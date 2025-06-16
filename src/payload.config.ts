@@ -7,6 +7,7 @@ import sharp from 'sharp' // sharp-import
 import { fileURLToPath } from 'url'
 
 import { defaultLexical } from '@/fields/defaultLexical'
+import { Carousal } from './collections/Carousal'
 import { Categories } from './collections/Categories'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
@@ -61,7 +62,7 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
-  collections: [Pages, Posts, Media, Categories, Users],
+  collections: [Pages, Posts, Media, Categories, Users, Carousal],
   cors: [getServerSideURL()].filter(Boolean),
   plugins: [
     ...plugins,

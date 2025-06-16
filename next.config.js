@@ -19,6 +19,7 @@ const nextConfig = {
         }
       }),
     ],
+    unoptimized: true,
   },
   reactStrictMode: true,
   redirects,
