@@ -1,5 +1,5 @@
-import PageTemplate, { generateMetadata } from './[slug]/page'
+import HomePage from '@/components/HomePage'
 
-export default PageTemplate
-
-export { generateMetadata }
+export default function Home() {
+  return <HomePage />
+}
