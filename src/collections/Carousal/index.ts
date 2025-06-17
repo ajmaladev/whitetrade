@@ -1,3 +1,4 @@
+import globalUpload from '@/components/Globals/GlobalUpload'
 import { revalidateTag } from 'next/cache'
 import { CollectionConfig } from 'payload'
 
@@ -16,10 +17,10 @@ export const Carousal: CollectionConfig = {
       label: 'Alt Text',
       type: 'text',
     },
-    {
-      name: 'image',
-      type: 'upload',
-      relationTo: 'media',
-    },
+    globalUpload({
+      field_name: 'image',
+      label: 'Image',
+      description: 'Upload an image for the carousal',
+    }),
   ],
 }

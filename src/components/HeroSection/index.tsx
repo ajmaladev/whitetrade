@@ -25,11 +25,18 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
         {/* Carousel background */}
         {carousal.map((img, idx) => {
           let src = ''
-          if (img.image && typeof img.image === 'object' && 'url' in img.image) {
-            src = img.image.url || ''
-          } else if (typeof img.image === 'string') {
+
+          // Handle the new structure where image is a URL string
+          if (img.image && typeof img.image === 'string') {
             src = img.image
           }
+
+          // If the URL doesn't start with http, prefix it with Bunny CDN
+          if (src && !src.startsWith('http')) {
+            src = `${process.env.NEXT_PUBLIC_BUNNY_CDN}${src}`
+          }
+
+          console.log(src, 'src')
           if (!src) return null
           return (
             <Image

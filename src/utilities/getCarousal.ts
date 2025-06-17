@@ -10,6 +10,7 @@ export async function getCarousal(depth = 2) {
     depth,
     limit: 0,
     pagination: false,
+    sort: 'createdAt',
   })
 
   return carousal
