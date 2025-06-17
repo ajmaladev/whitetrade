@@ -10,6 +10,7 @@ import { Providers } from '@/providers'
 import { getServerSideURL } from '@/utilities/getURL'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import './globals.css'
+export const dynamic = 'force-dynamic'
 
 const poppins = Poppins({
   subsets: ['latin'],
