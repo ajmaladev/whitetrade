@@ -8,7 +8,6 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ carousal = [] }: HeroSectionProps) {
-  console.log(carousal)
   const [current, setCurrent] = useState(0)
 
   useEffect(() => {
@@ -36,7 +35,6 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
             src = `${process.env.NEXT_PUBLIC_BUNNY_CDN}${src}`
           }
 
-          console.log(src, 'src')
           if (!src) return null
           return (
             <Image
