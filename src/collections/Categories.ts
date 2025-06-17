@@ -23,5 +23,13 @@ export const Categories: CollectionConfig = {
       required: true,
     },
     ...slugField(),
+    {
+      label: 'Products',
+      name: 'products',
+      type: 'join',
+      collection: 'products',
+      on: 'category',
+      maxDepth: 2,
+    },
   ],
 }
