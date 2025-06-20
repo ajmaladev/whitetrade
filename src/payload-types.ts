@@ -74,6 +74,7 @@ export interface Config {
     users: User;
     carousal: Carousal;
     products: Product;
+    testimonial: Testimonial;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -96,6 +97,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     carousal: CarousalSelect<false> | CarousalSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
+    testimonial: TestimonialSelect<false> | TestimonialSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -713,6 +715,22 @@ export interface Carousal {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonial".
+ */
+export interface Testimonial {
+  id: string;
+  testimonials?:
+    | {
+        title?: string | null;
+        count?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -911,6 +929,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'products';
         value: string | Product;
+      } | null)
+    | ({
+        relationTo: 'testimonial';
+        value: string | Testimonial;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1243,6 +1265,21 @@ export interface ProductsSelect<T extends boolean = true> {
   description?: T;
   product_image?: T;
   category?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonial_select".
+ */
+export interface TestimonialSelect<T extends boolean = true> {
+  testimonials?:
+    | T
+    | {
+        title?: T;
+        count?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

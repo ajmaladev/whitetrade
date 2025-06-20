@@ -1,17 +1,19 @@
-import { Carousal, Category } from '@/payload-types'
+import { Carousal, Category, Testimonial } from '@/payload-types'
 import { PaginatedDocs } from 'payload'
 import Categories from '../Categories'
 import HeroSection from '../HeroSection'
 import MegaMenu from '../MegaMenu'
 import ReadyToShip from '../ReadyToShip'
+import Testimonials from '../Testimonials'
 import { Button } from '../ui/button'
 
 interface HomePageProps {
   carousal: Carousal[]
   categories: PaginatedDocs<Category>
+  testimonials: PaginatedDocs<Testimonial>
 }
 
-export default function HomePage({ carousal, categories }: HomePageProps) {
+export default function HomePage({ carousal, categories, testimonials }: HomePageProps) {
   return (
     <div className="w-full">
       <MegaMenu />
@@ -23,6 +25,7 @@ export default function HomePage({ carousal, categories }: HomePageProps) {
           BUY NOW
         </Button>
       </div>
+      <Testimonials testimonials={testimonials} />
     </div>
   )
 }
