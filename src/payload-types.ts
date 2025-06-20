@@ -75,6 +75,7 @@ export interface Config {
     carousal: Carousal;
     products: Product;
     testimonial: Testimonial;
+    certificate: Certificate;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -98,6 +99,7 @@ export interface Config {
     carousal: CarousalSelect<false> | CarousalSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
     testimonial: TestimonialSelect<false> | TestimonialSelect<true>;
+    certificate: CertificateSelect<false> | CertificateSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -731,6 +733,17 @@ export interface Testimonial {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "certificate".
+ */
+export interface Certificate {
+  id: string;
+  image?: string | null;
+  title: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -933,6 +946,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'testimonial';
         value: string | Testimonial;
+      } | null)
+    | ({
+        relationTo: 'certificate';
+        value: string | Certificate;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1280,6 +1297,16 @@ export interface TestimonialSelect<T extends boolean = true> {
         count?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "certificate_select".
+ */
+export interface CertificateSelect<T extends boolean = true> {
+  image?: T;
+  title?: T;
   updatedAt?: T;
   createdAt?: T;
 }

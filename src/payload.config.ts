@@ -9,6 +9,7 @@ import { fileURLToPath } from 'url'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { Carousal } from './collections/Carousal'
 import { Categories } from './collections/Categories'
+import { Certificate } from './collections/Certificate'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
@@ -64,7 +65,17 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
-  collections: [Pages, Posts, Media, Categories, Users, Carousal, Products, Testimonial],
+  collections: [
+    Pages,
+    Posts,
+    Media,
+    Categories,
+    Users,
+    Carousal,
+    Products,
+    Testimonial,
+    Certificate,
+  ],
   cors: [getServerSideURL()].filter(Boolean),
   plugins: [
     ...plugins,
