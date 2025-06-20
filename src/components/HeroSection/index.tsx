@@ -52,9 +52,9 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
         </div>
         <div className="absolute inset-0 top-[100px] sm:top-[120px] md:top-[150px] lg:top-[177px] flex items-center justify-center z-[2] pointer-events-none px-4 sm:px-6 md:px-8">
           <div
-            className="relative w-full max-w-[320px] sm:max-w-[500px] md:max-w-[700px] lg:max-w-[963px] h-[280px] sm:h-[320px] md:h-[380px] lg:h-[452px] border-b-2 shadow-xl flex flex-col items-center justify-between pointer-events-auto overflow-hidden gap-4 sm:gap-6 md:gap-8 lg:gap-10 rounded-2xl sm:rounded-2xl md:rounded-3xl lg:rounded-3xl"
+            className="relative w-full max-w-[320px] sm:max-w-[500px] md:max-w-[700px] lg:max-w-[963px] h-[280px] sm:h-[320px] md:h-[380px] lg:h-[452px] flex flex-col items-center justify-between pointer-events-auto overflow-hidden gap-4 sm:gap-6 md:gap-8 lg:gap-10 "
             style={{
-              backgroundImage: 'url(/hero-section-bg.png)',
+              backgroundImage: 'url(/hero-section-bg.webp)',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
@@ -111,7 +111,7 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
         <div
           className="relative w-full h-auto flex flex-col items-center justify-center pointer-events-auto overflow-hidden p-6"
           style={{
-            backgroundImage: 'url(/hero-section-bg.png)',
+            backgroundImage: 'url(/hero-section-bg.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
