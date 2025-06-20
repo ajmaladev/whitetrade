@@ -17,7 +17,7 @@ export default function Upload({
   label: string
   description: string
 }) {
-  const { setValue, value } = useField<string>({
+  const { setValue } = useField<string>({
     path,
   })
 

@@ -85,9 +85,7 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
           {/* Carousel with small_image */}
           {carousal?.map((img, idx) => {
             let src = ''
-            // @ts-ignore
             if (img.small_image && typeof img.small_image === 'string') {
-              // @ts-ignore
               src = img.small_image
             }
 
