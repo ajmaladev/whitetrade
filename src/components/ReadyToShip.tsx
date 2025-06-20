@@ -8,7 +8,7 @@ export default function ReadyToShip() {
         alt="Ready to Ship"
         width={513}
         height={111}
-        className="ml-52 mt-28 object-cover"
+        className="ml-52 mt-32 object-cover"
       />
     </div>
   )
