@@ -305,6 +305,7 @@ export interface Category {
   title: string;
   slug?: string | null;
   slugLock?: boolean | null;
+  category_image?: string | null;
   products?: {
     docs?: (string | Product)[];
     hasNextPage?: boolean;
@@ -1191,6 +1192,7 @@ export interface CategoriesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   slugLock?: T;
+  category_image?: T;
   products?: T;
   parent?: T;
   breadcrumbs?:

@@ -22,7 +22,7 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
     <>
       <div className="relative w-full h-[500px] overflow-hidden">
         {/* Carousel background */}
-        {carousal.map((img, idx) => {
+        {carousal?.map((img, idx) => {
           let src = ''
 
           // Handle the new structure where image is a URL string
