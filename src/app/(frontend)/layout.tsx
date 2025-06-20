@@ -6,11 +6,9 @@ import { GeistSans } from 'geist/font/sans'
 import { Manrope, Poppins } from 'next/font/google'
 import React from 'react'
 
-import { Providers } from '@/providers'
 import { getServerSideURL } from '@/utilities/getURL'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import './globals.css'
-export const dynamic = 'force-dynamic'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -37,9 +35,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
       </head>
-      <body>
-        <Providers>{children}</Providers>
-      </body>
+      <body>{children}</body>
     </html>
   )
 }

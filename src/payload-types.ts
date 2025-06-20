@@ -73,6 +73,7 @@ export interface Config {
     categories: Category;
     users: User;
     carousal: Carousal;
+    products: Product;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -82,7 +83,11 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    categories: {
+      products: 'products';
+    };
+  };
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
@@ -90,6 +95,7 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     carousal: CarousalSelect<false> | CarousalSelect<true>;
+    products: ProductsSelect<false> | ProductsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -256,25 +262,13 @@ export interface Post {
  */
 export interface Media {
   id: string;
-  alt?: string | null;
-  caption?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+  backupUrl?: string | null;
+  title: string;
+  alt_text: string;
+  uploader?: string | null;
   updatedAt: string;
   createdAt: string;
-  url?: string | null;
+  url: string;
   thumbnailURL?: string | null;
   filename?: string | null;
   mimeType?: string | null;
@@ -283,6 +277,24 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    medium?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -293,6 +305,12 @@ export interface Category {
   title: string;
   slug?: string | null;
   slugLock?: boolean | null;
+  category_image?: string | null;
+  products?: {
+    docs?: (string | Product)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   parent?: (string | null) | Category;
   breadcrumbs?:
     | {
@@ -302,6 +320,22 @@ export interface Category {
         id?: string | null;
       }[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products".
+ */
+export interface Product {
+  id: string;
+  title?: string | null;
+  description?: string | null;
+  product_image?: string | null;
+  category: {
+    relationTo: 'categories';
+    value: string | Category;
+  }[];
   updatedAt: string;
   createdAt: string;
 }
@@ -672,7 +706,7 @@ export interface Form {
 export interface Carousal {
   id: string;
   alt?: string | null;
-  image?: (string | null) | Media;
+  image?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -872,6 +906,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'carousal';
         value: string | Carousal;
+      } | null)
+    | ({
+        relationTo: 'products';
+        value: string | Product;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1106,8 +1144,10 @@ export interface PostsSelect<T extends boolean = true> {
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
-  alt?: T;
-  caption?: T;
+  backupUrl?: T;
+  title?: T;
+  alt_text?: T;
+  uploader?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1119,6 +1159,30 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        medium?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1128,6 +1192,8 @@ export interface CategoriesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   slugLock?: T;
+  category_image?: T;
+  products?: T;
   parent?: T;
   breadcrumbs?:
     | T
@@ -1163,6 +1229,18 @@ export interface UsersSelect<T extends boolean = true> {
 export interface CarousalSelect<T extends boolean = true> {
   alt?: T;
   image?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products_select".
+ */
+export interface ProductsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  product_image?: T;
+  category?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -12,6 +12,7 @@ import { Categories } from './collections/Categories'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
+import { Products } from './collections/Products'
 import { Users } from './collections/Users'
 import { plugins } from './plugins'
 import { getServerSideURL } from './utilities/getURL'
@@ -62,7 +63,7 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
-  collections: [Pages, Posts, Media, Categories, Users, Carousal],
+  collections: [Pages, Posts, Media, Categories, Users, Carousal, Products],
   cors: [getServerSideURL()].filter(Boolean),
   plugins: [
     ...plugins,
