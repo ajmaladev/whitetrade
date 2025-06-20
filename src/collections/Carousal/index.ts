@@ -18,8 +18,13 @@ export const Carousal: CollectionConfig = {
       type: 'text',
     },
     globalUpload({
-      field_name: 'image',
-      label: 'Image',
+      field_name: 'big_image',
+      label: 'Big Image',
+      description: 'Upload an image for the carousal',
+    }),
+    globalUpload({
+      field_name: 'small_image',
+      label: 'Small Image',
       description: 'Upload an image for the carousal',
     }),
   ],

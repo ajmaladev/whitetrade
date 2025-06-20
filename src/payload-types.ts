@@ -706,7 +706,8 @@ export interface Form {
 export interface Carousal {
   id: string;
   alt?: string | null;
-  image?: string | null;
+  big_image?: string | null;
+  small_image?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1228,7 +1229,8 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface CarousalSelect<T extends boolean = true> {
   alt?: T;
-  image?: T;
+  big_image?: T;
+  small_image?: T;
   updatedAt?: T;
   createdAt?: T;
 }
