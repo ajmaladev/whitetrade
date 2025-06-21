@@ -77,6 +77,7 @@ export interface Config {
     testimonial: Testimonial;
     certificate: Certificate;
     weOffer: WeOffer;
+    'home-page': HomePage;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -102,6 +103,7 @@ export interface Config {
     testimonial: TestimonialSelect<false> | TestimonialSelect<true>;
     certificate: CertificateSelect<false> | CertificateSelect<true>;
     weOffer: WeOfferSelect<false> | WeOfferSelect<true>;
+    'home-page': HomePageSelect<false> | HomePageSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -767,6 +769,51 @@ export interface WeOffer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page".
+ */
+export interface HomePage {
+  id: string;
+  carousal?:
+    | {
+        alt?: string | null;
+        big_image?: string | null;
+        small_image?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  testimonials?:
+    | {
+        title?: string | null;
+        count?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  certificates?:
+    | {
+        image?: string | null;
+        title: string;
+        id?: string | null;
+      }[]
+    | null;
+  weOffer?: {
+    title?: string | null;
+    /**
+     * Enter the items you want to offer
+     */
+    item?:
+      | {
+          title?: string | null;
+          description?: string | null;
+          icon?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -977,6 +1024,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'weOffer';
         value: string | WeOffer;
+      } | null)
+    | ({
+        relationTo: 'home-page';
+        value: string | HomePage;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1350,6 +1401,49 @@ export interface WeOfferSelect<T extends boolean = true> {
         description?: T;
         icon?: T;
         id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page_select".
+ */
+export interface HomePageSelect<T extends boolean = true> {
+  carousal?:
+    | T
+    | {
+        alt?: T;
+        big_image?: T;
+        small_image?: T;
+        id?: T;
+      };
+  testimonials?:
+    | T
+    | {
+        title?: T;
+        count?: T;
+        id?: T;
+      };
+  certificates?:
+    | T
+    | {
+        image?: T;
+        title?: T;
+        id?: T;
+      };
+  weOffer?:
+    | T
+    | {
+        title?: T;
+        item?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              icon?: T;
+              id?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;

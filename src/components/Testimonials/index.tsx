@@ -1,22 +1,21 @@
 'use client'
 
-import { Testimonial } from '@/payload-types'
-import { PaginatedDocs } from 'payload'
 import CountUp from 'react-countup'
 import { useInView } from 'react-intersection-observer'
 
-export default function Testimonials({
-  testimonials,
-}: {
-  testimonials: PaginatedDocs<Testimonial>
-}) {
-  const testimonialData = testimonials.docs?.[0]?.testimonials
+// Define the actual type based on your data structure
+type TestimonialItem = {
+  id: string
+  title: string
+  count: string
+}
 
+export default function Testimonials({ testimonials }: { testimonials: TestimonialItem[] }) {
   const [ref, inView] = useInView({
     triggerOnce: true,
   })
 
-  if (!testimonialData || testimonialData.length === 0) {
+  if (!testimonials || testimonials.length === 0) {
     return null
   }
 
@@ -39,8 +38,8 @@ export default function Testimonials({
   return (
     <div className="py-10 sm:py-20" ref={ref}>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-8 sm:gap-y-16 justify-items-center">
-        {testimonialData.map((item, index) => {
-          const { start, end, suffix } = getCountUpProps(item.count)
+        {testimonials.map((item, index) => {
+          const { start, end, suffix } = getCountUpProps(item.count || '0')
           return (
             <div key={item.id || index} className="text-center">
               <p className="text-4xl font-extrabold text-cyan-900 font-['Manrope'] leading-tight sm:text-6xl sm:leading-[76px]">
