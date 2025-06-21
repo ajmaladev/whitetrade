@@ -1,4 +1,4 @@
-import { Carousal, Category, Certificate, Testimonial, WeOffer } from '@/payload-types'
+import { Carousal, Category, Certificate } from '@/payload-types'
 import { PaginatedDocs } from 'payload'
 import Categories from '../Categories'
 import { Certificates } from '../Certificates'
@@ -9,12 +9,29 @@ import Testimonials from '../Testimonials'
 import { Button } from '../ui/button'
 import { WeOffer as WeOfferComponent } from '../WeOffer'
 
+type TestimonialItem = {
+  id: string
+  title: string
+  count: string
+}
+
+type WeOfferItem = {
+  id: string
+  title: string
+  description: string
+  icon: string
+}
+
+type WeOfferData = {
+  item: WeOfferItem[]
+}
+
 interface HomePageProps {
   carousal: Carousal[]
   categories: PaginatedDocs<Category>
-  testimonials: PaginatedDocs<Testimonial>
-  certificates: PaginatedDocs<Certificate>
-  weOffer: PaginatedDocs<WeOffer>
+  testimonials: TestimonialItem[]
+  certificates: Certificate[]
+  weOffer: WeOfferData
 }
 
 export default function HomePage({
@@ -38,6 +55,7 @@ export default function HomePage({
       <Testimonials testimonials={testimonials} />
       <Certificates certificates={certificates} />
       <WeOfferComponent weOffer={weOffer} />
+      {/* <OurBrands brands={brands} /> */}
     </div>
   )
 }

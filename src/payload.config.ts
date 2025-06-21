@@ -10,6 +10,7 @@ import { defaultLexical } from '@/fields/defaultLexical'
 import { Carousal } from './collections/Carousal'
 import { Categories } from './collections/Categories'
 import { Certificate } from './collections/Certificate'
+import { HomePage } from './collections/HomePage'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
@@ -77,6 +78,7 @@ export default buildConfig({
     Testimonial,
     Certificate,
     WeOffer,
+    HomePage,
   ],
   cors: [getServerSideURL()].filter(Boolean),
   plugins: [

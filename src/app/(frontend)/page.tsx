@@ -1,18 +1,12 @@
 import HomePage from '@/components/HomePage'
-import {
-  getCachedCategories,
-  getCachedCertificates,
-  getCachedTestimonials,
-  getCachedWeOffer,
-} from '@/lib/fetchMethods'
-import { getCachedCarousal } from '@/utilities/getCarousal'
+import { getCachedCategories, getCachedHomePage } from '@/lib/fetchMethods'
 
 export default async function Home() {
-  const carousal = await getCachedCarousal()()
   const categories = await getCachedCategories()()
-  const testimonials = await getCachedTestimonials()()
-  const certificates = await getCachedCertificates()()
-  const weOffer = await getCachedWeOffer()()
+  const homePage = await getCachedHomePage()()
+  const { carousal, testimonials, certificates, weOffer } = homePage.docs[0] as any
+  console.log(weOffer)
+  console.log(homePage)
   return (
     <HomePage
       carousal={carousal}

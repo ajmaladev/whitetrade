@@ -2,17 +2,16 @@
 import { Certificate } from '@/payload-types'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { PaginatedDocs } from 'payload'
 
 interface CertificatesProps {
-  certificates: PaginatedDocs<Certificate>
+  certificates: Certificate[]
 }
 
 export const Certificates = ({ certificates }: CertificatesProps) => {
   return (
     <div className="px-4 py-8 md:px-6">
       <div className="grid grid-cols-4 mt-8 md:flex md:flex-wrap items-center justify-center md:gap-20">
-        {certificates.docs.map((certificate) => (
+        {certificates.map((certificate) => (
           <motion.div
             key={certificate.id}
             className="relative flex items-center justify-center"
