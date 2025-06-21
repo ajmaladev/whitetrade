@@ -1,0 +1,60 @@
+.we-offer-timeline {
+  position: relative;
+  padding: 2rem 0;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 50px;
+}
+
+.timeline-content {
+  position: relative;
+  width: 80%;
+}
+
+.left .timeline-content {
+  margin-right: auto;
+  padding-left: 2rem;
+}
+
+.right .timeline-content {
+  margin-left: auto;
+  padding-right: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .timeline-content {
+    width: 100%;
+  }
+
+  .left .timeline-content,
+  .right .timeline-content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .we-offer-timeline::before {
+    left: 20px;
+  }
+
+  .timeline-item::after {
+    left: 20px;
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    scale: 0.5;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+.animation-block {
+  animation: appear linear;
+  animation-timeline: view();
+}
