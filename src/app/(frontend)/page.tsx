@@ -3,6 +3,7 @@ import {
   getCachedCategories,
   getCachedCertificates,
   getCachedTestimonials,
+  getCachedWeOffer,
 } from '@/lib/fetchMethods'
 import { getCachedCarousal } from '@/utilities/getCarousal'
 
@@ -11,12 +12,14 @@ export default async function Home() {
   const categories = await getCachedCategories()()
   const testimonials = await getCachedTestimonials()()
   const certificates = await getCachedCertificates()()
+  const weOffer = await getCachedWeOffer()()
   return (
     <HomePage
       carousal={carousal}
       categories={categories}
       testimonials={testimonials}
       certificates={certificates}
+      weOffer={weOffer}
     />
   )
 }

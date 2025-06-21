@@ -76,6 +76,7 @@ export interface Config {
     products: Product;
     testimonial: Testimonial;
     certificate: Certificate;
+    weOffer: WeOffer;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -100,6 +101,7 @@ export interface Config {
     products: ProductsSelect<false> | ProductsSelect<true>;
     testimonial: TestimonialSelect<false> | TestimonialSelect<true>;
     certificate: CertificateSelect<false> | CertificateSelect<true>;
+    weOffer: WeOfferSelect<false> | WeOfferSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -744,6 +746,27 @@ export interface Certificate {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "weOffer".
+ */
+export interface WeOffer {
+  id: string;
+  title?: string | null;
+  /**
+   * Enter the items you want to offer
+   */
+  item?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        icon?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -950,6 +973,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'certificate';
         value: string | Certificate;
+      } | null)
+    | ({
+        relationTo: 'weOffer';
+        value: string | WeOffer;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1307,6 +1334,23 @@ export interface TestimonialSelect<T extends boolean = true> {
 export interface CertificateSelect<T extends boolean = true> {
   image?: T;
   title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "weOffer_select".
+ */
+export interface WeOfferSelect<T extends boolean = true> {
+  title?: T;
+  item?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        icon?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

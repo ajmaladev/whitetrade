@@ -16,6 +16,7 @@ import { Posts } from './collections/Posts'
 import { Products } from './collections/Products'
 import { Testimonial } from './collections/Testimonial'
 import { Users } from './collections/Users'
+import { WeOffer } from './collections/WeOffer'
 import { plugins } from './plugins'
 import { getServerSideURL } from './utilities/getURL'
 
@@ -75,6 +76,7 @@ export default buildConfig({
     Products,
     Testimonial,
     Certificate,
+    WeOffer,
   ],
   cors: [getServerSideURL()].filter(Boolean),
   plugins: [

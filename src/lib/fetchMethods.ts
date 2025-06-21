@@ -36,3 +36,15 @@ export const getCertificates = async () => {
   const certificates = await payload.find({ collection: 'certificate' })
   return certificates
 }
+
+export const getCachedWeOffer = () =>
+  unstable_cache(async () => getWeOffer(), ['weOffer'], {
+    revalidate: 60 * 60 * 24,
+    tags: ['weOffer'],
+  })
+
+export const getWeOffer = async () => {
+  const payload = await getPayloadClient()
+  const weOffer = await payload.find({ collection: 'weOffer' })
+  return weOffer
+}
