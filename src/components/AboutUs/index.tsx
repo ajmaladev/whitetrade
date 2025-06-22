@@ -41,14 +41,14 @@ export const AboutUs = () => {
       {/* Main Content */}
       <div className="max-w-3xl mx-auto mb-12 sm:mb-16 lg:mb-20">
         <div className="text-white text-base sm:text-lg lg:text-xl font-normal font-['Poppins'] leading-relaxed">
-          At White Trading Company, we're more than a supplier—we're your trusted partner in growth.
-          Built on a foundation of integrity, innovation, and customer-first service, we strive to
-          deliver exceptional value through high-quality products and reliable solutions.
+          At White Trading Company, we&apos;re more than a supplier—we&apos;re your trusted partner
+          in growth. Built on a foundation of integrity, innovation, and customer-first service, we
+          strive to deliver exceptional value through high-quality products and reliable solutions.
           <br />
           <br />
           Our mission is to empower businesses and individuals by making premium products and
-          outstanding support easily accessible. Whether you're sourcing for retail, wholesale, or
-          personal use, we're here to help you succeed.
+          outstanding support easily accessible. Whether you&apos;re sourcing for retail, wholesale,
+          or personal use, we&apos;re here to help you succeed.
           <br />
           <br />
           Driven by our core values—trust, quality, and innovation—we are committed to building
