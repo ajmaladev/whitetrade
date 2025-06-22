@@ -1,5 +1,6 @@
 'use client'
 import Image from 'next/image'
+import { useEffect, useRef } from 'react'
 import './weoffer.css'
 
 // Define the actual type based on your data structure
@@ -19,7 +20,34 @@ interface WeOfferProps {
 }
 
 export const WeOffer = ({ weOffer }: WeOfferProps) => {
-  console.log(weOffer)
+  const animationRefs = useRef<(HTMLDivElement | null)[]>([])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Only add the class if it's not already there
+            if (!entry.target.classList.contains('animate')) {
+              entry.target.classList.add('animate')
+            }
+          }
+        })
+      },
+      {
+        threshold: 0.3,
+        rootMargin: '0px 0px -100px 0px',
+      },
+    )
+
+    animationRefs.current.forEach((ref) => {
+      if (ref) {
+        observer.observe(ref)
+      }
+    })
+
+    return () => observer.disconnect()
+  }, [weOffer])
 
   if (!weOffer || !weOffer.item || weOffer.item.length === 0) {
     return null
@@ -39,7 +67,11 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
             return (
               <div
                 key={item.id}
+                ref={(el) => {
+                  animationRefs.current[index] = el
+                }}
                 className={`animation-block relative mb-8 sm:mb-12 lg:mb-16 ${isLeft ? 'left' : 'right'}`}
+                style={{ '--animation-order': index } as React.CSSProperties}
               >
                 <div className={`${isLeft ? 'mr-auto lg:pl-8' : 'ml-auto lg:pr-8'}`}>
                   <div
