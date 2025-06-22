@@ -1,4 +1,4 @@
-import { Carousal, Category, Certificate, Product } from '@/payload-types'
+import { Carousal, Category, Certificate, HomePage as HomePageType, Product } from '@/payload-types'
 import { PaginatedDocs } from 'payload'
 import Categories from '../Categories'
 import { Certificates } from '../Certificates'
@@ -40,6 +40,7 @@ interface HomePageProps {
   weOffer: WeOfferData
   products: PaginatedDocs<Product>
   ourBrands: OurBrands
+  reviews: HomePageType['reviews']
 }
 
 export default function HomePage({
@@ -50,6 +51,7 @@ export default function HomePage({
   weOffer,
   products,
   ourBrands,
+  reviews,
 }: HomePageProps) {
   return (
     <div className="w-full">
@@ -66,7 +68,7 @@ export default function HomePage({
       <Certificates certificates={certificates} />
       <WeOfferComponent weOffer={weOffer} />
       <OurBrandsQuery brands={ourBrands} products={products.docs} />
-      <Reviews />
+      <Reviews reviews={reviews} />
     </div>
   )
 }

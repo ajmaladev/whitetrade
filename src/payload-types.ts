@@ -817,6 +817,15 @@ export interface HomePage {
         id?: string | null;
       }[]
     | null;
+  reviews?:
+    | {
+        user_name?: string | null;
+        user_role?: string | null;
+        review?: string | null;
+        user_image?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1473,6 +1482,15 @@ export interface HomePageSelect<T extends boolean = true> {
     | T
     | {
         image?: T;
+        id?: T;
+      };
+  reviews?:
+    | T
+    | {
+        user_name?: T;
+        user_role?: T;
+        review?: T;
+        user_image?: T;
         id?: T;
       };
   updatedAt?: T;

@@ -1,69 +1,51 @@
 'use client'
+import { HomePage } from '@/payload-types'
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 import React, { useRef, useState } from 'react'
 
-interface Testimonial {
-  name: string
-  title: string
-  testimonial: string
-  image: string
+interface Review {
+  user_name?: string | null
+  user_role?: string | null
+  review?: string | null
+  user_image?: string | null
+  id?: string | null
 }
 
-const testimonials: Testimonial[] = [
-  {
-    name: 'Esther Hills',
-    title: 'Lead Intranet Technician',
-    testimonial:
-      'Omnis totam molestiae delectus nemo alias nesciunt harum et. Nobis dolorum excepturi quod vel. Sunt est qui ab non dolores repellat rem impedit dolores. Ut ea rerum cum eum. Alias dolores tempore illo accusantium est et voluptatem voluptas.',
-    image: 'https://placehold.co/80x80',
-  },
-  {
-    name: 'Ethel Johnson',
-    title: 'Human Directives',
-    testimonial:
-      'Fuga et debitis numquam ut enim qui. Nobis dolorum excepturi quod vel. Sunt est qui ab non dolores repellat rem impedit dolores. Ut ea rerum cum eum. Alias dolores tempore illo accusantium est et voluptatem voluptas.',
-    image: 'https://placehold.co/80x80',
-  },
-  {
-    name: 'John Doe',
-    title: 'Software Engineer',
-    testimonial:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    image: 'https://placehold.co/80x80',
-  },
-]
-
-const ReviewCard: React.FC<Testimonial> = ({ name, title, testimonial, image }) => {
+const ReviewCard: React.FC<Review> = ({ user_name, user_role, review, user_image }) => {
   return (
-    <div className="w-full min-w-[280px] sm:min-w-[400px] md:min-w-[500px] lg:min-w-[600px] flex-shrink-0 p-4 sm:p-6 md:p-8 lg:p-10 bg-white rounded-[10px] shadow-[0px_0px_20px_0px_rgba(0,0,0,0.05)] flex flex-col justify-start items-start gap-4 sm:gap-6">
+    <div className="w-[280px] sm:w-[400px] md:w-[500px] lg:w-[600px] flex-shrink-0 p-4 sm:p-6 md:p-8 lg:p-10 bg-white rounded-[10px] shadow-[0px_0px_20px_0px_rgba(0,0,0,0.05)] flex flex-col justify-start items-start gap-4 sm:gap-6">
       <div className="self-stretch flex justify-start items-center gap-3 sm:gap-3.5">
         <img
           className="w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-full ring-4 ring-blue-600/30 flex-shrink-0"
-          src={image}
-          alt={name}
+          src={user_image || 'https://placehold.co/80x80'}
+          alt={user_name || 'User'}
         />
         <div className="flex flex-col justify-center items-start gap-1 min-w-0 flex-1">
           <div className="text-blue-600 text-lg sm:text-xl font-extrabold truncate w-full">
-            {name}
+            {user_name || 'Anonymous'}
           </div>
           <div className="text-zinc-500 text-sm sm:text-base font-medium truncate w-full">
-            {title}
+            {user_role || 'Customer'}
           </div>
         </div>
       </div>
       <div className="self-stretch text-neutral-800 text-sm sm:text-base font-normal leading-relaxed">
-        {testimonial}
+        {review || 'No review available'}
       </div>
     </div>
   )
 }
 
-export const Reviews = () => {
+export const Reviews = ({ reviews }: { reviews: HomePage['reviews'] }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [currentIndex, setCurrentIndex] = useState(0)
 
+  // Use dynamic reviews data or fallback to empty array
+  const reviewsData = reviews || []
+  const reviewsLength = reviewsData.length
+
   const scrollToNext = () => {
-    if (scrollContainerRef.current) {
+    if (scrollContainerRef.current && reviewsLength > 0) {
       const container = scrollContainerRef.current
       const cardWidth =
         container.clientWidth < 640
@@ -81,12 +63,12 @@ export const Reviews = () => {
         behavior: 'smooth',
       })
 
-      setCurrentIndex((prev) => Math.min(prev + 1, testimonials.length - 1))
+      setCurrentIndex((prev) => Math.min(prev + 1, reviewsLength - 1))
     }
   }
 
   const scrollToPrevious = () => {
-    if (scrollContainerRef.current) {
+    if (scrollContainerRef.current && reviewsLength > 0) {
       const container = scrollContainerRef.current
       const cardWidth =
         container.clientWidth < 640
@@ -108,7 +90,12 @@ export const Reviews = () => {
   }
 
   const isAtStart = currentIndex === 0
-  const isAtEnd = currentIndex === testimonials.length - 1
+  const isAtEnd = currentIndex === reviewsLength - 1
+
+  // Don't render if no reviews
+  if (reviewsLength === 0) {
+    return null
+  }
 
   return (
     <section className="relative overflow-hidden w-full min-h-[80vh] sm:min-h-[120vh]">
@@ -169,13 +156,13 @@ export const Reviews = () => {
             className="flex overflow-x-auto space-x-4 sm:space-x-6 md:space-x-8 scrollbar-hide scroll-smooth w-full"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            {testimonials.map((item, index) => (
+            {reviewsData.map((item, index) => (
               <ReviewCard
-                key={index}
-                name={item.name}
-                title={item.title}
-                testimonial={item.testimonial}
-                image={item.image}
+                key={item.id || index}
+                user_name={item.user_name}
+                user_role={item.user_role}
+                review={item.review}
+                user_image={item.user_image}
               />
             ))}
           </div>
