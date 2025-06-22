@@ -88,5 +88,16 @@ export const HomePage: CollectionConfig = {
         },
       ],
     },
+    {
+      type: 'array',
+      name: 'our-brands',
+      fields: [
+        globalUpload({
+          field_name: 'image',
+          label: 'Image',
+          description: 'Upload the image of the brand',
+        }),
+      ],
+    },
   ],
 }

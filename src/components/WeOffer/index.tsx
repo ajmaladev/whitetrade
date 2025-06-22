@@ -56,8 +56,8 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
   }
 
   return (
-    <section className="relative overflow-clip">
-      <div className="absolute top-0 left-0 w-[60%] h-full bg-gradient-to-b from-indigo-300 to-cyan-900 -z-10"></div>
+    <section className="relative overflow-clip mt-10 md:mt-14">
+      <div className="absolute top-0 left-0 w-[60%] h-full bg-gradient-to-b from-indigo-300 to-[#1C3A6A] -z-10"></div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 relative">
         <h2 className="text-white text-4xl sm:text-6xl lg:text-8xl xl:text-9xl font-bold font-['Poppins'] mb-8 sm:mb-12 lg:mb-16 text-left">
           We Offer

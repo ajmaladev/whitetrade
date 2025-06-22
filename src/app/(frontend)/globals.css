@@ -58,3 +58,12 @@
     @apply bg-background text-foreground min-h-[100vh] flex flex-col;
   }
 }
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

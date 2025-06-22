@@ -78,6 +78,7 @@ export interface Config {
     certificate: Certificate;
     weOffer: WeOffer;
     'home-page': HomePage;
+    'customer-query': CustomerQuery;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -104,6 +105,7 @@ export interface Config {
     certificate: CertificateSelect<false> | CertificateSelect<true>;
     weOffer: WeOfferSelect<false> | WeOfferSelect<true>;
     'home-page': HomePageSelect<false> | HomePageSelect<true>;
+    'customer-query': CustomerQuerySelect<false> | CustomerQuerySelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -809,6 +811,24 @@ export interface HomePage {
         }[]
       | null;
   };
+  'our-brands'?:
+    | {
+        image?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "customer-query".
+ */
+export interface CustomerQuery {
+  id: string;
+  name?: string | null;
+  product?: (string | null) | Product;
+  phone?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1028,6 +1048,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'home-page';
         value: string | HomePage;
+      } | null)
+    | ({
+        relationTo: 'customer-query';
+        value: string | CustomerQuery;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1445,6 +1469,23 @@ export interface HomePageSelect<T extends boolean = true> {
               id?: T;
             };
       };
+  'our-brands'?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "customer-query_select".
+ */
+export interface CustomerQuerySelect<T extends boolean = true> {
+  name?: T;
+  product?: T;
+  phone?: T;
   updatedAt?: T;
   createdAt?: T;
 }

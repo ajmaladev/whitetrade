@@ -1,9 +1,10 @@
-import { Carousal, Category, Certificate } from '@/payload-types'
+import { Carousal, Category, Certificate, Product } from '@/payload-types'
 import { PaginatedDocs } from 'payload'
 import Categories from '../Categories'
 import { Certificates } from '../Certificates'
 import HeroSection from '../HeroSection'
 import MegaMenu from '../MegaMenu'
+import { OurBrandsQuery } from '../OurBrandsQuery'
 import ReadyToShip from '../ReadyToShip'
 import Testimonials from '../Testimonials'
 import { Button } from '../ui/button'
@@ -26,12 +27,18 @@ type WeOfferData = {
   item: WeOfferItem[]
 }
 
+type OurBrands =
+  | { image?: string | null | undefined; id?: string | null | undefined }[]
+  | null
+  | undefined
 interface HomePageProps {
   carousal: Carousal[]
   categories: PaginatedDocs<Category>
   testimonials: TestimonialItem[]
   certificates: Certificate[]
   weOffer: WeOfferData
+  products: PaginatedDocs<Product>
+  ourBrands: OurBrands
 }
 
 export default function HomePage({
@@ -40,6 +47,8 @@ export default function HomePage({
   testimonials,
   certificates,
   weOffer,
+  products,
+  ourBrands,
 }: HomePageProps) {
   return (
     <div className="w-full">
@@ -55,7 +64,7 @@ export default function HomePage({
       <Testimonials testimonials={testimonials} />
       <Certificates certificates={certificates} />
       <WeOfferComponent weOffer={weOffer} />
-      {/* <OurBrands brands={brands} /> */}
+      <OurBrandsQuery brands={ourBrands} products={products.docs} />
     </div>
   )
 }
