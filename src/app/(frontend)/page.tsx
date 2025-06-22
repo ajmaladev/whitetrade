@@ -5,7 +5,7 @@ export default async function Home() {
   const categories = await getCachedCategories()()
   const homePage = await getCachedHomePage()()
   const products = await getCachedProducts()()
-  const { carousal, testimonials, certificates, weOffer } = homePage.docs[0] as any
+  const { carousal, testimonials, certificates, weOffer, reviews } = homePage.docs[0] as any
   const ourBrands = homePage.docs[0]?.['our-brands']
   return (
     <HomePage
@@ -16,6 +16,7 @@ export default async function Home() {
       weOffer={weOffer}
       products={products}
       ourBrands={ourBrands}
+      reviews={reviews}
     />
   )
 }

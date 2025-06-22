@@ -99,5 +99,31 @@ export const HomePage: CollectionConfig = {
         }),
       ],
     },
+    {
+      type: 'array',
+      name: 'reviews',
+      fields: [
+        {
+          name: 'user_name',
+          label: 'User Name',
+          type: 'text',
+        },
+        {
+          name: 'user_role',
+          label: 'User Role',
+          type: 'text',
+        },
+        {
+          name: 'review',
+          label: 'Review',
+          type: 'text',
+        },
+        globalUpload({
+          field_name: 'user_image',
+          label: 'User Image',
+          description: 'Upload the image of the user',
+        }),
+      ],
+    },
   ],
 }

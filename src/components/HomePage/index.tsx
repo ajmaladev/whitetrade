@@ -1,11 +1,13 @@
-import { Carousal, Category, Certificate, Product } from '@/payload-types'
+import { Carousal, Category, Certificate, HomePage as HomePageType, Product } from '@/payload-types'
 import { PaginatedDocs } from 'payload'
+import { AboutUs } from '../AboutUs'
 import Categories from '../Categories'
 import { Certificates } from '../Certificates'
 import HeroSection from '../HeroSection'
 import MegaMenu from '../MegaMenu'
 import { OurBrandsQuery } from '../OurBrandsQuery'
 import ReadyToShip from '../ReadyToShip'
+import { Reviews } from '../Reviews'
 import Testimonials from '../Testimonials'
 import { Button } from '../ui/button'
 import { WeOffer as WeOfferComponent } from '../WeOffer'
@@ -39,6 +41,7 @@ interface HomePageProps {
   weOffer: WeOfferData
   products: PaginatedDocs<Product>
   ourBrands: OurBrands
+  reviews: HomePageType['reviews']
 }
 
 export default function HomePage({
@@ -49,6 +52,7 @@ export default function HomePage({
   weOffer,
   products,
   ourBrands,
+  reviews,
 }: HomePageProps) {
   return (
     <div className="w-full">
@@ -65,6 +69,8 @@ export default function HomePage({
       <Certificates certificates={certificates} />
       <WeOfferComponent weOffer={weOffer} />
       <OurBrandsQuery brands={ourBrands} products={products.docs} />
+      <Reviews reviews={reviews} />
+      <AboutUs />
     </div>
   )
 }
