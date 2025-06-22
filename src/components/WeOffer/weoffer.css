@@ -40,18 +40,7 @@
   }
 }
 
-@keyframes appearFallback {
-  0% {
-    opacity: 0;
-    transform: scale(0.8) translateY(30px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
+/* Base animation block styles */
 .animation-block {
   opacity: 0;
   transform: scale(0.8) translateY(30px);
@@ -59,22 +48,32 @@
     opacity 0.8s ease-out,
     transform 0.8s ease-out;
   transition-delay: calc(var(--animation-order, 0) * 0.15s);
+  will-change: opacity, transform;
 }
 
-/* Modern browsers with scroll-driven animations support */
-@supports (animation-timeline: view()) {
-  .animation-block {
-    opacity: 0;
-    transform: scale(0.8) translateY(30px);
-    animation: appear linear;
-    animation-timeline: view();
-    animation-range: 0% 50%;
-    animation-delay: calc(var(--animation-order, 0) * 0.1s);
-  }
-}
-
-/* Ensure animation works on mobile by adding intersection observer fallback */
+/* Animation state when element is in view */
 .animation-block.animate {
   opacity: 1;
   transform: scale(1) translateY(0);
+}
+
+/* Ensure smooth transitions on all devices */
+@media (prefers-reduced-motion: no-preference) {
+  .animation-block {
+    transition:
+      opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* Fallback for devices that don't support smooth transitions */
+@media (prefers-reduced-motion: reduce) {
+  .animation-block {
+    transition: none;
+  }
+
+  .animation-block.animate {
+    opacity: 1;
+    transform: none;
+  }
 }

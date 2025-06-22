@@ -27,10 +27,12 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Only add the class if it's not already there
-            if (!entry.target.classList.contains('animate')) {
-              entry.target.classList.add('animate')
-            }
+            // Add animation class when element comes into view
+            entry.target.classList.add('animate')
+          } else {
+            // Remove animation class when element goes out of view
+            // This allows the animation to trigger again on next scroll
+            entry.target.classList.remove('animate')
           }
         })
       },
