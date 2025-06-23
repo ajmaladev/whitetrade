@@ -89,7 +89,27 @@
 
 /* Hero Section Small Screen Background */
 .hero-small-bg {
-  background-image: url('/product-bg.png');
+  background-image: url('/product-bg.webp');
   background-size: cover;
   background-position: center;
+}
+
+/* Category card background for small screens */
+.category-small-bg {
+  background-image: url('/product-bg.webp');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Category card background for larger screens */
+.category-large-bg {
+  background-image: url('/productcard-bg.webp');
+  background-size: cover;
+  background-position: center;
+}
+
+@media (min-width: 640px) {
+  .category-small-bg {
+    background-image: url('/productcard-bg.webp');
+  }
 }

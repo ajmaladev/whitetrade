@@ -128,7 +128,7 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
       <div
         className="md:hidden absolute top-[43px] left-0 w-full h-[227px] flex flex-col items-center justify-center pointer-events-auto overflow-hidden rounded-b-2xl z-[1]"
         style={{
-          backgroundImage: 'url(/product-bg.png)',
+          backgroundImage: 'url(/hero-section-small-bg.webp)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}

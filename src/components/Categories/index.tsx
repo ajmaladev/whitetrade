@@ -83,12 +83,7 @@ function CategoryCard({ category, index }: { category: Category; index: number }
     >
       <Link href={`/categories/${category.slug || ''}`} className="block">
         <motion.div
-          className="relative w-48 sm:w-72 h-32 sm:h-44 cursor-pointer p-4 rounded-lg overflow-hidden"
-          style={{
-            backgroundImage: `url(/productcard-bg.webp)`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
+          className="relative w-48 sm:w-72 h-[140px] sm:h-44 cursor-pointer p-4 rounded-lg overflow-hidden category-small-bg"
           whileHover={{
             boxShadow: '0 25px 50px rgba(0, 0, 0, 0.12)',
             transition: { duration: 0.4, ease: 'easeOut' },
