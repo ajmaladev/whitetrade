@@ -83,12 +83,51 @@ export default function MegaMenu() {
 
   const menuWrapperRef = useRef<HTMLDivElement>(null)
 
-  const handleMenuClick = useCallback((key: MenuKey) => {
-    const url = new URL(window.location.href)
-    url.hash = key
-    window.history.pushState({}, '', url.toString())
-    setActive(key)
-  }, [])
+  // Custom smooth scroll function with configurable duration
+  const smoothScrollTo = useCallback(
+    (targetElement: HTMLElement, duration: number = 2000, key: MenuKey) => {
+      const height = key === 'products' ? 200 : 0
+      const targetPosition = targetElement.offsetTop - height // Account for header height
+      const startPosition = window.pageYOffset
+      const distance = targetPosition - startPosition
+      let startTime: number | null = null
+
+      const animation = (currentTime: number) => {
+        if (startTime === null) startTime = currentTime
+        const timeElapsed = currentTime - startTime
+        const run = easeInOutCubic(timeElapsed, startPosition, distance, duration)
+        window.scrollTo(0, run)
+        if (timeElapsed < duration) requestAnimationFrame(animation)
+      }
+
+      // Easing function for smooth acceleration/deceleration
+      const easeInOutCubic = (t: number, b: number, c: number, d: number) => {
+        t /= d / 2
+        if (t < 1) return (c / 2) * t * t * t + b
+        t -= 2
+        return (c / 2) * (t * t * t + 2) + b
+      }
+
+      requestAnimationFrame(animation)
+    },
+    [],
+  )
+
+  const handleMenuClick = useCallback(
+    (key: MenuKey) => {
+      const url = new URL(window.location.href)
+      url.hash = key
+      window.history.pushState({}, '', url.toString())
+      setActive(key)
+
+      // Use custom smooth scrolling with longer duration
+      const targetElement = document.getElementById(key)
+      if (targetElement) {
+        smoothScrollTo(targetElement, 2500, key) // 2.5 seconds duration
+      }
+    },
+    [smoothScrollTo],
+  )
 
   useEffect(() => {
     // Set initial active state based on hash

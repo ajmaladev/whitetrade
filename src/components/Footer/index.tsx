@@ -3,7 +3,10 @@ import { Logo } from '../Logo/Logo'
 
 export const Footer = () => {
   return (
-    <div className="mt-[12rem] md:mt-[14rem] lg:mt-[11rem] mx-4 sm:mx-6 md:mx-8 lg:mx-16 xl:mx-24 2xl:mx-32 mb-8 md:mb-12 lg:mb-16 xl:mb-24">
+    <div
+      id="contact"
+      className="mt-[12rem] md:mt-[14rem] lg:mt-[11rem] mx-4 sm:mx-6 md:mx-8 lg:mx-16 xl:mx-24 2xl:mx-32 mb-8 md:mb-12 lg:mb-16 xl:mb-24"
+    >
       {/* Navigation Links */}
       <div className="flex flex-wrap gap-4 sm:gap-6 md:gap-8 lg:gap-12 xl:gap-16 justify-center md:justify-start">
         <Link

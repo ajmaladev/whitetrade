@@ -2,7 +2,10 @@ import { MailIcon, MapPinIcon, PhoneIcon, StarIcon } from 'lucide-react'
 
 export const AboutUs = () => {
   return (
-    <div className="w-full min-h-screen relative bg-gradient-to-br from-slate-900 to-blue-900 overflow-hidden px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+    <div
+      id="about"
+      className="w-full min-h-screen relative bg-gradient-to-br from-slate-900 to-blue-900 overflow-hidden px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16"
+    >
       {/* Header Section */}
       <div className="flex flex-col md:flex-row md:gap-16 gap-8 justify-center items-center">
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
