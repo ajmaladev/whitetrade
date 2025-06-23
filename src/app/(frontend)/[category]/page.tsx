@@ -2,8 +2,8 @@ import { CategoryCard } from '@/components/Categories'
 import { getCachedCategory } from '@/lib/fetchMethods'
 import { Category } from '@/payload-types'
 
-export default async function CategoryPage({ params }: { params: { category: string } }) {
-  const category = await getCachedCategory(params.category)()
+export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
+  const category = await getCachedCategory((await params).category)()
   if (!category) {
     return <div>Category not found</div>
   }
