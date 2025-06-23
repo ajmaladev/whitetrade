@@ -1,6 +1,7 @@
 'use client'
 
 import { Category } from '@/payload-types'
+import { cn } from '@/utilities/ui'
 import { motion, useScroll, useTransform, Variants } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -8,7 +9,15 @@ import { PaginatedDocs } from 'payload'
 import { useRef } from 'react'
 
 // Separate component for individual category cards
-function CategoryCard({ category, index }: { category: Category; index: number }) {
+export function CategoryCard({
+  category,
+  index,
+  className,
+}: {
+  category: Category
+  index: number
+  className?: string
+}) {
   const cardRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: cardRef,
@@ -68,7 +77,7 @@ function CategoryCard({ category, index }: { category: Category; index: number }
     <motion.div
       ref={cardRef}
       variants={cardVariants}
-      className="relative group mr-[70px] md:mr-0"
+      className={cn('relative group mr-[70px] md:mr-0', className)}
       id="products"
       custom={index}
       style={{
@@ -81,7 +90,7 @@ function CategoryCard({ category, index }: { category: Category; index: number }
         transition: { duration: 0.3, ease: 'easeOut' },
       }}
     >
-      <Link href={`/categories/${category.slug || ''}`} className="block">
+      <Link href={`/${category.slug || ''}`} className="block">
         <motion.div
           className="relative w-48 sm:w-72 h-[140px] sm:h-44 cursor-pointer p-4 rounded-lg overflow-hidden category-small-bg"
           whileHover={{
