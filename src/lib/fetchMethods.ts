@@ -1,4 +1,4 @@
-import { HomePage, Product } from '@/payload-types'
+import { Category, HomePage, Product } from '@/payload-types'
 import { unstable_cache } from 'next/cache'
 import { PaginatedDocs } from 'payload'
 import { getPayloadClient } from './payload'
@@ -77,4 +77,19 @@ export const getProducts = async () => {
     limit: 1000,
   })
   return products as PaginatedDocs<Product>
+}
+
+export const getCachedCategory = (slug: string) =>
+  unstable_cache(async () => getCategory(slug), ['category', slug], {
+    revalidate: 60 * 60 * 24,
+    tags: ['category', slug],
+  })
+
+export const getCategory = async (slug: string) => {
+  const payload = await getPayloadClient()
+  const category = await payload.find({
+    collection: 'categories',
+    where: { slug: { equals: slug } },
+  })
+  return category as PaginatedDocs<Category>
 }
