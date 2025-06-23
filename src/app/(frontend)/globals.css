@@ -113,3 +113,14 @@
     background-image: url('/productcard-bg.webp');
   }
 }
+@media (min-width: 500px) {
+  .hero-section-small {
+    margin-bottom: -20px;
+  }
+  .hero-section-small-container {
+    top: 63px;
+  }
+  .small-screen-categories {
+    margin-top: 48px;
+  }
+}
