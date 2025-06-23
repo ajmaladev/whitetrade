@@ -5,6 +5,7 @@ import Categories from '../Categories'
 import { Certificates } from '../Certificates'
 import HeroSection from '../HeroSection'
 import MegaMenu from '../MegaMenu'
+import { NewsLetter } from '../NewsLetter'
 import { OurBrandsQuery } from '../OurBrandsQuery'
 import ReadyToShip from '../ReadyToShip'
 import { Reviews } from '../Reviews'
@@ -71,6 +72,7 @@ export default function HomePage({
       <OurBrandsQuery brands={ourBrands} products={products.docs} />
       <Reviews reviews={reviews} />
       <AboutUs />
+      <NewsLetter />
     </div>
   )
 }

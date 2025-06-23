@@ -79,3 +79,10 @@
     display: none; /* Chrome, Safari and Opera */
   }
 }
+
+.red-line {
+  height: 3px;
+  background-color: #ff0000;
+  width: 100px;
+  margin: 20px auto;
+}
