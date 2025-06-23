@@ -43,8 +43,8 @@ const MenuItem = memo(({ href, label, isActive, menuRef, onClick, menuKey }: Men
 
 MenuItem.displayName = 'MenuItem'
 
-const Logo = memo(() => (
-  <Link href="/" className="flex items-center flex-shrink-0 mt-4">
+const Logo = memo(({ onClick }: { onClick?: () => void }) => (
+  <Link href="/" className="flex items-center flex-shrink-0 mt-4" onClick={onClick}>
     <Image
       src="/logo.svg"
       alt="logo"
@@ -67,6 +67,7 @@ SearchIcon.displayName = 'SearchIcon'
 export default function MegaMenu() {
   const [active, setActive] = useState<MenuKey>('products')
   const [underlineStyle, setUnderlineStyle] = useState({ left: 0, width: 0 })
+  const [isDrawerOpen, setDrawerOpen] = useState(false)
 
   const productsRef = useRef<HTMLAnchorElement>(null)
   const aboutRef = useRef<HTMLAnchorElement>(null)
@@ -123,8 +124,11 @@ export default function MegaMenu() {
       // Use custom smooth scrolling with longer duration
       const targetElement = document.getElementById(key)
       if (targetElement) {
-        smoothScrollTo(targetElement, 2500, key) // 2.5 seconds duration
+        smoothScrollTo(targetElement, 2500, key)
       }
+
+      // Close the drawer after clicking a link (for mobile)
+      setDrawerOpen(false)
     },
     [smoothScrollTo],
   )
@@ -205,15 +209,15 @@ export default function MegaMenu() {
       <div className="flex md:hidden items-center gap-10 ml-auto">
         <Image src="/search.svg" alt="search" width={20} height={20} className="w-8 h-8" priority />
 
-        <Drawer>
+        <Drawer open={isDrawerOpen} onOpenChange={setDrawerOpen}>
           <DrawerTrigger asChild>
             <button aria-label="Open menu">
               <Menu className="w-8 h-8" />
             </button>
           </DrawerTrigger>
-          <DrawerContent className="right-0 left-auto w-4/5 max-w-xs fixed top-0 h-full rounded-none p-0 flex flex-col">
+          <DrawerContent className="right-0 left-auto w-4/5 max-w-xs fixed top-0 h-full rounded-none p-0 flex flex-col !mt-0">
             <div className="flex items-center justify-between px-4 py-6 border-b">
-              <Logo />
+              <Logo onClick={() => setDrawerOpen(false)} />
               <DrawerTrigger asChild>
                 <button aria-label="Close menu">
                   <Menu className="w-8 h-8 rotate-90" />
