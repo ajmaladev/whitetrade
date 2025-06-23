@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function ReadyToShip() {
   return (
-    <div className="w-full">
+    <div className="w-full hidden md:block">
       <Image
         src="/ready-to-ship.png"
         alt="Ready to Ship"

@@ -86,3 +86,10 @@
   width: 100px;
   margin: 20px auto;
 }
+
+/* Hero Section Small Screen Background */
+.hero-small-bg {
+  background-image: url('/product-bg.png');
+  background-size: cover;
+  background-position: center;
+}

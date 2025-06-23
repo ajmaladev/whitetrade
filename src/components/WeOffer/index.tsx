@@ -69,7 +69,7 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                 ref={(el) => {
                   animationRefs.current[index] = el
                 }}
-                className={`sticky pb-6 px-4 sm:px-6 top-0 ${isLeft ? 'left' : 'right'} bg-white md:pt-[156px] glass-container w-full`}
+                className={`sticky pb-6 px-4 sm:px-6 top-0 ${isLeft ? 'left' : 'right'} bg-white lg:pt-[156px] glass-container w-full`}
               >
                 <div className={`${isLeft ? 'mr-auto lg:pl-8' : 'ml-auto lg:pr-8'}`}>
                   <div
