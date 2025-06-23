@@ -69,6 +69,7 @@ function CategoryCard({ category, index }: { category: Category; index: number }
       ref={cardRef}
       variants={cardVariants}
       className="relative group mr-[70px] md:mr-0"
+      id="products"
       custom={index}
       style={{
         y: floatingY,

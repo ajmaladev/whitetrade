@@ -57,8 +57,23 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
               backgroundImage: 'url(/hero-section-bg.webp)',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
+              position: 'relative',
             }}
           >
+            {/* Centered bottom shadow */}
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '-12px',
+                left: '12.5%',
+                right: '12.5%',
+                height: '5px',
+                background: 'gray',
+                zIndex: -1,
+                boxShadow:
+                  '0 4px 16px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.2), 0 8px 32px rgba(0,0,0,0.4), 0 12px 48px rgba(0,0,0,0.2), 0 16px 64px rgba(0,0,0,0.5), 0 24px 96px rgba(0,0,0,0.3), 0 32px 128px rgba(0,0,0,0.2)',
+              }}
+            />
             <div className="relative z-10 flex flex-col items-start pl-4 sm:pl-8 md:pl-16 lg:pl-24 justify-center w-full h-full pt-6 sm:pt-8 md:pt-10 gap-2 sm:gap-3 md:gap-4">
               <h1 className="pl-2 sm:pl-4 md:pl-6 justify-start text-[#1C3A6A] text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-medium font-['Poppins'] leading-tight">
                 White Trading Company
@@ -102,7 +117,7 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
                 width={360}
                 height={170}
                 unoptimized
-                className={`absolute top-0 left-0 w-auto h-auto object-cover transition-opacity duration-1000 z-[2] ${idx === current ? 'opacity-100' : 'opacity-0'}`}
+                className={`absolute top-0 left-0 w-auto h-auto object-cover  transition-opacity duration-1000 z-[2] ${idx === current ? 'opacity-100' : 'opacity-0'}`}
               />
             )
           })}
@@ -111,7 +126,7 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
         </div>
       </div>
       <div
-        className="absolute top-[43px] left-0 w-full h-[227px] flex flex-col items-center justify-center pointer-events-auto overflow-hidden rounded-b-2xl z-[1]"
+        className="md:hidden absolute top-[43px] left-0 w-full h-[227px] flex flex-col items-center justify-center pointer-events-auto overflow-hidden rounded-b-2xl z-[1]"
         style={{
           backgroundImage: 'url(/product-bg.png)',
           backgroundSize: 'cover',
