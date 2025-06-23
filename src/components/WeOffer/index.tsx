@@ -27,17 +27,14 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Add animation class when element comes into view
             entry.target.classList.add('animate')
           } else {
-            // Remove animation class when element goes out of view
-            // This allows the animation to trigger again on next scroll
             entry.target.classList.remove('animate')
           }
         })
       },
       {
-        threshold: 0.3,
+        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
         rootMargin: '0px 0px -100px 0px',
       },
     )
@@ -56,14 +53,14 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
   }
 
   return (
-    <section className="relative overflow-clip mt-10 md:mt-14">
-      <div className="absolute top-0 left-0 w-[60%] h-full bg-gradient-to-b from-indigo-300 to-[#1C3A6A] -z-10"></div>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 relative">
-        <h2 className="text-white text-4xl sm:text-6xl lg:text-8xl xl:text-9xl font-bold font-['Poppins'] mb-8 sm:mb-12 lg:mb-16 text-left">
+    <section className="relative overflow-clip mt-10 md:mt-14 w-full">
+      {/* <div className="absolute top-0 left-0 w-[60%] h-full bg-gradient-to-b from-indigo-300 to-[#1C3A6A] -z-10"></div> */}
+      <div className="relative w-full">
+        <h2 className="ml-20 sticky top-0 py-4 text-[#3661c1] text-4xl sm:text-6xl lg:text-8xl xl:text-9xl font-bold font-['Poppins'] mb-8 text-left">
           We Offer
         </h2>
 
-        <div className="relative flex flex-col sm:gap-12 lg:gap-16">
+        <div className="relative flex flex-col mt-10 md:mt-20 w-full gap-8 sm:gap-12 lg:gap-16 ">
           {weOffer.item.map((item: WeOfferItem, index: number) => {
             const isLeft = index % 2 === 0
             return (
@@ -72,8 +69,7 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                 ref={(el) => {
                   animationRefs.current[index] = el
                 }}
-                className={`animation-block relative mb-8 sm:mb-12 lg:mb-16 ${isLeft ? 'left' : 'right'}`}
-                style={{ '--animation-order': index } as React.CSSProperties}
+                className={`sticky pb-6 px-4 sm:px-6 top-0 ${isLeft ? 'left' : 'right'} bg-white lg:pt-[156px] glass-container w-full`}
               >
                 <div className={`${isLeft ? 'mr-auto lg:pl-8' : 'ml-auto lg:pr-8'}`}>
                   <div
@@ -106,7 +102,7 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                       <div
                         className={`w-48 p-2.5 sm:w-[400px] md:w-[550px] sm:p-6 lg:p-7 bg-blue-600 ${isLeft ? '' : 'lg:text-right'}`}
                       >
-                        <h3 className="text-white text-xs sm:text-2xl lg:text-3xl xl:text-4xl font-bold font-['Manrope']">
+                        <h3 className="text-white text-xs sm:text-2xl lg:text-3xl xl:text-[28px] font-bold font-['Manrope']">
                           {item.title}
                         </h3>
                       </div>
@@ -122,36 +118,6 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                     </div>
                   </div>
                 </div>
-                {weOffer.item && index <= weOffer.item.length - 1 && (
-                  <div
-                    className={`w-full max-w-[710px] my-8 sm:my-12 lg:my-20 relative flex items-center mx-auto lg:mx-0 ${
-                      isLeft ? 'lg:ml-[220px]' : 'lg:ml-[420px]'
-                    }`}
-                  >
-                    <div className="h-px bg-blue-600 w-full absolute top-1/2 left-0 -translate-y-1/2"></div>
-                    <div className="w-full flex items-center justify-between relative">
-                      {Array.from({ length: weOffer.item.length }).map((_, dotIndex) => {
-                        const isActive = dotIndex === index + 1
-
-                        if (isActive) {
-                          return (
-                            <div
-                              key={dotIndex}
-                              className="w-3 sm:w-3.5 h-3 sm:h-3.5 bg-blue-600 rounded-full"
-                            />
-                          )
-                        }
-
-                        return (
-                          <div
-                            key={dotIndex}
-                            className="w-2.5 sm:w-3 h-2.5 sm:h-3 bg-indigo-500 rounded-full"
-                          />
-                        )
-                      })}
-                    </div>
-                  </div>
-                )}
               </div>
             )
           })}

@@ -79,6 +79,7 @@ export interface Config {
     weOffer: WeOffer;
     'home-page': HomePage;
     'customer-query': CustomerQuery;
+    newstletter: Newstletter;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -106,6 +107,7 @@ export interface Config {
     weOffer: WeOfferSelect<false> | WeOfferSelect<true>;
     'home-page': HomePageSelect<false> | HomePageSelect<true>;
     'customer-query': CustomerQuerySelect<false> | CustomerQuerySelect<true>;
+    newstletter: NewstletterSelect<false> | NewstletterSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -843,6 +845,16 @@ export interface CustomerQuery {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newstletter".
+ */
+export interface Newstletter {
+  id: string;
+  email?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1061,6 +1073,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'customer-query';
         value: string | CustomerQuery;
+      } | null)
+    | ({
+        relationTo: 'newstletter';
+        value: string | Newstletter;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1504,6 +1520,15 @@ export interface CustomerQuerySelect<T extends boolean = true> {
   name?: T;
   product?: T;
   phone?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newstletter_select".
+ */
+export interface NewstletterSelect<T extends boolean = true> {
+  email?: T;
   updatedAt?: T;
   createdAt?: T;
 }

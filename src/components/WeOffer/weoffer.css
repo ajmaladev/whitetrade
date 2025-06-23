@@ -1,3 +1,84 @@
+/* Animation styles */
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-icon-left {
+  animation: slideInFromLeft 0.8s ease-out forwards;
+}
+
+.animate-icon-right {
+  animation: slideInFromRight 0.8s ease-out forwards;
+}
+
+/* Base animation block styles */
+.animation-block {
+  opacity: 0;
+  transform: scale(0.8) translateY(30px);
+  transition:
+    opacity 0.8s ease-out,
+    transform 0.8s ease-out;
+  transition-delay: calc(var(--animation-order, 0) * 0.15s);
+  will-change: opacity, transform;
+}
+
+/* Animation state when element is in view */
+.animation-block.animate {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Ensure smooth transitions on all devices */
+@media (prefers-reduced-motion: no-preference) {
+  .animation-block {
+    transition:
+      opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animate-icon-left,
+  .animate-icon-right {
+    animation-fill-mode: both;
+  }
+}
+
+/* Fallback for devices that don't support smooth transitions */
+@media (prefers-reduced-motion: reduce) {
+  .animation-block {
+    transition: none;
+  }
+
+  .animation-block.animate {
+    opacity: 1;
+    transform: none;
+  }
+
+  .animate-icon-left,
+  .animate-icon-right {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* Layout styles */
 .left .timeline-content {
   margin-right: auto;
   padding-left: 2rem;
@@ -28,52 +109,38 @@
   }
 }
 
-@keyframes appear {
-  0% {
-    opacity: 0;
-    transform: scale(0.8) translateY(30px);
+/* Glass morphism styles */
+.glass-container {
+  background: white;
+}
+
+.glass-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  z-index: -1;
+}
+
+/* Fallback for browsers that don't support backdrop-filter */
+@supports not (backdrop-filter: blur(20px)) {
+  .glass-container {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.3);
   }
 
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
+  .glass-container::before {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
   }
 }
 
-/* Base animation block styles */
-.animation-block {
-  opacity: 0;
-  transform: scale(0.8) translateY(30px);
-  transition:
-    opacity 0.8s ease-out,
-    transform 0.8s ease-out;
-  transition-delay: calc(var(--animation-order, 0) * 0.15s);
-  will-change: opacity, transform;
-}
-
-/* Animation state when element is in view */
-.animation-block.animate {
-  opacity: 1;
-  transform: scale(1) translateY(0);
-}
-
-/* Ensure smooth transitions on all devices */
-@media (prefers-reduced-motion: no-preference) {
-  .animation-block {
-    transition:
-      opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-      transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-}
-
-/* Fallback for devices that don't support smooth transitions */
-@media (prefers-reduced-motion: reduce) {
-  .animation-block {
-    transition: none;
-  }
-
-  .animation-block.animate {
-    opacity: 1;
-    transform: none;
-  }
+.gradient-text {
+  background: linear-gradient(to right, #ff7e5f, #feb47b); /* Your gradient colors */
+  background-clip: text;
+  color: transparent;
+  font-size: 48px; /* Adjust as needed */
+  font-weight: bold;
 }

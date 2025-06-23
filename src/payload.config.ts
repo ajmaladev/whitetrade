@@ -13,6 +13,7 @@ import { Certificate } from './collections/Certificate'
 import { CustomerQuery } from './collections/CustomerQuery'
 import { HomePage } from './collections/HomePage'
 import { Media } from './collections/Media'
+import { Newstletter } from './collections/Newstletter'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Products } from './collections/Products'
@@ -81,6 +82,7 @@ export default buildConfig({
     WeOffer,
     HomePage,
     CustomerQuery,
+    Newstletter,
   ],
   cors: [getServerSideURL()].filter(Boolean),
   plugins: [

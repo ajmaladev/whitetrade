@@ -19,7 +19,7 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
   }, [carousal.length])
 
   return (
-    <>
+    <div className="relative">
       {/* Large screen design */}
       <div className="hidden md:block">
         <div className="relative w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] overflow-hidden">
@@ -52,7 +52,7 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
         </div>
         <div className="absolute inset-0 top-[100px] sm:top-[120px] md:top-[150px] lg:top-[177px] flex items-center justify-center z-[2] pointer-events-none px-4 sm:px-6 md:px-8">
           <div
-            className="relative w-full max-w-[320px] sm:max-w-[500px] md:max-w-[700px] lg:max-w-[963px] h-[280px] sm:h-[320px] md:h-[380px] lg:h-[452px] flex flex-col items-center justify-between pointer-events-auto overflow-hidden gap-4 sm:gap-6 md:gap-8 lg:gap-10 "
+            className="-z-10 md:z-10 -m-32 relative w-full max-w-[320px] sm:max-w-[500px] md:max-w-[700px] lg:max-w-[963px] h-[280px] sm:h-[320px] md:h-[380px] lg:h-[452px] flex flex-col items-center justify-between pointer-events-auto overflow-hidden gap-4 sm:gap-6 md:gap-8 lg:gap-10 "
             style={{
               backgroundImage: 'url(/hero-section-bg.webp)',
               backgroundSize: 'cover',
@@ -80,8 +80,8 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
       </div>
 
       {/* Small screen design */}
-      <div className="block md:hidden">
-        <div className="relative w-full px-5 rounded-2xl h-[180px] overflow-hidden">
+      <div className="md:hidden m-4 relative">
+        <div className="relative w-full h-[344px] overflow-hidden rounded-2xl">
           {/* Carousel with small_image */}
           {carousal?.map((img, idx) => {
             let src = ''
@@ -99,32 +99,33 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
                 key={src + idx}
                 src={src}
                 alt={img.alt || ''}
-                fill
+                width={360}
+                height={170}
                 unoptimized
-                className={`absolute top-0 left-0 px-5 w-full h-full object-contain transition-opacity duration-1000 z-[1] ${idx === current ? 'opacity-100' : 'opacity-0'}`}
+                className={`absolute top-0 left-0 w-auto h-auto object-cover transition-opacity duration-1000 z-[2] ${idx === current ? 'opacity-100' : 'opacity-0'}`}
               />
             )
           })}
-        </div>
-        <div
-          className="relative w-full h-auto flex flex-col items-center justify-center pointer-events-auto overflow-hidden p-6"
-          style={{
-            backgroundImage: 'url(/hero-section-bg.webp)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        >
-          <div className="relative z-10 flex flex-col items-start justify-center w-full h-full gap-4 pl-7">
-            <h1 className="justify-start text-sky-950 text-2xl font-medium font-['Poppins'] leading-tight">
-              White Trading Company
-            </h1>
-            <div className="justify-start text-sky-950 text-xl font-normal">
-              Worldwide Exporters & Supplier
-            </div>
-            <div className="justify-start text-sky-950 text-lg font-normal">over a decade now</div>
-          </div>
+
+          {/* Background image container */}
         </div>
       </div>
-    </>
+      <div
+        className="absolute top-[43px] left-0 w-full h-[227px] flex flex-col items-center justify-center pointer-events-auto overflow-hidden rounded-b-2xl z-[1]"
+        style={{
+          backgroundImage: 'url(/product-bg.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className="relative z-10 flex flex-col items-start justify-end w-full h-full gap-2 p-6">
+          <h1 className="text-[#1C3A6A] text-2xl font-medium font-['Poppins'] leading-tight">
+            White Trading Company
+          </h1>
+          <div className="text-[#1C3A6A] text-lg font-normal">Worldwide Exporters & Supplier</div>
+          <div className="text-[#1C3A6A] text-base font-normal">over a decade now</div>
+        </div>
+      </div>
+    </div>
   )
 }

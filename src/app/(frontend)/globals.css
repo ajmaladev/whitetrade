@@ -79,3 +79,17 @@
     display: none; /* Chrome, Safari and Opera */
   }
 }
+
+.red-line {
+  height: 3px;
+  background-color: #ff0000;
+  width: 100px;
+  margin: 20px auto;
+}
+
+/* Hero Section Small Screen Background */
+.hero-small-bg {
+  background-image: url('/product-bg.png');
+  background-size: cover;
+  background-position: center;
+}
