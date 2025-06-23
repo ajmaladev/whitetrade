@@ -3,6 +3,7 @@ import { PaginatedDocs } from 'payload'
 import { AboutUs } from '../AboutUs'
 import Categories from '../Categories'
 import { Certificates } from '../Certificates'
+import { Footer } from '../Footer'
 import HeroSection from '../HeroSection'
 import MegaMenu from '../MegaMenu'
 import { NewsLetter } from '../NewsLetter'
@@ -73,6 +74,7 @@ export default function HomePage({
       <Reviews reviews={reviews} />
       <AboutUs />
       <NewsLetter />
+      <Footer />
     </div>
   )
 }
