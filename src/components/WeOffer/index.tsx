@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import './weoffer.css'
 
 // Define the actual type based on your data structure
@@ -21,28 +21,10 @@ interface WeOfferProps {
 
 export const WeOffer = ({ weOffer }: WeOfferProps) => {
   const animationRefs = useRef<(HTMLDivElement | null)[]>([])
-  const [activeIndex, setActiveIndex] = useState(0)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        // Track all currently intersecting elements
-        const intersectingElements = entries.filter((entry) => entry.isIntersecting)
-
-        if (intersectingElements.length > 0) {
-          // Find the element that is most prominently in view (highest intersection ratio)
-          const mostVisibleElement = intersectingElements.reduce((prev, current) =>
-            current.intersectionRatio > prev.intersectionRatio ? current : prev,
-          )
-
-          // Update active index based on the most visible element
-          const index = animationRefs.current.findIndex((ref) => ref === mostVisibleElement.target)
-          if (index !== -1) {
-            setActiveIndex(index)
-          }
-        }
-
-        // Handle animation classes
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('animate')
@@ -74,11 +56,11 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
     <section className="relative overflow-clip mt-10 md:mt-14 w-full">
       {/* <div className="absolute top-0 left-0 w-[60%] h-full bg-gradient-to-b from-indigo-300 to-[#1C3A6A] -z-10"></div> */}
       <div className="relative w-full">
-        <h2 className="ml-20 py-4 text-[#3661c1] text-4xl sm:text-6xl lg:text-8xl xl:text-9xl font-bold font-['Poppins'] mb-8 text-left">
+        <h2 className="ml-20 sticky top-0 py-4 text-[#3661c1] text-4xl sm:text-6xl lg:text-8xl xl:text-9xl font-bold font-['Poppins'] mb-8 text-left">
           We Offer
         </h2>
 
-        <div className="relative flex flex-col mt-20 w-full gap-8 sm:gap-12 lg:gap-16 ">
+        <div className="relative flex flex-col mt-10 md:mt-20 w-full gap-8 sm:gap-12 lg:gap-16 ">
           {weOffer.item.map((item: WeOfferItem, index: number) => {
             const isLeft = index % 2 === 0
             return (
@@ -87,7 +69,7 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                 ref={(el) => {
                   animationRefs.current[index] = el
                 }}
-                className={`sticky pb-6 px-4 sm:px-6 top-0 ${isLeft ? 'left' : 'right'} bg-white pt-[156px] glass-container w-full`}
+                className={`sticky pb-6 px-4 sm:px-6 top-0 ${isLeft ? 'left' : 'right'} bg-white md:pt-[156px] glass-container w-full`}
               >
                 <div className={`${isLeft ? 'mr-auto lg:pl-8' : 'ml-auto lg:pr-8'}`}>
                   <div
