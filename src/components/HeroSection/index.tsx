@@ -96,7 +96,7 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
 
       {/* Small screen design */}
       <div className="sm:hidden m-4 relative">
-        <div className="relative w-full h-[344px] overflow-hidden rounded-2xl">
+        <div className="relative w-full h-[50vh] overflow-hidden rounded-2xl">
           {/* Carousel with small_image */}
           {carousal?.map((img, idx) => {
             let src = ''
@@ -126,7 +126,7 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
         </div>
       </div>
       <div
-        className="hero-section-small-container sm:hidden absolute top-[43px] left-0 w-full h-[250px] flex flex-col items-center justify-center pointer-events-auto overflow-hidden rounded-b-2xl z-[1]"
+        className="hero-section-small-container sm:hidden absolute top-[43px] left-0 w-full h-[222px] flex flex-col items-center justify-center pointer-events-auto overflow-hidden rounded-b-2xl z-[1]"
         style={{
           backgroundImage: 'url(/hero-section-small-bg.webp)',
           backgroundSize: 'cover',
@@ -134,11 +134,11 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
           backgroundRepeat: 'no-repeat',
         }}
       >
-        <div className="hero-section-small relative mb-4 sm:mb-6 md:mb-8 z-10 flex flex-col items-start justify-end w-full h-full gap-2 p-6">
-          <h1 className="text-[#1C3A6A] text-2xl font-medium font-['Poppins'] leading-tight">
+        <div className="hero-section-small relative mb-4 sm:mb-6 md:mb-8 z-10 flex flex-col items-start justify-end w-auto md:w-full h-full gap-1 p-6">
+          <h1 className="text-[#1C3A6A] text-[22px] font-medium font-['Poppins'] leading-tight">
             White Trading Company
           </h1>
-          <div className="text-[#1C3A6A] text-lg font-normal">Worldwide Exporters & Supplier</div>
+          <div className="text-[#1C3A6A] text-lg font-medium">Worldwide Exporters & Supplier</div>
           <div className="text-[#1C3A6A] text-base font-normal">over a decade now</div>
         </div>
       </div>
