@@ -33,7 +33,7 @@ export function CategoryCard({
   // Image floating animation
   const imageFloatingY = useTransform(scrollYProgress, [0, 0.3, 0.6, 0.9, 1], [0, -12, 0, -8, 0])
 
-  let imageUrl = category.category_image
+  let imageUrl = category?.category_image
   if (imageUrl) {
     imageUrl = process.env.NEXT_PUBLIC_BUNNY_CDN + imageUrl
   }

@@ -56,7 +56,7 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
     <section className="relative overflow-clip mt-10 md:mt-14 w-full">
       {/* <div className="absolute top-0 left-0 w-[60%] h-full bg-gradient-to-b from-indigo-300 to-[#1C3A6A] -z-10"></div> */}
       <div className="relative w-full">
-        <h2 className="ml-20 sticky top-0 py-4 text-[#3661c1] text-4xl sm:text-6xl lg:text-8xl xl:text-9xl font-bold font-['Poppins'] mb-8 text-left">
+        <h2 className="text-center sm:ml-20 sticky top-0 py-4 text-[#3661c1] text-6xl sm:text-6xl lg:text-8xl xl:text-9xl font-bold font-['Poppins'] mb-8 sm:text-left">
           We Offer
         </h2>
 
