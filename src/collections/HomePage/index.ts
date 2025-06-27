@@ -1,8 +1,17 @@
+import { revalidate } from '@/app/(frontend)/actions'
 import globalUpload from '@/components/Globals/GlobalUpload'
 import type { CollectionConfig } from 'payload'
 
 export const HomePage: CollectionConfig = {
   slug: 'home-page',
+  hooks: {
+    beforeValidate: [
+      async ({ data, req }) => {
+        await revalidate('home-page')
+        return data
+      },
+    ],
+  },
   fields: [
     {
       name: 'carousal',

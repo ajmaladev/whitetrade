@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 
+import { revalidate } from '@/app/(frontend)/actions'
 import globalUpload from '@/components/Globals/GlobalUpload'
 import { slugField } from '@/fields/slug'
 import { anyone } from '../access/anyone'
@@ -7,6 +8,21 @@ import { authenticated } from '../access/authenticated'
 
 export const Categories: CollectionConfig = {
   slug: 'categories',
+  hooks: {
+    beforeValidate: [
+      async ({ data }) => {
+        await revalidate('categories')
+        await revalidate(data?.slug)
+        return data
+      },
+    ],
+    beforeDelete: [
+      async () => {
+        await revalidate('categories')
+        await revalidate('category')
+      },
+    ],
+  },
   access: {
     create: authenticated,
     delete: authenticated,

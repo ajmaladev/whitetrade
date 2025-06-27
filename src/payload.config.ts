@@ -7,9 +7,7 @@ import sharp from 'sharp' // sharp-import
 import { fileURLToPath } from 'url'
 
 import { defaultLexical } from '@/fields/defaultLexical'
-import { Carousal } from './collections/Carousal'
 import { Categories } from './collections/Categories'
-import { Certificate } from './collections/Certificate'
 import { CustomerQuery } from './collections/CustomerQuery'
 import { HomePage } from './collections/HomePage'
 import { Media } from './collections/Media'
@@ -17,9 +15,7 @@ import { Newstletter } from './collections/Newstletter'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Products } from './collections/Products'
-import { Testimonial } from './collections/Testimonial'
 import { Users } from './collections/Users'
-import { WeOffer } from './collections/WeOffer'
 import { plugins } from './plugins'
 import { getServerSideURL } from './utilities/getURL'
 
@@ -35,7 +31,7 @@ export default buildConfig({
       beforeLogin: ['@/components/BeforeLogin'],
       // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below and the import `BeforeDashboard` statement on line 15.
-      beforeDashboard: ['@/components/BeforeDashboard'],
+      // beforeDashboard: ['@/components/BeforeDashboard'],
     },
     importMap: {
       baseDir: path.resolve(dirname),
@@ -70,19 +66,15 @@ export default buildConfig({
     url: process.env.DATABASE_URI || '',
   }),
   collections: [
+    Categories,
+    CustomerQuery,
+    HomePage,
+    Media,
+    Newstletter,
     Pages,
     Posts,
-    Media,
-    Categories,
-    Users,
-    Carousal,
     Products,
-    Testimonial,
-    Certificate,
-    WeOffer,
-    HomePage,
-    CustomerQuery,
-    Newstletter,
+    Users,
   ],
   cors: [getServerSideURL()].filter(Boolean),
   plugins: [

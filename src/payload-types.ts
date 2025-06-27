@@ -67,19 +67,15 @@ export interface Config {
   };
   blocks: {};
   collections: {
+    categories: Category;
+    'customer-query': CustomerQuery;
+    'home-page': HomePage;
+    media: Media;
+    newstletter: Newstletter;
     pages: Page;
     posts: Post;
-    media: Media;
-    categories: Category;
-    users: User;
-    carousal: Carousal;
     products: Product;
-    testimonial: Testimonial;
-    certificate: Certificate;
-    weOffer: WeOffer;
-    'home-page': HomePage;
-    'customer-query': CustomerQuery;
-    newstletter: Newstletter;
+    users: User;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -95,19 +91,15 @@ export interface Config {
     };
   };
   collectionsSelect: {
+    categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    'customer-query': CustomerQuerySelect<false> | CustomerQuerySelect<true>;
+    'home-page': HomePageSelect<false> | HomePageSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
+    newstletter: NewstletterSelect<false> | NewstletterSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
-    media: MediaSelect<false> | MediaSelect<true>;
-    categories: CategoriesSelect<false> | CategoriesSelect<true>;
-    users: UsersSelect<false> | UsersSelect<true>;
-    carousal: CarousalSelect<false> | CarousalSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
-    testimonial: TestimonialSelect<false> | TestimonialSelect<true>;
-    certificate: CertificateSelect<false> | CertificateSelect<true>;
-    weOffer: WeOfferSelect<false> | WeOfferSelect<true>;
-    'home-page': HomePageSelect<false> | HomePageSelect<true>;
-    'customer-query': CustomerQuerySelect<false> | CustomerQuerySelect<true>;
-    newstletter: NewstletterSelect<false> | NewstletterSelect<true>;
+    users: UsersSelect<false> | UsersSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -154,6 +146,171 @@ export interface UserAuthOperations {
     email: string;
     password: string;
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: string;
+  title: string;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  category_image?: string | null;
+  products?: {
+    docs?: (string | Product)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  parent?: (string | null) | Category;
+  breadcrumbs?:
+    | {
+        doc?: (string | null) | Category;
+        url?: string | null;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products".
+ */
+export interface Product {
+  id: string;
+  title?: string | null;
+  description?: string | null;
+  product_image?: string | null;
+  category: {
+    relationTo: 'categories';
+    value: string | Category;
+  }[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "customer-query".
+ */
+export interface CustomerQuery {
+  id: string;
+  name?: string | null;
+  product?: (string | null) | Product;
+  phone?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page".
+ */
+export interface HomePage {
+  id: string;
+  carousal?:
+    | {
+        alt?: string | null;
+        big_image?: string | null;
+        small_image?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  testimonials?:
+    | {
+        title?: string | null;
+        count?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  certificates?:
+    | {
+        image?: string | null;
+        title: string;
+        id?: string | null;
+      }[]
+    | null;
+  weOffer?: {
+    title?: string | null;
+    /**
+     * Enter the items you want to offer
+     */
+    item?:
+      | {
+          title?: string | null;
+          description?: string | null;
+          icon?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  'our-brands'?:
+    | {
+        image?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  reviews?:
+    | {
+        user_name?: string | null;
+        user_role?: string | null;
+        review?: string | null;
+        user_image?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: string;
+  backupUrl?: string | null;
+  title: string;
+  alt_text: string;
+  uploader?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url: string;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    medium?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newstletter".
+ */
+export interface Newstletter {
+  id: string;
+  email?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -267,89 +424,6 @@ export interface Post {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: string;
-  backupUrl?: string | null;
-  title: string;
-  alt_text: string;
-  uploader?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  url: string;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-  sizes?: {
-    thumbnail?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    medium?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-  };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories".
- */
-export interface Category {
-  id: string;
-  title: string;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  category_image?: string | null;
-  products?: {
-    docs?: (string | Product)[];
-    hasNextPage?: boolean;
-    totalDocs?: number;
-  };
-  parent?: (string | null) | Category;
-  breadcrumbs?:
-    | {
-        doc?: (string | null) | Category;
-        url?: string | null;
-        label?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "products".
- */
-export interface Product {
-  id: string;
-  title?: string | null;
-  description?: string | null;
-  product_image?: string | null;
-  category: {
-    relationTo: 'categories';
-    value: string | Category;
-  }[];
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -713,148 +787,6 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "carousal".
- */
-export interface Carousal {
-  id: string;
-  alt?: string | null;
-  big_image?: string | null;
-  small_image?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "testimonial".
- */
-export interface Testimonial {
-  id: string;
-  testimonials?:
-    | {
-        title?: string | null;
-        count?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "certificate".
- */
-export interface Certificate {
-  id: string;
-  image?: string | null;
-  title: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "weOffer".
- */
-export interface WeOffer {
-  id: string;
-  title?: string | null;
-  /**
-   * Enter the items you want to offer
-   */
-  item?:
-    | {
-        title?: string | null;
-        description?: string | null;
-        icon?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "home-page".
- */
-export interface HomePage {
-  id: string;
-  carousal?:
-    | {
-        alt?: string | null;
-        big_image?: string | null;
-        small_image?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  testimonials?:
-    | {
-        title?: string | null;
-        count?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  certificates?:
-    | {
-        image?: string | null;
-        title: string;
-        id?: string | null;
-      }[]
-    | null;
-  weOffer?: {
-    title?: string | null;
-    /**
-     * Enter the items you want to offer
-     */
-    item?:
-      | {
-          title?: string | null;
-          description?: string | null;
-          icon?: string | null;
-          id?: string | null;
-        }[]
-      | null;
-  };
-  'our-brands'?:
-    | {
-        image?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  reviews?:
-    | {
-        user_name?: string | null;
-        user_role?: string | null;
-        review?: string | null;
-        user_image?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "customer-query".
- */
-export interface CustomerQuery {
-  id: string;
-  name?: string | null;
-  product?: (string | null) | Product;
-  phone?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "newstletter".
- */
-export interface Newstletter {
-  id: string;
-  email?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1027,6 +959,26 @@ export interface PayloadLockedDocument {
   id: string;
   document?:
     | ({
+        relationTo: 'categories';
+        value: string | Category;
+      } | null)
+    | ({
+        relationTo: 'customer-query';
+        value: string | CustomerQuery;
+      } | null)
+    | ({
+        relationTo: 'home-page';
+        value: string | HomePage;
+      } | null)
+    | ({
+        relationTo: 'media';
+        value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'newstletter';
+        value: string | Newstletter;
+      } | null)
+    | ({
         relationTo: 'pages';
         value: string | Page;
       } | null)
@@ -1035,48 +987,12 @@ export interface PayloadLockedDocument {
         value: string | Post;
       } | null)
     | ({
-        relationTo: 'media';
-        value: string | Media;
-      } | null)
-    | ({
-        relationTo: 'categories';
-        value: string | Category;
-      } | null)
-    | ({
-        relationTo: 'users';
-        value: string | User;
-      } | null)
-    | ({
-        relationTo: 'carousal';
-        value: string | Carousal;
-      } | null)
-    | ({
         relationTo: 'products';
         value: string | Product;
       } | null)
     | ({
-        relationTo: 'testimonial';
-        value: string | Testimonial;
-      } | null)
-    | ({
-        relationTo: 'certificate';
-        value: string | Certificate;
-      } | null)
-    | ({
-        relationTo: 'weOffer';
-        value: string | WeOffer;
-      } | null)
-    | ({
-        relationTo: 'home-page';
-        value: string | HomePage;
-      } | null)
-    | ({
-        relationTo: 'customer-query';
-        value: string | CustomerQuery;
-      } | null)
-    | ({
-        relationTo: 'newstletter';
-        value: string | Newstletter;
+        relationTo: 'users';
+        value: string | User;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1139,6 +1055,151 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories_select".
+ */
+export interface CategoriesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  slugLock?: T;
+  category_image?: T;
+  products?: T;
+  parent?: T;
+  breadcrumbs?:
+    | T
+    | {
+        doc?: T;
+        url?: T;
+        label?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "customer-query_select".
+ */
+export interface CustomerQuerySelect<T extends boolean = true> {
+  name?: T;
+  product?: T;
+  phone?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page_select".
+ */
+export interface HomePageSelect<T extends boolean = true> {
+  carousal?:
+    | T
+    | {
+        alt?: T;
+        big_image?: T;
+        small_image?: T;
+        id?: T;
+      };
+  testimonials?:
+    | T
+    | {
+        title?: T;
+        count?: T;
+        id?: T;
+      };
+  certificates?:
+    | T
+    | {
+        image?: T;
+        title?: T;
+        id?: T;
+      };
+  weOffer?:
+    | T
+    | {
+        title?: T;
+        item?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              icon?: T;
+              id?: T;
+            };
+      };
+  'our-brands'?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
+  reviews?:
+    | T
+    | {
+        user_name?: T;
+        user_role?: T;
+        review?: T;
+        user_image?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  backupUrl?: T;
+  title?: T;
+  alt_text?: T;
+  uploader?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        medium?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newstletter_select".
+ */
+export interface NewstletterSelect<T extends boolean = true> {
+  email?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1308,68 +1369,13 @@ export interface PostsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media_select".
+ * via the `definition` "products_select".
  */
-export interface MediaSelect<T extends boolean = true> {
-  backupUrl?: T;
+export interface ProductsSelect<T extends boolean = true> {
   title?: T;
-  alt_text?: T;
-  uploader?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
-  sizes?:
-    | T
-    | {
-        thumbnail?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        medium?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-      };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories_select".
- */
-export interface CategoriesSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  slugLock?: T;
-  category_image?: T;
-  products?: T;
-  parent?: T;
-  breadcrumbs?:
-    | T
-    | {
-        doc?: T;
-        url?: T;
-        label?: T;
-        id?: T;
-      };
+  description?: T;
+  product_image?: T;
+  category?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1388,149 +1394,6 @@ export interface UsersSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "carousal_select".
- */
-export interface CarousalSelect<T extends boolean = true> {
-  alt?: T;
-  big_image?: T;
-  small_image?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "products_select".
- */
-export interface ProductsSelect<T extends boolean = true> {
-  title?: T;
-  description?: T;
-  product_image?: T;
-  category?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "testimonial_select".
- */
-export interface TestimonialSelect<T extends boolean = true> {
-  testimonials?:
-    | T
-    | {
-        title?: T;
-        count?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "certificate_select".
- */
-export interface CertificateSelect<T extends boolean = true> {
-  image?: T;
-  title?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "weOffer_select".
- */
-export interface WeOfferSelect<T extends boolean = true> {
-  title?: T;
-  item?:
-    | T
-    | {
-        title?: T;
-        description?: T;
-        icon?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "home-page_select".
- */
-export interface HomePageSelect<T extends boolean = true> {
-  carousal?:
-    | T
-    | {
-        alt?: T;
-        big_image?: T;
-        small_image?: T;
-        id?: T;
-      };
-  testimonials?:
-    | T
-    | {
-        title?: T;
-        count?: T;
-        id?: T;
-      };
-  certificates?:
-    | T
-    | {
-        image?: T;
-        title?: T;
-        id?: T;
-      };
-  weOffer?:
-    | T
-    | {
-        title?: T;
-        item?:
-          | T
-          | {
-              title?: T;
-              description?: T;
-              icon?: T;
-              id?: T;
-            };
-      };
-  'our-brands'?:
-    | T
-    | {
-        image?: T;
-        id?: T;
-      };
-  reviews?:
-    | T
-    | {
-        user_name?: T;
-        user_role?: T;
-        review?: T;
-        user_image?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "customer-query_select".
- */
-export interface CustomerQuerySelect<T extends boolean = true> {
-  name?: T;
-  product?: T;
-  phone?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "newstletter_select".
- */
-export interface NewstletterSelect<T extends boolean = true> {
-  email?: T;
-  updatedAt?: T;
-  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

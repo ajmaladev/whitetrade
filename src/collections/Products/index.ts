@@ -1,3 +1,4 @@
+import { revalidate } from '@/app/(frontend)/actions'
 import globalUpload from '@/components/Globals/GlobalUpload'
 import { CollectionConfig } from 'payload'
 
@@ -5,6 +6,24 @@ export const Products: CollectionConfig = {
   slug: 'products',
   admin: {
     useAsTitle: 'title',
+  },
+  hooks: {
+    beforeValidate: [
+      async ({ data, req }) => {
+        const categoryfetch = await req.payload.find({
+          collection: 'categories',
+          where: {
+            id: { equals: data?.[0]?.value },
+          },
+          select: {
+            slug: true,
+          },
+        })
+        await revalidate(categoryfetch?.docs[0]?.slug || '')
+        await revalidate('products')
+        return data
+      },
+    ],
   },
   fields: [
     {
@@ -15,7 +34,7 @@ export const Products: CollectionConfig = {
     {
       name: 'description',
       label: 'Product Description',
-      type: 'text',
+      type: 'textarea',
     },
     globalUpload({
       field_name: 'product_image',

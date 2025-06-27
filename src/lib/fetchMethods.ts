@@ -15,42 +15,6 @@ export const getCategories = async () => {
   return categories
 }
 
-export const getCachedTestimonials = () =>
-  unstable_cache(async () => getTestimonials(), ['testimonials'], {
-    revalidate: 60 * 60 * 24,
-    tags: ['testimonials'],
-  })
-
-export const getTestimonials = async () => {
-  const payload = await getPayloadClient()
-  const testimonials = await payload.find({ collection: 'testimonial' })
-  return testimonials
-}
-
-export const getCachedCertificates = () =>
-  unstable_cache(async () => getCertificates(), ['certificates'], {
-    revalidate: 60 * 60 * 24,
-    tags: ['certificates'],
-  })
-
-export const getCertificates = async () => {
-  const payload = await getPayloadClient()
-  const certificates = await payload.find({ collection: 'certificate' })
-  return certificates
-}
-
-export const getCachedWeOffer = () =>
-  unstable_cache(async () => getWeOffer(), ['weOffer'], {
-    revalidate: 60 * 60 * 24,
-    tags: ['weOffer'],
-  })
-
-export const getWeOffer = async () => {
-  const payload = await getPayloadClient()
-  const weOffer = await payload.find({ collection: 'weOffer' })
-  return weOffer
-}
-
 export const getCachedHomePage = () =>
   unstable_cache(async () => getHomePage(), ['home-page'], {
     revalidate: 60 * 60 * 24,
