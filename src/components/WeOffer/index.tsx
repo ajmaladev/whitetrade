@@ -53,14 +53,13 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
   }
 
   return (
-    <section className="relative overflow-clip mt-10 md:mt-14 w-full">
-      {/* <div className="absolute top-0 left-0 w-[60%] h-full bg-gradient-to-b from-indigo-300 to-[#1C3A6A] -z-10"></div> */}
+    <section className="relative overflow-clip mt-4 sm:mt-10 md:mt-14 w-full">
       <div className="relative w-full">
         <h2 className="text-center sm:ml-20 sticky top-0 py-4 text-[#3661c1] text-6xl sm:text-6xl lg:text-8xl xl:text-9xl font-bold font-['Poppins'] mb-8 sm:text-left">
           We Offer
         </h2>
 
-        <div className="relative flex flex-col mt-10 md:mt-20 w-full gap-8 sm:gap-12 lg:gap-16 ">
+        <div className="relative flex flex-col mt-3 md:mt-20 w-full gap-4 sm:gap-12 lg:gap-16 ">
           {weOffer.item.map((item: WeOfferItem, index: number) => {
             const isLeft = index % 2 === 0
             return (
@@ -69,21 +68,21 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                 ref={(el) => {
                   animationRefs.current[index] = el
                 }}
-                className={`sticky pb-6 px-4 sm:px-6 top-0 ${isLeft ? 'left' : 'right'} bg-white lg:pt-[156px] glass-container w-full`}
+                className={`sticky pb-6 px-4 sm:px-6 top-0 ${isLeft ? 'left' : 'right'} bg-white pt-[60px] sm:pt-[80px] lg:pt-[156px] glass-container w-full`}
               >
                 <div className={`${isLeft ? 'mr-auto lg:pl-8' : 'ml-auto lg:pr-8'}`}>
                   <div
                     className={`flex flex-col lg:flex-row ${isLeft ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-start gap-4 sm:gap-6 lg:gap-8 relative`}
                   >
                     <div
-                      className={`flex flex-col ${isLeft ? 'items-start' : 'items-end lg:items-end'} gap-4 relative w-full lg:w-auto`}
+                      className={`flex flex-col ${isLeft ? 'items-start' : 'items-end lg:items-end'} gap-1 sm:gap-4 relative w-full lg:w-auto`}
                     >
                       {item.icon && (
                         <div
-                          className={`flex-shrink-0 relative lg:absolute top-0 w-32 h-32 sm:w-40 sm:h-40 lg:w-56 lg:h-56 rounded-full flex items-center justify-center p-2 mx-auto lg:mx-0 mb-4 lg:mb-0 ${
+                          className={`flex-shrink-0 absolute w-32 h-32 sm:w-40 sm:h-40 lg:w-56 lg:h-56 rounded-full flex items-center justify-center p-2 mx-auto lg:mx-0 mb-4 lg:mb-0 ${
                             isLeft
-                              ? 'lg:order-2 lg:-right-[150px] lg:-top-[120px]'
-                              : 'lg:order-1 lg:-left-[150px] lg:-top-[120px]'
+                              ? 'lg:order-2 -top-[65px] sm:-top-[82px] right-0 sm:right-[36px] lg:-right-[150px] lg:-top-[120px]'
+                              : 'lg:order-1  -top-[65px] sm:-top-[82px] left-0 sm:left-[36px] lg:-left-[150px] lg:-top-[120px]'
                           }`}
                         >
                           <Image
@@ -95,7 +94,7 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                             alt={item.title || ''}
                             width={224}
                             height={224}
-                            className="w-24 h-24 sm:w-40 sm:h-40 lg:w-56 lg:h-56 object-contain"
+                            className="w-16 h-16 sm:w-40 sm:h-40 lg:w-56 lg:h-56 object-contain"
                           />
                         </div>
                       )}
@@ -107,11 +106,11 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                         </h3>
                       </div>
                       <div
-                        className={`w-52 p-2.5 sm:w-[400px] md:w-[600px] ${
+                        className={`w-52 p-3 sm:w-[400px] md:w-[600px] ${
                           isLeft ? 'ml-16 md:ml-32' : 'mr-16 md:mr-32'
                         } p-4 sm:p-6 lg:p-7 bg-zinc-950 ${isLeft ? '' : 'lg:text-right'}`}
                       >
-                        <p className="text-white text-[7.43px] sm:text-base lg:text-lg xl:text-xl font-normal font-['Manrope'] leading-relaxed lg:leading-loose">
+                        <p className="text-white text-[8.23px] sm:text-base lg:text-lg xl:text-xl font-normal font-['Manrope'] leading-relaxed lg:leading-loose">
                           {item.description}
                         </p>
                       </div>

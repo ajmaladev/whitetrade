@@ -61,7 +61,7 @@ export const AboutUs = () => {
 
       {/* CTA Button */}
       <div className="flex justify-center mb-12 sm:mb-16 lg:mb-20">
-        <button className="px-6 sm:px-8 lg:px-10 py-3 sm:py-4 bg-orange-500 rounded-xl inline-flex justify-start items-start gap-2.5 hover:bg-orange-600 transition-colors">
+        <button className="px-6 sm:px-8 lg:px-10 py-3 sm:py-4 bg-orange-500 rounded-xl inline-flex justify-start items-start gap-2.5 hover:bg-orange-600 hover:shadow-[0px_8px_16px_0px_rgba(0,0,0,0.35)] transition-all duration-300 ease-in-out">
           <div className="justify-start text-white text-base sm:text-lg font-semibold font-['Manrope'] leading-loose">
             Book a service
           </div>

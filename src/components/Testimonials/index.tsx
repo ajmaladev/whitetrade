@@ -36,7 +36,8 @@ export default function Testimonials({ testimonials }: { testimonials: Testimoni
   }
 
   return (
-    <div className="py-10 sm:py-20" ref={ref}>
+    <div className="py-10 sm:py-20 relative" ref={ref}>
+      <div className="hidden lg:block w-[275px] h-[550px] bg-gradient-to-bl from-indigo-50 to-white/0 rounded-r-full absolute -top-[20px] left-0 z-[-1]" />
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-8 sm:gap-y-16 justify-items-center">
         {testimonials.map((item, index) => {
           const { start, end, suffix } = getCountUpProps(item.count || '0')

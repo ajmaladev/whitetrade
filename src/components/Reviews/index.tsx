@@ -17,7 +17,11 @@ const ReviewCard: React.FC<Review> = ({ user_name, user_role, review, user_image
       <div className="self-stretch flex justify-start items-center gap-3 sm:gap-3.5">
         <img
           className="w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-full ring-4 ring-blue-600/30 flex-shrink-0"
-          src={user_image || 'https://placehold.co/80x80'}
+          src={
+            user_image
+              ? process.env.NEXT_PUBLIC_BUNNY_CDN + user_image
+              : 'https://placehold.co/80x80'
+          }
           alt={user_name || 'User'}
         />
         <div className="flex flex-col justify-center items-start gap-1 min-w-0 flex-1">
@@ -106,17 +110,19 @@ export const Reviews = ({ reviews }: { reviews: HomePage['reviews'] }) => {
         style={{ zIndex: -1 }}
       />
 
-      <div className="container px-4 sm:px-6 lg:px-8 relative z-10">
-        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-800 mt-20 sm:mt-20 md:mt-24 lg:mt-[100px] ml-0 sm:ml-8 md:ml-12 lg:ml-[57px]">
+      <div className="container px-2 sm:px-6 lg:px-8 relative z-10">
+        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-800 mt-24 sm:mt-20 md:mt-24 lg:mt-[100px] ml-0 sm:ml-8 md:ml-12 lg:ml-[57px]">
           Loved Across Continents
         </h2>
 
         <div className="flex flex-col lg:flex-row mt-8 sm:mt-12 md:mt-16 lg:mt-20 pb-4 px-2 sm:px-4 lg:gap-9 lg:items-center">
           {/* Navigation Section */}
-          <div className="flex flex-col items-center lg:items-start mb-6 lg:mb-0 lg:mt-12 lg:ml-[12%] xl:ml-[17%]">
-            <p className="text-lg sm:text-xl font-semibold text-gray-700">Clients</p>
-            <h3 className="text-lg sm:text-xl font-semibold text-gray-800">Testimonials</h3>
-            <div className="flex items-center gap-2 mt-4 sm:mt-7">
+          <div className="flex md:flex-col gap-1 md:gap-0 items-center lg:items-start mb-6 lg:mb-0 lg:mt-12 lg:ml-[12%] xl:ml-[17%]">
+            <p className="text-md sm:text-xl font-semibold text-gray-700">Clients</p>
+            <h3 className="text-md sm:text-xl font-semibold text-gray-700 md:text-gray-800">
+              Testimonials
+            </h3>
+            <div className="hidden lg:flex items-center gap-2 mt-4 sm:mt-7">
               <button
                 onClick={scrollToPrevious}
                 disabled={isAtStart}

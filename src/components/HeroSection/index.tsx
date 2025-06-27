@@ -84,8 +84,8 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
               <div className="pl-2 sm:pl-4 md:pl-6 justify-start text-neutral-500 text-base sm:text-lg md:text-xl lg:text-3xl font-normal">
                 over a decade now
               </div>
-              <div className="w-full md:mt-10 max-w-[280px] sm:max-w-[320px] md:max-w-[380px] lg:max-w-[426px] h-10 sm:h-12 md:h-13 lg:h-14 relative bg-gradient-to-r from-[#1C3A6A] to-[#3661c1] rounded-[25px] sm:rounded-[30px] md:rounded-[40px] lg:rounded-[50px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]">
-                <div className="absolute inset-0 flex items-center justify-center text-white text-sm sm:text-base md:text-lg lg:text-2xl font-semibold tracking-wide px-4 text-center">
+              <div className="w-full md:mt-10 max-w-[280px] sm:max-w-[320px] md:max-w-[380px] lg:max-w-[454px] h-10 sm:h-12 md:h-13 lg:h-14 relative bg-gradient-to-r from-[#1C3A6A] to-[#3661c1] rounded-[25px] sm:rounded-[30px] md:rounded-[40px] lg:rounded-[50px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] hover:shadow-[0px_8px_16px_0px_rgba(0,0,0,0.35)] transition-all duration-300 ease-in-out cursor-pointer group">
+                <div className="absolute inset-0 flex items-center justify-center text-white text-sm sm:text-base md:text-lg lg:text-2xl font-semibold tracking-wide px-4 text-center font-['Montserrat'] group-hover:text-blue-100 transition-colors duration-300">
                   Schedule a Call with Our Team
                 </div>
               </div>
@@ -126,7 +126,7 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
         </div>
       </div>
       <div
-        className="hero-section-small-container sm:hidden absolute top-[43px] left-0 w-full h-[222px] flex flex-col items-center justify-center pointer-events-auto overflow-hidden rounded-b-2xl z-[1]"
+        className="hero-section-small-container sm:hidden absolute top-[43px] left-0 w-full h-[235px] flex flex-col items-center justify-center pointer-events-auto overflow-hidden rounded-b-2xl z-[1]"
         style={{
           backgroundImage: 'url(/hero-section-small-bg.webp)',
           backgroundSize: 'cover',
@@ -135,11 +135,15 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
         }}
       >
         <div className="hero-section-small relative mb-4 sm:mb-6 md:mb-8 z-10 flex flex-col items-start justify-end w-auto md:w-full h-full gap-1 p-6">
-          <h1 className="text-[#1C3A6A] text-[22px] font-medium font-['Poppins'] leading-tight">
+          <h1 className="text-black md:text-[#1C3A6A] text-[22px] font-medium font-['Poppins'] leading-tight">
             White Trading Company
           </h1>
-          <div className="text-[#1C3A6A] text-lg font-medium">Worldwide Exporters & Supplier</div>
-          <div className="text-[#1C3A6A] text-base font-normal">over a decade now</div>
+          <div className="text-black md:text-[#1C3A6A] text-lg font-medium">
+            Worldwide Exporters & Supplier
+          </div>
+          <div className="text-black md:text-[#1C3A6A] text-base font-normal">
+            over a decade now
+          </div>
         </div>
       </div>
     </div>

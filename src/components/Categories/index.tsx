@@ -156,7 +156,7 @@ export default function Categories({ categories }: { categories: PaginatedDocs<C
   return (
     <motion.div
       ref={containerRef}
-      className="small-screen-categories grid grid-cols-1 items-center justify-items-center md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 lg:gap-10 gap-y-24 md:gap-y-24 lg:gap-y-36 pb-8 sm:pt-28 sm:px-6 md:px-8 lg:px-32 xl:px-32 w-full"
+      className="relative small-screen-categories grid grid-cols-1 items-center justify-items-center md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 lg:gap-10 gap-y-24 md:gap-y-24 lg:gap-y-36 pb-8 sm:pt-28 sm:px-6 md:px-8 lg:px-32 xl:px-32 w-full"
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
@@ -165,6 +165,7 @@ export default function Categories({ categories }: { categories: PaginatedDocs<C
       {categories.docs.map((category, index) => (
         <CategoryCard key={category.id} category={category} index={index} />
       ))}
+      <div className="hidden lg:block w-[275px] h-[550px] bg-gradient-to-bl from-[#eaf5ff] to-white/0 rounded-l-full absolute -top-[100px] right-0" />
     </motion.div>
   )
 }

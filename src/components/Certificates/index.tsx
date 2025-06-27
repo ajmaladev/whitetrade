@@ -9,7 +9,9 @@ interface CertificatesProps {
 
 export const Certificates = ({ certificates }: CertificatesProps) => {
   return (
-    <div className="px-4 py-8 md:px-6">
+    <div className="px-4 py-8 md:px-6 relative">
+      <div className="hidden lg:block w-28 h-52 bg-indigo-400 rounded-l-full absolute top-0 right-0" />
+      <div className="hidden lg:block w-36 h-36 bg-gradient-to-l from-indigo-500/40 to-blue-900/0 rounded-full absolute top-[100px] right-0" />
       <div className="grid grid-cols-4 mt-8 md:flex md:flex-wrap items-center justify-center md:gap-20">
         {certificates.map((certificate) => (
           <motion.div

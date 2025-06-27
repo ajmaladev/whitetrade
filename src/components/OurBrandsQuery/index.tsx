@@ -100,7 +100,7 @@ export const OurBrandsQuery = ({ brands, products }: OurBrandsQueryProps) => {
             <div className="flex flex-col items-center mt-8 md:mt-16 gap-4">
               <button
                 type="submit"
-                className="px-8 py-4 bg-orange-500 rounded-xl inline-flex justify-start items-start gap-2"
+                className="px-8 py-4 bg-orange-500 rounded-xl inline-flex justify-start items-start gap-2 hover:shadow-[0px_8px_16px_0px_rgba(0,0,0,0.35)] transition-all duration-300 ease-in-out"
               >
                 <div className="justify-start text-white text-sm font-semibold font-['Manrope'] leading-normal">
                   Get your quote
