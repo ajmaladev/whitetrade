@@ -110,7 +110,7 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                           isLeft ? 'ml-16 md:ml-32' : 'mr-16 md:mr-32'
                         } p-4 sm:p-6 lg:p-7 bg-zinc-950 ${isLeft ? '' : 'lg:text-right'}`}
                       >
-                        <p className="text-white text-[8.23px] sm:text-base lg:text-lg xl:text-xl font-normal font-['Manrope'] leading-relaxed lg:leading-loose">
+                        <p className="text-white text-[9.21px] sm:text-base lg:text-lg xl:text-xl font-normal font-['Manrope'] leading-relaxed lg:leading-loose">
                           {item.description}
                         </p>
                       </div>

@@ -6,7 +6,6 @@ import { GeistSans } from 'geist/font/sans'
 import { Manrope, Montserrat, Poppins } from 'next/font/google'
 import React from 'react'
 
-import { AboutUs } from '@/components/AboutUs'
 import { Footer } from '@/components/Footer'
 import MegaMenu from '@/components/MegaMenu'
 import { NewsLetter } from '@/components/NewsLetter'
@@ -55,7 +54,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body>
         <MegaMenu />
         {children}
-        <AboutUs />
         <NewsLetter />
         <Footer />
       </body>

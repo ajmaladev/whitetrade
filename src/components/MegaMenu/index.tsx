@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { memo, RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Drawer, DrawerContent, DrawerTrigger } from '../ui/drawer'
+import SearchContent from './SearchContent'
 
 const MENU_KEYS = ['products', 'about', 'contact'] as const
 
@@ -58,8 +59,10 @@ const Logo = memo(({ onClick }: { onClick?: () => void }) => (
 
 Logo.displayName = 'Logo'
 
-const SearchIcon = memo(() => (
-  <Image src="/search.svg" alt="search" width={20} height={20} className="w-8 h-8 mb-2" priority />
+const SearchIcon = memo(({ onClick }: { onClick?: () => void }) => (
+  <button onClick={onClick} className="mb-2">
+    <Image src="/search.svg" alt="search" width={20} height={20} className="w-8 h-8" priority />
+  </button>
 ))
 
 SearchIcon.displayName = 'SearchIcon'
@@ -68,6 +71,7 @@ export default function MegaMenu() {
   const [active, setActive] = useState<MenuKey>('products')
   const [underlineStyle, setUnderlineStyle] = useState({ left: 0, width: 0 })
   const [isDrawerOpen, setDrawerOpen] = useState(false)
+  const [isSearchOpen, setSearchOpen] = useState(false)
 
   const productsRef = useRef<HTMLAnchorElement>(null)
   const aboutRef = useRef<HTMLAnchorElement>(null)
@@ -183,7 +187,7 @@ export default function MegaMenu() {
       <Logo />
       {/* Desktop nav */}
       <nav className="gap-10 mt-auto hidden md:flex">
-        <SearchIcon />
+        <SearchIcon onClick={() => setSearchOpen(true)} />
 
         <div className="relative" ref={menuWrapperRef}>
           <ul className="flex items-center gap-6">
@@ -207,7 +211,7 @@ export default function MegaMenu() {
       </nav>
       {/* Mobile nav: Drawer trigger */}
       <div className="flex md:hidden items-center gap-10 ml-auto">
-        <Image src="/search.svg" alt="search" width={20} height={20} className="w-8 h-8" priority />
+        <SearchIcon onClick={() => setSearchOpen(true)} />
 
         <Drawer open={isDrawerOpen} onOpenChange={setDrawerOpen}>
           <DrawerTrigger asChild>
@@ -226,7 +230,12 @@ export default function MegaMenu() {
             </div>
             <div className="flex flex-col gap-6 px-6 py-8">
               <div className="flex justify-start mb-4">
-                <SearchIcon />
+                <SearchIcon
+                  onClick={() => {
+                    setDrawerOpen(false)
+                    setSearchOpen(true)
+                  }}
+                />
               </div>
               <ul className="flex flex-col gap-4">
                 {menuItems.map(({ key, label }) => (
@@ -248,6 +257,11 @@ export default function MegaMenu() {
           </DrawerContent>
         </Drawer>
       </div>
+
+      {/* Search Drawer */}
+      <Drawer open={isSearchOpen} onOpenChange={setSearchOpen}>
+        <SearchContent onClose={() => setSearchOpen(false)} />
+      </Drawer>
     </header>
   )
 }

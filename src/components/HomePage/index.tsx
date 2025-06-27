@@ -1,5 +1,6 @@
 import { Category, HomePage as HomePageType, Product } from '@/payload-types'
 import { PaginatedDocs } from 'payload'
+import { AboutUs } from '../AboutUs'
 import Categories from '../Categories'
 import { Certificates } from '../Certificates'
 import HeroSection from '../HeroSection'
@@ -67,6 +68,7 @@ export default function HomePage({
       <WeOfferComponent weOffer={weOffer} />
       <OurBrandsQuery brands={ourBrands} products={products.docs} />
       <Reviews reviews={reviews} />
+      <AboutUs />
     </div>
   )
 }
