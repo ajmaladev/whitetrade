@@ -4,7 +4,6 @@ import { ChevronDownIcon } from 'lucide-react'
 import { useState } from 'react'
 
 export default function ProductDetails({ products }: { products: Product[] }) {
-  console.log(products)
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [dropdownOpen, setDropdownOpen] = useState(false)
 

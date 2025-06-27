@@ -10,7 +10,6 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
   if (!category) {
     NotFound()
   }
-  console.log(category.docs)
   return (
     <div className="flex flex-col mb-10 lg:mb-0">
       <div className="flex flex-col lg:flex-row items-center justify-center min-[50vh] lg:gap-40">
