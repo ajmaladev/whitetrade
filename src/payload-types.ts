@@ -162,6 +162,12 @@ export interface Category {
     hasNextPage?: boolean;
     totalDocs?: number;
   };
+  category_image_mobile?:
+    | {
+        image?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   parent?: (string | null) | Category;
   breadcrumbs?:
     | {
@@ -1066,6 +1072,12 @@ export interface CategoriesSelect<T extends boolean = true> {
   slugLock?: T;
   category_image?: T;
   products?: T;
+  category_image_mobile?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
   parent?: T;
   breadcrumbs?:
     | T

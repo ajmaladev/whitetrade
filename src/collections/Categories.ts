@@ -52,5 +52,17 @@ export const Categories: CollectionConfig = {
       on: 'category',
       maxDepth: 2,
     },
+    {
+      name: 'category_image_mobile',
+      label: 'Category Image Mobile',
+      type: 'array',
+      fields: [
+        globalUpload({
+          field_name: 'image',
+          label: 'Image',
+          description: 'Upload an image for the category',
+        }),
+      ],
+    },
   ],
 }
