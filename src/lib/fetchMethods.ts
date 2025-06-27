@@ -1,11 +1,12 @@
 import { Category, HomePage, Product } from '@/payload-types'
 import { unstable_cache } from 'next/cache'
 import { PaginatedDocs } from 'payload'
+import { CACHE_REVALIDATE_TIME } from './constants'
 import { getPayloadClient } from './payload'
 
 export const getCachedCategories = () =>
   unstable_cache(async () => getCategories(), ['categories'], {
-    revalidate: 60 * 60 * 24,
+    revalidate: CACHE_REVALIDATE_TIME,
     tags: ['categories'],
   })
 
@@ -17,7 +18,7 @@ export const getCategories = async () => {
 
 export const getCachedHomePage = () =>
   unstable_cache(async () => getHomePage(), ['home-page'], {
-    revalidate: 60 * 60 * 24,
+    revalidate: CACHE_REVALIDATE_TIME,
     tags: ['home-page'],
   })
 
@@ -29,7 +30,7 @@ export const getHomePage = async () => {
 
 export const getCachedProducts = () =>
   unstable_cache(async () => getProducts(), ['products'], {
-    revalidate: 60 * 60 * 24,
+    revalidate: CACHE_REVALIDATE_TIME,
     tags: ['products'],
   })
 
@@ -45,7 +46,7 @@ export const getProducts = async () => {
 
 export const getCachedCategory = (slug: string) =>
   unstable_cache(async () => getCategory(slug), ['category', slug], {
-    revalidate: 60 * 60 * 24,
+    revalidate: CACHE_REVALIDATE_TIME,
     tags: ['category', slug],
   })
 
