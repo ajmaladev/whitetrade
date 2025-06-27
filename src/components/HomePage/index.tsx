@@ -1,4 +1,4 @@
-import { Carousal, Category, Certificate, HomePage as HomePageType, Product } from '@/payload-types'
+import { Category, HomePage as HomePageType, Product } from '@/payload-types'
 import { PaginatedDocs } from 'payload'
 import Categories from '../Categories'
 import { Certificates } from '../Certificates'
@@ -32,10 +32,10 @@ type OurBrands =
   | null
   | undefined
 interface HomePageProps {
-  carousal: Carousal[]
+  carousal: HomePageType['carousal']
   categories: PaginatedDocs<Category>
   testimonials: TestimonialItem[]
-  certificates: Certificate[]
+  certificates: HomePageType['certificates']
   weOffer: WeOfferData
   products: PaginatedDocs<Product>
   ourBrands: OurBrands

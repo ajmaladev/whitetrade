@@ -1,10 +1,10 @@
 'use client'
-import { Certificate } from '@/payload-types'
+import { HomePage } from '@/payload-types'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 
 interface CertificatesProps {
-  certificates: Certificate[]
+  certificates: HomePage['certificates']
 }
 
 export const Certificates = ({ certificates }: CertificatesProps) => {
@@ -13,7 +13,7 @@ export const Certificates = ({ certificates }: CertificatesProps) => {
       <div className="hidden lg:block w-28 h-52 bg-indigo-400 rounded-l-full absolute top-0 right-0" />
       <div className="hidden lg:block w-36 h-36 bg-gradient-to-l from-indigo-500/40 to-blue-900/0 rounded-full absolute top-[100px] right-0" />
       <div className="grid grid-cols-4 mt-8 md:flex md:flex-wrap items-center justify-center md:gap-20">
-        {certificates.map((certificate) => (
+        {certificates?.map((certificate) => (
           <motion.div
             key={certificate.id}
             className="relative flex items-center justify-center"

@@ -1,22 +1,22 @@
 'use client'
-import { Carousal } from '@/payload-types'
+import { HomePage } from '@/payload-types'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 interface HeroSectionProps {
-  carousal: Carousal[]
+  carousal: HomePage['carousal']
 }
 
 export default function HeroSection({ carousal = [] }: HeroSectionProps) {
   const [current, setCurrent] = useState(0)
 
   useEffect(() => {
-    if (!carousal.length) return
+    if (!carousal?.length) return
     const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % carousal.length)
+      setCurrent((prev) => (prev + 1) % carousal?.length)
     }, 4000)
     return () => clearInterval(interval)
-  }, [carousal.length])
+  }, [carousal?.length])
 
   return (
     <div className="relative">
