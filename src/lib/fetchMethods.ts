@@ -1,4 +1,4 @@
-import { Category, HomePage, Product } from '@/payload-types'
+import { Category, Gallery, HomePage, Product } from '@/payload-types'
 import { unstable_cache } from 'next/cache'
 import { PaginatedDocs } from 'payload'
 import { CACHE_REVALIDATE_TIME } from './constants'
@@ -57,4 +57,16 @@ export const getCategory = async (slug: string) => {
     where: { slug: { equals: slug } },
   })
   return category as PaginatedDocs<Category>
+}
+
+export const getCachedGallery = () =>
+  unstable_cache(async () => getGallery(), ['gallery'], {
+    revalidate: CACHE_REVALIDATE_TIME,
+    tags: ['gallery'],
+  })
+
+export const getGallery = async () => {
+  const payload = await getPayloadClient()
+  const gallery = await payload.find({ collection: 'gallery' })
+  return gallery as PaginatedDocs<Gallery>
 }

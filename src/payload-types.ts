@@ -76,6 +76,7 @@ export interface Config {
     posts: Post;
     products: Product;
     users: User;
+    gallery: Gallery;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -100,6 +101,7 @@ export interface Config {
     posts: PostsSelect<false> | PostsSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    gallery: GallerySelect<false> | GallerySelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -793,6 +795,24 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery".
+ */
+export interface Gallery {
+  id: string;
+  /**
+   * The images to display in the gallery. Please upload the images below 1MB
+   */
+  images?:
+    | {
+        image?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -999,6 +1019,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: string | User;
+      } | null)
+    | ({
+        relationTo: 'gallery';
+        value: string | Gallery;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1406,6 +1430,20 @@ export interface UsersSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery_select".
+ */
+export interface GallerySelect<T extends boolean = true> {
+  images?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

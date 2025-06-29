@@ -62,7 +62,6 @@ export default function SearchContent({ onClose }: SearchContentProps) {
       }
 
       const data: SearchResponse = await response.json()
-      console.log(data)
       setSearchResults({
         categories: data.categories || [],
         products: data.products || [],
@@ -156,11 +155,9 @@ export default function SearchContent({ onClose }: SearchContentProps) {
   ): (Product & { categorySlug: string })[] => {
     const allProducts: (Product & { categorySlug: string })[] = []
     categories.forEach((category) => {
-      console.log('Category products:', category.products) // Debug log
       // Check if products is an array directly
       if (Array.isArray(category.products)) {
         category.products.forEach((product) => {
-          console.log('Product item:', product, typeof product) // Debug log
           // Check if it's a Product object (not a string ID)
           if (typeof product === 'object' && product !== null && 'id' in product) {
             allProducts.push({
@@ -173,7 +170,6 @@ export default function SearchContent({ onClose }: SearchContentProps) {
       // Also check the docs structure as fallback
       else if (category.products?.docs) {
         category.products.docs.forEach((product) => {
-          console.log('Product item from docs:', product, typeof product) // Debug log
           if (typeof product === 'object' && product !== null && 'id' in product) {
             allProducts.push({
               ...(product as Product),
@@ -183,7 +179,6 @@ export default function SearchContent({ onClose }: SearchContentProps) {
         })
       }
     })
-    console.log('All extracted products:', allProducts) // Debug log
     return allProducts
   }
 

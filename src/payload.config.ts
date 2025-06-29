@@ -9,6 +9,7 @@ import { fileURLToPath } from 'url'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { Categories } from './collections/Categories'
 import { CustomerQuery } from './collections/CustomerQuery'
+import { Gallery } from './collections/Gallery'
 import { HomePage } from './collections/HomePage'
 import { Media } from './collections/Media'
 import { Newstletter } from './collections/Newstletter'
@@ -75,6 +76,7 @@ export default buildConfig({
     Posts,
     Products,
     Users,
+    Gallery,
   ],
   cors: [getServerSideURL()].filter(Boolean),
   plugins: [

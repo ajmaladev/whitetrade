@@ -1,9 +1,10 @@
-import { Category, HomePage as HomePageType, Product } from '@/payload-types'
+import { Category, Gallery, HomePage as HomePageType, Product } from '@/payload-types'
 import { PaginatedDocs } from 'payload'
 import { AboutUs } from '../AboutUs'
 import Categories from '../Categories'
 import { Certificates } from '../Certificates'
 import HeroSection from '../HeroSection'
+import HomePageGallery from '../HomePageGallery'
 import { OurBrandsQuery } from '../OurBrandsQuery'
 import ReadyToShip from '../ReadyToShip'
 import { Reviews } from '../Reviews'
@@ -41,6 +42,7 @@ interface HomePageProps {
   products: PaginatedDocs<Product>
   ourBrands: OurBrands
   reviews: HomePageType['reviews']
+  gallery: PaginatedDocs<Gallery>
 }
 
 export default function HomePage({
@@ -52,6 +54,7 @@ export default function HomePage({
   products,
   ourBrands,
   reviews,
+  gallery,
 }: HomePageProps) {
   return (
     <div className="w-full">
@@ -65,6 +68,7 @@ export default function HomePage({
       </div>
       <Testimonials testimonials={testimonials} />
       <Certificates certificates={certificates} />
+      <HomePageGallery gallery={gallery} />
       <WeOfferComponent weOffer={weOffer} />
       <OurBrandsQuery brands={ourBrands} products={products.docs} />
       <Reviews reviews={reviews} />
