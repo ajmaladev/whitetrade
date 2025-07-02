@@ -137,7 +137,7 @@ export const Media: CollectionConfig = {
         const fileName = generateImageName(file.name)
 
         // Use constant folder structure: /whitetrade/media/{file}
-        const uploadPath = `whitetrade/media/${fileName}`
+        const uploadPath = `media/${fileName}`
 
         try {
           // Upload to BunnyCDN
