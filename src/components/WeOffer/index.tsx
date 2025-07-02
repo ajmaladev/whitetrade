@@ -59,7 +59,7 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
           We Offer
         </h2>
 
-        <div className="relative flex flex-col mt-3 md:mt-20 w-full gap-4 sm:gap-12 lg:gap-16 ">
+        <div className="relative flex flex-col mt-3 md:mt-10 lg:mt-20 w-full gap-4 sm:gap-12 lg:gap-16 ">
           {weOffer.item.map((item: WeOfferItem, index: number) => {
             const isLeft = index % 2 === 0
             return (
