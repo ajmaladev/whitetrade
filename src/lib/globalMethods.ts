@@ -1,9 +1,8 @@
 export const generateImageName = (originalName: string): string => {
-  const timestamp = Date.now()
   const extension = originalName.split('.').pop()
   const nameWithoutExtension = originalName.replace(/\.[^/.]+$/, '')
   const sanitizedName = nameWithoutExtension.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()
-  return `${sanitizedName}-${timestamp}.${extension}`
+  return `${sanitizedName}.${extension}`
 }
 
 export const generateSlug = (title: string): string => {
