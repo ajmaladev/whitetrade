@@ -50,7 +50,7 @@ async function getSearchWithAggregation(searchTerm: string) {
                 title: 1,
                 slug: 1,
                 category_image: 1,
-                category_image_mobile: 1,
+                category_images: 1,
                 parent: 1,
                 breadcrumbs: 1,
                 updatedAt: 1,

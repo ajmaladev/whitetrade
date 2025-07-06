@@ -29,7 +29,7 @@ interface ExtendedCategory {
   title: string
   slug: string
   category_image?: string
-  category_image_mobile?: any[]
+  category_images?: any[]
 }
 
 export default function SearchContent({ onClose }: SearchContentProps) {

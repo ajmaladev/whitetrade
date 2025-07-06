@@ -164,7 +164,7 @@ export interface Category {
     hasNextPage?: boolean;
     totalDocs?: number;
   };
-  category_image_mobile?:
+  category_images?:
     | {
         image?: string | null;
         id?: string | null;
@@ -1096,7 +1096,7 @@ export interface CategoriesSelect<T extends boolean = true> {
   slugLock?: T;
   category_image?: T;
   products?: T;
-  category_image_mobile?:
+  category_images?:
     | T
     | {
         image?: T;

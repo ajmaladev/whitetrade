@@ -11,7 +11,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
     NotFound()
   }
   return (
-    <div className="flex flex-col mb-10 lg:mb-0">
+    <div className="flex flex-col mb-10 lg:mb-0 mt-5 md:mt-10">
       <div className="flex flex-col lg:flex-row items-center justify-center min-[50vh] lg:gap-40">
         <CategoryCard
           category={category.docs[0] as Category}

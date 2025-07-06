@@ -53,8 +53,8 @@ export const Categories: CollectionConfig = {
       maxDepth: 2,
     },
     {
-      name: 'category_image_mobile',
-      label: 'Category Image Mobile',
+      name: 'category_images',
+      label: 'Category Images',
       type: 'array',
       fields: [
         globalUpload({

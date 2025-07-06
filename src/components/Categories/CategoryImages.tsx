@@ -5,7 +5,7 @@ export default function CategoryImages({ category }: { category: Category }) {
   return (
     <div className="mx-auto my-10">
       <div className="flex flex-col gap-4">
-        {category?.category_image_mobile?.map((image) => (
+        {category?.category_images?.map((image) => (
           <Image
             src={image.image ? process.env.NEXT_PUBLIC_BUNNY_CDN + image.image : ''}
             key={image.image}
