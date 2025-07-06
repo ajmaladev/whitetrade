@@ -14,7 +14,7 @@ export default function globalUpload(props: {
       components: {
         Field: {
           path: 'src/components/Globals/CustomUpload',
-          serverProps: {
+          clientProps: {
             label,
             description,
           },

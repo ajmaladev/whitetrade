@@ -59,14 +59,14 @@ export const getCategory = async (slug: string) => {
   return category as PaginatedDocs<Category>
 }
 
-export const getCachedGallery = () =>
-  unstable_cache(async () => getGallery(), ['gallery'], {
+export const getCachedGallery = (limit: number) =>
+  unstable_cache(async () => getGallery(limit), ['gallery'], {
     revalidate: CACHE_REVALIDATE_TIME,
     tags: ['gallery'],
   })
 
-export const getGallery = async () => {
+export const getGallery = async (limit: number) => {
   const payload = await getPayloadClient()
-  const gallery = await payload.find({ collection: 'gallery' })
+  const gallery = await payload.find({ collection: 'gallery', limit })
   return gallery as PaginatedDocs<Gallery>
 }

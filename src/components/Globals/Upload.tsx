@@ -9,6 +9,7 @@ export default function Upload({
   convertedId,
   label,
   description,
+  setValue,
 }: {
   field_name: string
   path: string
@@ -16,31 +17,33 @@ export default function Upload({
   convertedId: string
   label: string
   description: string
+  setValue: (value: string) => void
 }) {
-  const { setValue } = useField<string>({
-    path,
-  })
-
   const [isReady, setIsReady] = useState(false)
+  const [mediaId, setMediaId] = useState<string>('')
+
+  // Use a separate field for the upload component
+  const { setValue: setUploadValue } = useField<string>({
+    path: `${path}_upload`,
+  })
 
   useEffect(() => {
     const processUrl = async () => {
       try {
         if (convertedId) {
-          setValue(convertedId)
-          // Small delay to ensure the value is set
+          setMediaId(convertedId)
+          setUploadValue(convertedId)
           setTimeout(() => {
             setIsReady(true)
           }, 50)
           return
         }
 
-        // Use initialUrl as fallback
         if (initialUrl) {
-          setValue(initialUrl)
+          setMediaId('')
+          setUploadValue('')
         }
 
-        // Always set ready to allow upload functionality
         setIsReady(true)
       } catch (error) {
         const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred'
@@ -50,22 +53,31 @@ export default function Upload({
     }
 
     processUrl()
-  }, [convertedId, initialUrl, setValue])
+  }, [convertedId, initialUrl, setUploadValue])
+
+  // Watch for changes in the upload field and update the main field
+  useEffect(() => {
+    if (mediaId) {
+      setValue(mediaId)
+    }
+  }, [mediaId, setValue])
 
   return isReady ? (
-    <UploadField
-      field={{
-        type: 'upload',
-        relationTo: 'media',
-        name: field_name,
-        label,
-        admin: {
-          description,
-          sortOptions: 'filename',
-        },
-      }}
-      path={path}
-    />
+    <div>
+      <UploadField
+        field={{
+          type: 'upload',
+          relationTo: 'media',
+          name: `${field_name}_upload`,
+          label,
+          admin: {
+            description,
+            sortOptions: 'filename',
+          },
+        }}
+        path={`${path}_upload`}
+      />
+    </div>
   ) : (
     <div className="p-2">Loading media field...</div>
   )

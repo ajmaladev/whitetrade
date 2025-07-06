@@ -1,25 +1,27 @@
-'use server'
-import { getPayloadClient } from '@/lib/payload'
-
 export const updateUrltoId = async (url: string) => {
   if (!url) return null
 
   try {
-    const payload = await getPayloadClient()
-    const media = await payload.find({
-      collection: 'media',
-      where: {
-        url: { equals: url },
+    // Make a client-side API call to fetch media by URL
+    const response = await fetch('/api/media/by-url', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
+      body: JSON.stringify({ url }),
     })
 
-    if (!media.docs?.[0]?.id) {
-      // console.error(`No media found with URL: ${url}`);
+    if (!response.ok) {
+      console.error(`No media found with URL: ${url}`)
+      return null
     }
 
-    return media.docs?.[0]?.id
+    const data = await response.json()
+    const objectIdString = data._id
+    return objectIdString
   } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred'
     console.error('Media URL to ID conversion error:', errorMessage)
+    return null
   }
 }

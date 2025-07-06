@@ -1,51 +1,56 @@
-'use server'
-import { get } from '@/lib/get'
-import { UIFieldServerProps } from 'payload'
+'use client'
+import { useField } from '@payloadcms/ui'
+import { useEffect, useState } from 'react'
 import Upload from './Upload'
 import { updateUrltoId } from './updateUrltoId'
 
-export default async function CustomUpload(
-  props: UIFieldServerProps & { label: string; description: string },
-) {
-  try {
-    const { field, path, data, label, description } = props
-    const value = get(data, path) as string | undefined
+export default function CustomUpload(props: {
+  field: { name: string }
+  path: string
+  data: any
+  label: string
+  description: string
+}) {
+  const { field, path, data, label, description } = props
+  const { value, setValue } = useField<string>({ path })
+  const [convertedId, setConvertedId] = useState<string>('')
+  const [isProcessing, setIsProcessing] = useState(false)
 
-    let id: string | null = null
-    // Only attempt to convert if we have a valid value
-    if (value && typeof value === 'string' && value.trim() !== '') {
+  useEffect(() => {
+    const processUrl = async () => {
+      if (!value || typeof value !== 'string' || value.trim() === '') {
+        setConvertedId('')
+        return
+      }
+
+      setIsProcessing(true)
       try {
-        const convertedId = await updateUrltoId(value)
-        id = convertedId || null
+        const id = await updateUrltoId(value)
+        setConvertedId(id || '')
       } catch (conversionError) {
         console.error('Error converting URL to ID:', conversionError)
+        setConvertedId('')
+      } finally {
+        setIsProcessing(false)
       }
     }
 
-    return (
-      <Upload
-        field_name={field.name}
-        path={path}
-        initialUrl={value || ''}
-        convertedId={id || ''}
-        label={label}
-        description={description}
-      />
-    )
-  } catch (error: unknown) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred'
-    console.error('Custom upload component error:', errorMessage)
+    processUrl()
+  }, [value])
 
-    // Return the Upload component with default values in case of error
-    return (
-      <Upload
-        field_name={props.field.name}
-        path={props.path}
-        initialUrl=""
-        convertedId=""
-        label={props.label}
-        description={props.description}
-      />
-    )
+  if (isProcessing) {
+    return <div className="p-2">Processing media URL...</div>
   }
+
+  return (
+    <Upload
+      field_name={field.name}
+      path={path}
+      initialUrl={value || ''}
+      convertedId={convertedId}
+      label={label}
+      description={description}
+      setValue={setValue}
+    />
+  )
 }
