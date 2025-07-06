@@ -1,8 +1,8 @@
 import { CategoryCard } from '@/components/Categories'
-import CategoryImages from '@/components/Categories/CategoryImages'
 import ProductDetails from '@/components/Categories/ProductDetails'
 import { getCachedCategories, getCachedCategory } from '@/lib/fetchMethods'
-import { Category, Product } from '@/payload-types'
+import { Category, Gallery, Product } from '@/payload-types'
+import GalleryGrid from '../gallery/GalleryGrid'
 import NotFound from '../not-found'
 
 export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
@@ -20,7 +20,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
         />
         <ProductDetails products={category.docs[0]?.products?.docs as Product[]} />
       </div>
-      <CategoryImages category={category.docs[0] as Category} />
+      <GalleryGrid images={category.docs[0]?.category_images as Gallery['images']} />
     </div>
   )
 }

@@ -86,6 +86,17 @@ See the [Collections](https://payloadcms.com/docs/configuration/collections) doc
 
   This is the uploads enabled collection used by pages, posts, and projects to contain media like images, videos, downloads, and other assets. It features pre-configured sizes, focal point and manual resizing to help you manage your pictures.
 
+- #### Gallery
+
+  A dedicated collection for managing gallery images with responsive layout and animations. The gallery page displays images in a responsive grid with staggered animations, hover effects, and a modal lightbox for viewing images. Features include:
+
+  - Responsive grid layout (1-4 columns based on screen size)
+  - Staggered entrance animations (slide-in-left, slide-in-bottom, slide-in-right)
+  - Hover effects with image scaling and overlay
+  - Modal lightbox with keyboard navigation (arrow keys, escape)
+  - Loading skeletons for better UX
+  - Image counter and navigation controls
+
 - #### Categories
 
   A taxonomy used to group posts together. Categories can be nested inside of one another, for example "News > Technology". See the official [Payload Nested Docs Plugin](https://payloadcms.com/docs/plugins/nested-docs) for more details.
