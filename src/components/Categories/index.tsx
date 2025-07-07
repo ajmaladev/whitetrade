@@ -26,6 +26,12 @@ export function CategoryCard({
     offset: ['start end', 'end start'],
   })
 
+  // Helper function to determine text size based on word count
+  const getTextSizeClass = (title: string) => {
+    const wordCount = title.trim().split(/\s+/).length
+    return wordCount === 1 ? 'text-2xl md:text-4xl' : 'text-2xl md:text-3xl'
+  }
+
   // Subtle floating animation based on scroll
   const floatingY = useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], [0, -8, 0, -4, 0])
 
@@ -79,7 +85,7 @@ export function CategoryCard({
     <motion.article
       ref={cardRef}
       variants={cardVariants}
-      className={cn('relative group mr-[70px] md:mr-0', className)}
+      className={cn('relative group flex-shrink-0', className)}
       id="products"
       custom={index}
       style={{
@@ -96,23 +102,23 @@ export function CategoryCard({
     >
       <Link href={`/${category.slug || ''}`} className="block">
         <motion.div
-          className="relative w-48 sm:w-72 h-[140px] sm:h-44 cursor-pointer p-4 rounded-lg overflow-hidden category-small-bg"
+          className="relative w-48 sm:w-72 h-[140px] sm:h-44 cursor-pointer] rounded-lg overflow-hidden category-small-bg"
           whileHover={{
             boxShadow: '0 25px 50px rgba(0, 0, 0, 0.12)',
             transition: { duration: 0.4, ease: 'easeOut' },
           }}
         >
-          <motion.div className="relative z-10 flex h-full items-center">
+          <motion.div className="relative z-10 flex h-full items-center w-[70%]">
             {categoryPage ? (
               <h1
-                className="justify-center text-sky-950 text-3xl md:text-5xl pl-6 font-bold font-['Philosopher'] leading-[59.52px]"
+                className={`justify-center text-sky-950 ${getTextSizeClass(category.title)} pl-6 font-bold font-['Philosopher'] md:leading-[50.52px] lg:leading-[40.52px]`}
                 itemProp="name"
               >
                 {category.title}
               </h1>
             ) : (
               <h2
-                className="justify-center text-sky-950 text-3xl md:text-5xl pl-6 font-bold font-['Philosopher'] leading-[59.52px]"
+                className={`justify-center text-sky-950 ${getTextSizeClass(category.title)} pl-6 font-bold font-['Philosopher'] md:leading-[50.52px] lg:leading-[40.52px]`}
                 itemProp="name"
               >
                 {category.title}
@@ -130,7 +136,7 @@ export function CategoryCard({
         </motion.div>
 
         <motion.div
-          className="absolute md:left-[126px] left-[95px] md:bottom-[12px] bottom-[0px] w-48 sm:w-64 h-48 sm:h-60 z-30"
+          className="absolute left-[100px] bottom-[69px] sm:left-[160px] sm:bottom-[69px] md:left-[170px] md:bottom-[57px] w-36 h-28 sm:w-48 sm:h-32 z-30"
           variants={imageVariants}
           style={{
             y: imageFloatingY,
@@ -170,6 +176,11 @@ export default function Categories({ categories }: { categories: PaginatedDocs<C
     },
   }
 
+  // Split categories into two rows
+  const midPoint = Math.ceil(categories.docs.length / 2)
+  const firstRow = categories.docs.slice(0, midPoint)
+  const secondRow = categories.docs.slice(midPoint)
+
   // Generate structured data for categories
   const structuredData = {
     '@context': 'https://schema.org',
@@ -206,7 +217,7 @@ export default function Categories({ categories }: { categories: PaginatedDocs<C
         </h2>
         <motion.div
           ref={containerRef}
-          className="grid grid-cols-1 items-center justify-items-center md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 lg:gap-10 gap-y-24 md:gap-y-24 lg:gap-y-36 pb-8 sm:pt-28 sm:px-6 md:px-8 lg:px-32 xl:px-32 w-full"
+          className="flex flex-col gap-8 pb-8 sm:pl-6 md:pl-8 lg:pl-32 xl:pl-32 w-full"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -214,9 +225,20 @@ export default function Categories({ categories }: { categories: PaginatedDocs<C
           role="list"
           aria-label="Trading categories"
         >
-          {categories.docs.map((category, index) => (
-            <CategoryCard key={category.id} category={category} index={index} />
-          ))}
+          {/* First Row */}
+          <div className="flex overflow-x-auto pl-3 sm:pl-0 pt-16 md:pt-10 gap-20 md:gap-24 lg:gap-28 pb-4 scrollbar-hide">
+            {firstRow.map((category, index) => (
+              <CategoryCard key={category.id} category={category} index={index} />
+            ))}
+          </div>
+
+          {/* Second Row */}
+          <div className="flex overflow-x-auto pl-3 sm:pl-0 pt-16 md:pt-10 gap-20 md:gap-24 lg:gap-28 pb-4 scrollbar-hide">
+            {secondRow.map((category, index) => (
+              <CategoryCard key={category.id} category={category} index={index + midPoint} />
+            ))}
+          </div>
+
           <div className="hidden lg:block w-[275px] h-[550px] bg-gradient-to-bl from-[#eaf5ff] to-white/0 rounded-l-full absolute bottom-[-200px] right-0 z-[-1]" />
         </motion.div>
       </section>
