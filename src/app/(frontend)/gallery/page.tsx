@@ -30,7 +30,7 @@ export default async function GalleryPage() {
     <div className="bg-gray-50">
       {/* Header Section */}
       <div className="bg-white shadow-sm">
-        <div className="container mx-auto px-4 py-12">
+        <div className="mx-auto px-4 py-12">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-[#1C3A6A] mb-4">Our Gallery</h1>
           </div>
@@ -38,7 +38,7 @@ export default async function GalleryPage() {
       </div>
 
       {/* Gallery Grid */}
-      <div className="container mx-auto px-4 ">
+      <div className="mx-auto px-4 ">
         <GalleryGrid images={images} />
       </div>
     </div>

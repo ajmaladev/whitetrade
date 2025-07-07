@@ -35,7 +35,7 @@ export const OurBrandsQuery = ({ brands, products }: OurBrandsQueryProps) => {
 
   return (
     <div className="w-full relative bg-gradient-to-b from-[#1C3A6A] via-[#3a5888] to-[#fafbfd]">
-      <div className="container mx-auto px-4 py-16">
+      <div className="mx-auto px-4 py-16">
         <h3 className="text-4xl font-semibold text-center text-white mb-12 font-['Poppins']">
           Our Brands
         </h3>
