@@ -29,7 +29,7 @@ export default function ReadyToShip() {
           alt="Ready to Ship - Products available for immediate shipping"
           width={513}
           height={111}
-          className="md:ml-52 md:mt-32 mt-10 object-cover w-3/4 md:w-[513px] mx-auto"
+          className="md:ml-40 md:mt-32 mt-10 object-cover w-3/4 md:w-[513px] mx-auto"
           priority={false}
         />
       </section>

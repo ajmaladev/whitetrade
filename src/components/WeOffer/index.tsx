@@ -95,7 +95,7 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
             alt="We Offer section heading"
             width={1000}
             height={1000}
-            className="h-auto w-3/4 md:w-[513px] mx-auto md:mx-0"
+            className="w-full md:w-[36%] lg:ml-40 px-6 sm:mx-auto"
           />
 
           <div

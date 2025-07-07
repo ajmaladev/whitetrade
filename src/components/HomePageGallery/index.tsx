@@ -79,7 +79,7 @@ export default function HomePageGallery({ gallery }: { gallery: PaginatedDocs<Ga
           width={1000}
           height={1000}
           priority
-          className="w-full md:w-[36%] lg:ml-52 px-6 sm:mx-auto"
+          className="w-full md:w-[36%] lg:ml-40 px-6 sm:mx-auto"
         />
         <h2
           id="gallery-heading"
