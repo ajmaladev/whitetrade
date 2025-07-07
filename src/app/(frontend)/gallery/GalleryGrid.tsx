@@ -2,6 +2,7 @@
 
 import { Gallery } from '@/payload-types'
 import { ChevronLeft, ChevronRight, X, ZoomIn } from 'lucide-react'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 interface GalleryGridProps {
@@ -11,6 +12,7 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
   const [selectedImage, setSelectedImage] = useState<number | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set())
+  const [visibleImages, setVisibleImages] = useState<Set<number>>(new Set())
 
   // Create dynamic layout patterns for visual interest
   const getImageClass = (index: number) => {
@@ -27,6 +29,25 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
     if (index % 3 === 0) return patterns[1] // Wide every 3rd
     return patterns[0] // Standard for others
   }
+
+  // Staggered animation for images appearing one by one
+  useEffect(() => {
+    if (!images) return
+
+    const staggerDelay = 150 // 150ms delay between each image
+    const timers: NodeJS.Timeout[] = []
+
+    images.forEach((_, index) => {
+      const timer = setTimeout(() => {
+        setVisibleImages((prev) => new Set([...prev, index]))
+      }, index * staggerDelay)
+      timers.push(timer)
+    })
+
+    return () => {
+      timers.forEach((timer) => clearTimeout(timer))
+    }
+  }, [images])
 
   const openModal = (index: number) => {
     setSelectedImage(index)
@@ -85,7 +106,7 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
   return (
     <>
       {/* Main Gallery Grid */}
-      <div className="p-6 bg-gradient-to-br from-gray-50 to-white">
+      <div className="md:p-6 p-2 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto">
           {/* Dynamic Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 auto-rows-[200px]">
@@ -93,31 +114,42 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
               const imageUrl = imageItem?.image
                 ? `${process.env.NEXT_PUBLIC_BUNNY_CDN}${imageItem.image}`
                 : `https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=800&q=80`
+
+              const isVisible = visibleImages.has(index)
+              const isLoaded = loadedImages.has(index)
+
               return (
                 <div
                   key={imageItem.id || index}
-                  className={`group relative overflow-hidden rounded-2xl cursor-pointer transform transition-all duration-700 hover:scale-[1.02] hover:z-10 ${getImageClass(index)}`}
+                  className={`group relative overflow-hidden rounded-2xl cursor-pointer transform transition-all duration-700 hover:scale-[1.02] hover:z-10 ${getImageClass(index)} ${
+                    isVisible
+                      ? 'opacity-100 translate-y-0 scale-100'
+                      : 'opacity-0 translate-y-8 scale-95'
+                  }`}
                   onClick={() => openModal(index)}
                   style={{
                     background: `linear-gradient(45deg, 
                       hsl(${(index * 137.5) % 360}, 70%, 85%), 
                       hsl(${(index * 137.5 + 60) % 360}, 70%, 90%))`,
+                    transitionDelay: `${index * 50}ms`,
                   }}
                 >
                   {/* Image Container */}
                   <div className="relative w-full h-full">
-                    <img
+                    <Image
                       src={imageUrl}
+                      width={100}
+                      height={100}
                       alt={`Gallery image ${index + 1}`}
                       className={`w-full h-full object-cover transition-all duration-700 
-                        ${loadedImages.has(index) ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}
+                        ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}
                         group-hover:scale-110 group-hover:rotate-1`}
                       onLoad={() => handleImageLoad(index)}
                       loading={index < 6 ? 'eager' : 'lazy'}
                     />
 
                     {/* Loading Skeleton */}
-                    {!loadedImages.has(index) && (
+                    {!isLoaded && (
                       <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 animate-pulse" />
                     )}
 
@@ -193,37 +225,59 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
             </button>
 
             {/* Main Image Container */}
-            <div className="relative max-w-6xl max-h-[85vh] w-full flex items-center justify-center">
-              <img
+            <div className="relative w-full h-full flex items-center justify-center">
+              <Image
                 src={`${process.env.NEXT_PUBLIC_BUNNY_CDN}${images[selectedImage]?.image}`}
                 alt={`Gallery image ${selectedImage + 1}`}
-                className="w-auto h-auto max-w-full max-h-full object-contain rounded-lg shadow-2xl animate-scale-in"
+                className="md:w-96 md:h-96 w-64 h-64 object-cover rounded-lg shadow-2xl animate-scale-in"
+                width={100}
+                height={100}
               />
             </div>
 
             {/* Image Thumbnails Strip */}
             <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20">
-              <div className="flex space-x-2 bg-white/10 backdrop-blur-md rounded-full p-2 border border-white/20">
-                {images.slice(Math.max(0, selectedImage - 2), selectedImage + 3).map((img, idx) => {
-                  const actualIndex = Math.max(0, selectedImage - 2) + idx
-                  return (
-                    <button
-                      key={actualIndex}
-                      onClick={() => setSelectedImage(actualIndex)}
-                      className={`w-12 h-12 rounded-lg overflow-hidden transition-all duration-200 border-2 ${
-                        actualIndex === selectedImage
-                          ? 'border-white scale-110'
-                          : 'border-white/30 hover:border-white/60'
-                      }`}
-                    >
-                      <img
-                        src={`${process.env.NEXT_PUBLIC_BUNNY_CDN}${img?.image}`}
-                        alt=""
-                        className="w-full h-full object-cover"
-                      />
-                    </button>
-                  )
-                })}
+              <div className="flex space-x-2 bg-white/10 backdrop-blur-md rounded-lg p-2 border border-white/20">
+                {(() => {
+                  // Calculate the range to show exactly 5 thumbnails
+                  const totalImages = images.length
+                  let startIndex = Math.max(0, selectedImage - 2)
+                  let endIndex = Math.min(totalImages, selectedImage + 3)
+
+                  // Adjust if we're near the beginning
+                  if (selectedImage < 2) {
+                    endIndex = Math.min(totalImages, 5)
+                  }
+
+                  // Adjust if we're near the end
+                  if (selectedImage >= totalImages - 3) {
+                    startIndex = Math.max(0, totalImages - 5)
+                    endIndex = totalImages
+                  }
+
+                  return images.slice(startIndex, endIndex).map((img, idx) => {
+                    const actualIndex = startIndex + idx
+                    return (
+                      <button
+                        key={actualIndex}
+                        onClick={() => setSelectedImage(actualIndex)}
+                        className={`w-12 h-12 rounded-lg overflow-hidden transition-all duration-200 border-2 ${
+                          actualIndex === selectedImage
+                            ? 'border-white scale-110'
+                            : 'border-white/30 hover:border-white/60'
+                        }`}
+                      >
+                        <Image
+                          src={`${process.env.NEXT_PUBLIC_BUNNY_CDN}${img?.image}`}
+                          alt=""
+                          width={100}
+                          height={100}
+                          className="w-full h-full object-cover rounded-lg"
+                        />
+                      </button>
+                    )
+                  })
+                })()}
               </div>
             </div>
           </div>
