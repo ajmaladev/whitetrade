@@ -10,7 +10,7 @@ interface HeroSectionProps {
 
 export default function HeroSection({ carousal = [] }: HeroSectionProps) {
   const [current, setCurrent] = useState(0)
-  const isMobile = useMediaQuery({ maxWidth: 768 })
+  const isMobile = useMediaQuery({ maxWidth: 635 })
 
   useEffect(() => {
     if (!carousal?.length) return
@@ -96,15 +96,18 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
             })}
           </div>
           <div className="absolute inset-0 sm:top-[216px] md:top-[225px] lg:top-[177px] flex items-center justify-center z-[2] pointer-events-none px-4 sm:px-6 md:px-8">
-            <div
-              className="-z-10 md:z-10 -m-32 relative w-full max-w-[320px] sm:max-w-[500px] md:max-w-[700px] lg:max-w-[963px] h-[280px] sm:h-[234.5px] md:h-[329px] lg:h-[452px] flex flex-col items-center justify-between pointer-events-auto overflow-hidden gap-4 sm:gap-6 md:gap-8 lg:gap-10 "
-              style={{
-                backgroundImage: 'url(/hero-section-bg.webp)',
-                backgroundSize: 'contain',
-                backgroundPosition: 'center',
-                position: 'relative',
-              }}
-            >
+            <div className="-z-10 md:z-10 -m-32 relative w-full max-w-[320px] sm:max-w-[500px] md:max-w-[700px] lg:max-w-[963px] h-[280px] sm:h-[234.5px] md:h-[329px] lg:h-[452px] flex flex-col items-center justify-between pointer-events-auto overflow-hidden gap-4 sm:gap-6 md:gap-8 lg:gap-10">
+              {/* Background image as absolute positioned element */}
+              <div className="absolute inset-0 z-0">
+                <Image
+                  src="/hero-section-bg.webp"
+                  alt=""
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 640px) 320px, (max-width: 768px) 500px, (max-width: 1024px) 700px, 963px"
+                />
+              </div>
+
               {/* Centered bottom shadow */}
               <div
                 style={{
@@ -121,10 +124,14 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
                 aria-hidden="true"
               />
               <div className="relative z-10 flex flex-col items-start pl-4 sm:pl-8 md:pl-16 lg:pl-24 justify-center w-full h-full pt-6 sm:pt-8 md:pt-10 gap-2 sm:gap-3 md:gap-4">
-                {!isMobile && (
+                {!isMobile ? (
                   <h1 className="pl-2 sm:pl-4 md:pl-6 justify-start text-[#1C3A6A] text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-medium font-['Poppins'] leading-tight">
                     White Trading Company
                   </h1>
+                ) : (
+                  <p className="pl-2 sm:pl-4 md:pl-6 justify-start text-[#1C3A6A] text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-medium font-['Poppins'] leading-tight">
+                    White Trading Company
+                  </p>
                 )}
                 <div className="pl-2 sm:pl-4 md:pl-6 justify-start text-neutral-500 text-lg sm:text-xl md:text-2xl lg:text-4xl font-normal">
                   Worldwide Exporters & Supplier
@@ -147,7 +154,7 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
 
         {/* Small screen design */}
         <div className="sm:hidden m-4 relative">
-          <div className="relative w-full h-[40vh] md:h-[50vh] overflow-hidden rounded-2xl">
+          <div className="relative w-full h-[44vh] md:h-[50vh] overflow-hidden rounded-2xl">
             {/* Carousel with small_image */}
             {carousal?.map((img, idx) => {
               let src = ''
@@ -166,36 +173,40 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
                   src={src}
                   alt={img.alt || `Mobile hero image ${idx + 1}`}
                   width={360}
-                  height={170}
-                  unoptimized
+                  height={200}
                   className={`absolute top-0 left-0 w-auto h-auto object-cover transition-opacity duration-1000 z-[2] ${idx === current ? 'opacity-100' : 'opacity-0'}`}
                   priority={idx === 0}
                 />
               )
             })}
-
-            {/* Background image container */}
           </div>
         </div>
-        <div
-          className="hero-section-small-container sm:hidden absolute top-[43px] left-0 w-full h-[235px] flex flex-col items-center justify-center pointer-events-auto overflow-hidden rounded-b-2xl z-[1]"
-          style={{
-            backgroundImage: 'url(/hero-section-small-bg.webp)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
-        >
-          <div className="hero-section-small relative mb-4 sm:mb-6 md:mb-8 z-10 flex flex-col items-start justify-end w-auto md:w-full h-full gap-1 p-6">
-            {isMobile && (
-              <h1 className="text-black md:text-[#1C3A6A] text-[22px] font-medium font-['Poppins'] leading-tight">
+        <div className="hero-section-small-container sm:hidden absolute top-[43px] left-0 w-full h-[270px] flex flex-col items-center justify-center pointer-events-auto overflow-hidden rounded-b-2xl z-[1]">
+          {/* Background image as absolute positioned element */}
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/hero-section-small-bg.webp"
+              alt=""
+              fill
+              className="object-cover"
+              sizes="100vw"
+            />
+          </div>
+
+          <div className="hero-section-small relative mb-4 sm:mb-6 md:mb-8 z-10 flex flex-col items-start mt-24 w-auto md:w-full h-full gap-2 p-6">
+            {isMobile ? (
+              <h1 className="text-[#1C3A6A] text-[26px] font-medium font-['Poppins'] leading-tight">
                 White Trading Company
               </h1>
+            ) : (
+              <p className="text-[#1C3A6A] text-[26px] font-medium font-['Poppins'] leading-tight">
+                White Trading Company
+              </p>
             )}
-            <div className="text-black md:text-[#1C3A6A] text-lg font-medium">
+            <div className="text-[#1C3A6A] text-[20px] font-medium font-['Poppins']">
               Worldwide Exporters & Supplier
             </div>
-            <div className="text-black md:text-[#1C3A6A] text-base font-normal">
+            <div className="text-[#1C3A6A] text-sm font-normal font-['Poppins']">
               over a decade now
             </div>
           </div>

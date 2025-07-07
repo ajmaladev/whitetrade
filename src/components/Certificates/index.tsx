@@ -33,7 +33,7 @@ export const Certificates = ({ certificates }: CertificatesProps) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <section className="px-4 py-8 md:px-6 relative" aria-labelledby="certificates-heading">
+      <section className="px-4 pb-16 md:px-6 relative" aria-labelledby="certificates-heading">
         <h3 id="certificates-heading" className="sr-only">
           White Trading Company Certifications and Accreditations
         </h3>

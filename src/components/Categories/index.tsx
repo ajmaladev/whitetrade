@@ -102,12 +102,33 @@ export function CategoryCard({
     >
       <Link href={`/${category.slug || ''}`} className="block">
         <motion.div
-          className="relative w-48 sm:w-72 h-[140px] sm:h-44 cursor-pointer] rounded-lg overflow-hidden category-small-bg"
+          className="relative w-48 sm:w-72 h-[140px] sm:h-44 cursor-pointer rounded-lg overflow-hidden"
           whileHover={{
-            boxShadow: '0 25px 50px rgba(0, 0, 0, 0.12)',
             transition: { duration: 0.4, ease: 'easeOut' },
           }}
         >
+          {/* Background image as absolute positioned element */}
+          <div className="absolute inset-0 z-0 block sm:hidden">
+            <Image
+              src="/product-bg.webp"
+              alt=""
+              className="object-cover w-48 sm:w-72 h-[140px] sm:h-44"
+              width={1000}
+              height={1000}
+            />
+          </div>
+
+          {/* Responsive background for larger screens */}
+          <div className="absolute inset-0 z-0 hidden sm:block">
+            <Image
+              src="/productcard-bg.webp"
+              alt=""
+              className="object-cover w-48 sm:w-72 h-[140px] sm:h-44"
+              width={1000}
+              height={1000}
+            />
+          </div>
+
           <motion.div className="relative z-10 flex h-full items-center w-[70%]">
             {categoryPage ? (
               <h1

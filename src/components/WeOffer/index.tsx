@@ -90,12 +90,13 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
         aria-labelledby="we-offer-heading"
       >
         <div className="relative w-full">
-          <h3
-            id="we-offer-heading"
-            className="text-center sm:ml-20 sticky top-0 py-4 text-[#3661c1] text-6xl sm:text-6xl lg:text-8xl xl:text-9xl font-bold font-['Poppins'] mb-8 sm:text-left"
-          >
-            We Offer
-          </h3>
+          <Image
+            src="/we-offer-title.webp"
+            alt="We Offer section heading"
+            width={1000}
+            height={1000}
+            className="h-auto w-3/4 md:w-[513px] mx-auto md:mx-0"
+          />
 
           <div
             className="relative flex flex-col mt-3 md:mt-10 lg:mt-20 w-full gap-4 sm:gap-12 lg:gap-16"
@@ -124,8 +125,8 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                           <div
                             className={`flex-shrink-0 absolute w-32 h-32 sm:w-40 sm:h-40 lg:w-56 lg:h-56 rounded-full flex items-center justify-center p-2 mx-auto lg:mx-0 mb-4 lg:mb-0 ${
                               isLeft
-                                ? 'lg:order-2 -top-[65px] sm:-top-[82px] right-0 sm:right-[36px] lg:-right-[150px] lg:-top-[120px]'
-                                : 'lg:order-1  -top-[65px] sm:-top-[82px] left-0 sm:left-[36px] lg:-left-[150px] lg:-top-[120px]'
+                                ? 'lg:order-2 -top-[65px] sm:-top-[82px] right-0 xs:right-[18%] sm:right-[36px] lg:-right-[150px] lg:-top-[120px]'
+                                : 'lg:order-1  -top-[65px] sm:-top-[82px] left-0 xs:left-[18%] sm:left-[36px] lg:-left-[150px] lg:-top-[120px]'
                             }`}
                             aria-hidden="true"
                           >

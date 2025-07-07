@@ -9,6 +9,7 @@ import React from 'react'
 import { Footer } from '@/components/Footer'
 import MegaMenu from '@/components/MegaMenu'
 import { NewsLetter } from '@/components/NewsLetter'
+import WhatsAppButton from '@/components/WhatsAppButton'
 import { getServerSideURL } from '@/utilities/getURL'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import './globals.css'
@@ -56,6 +57,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {children}
         <NewsLetter />
         <Footer />
+        <WhatsAppButton />
       </body>
     </html>
   )

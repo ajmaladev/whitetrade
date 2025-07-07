@@ -26,6 +26,14 @@ const config = {
     'bg-warning/30',
   ],
   theme: {
+    screens: {
+      xs: '400px',
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+      '2xl': '1536px',
+    },
     container: {
       center: true,
       padding: {
@@ -42,6 +50,7 @@ const config = {
         md: '48rem',
         sm: '40rem',
         xl: '80rem',
+        xs: '400px',
       },
     },
     extend: {
