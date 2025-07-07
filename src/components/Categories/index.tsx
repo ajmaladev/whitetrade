@@ -29,7 +29,7 @@ export function CategoryCard({
   // Helper function to determine text size based on word count
   const getTextSizeClass = (title: string) => {
     const wordCount = title.trim().split(/\s+/).length
-    return wordCount === 1 ? 'text-2xl md:text-4xl' : 'text-2xl md:text-3xl'
+    return wordCount === 1 ? 'text-2xl md:text-4xl' : 'text-xl md:text-3xl'
   }
 
   // Subtle floating animation based on scroll
@@ -111,14 +111,14 @@ export function CategoryCard({
           <motion.div className="relative z-10 flex h-full items-center w-[70%]">
             {categoryPage ? (
               <h1
-                className={`justify-center text-sky-950 ${getTextSizeClass(category.title)} pl-6 font-bold font-['Philosopher'] md:leading-[50.52px] lg:leading-[40.52px]`}
+                className={`justify-center text-sky-950 ${getTextSizeClass(category.title)} pl-6 font-bold font-['Philosopher'] md:leading-[40.52px]`}
                 itemProp="name"
               >
                 {category.title}
               </h1>
             ) : (
               <h2
-                className={`justify-center text-sky-950 ${getTextSizeClass(category.title)} pl-6 font-bold font-['Philosopher'] md:leading-[50.52px] lg:leading-[40.52px]`}
+                className={`justify-center text-sky-950 ${getTextSizeClass(category.title)} pl-6 font-bold font-['Philosopher'] md:leading-[40.52px]`}
                 itemProp="name"
               >
                 {category.title}
