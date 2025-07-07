@@ -3,9 +3,9 @@ import type { Metadata } from 'next/types'
 import { CollectionArchive } from '@/components/CollectionArchive'
 import { PageRange } from '@/components/PageRange'
 import { Pagination } from '@/components/Pagination'
+import { generateDynamicSEO } from '@/components/SEO'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import React from 'react'
 import PageClient from './page.client'
 
 export const dynamic = 'force-static'
@@ -56,8 +56,24 @@ export default async function Page() {
   )
 }
 
-export function generateMetadata(): Metadata {
-  return {
-    title: `Payload Website Template Posts`,
-  }
+export async function generateMetadata(): Promise<Metadata> {
+  return generateDynamicSEO({
+    data: null,
+    type: 'page',
+    title: 'Trading Blog & Insights',
+    description:
+      'Explore our comprehensive trading blog featuring market analysis, trading strategies, investment insights, and expert guidance from White Trading Company professionals.',
+    keywords: [
+      'trading blog',
+      'investment insights',
+      'market analysis',
+      'trading strategies',
+      'financial education',
+      'trading tips',
+      'market news',
+      'trading articles',
+      'investment blog',
+      'White Trading Company blog',
+    ],
+  })
 }

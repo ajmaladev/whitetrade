@@ -1,7 +1,9 @@
 import { CategoryCard } from '@/components/Categories'
 import ProductDetails from '@/components/Categories/ProductDetails'
+import { generateDynamicSEO } from '@/components/SEO'
 import { getCachedCategories, getCachedCategory } from '@/lib/fetchMethods'
 import { Category, Gallery, Product } from '@/payload-types'
+import type { Metadata } from 'next'
 import GalleryGrid from '../gallery/GalleryGrid'
 import NotFound from '../not-found'
 
@@ -11,12 +13,13 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
     NotFound()
   }
   return (
-    <div className="flex flex-col mb-10 lg:mb-0 mt-5 md:mt-10">
+    <div className="flex flex-col mb-10 lg:mb-5 mt-5 md:mt-10">
       <div className="flex flex-col lg:flex-row items-center justify-center min-[50vh] lg:gap-40">
         <CategoryCard
           category={category.docs[0] as Category}
           className="!mt-[70px] md:!mt-[130px] !mb-12"
           index={0}
+          categoryPage
         />
         <ProductDetails products={category.docs[0]?.products?.docs as Product[]} />
       </div>
@@ -30,4 +33,27 @@ export async function generateStaticParams() {
   return categories.docs.map((category) => ({
     category: category.slug as string,
   }))
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ category: string }>
+}): Promise<Metadata> {
+  const { category: categorySlug } = await params
+  const category = await getCachedCategory(categorySlug)()
+
+  if (!category || !category.docs[0]) {
+    return generateDynamicSEO({
+      data: null,
+      type: 'category',
+      title: 'Category Not Found',
+      description: 'The requested category could not be found on White Trading Company.',
+    })
+  }
+
+  return generateDynamicSEO({
+    data: category.docs[0],
+    type: 'category',
+  })
 }

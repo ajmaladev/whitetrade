@@ -1,5 +1,7 @@
+import { generateDynamicSEO } from '@/components/SEO'
 import { getCachedGallery } from '@/lib/fetchMethods'
 import { Gallery } from '@/payload-types'
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import GalleryGrid from './GalleryGrid'
 
@@ -31,10 +33,6 @@ export default async function GalleryPage() {
         <div className="container mx-auto px-4 py-12">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Our Gallery</h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Explore our collection of high-quality images showcasing our products, facilities, and
-              commitment to excellence.
-            </p>
           </div>
         </div>
       </div>
@@ -45,4 +43,36 @@ export default async function GalleryPage() {
       </div>
     </div>
   )
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const gallery = await getCachedGallery(100)()
+
+  if (!gallery?.docs?.length) {
+    return generateDynamicSEO({
+      data: null,
+      type: 'page',
+      title: 'Gallery Not Found',
+      description: 'The gallery could not be found on White Trading Company.',
+    })
+  }
+
+  return generateDynamicSEO({
+    data: gallery.docs[0] || null,
+    type: 'page',
+    title: 'White Trading Company Gallery - Product Showcase & Facilities',
+    description:
+      'Explore our comprehensive gallery showcasing White Trading Company products, trading facilities, and our commitment to excellence in financial services.',
+    keywords: [
+      'White Trading Company gallery',
+      'trading platform images',
+      'financial services photos',
+      'trading facilities',
+      'investment platform showcase',
+      'trading tools gallery',
+      'White Trading Company products',
+      'trading software images',
+      'financial technology gallery',
+    ],
+  })
 }

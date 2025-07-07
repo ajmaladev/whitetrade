@@ -13,10 +13,12 @@ export function CategoryCard({
   category,
   index,
   className,
+  categoryPage,
 }: {
   category: Category
   index: number
   className?: string
+  categoryPage?: boolean
 }) {
   const cardRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
@@ -74,7 +76,7 @@ export function CategoryCard({
   }
 
   return (
-    <motion.div
+    <motion.article
       ref={cardRef}
       variants={cardVariants}
       className={cn('relative group mr-[70px] md:mr-0', className)}
@@ -89,6 +91,8 @@ export function CategoryCard({
         scale: 1.03,
         transition: { duration: 0.3, ease: 'easeOut' },
       }}
+      itemScope
+      itemType="https://schema.org/Service"
     >
       <Link href={`/${category.slug || ''}`} className="block">
         <motion.div
@@ -99,9 +103,21 @@ export function CategoryCard({
           }}
         >
           <motion.div className="relative z-10 flex h-full items-center">
-            <h3 className="justify-center text-sky-950 text-3xl md:text-5xl pl-6 font-bold font-['Philosopher'] leading-[59.52px]">
-              {category.title}
-            </h3>
+            {categoryPage ? (
+              <h1
+                className="justify-center text-sky-950 text-3xl md:text-5xl pl-6 font-bold font-['Philosopher'] leading-[59.52px]"
+                itemProp="name"
+              >
+                {category.title}
+              </h1>
+            ) : (
+              <h2
+                className="justify-center text-sky-950 text-3xl md:text-5xl pl-6 font-bold font-['Philosopher'] leading-[59.52px]"
+                itemProp="name"
+              >
+                {category.title}
+              </h2>
+            )}
           </motion.div>
 
           {/* Enhanced background overlay on hover */}
@@ -127,14 +143,15 @@ export function CategoryCard({
           <motion.div className="w-full h-full">
             <Image
               src={imageUrl || ''}
-              alt={category.title}
+              alt={`${category.title} trading services and products`}
               fill
               className="object-contain drop-shadow-lg"
+              itemProp="image"
             />
           </motion.div>
         </motion.div>
       </Link>
-    </motion.div>
+    </motion.article>
   )
 }
 
@@ -153,21 +170,56 @@ export default function Categories({ categories }: { categories: PaginatedDocs<C
     },
   }
 
+  // Generate structured data for categories
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'White Trading Company Trading Categories',
+    description: 'Comprehensive trading categories and services offered by White Trading Company',
+    numberOfItems: categories.docs.length,
+    itemListElement: categories.docs.map((category, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'Service',
+        name: category.title,
+        description: `Trading services and products in ${category.title}`,
+        url: `https://whitetradingcompany.com/${category.slug}`,
+        provider: {
+          '@type': 'Organization',
+          name: 'White Trading Company',
+        },
+        category: 'Trading Services',
+      },
+    })),
+  }
+
   return (
     <>
-      <motion.div
-        ref={containerRef}
-        className="relative small-screen-categories grid grid-cols-1 items-center justify-items-center md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 lg:gap-10 gap-y-24 md:gap-y-24 lg:gap-y-36 pb-8 sm:pt-28 sm:px-6 md:px-8 lg:px-32 xl:px-32 w-full"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-      >
-        {categories.docs.map((category, index) => (
-          <CategoryCard key={category.id} category={category} index={index} />
-        ))}
-        <div className="hidden lg:block w-[275px] h-[550px] bg-gradient-to-bl from-[#eaf5ff] to-white/0 rounded-l-full absolute bottom-[-200px] right-0 z-[-1]" />
-      </motion.div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <section aria-labelledby="categories-heading" className="relative small-screen-categories">
+        <h2 id="categories-heading" className="sr-only">
+          White Trading Company Trading Categories
+        </h2>
+        <motion.div
+          ref={containerRef}
+          className="grid grid-cols-1 items-center justify-items-center md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 lg:gap-10 gap-y-24 md:gap-y-24 lg:gap-y-36 pb-8 sm:pt-28 sm:px-6 md:px-8 lg:px-32 xl:px-32 w-full"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          role="list"
+          aria-label="Trading categories"
+        >
+          {categories.docs.map((category, index) => (
+            <CategoryCard key={category.id} category={category} index={index} />
+          ))}
+          <div className="hidden lg:block w-[275px] h-[550px] bg-gradient-to-bl from-[#eaf5ff] to-white/0 rounded-l-full absolute bottom-[-200px] right-0 z-[-1]" />
+        </motion.div>
+      </section>
     </>
   )
 }

@@ -1,10 +1,12 @@
 import HomePage from '@/components/HomePage'
+import { generateDynamicSEO } from '@/components/SEO'
 import {
   getCachedCategories,
   getCachedGallery,
   getCachedHomePage,
   getCachedProducts,
 } from '@/lib/fetchMethods'
+import type { Metadata } from 'next'
 
 export default async function Home() {
   const categories = await getCachedCategories()()
@@ -26,4 +28,12 @@ export default async function Home() {
       gallery={gallery}
     />
   )
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const homePage = await getCachedHomePage()()
+  return generateDynamicSEO({
+    data: homePage.docs[0] || null,
+    type: 'home',
+  })
 }

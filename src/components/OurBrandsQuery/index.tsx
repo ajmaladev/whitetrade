@@ -36,9 +36,9 @@ export const OurBrandsQuery = ({ brands, products }: OurBrandsQueryProps) => {
   return (
     <div className="w-full relative bg-gradient-to-b from-[#1C3A6A] via-[#3a5888] to-[#fafbfd]">
       <div className="container mx-auto px-4 py-16">
-        <h2 className="text-4xl font-semibold text-center text-white mb-12 font-['Poppins']">
+        <h3 className="text-4xl font-semibold text-center text-white mb-12 font-['Poppins']">
           Our Brands
-        </h2>
+        </h3>
         <div className="my-10 md:my-32">
           <Marquee speed={30} pauseOnHover={true}>
             {brands?.map((brand) => (
@@ -58,9 +58,9 @@ export const OurBrandsQuery = ({ brands, products }: OurBrandsQueryProps) => {
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl md:text-4xl font-semibold text-stone-900 mb-8 md:mb-16 font-['Poppins']">
+          <h3 className="text-2xl md:text-4xl font-semibold text-stone-900 mb-8 md:mb-16 font-['Poppins']">
             Get a quote
-          </h2>
+          </h3>
           <form action={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <Input

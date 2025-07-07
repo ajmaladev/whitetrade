@@ -85,7 +85,7 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
   return (
     <>
       {/* Main Gallery Grid */}
-      <div className="p-6 bg-gradient-to-br from-gray-50 to-white min-h-screen">
+      <div className="p-6 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto">
           {/* Dynamic Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 auto-rows-[200px]">

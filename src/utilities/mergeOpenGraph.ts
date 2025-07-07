@@ -3,14 +3,16 @@ import { getServerSideURL } from './getURL'
 
 const defaultOpenGraph: Metadata['openGraph'] = {
   type: 'website',
-  description: 'An open-source website built with Payload and Next.js.',
+  description:
+    'White Trading Company - Leading supplier of safety products, fruits & vegetables, grains & rice, food products, and textile materials. Established in 2011, serving Coimbatore and beyond.',
   images: [
     {
       url: `${getServerSideURL()}/website-template-OG.webp`,
     },
   ],
-  siteName: 'Payload Website Template',
-  title: 'Payload Website Template',
+  siteName: 'White Trading Company',
+  title:
+    'White Trading Company - Safety Products, Fruits & Vegetables, Grains & Rice, Food Products, Textile',
 }
 
 export const mergeOpenGraph = (og?: Metadata['openGraph']): Metadata['openGraph'] => {

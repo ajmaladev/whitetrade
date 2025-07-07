@@ -63,9 +63,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
 export const metadata: Metadata = {
   metadataBase: new URL(getServerSideURL()),
+  title:
+    'White Trading Company - Safety Products, Fruits & Vegetables, Grains & Rice, Food Products, Textile',
+  description:
+    'White Trading Company - Leading supplier of safety products, fruits & vegetables, grains & rice, food products, and textile materials. Established in 2011, serving Coimbatore.',
+  keywords:
+    'White Trading Company, safety products, fruits vegetables, grains rice, food products, textile products, Coimbatore, safety gear, basmati rice, cotton materials',
   openGraph: mergeOpenGraph(),
   twitter: {
     card: 'summary_large_image',
-    creator: '@payloadcms',
+    creator: '@whitetradingcompany',
+    site: '@whitetradingcompany',
   },
 }

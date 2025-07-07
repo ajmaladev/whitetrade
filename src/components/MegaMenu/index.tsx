@@ -36,6 +36,8 @@ const MenuItem = memo(({ href, label, isActive, menuRef, onClick, menuKey }: Men
         e.preventDefault()
         onClick(menuKey)
       }}
+      aria-label={`Navigate to ${label} section`}
+      aria-current={isActive ? 'page' : undefined}
     >
       {label}
     </Link>
@@ -45,10 +47,15 @@ const MenuItem = memo(({ href, label, isActive, menuRef, onClick, menuKey }: Men
 MenuItem.displayName = 'MenuItem'
 
 const Logo = memo(({ onClick }: { onClick?: () => void }) => (
-  <Link href="/" className="flex items-center flex-shrink-0 mt-4" onClick={onClick}>
+  <Link
+    href="/"
+    className="flex items-center flex-shrink-0 mt-4"
+    onClick={onClick}
+    aria-label="White Trading Company Homepage"
+  >
     <Image
       src="/logo.svg"
-      alt="logo"
+      alt="White Trading Company Logo"
       width={160}
       height={40}
       className="w-32 md:w-40 h-10"
@@ -60,8 +67,15 @@ const Logo = memo(({ onClick }: { onClick?: () => void }) => (
 Logo.displayName = 'Logo'
 
 const SearchIcon = memo(({ onClick }: { onClick?: () => void }) => (
-  <button onClick={onClick} className="mb-2">
-    <Image src="/search.svg" alt="search" width={20} height={20} className="w-8 h-8" priority />
+  <button onClick={onClick} className="mb-2" aria-label="Open search" type="button">
+    <Image
+      src="/search.svg"
+      alt="Search icon"
+      width={20}
+      height={20}
+      className="w-8 h-8"
+      priority
+    />
   </button>
 ))
 
@@ -182,86 +196,120 @@ export default function MegaMenu() {
     [],
   )
 
+  // Generate structured data for navigation
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'SiteNavigationElement',
+    name: 'White Trading Company Main Navigation',
+    hasPart: menuItems.map((item) => ({
+      '@type': 'WebPage',
+      name: item.label,
+      url: `https://whitetradingcompany.com/#${item.key}`,
+    })),
+  }
+
   return (
-    <header className="h-20 flex items-center w-full px-6 sm:px-12 md:px-16 lg:px-60 justify-between border-b border-gray-200">
-      <Logo />
-      {/* Desktop nav */}
-      <nav className="gap-10 mt-auto hidden md:flex">
-        <SearchIcon onClick={() => setSearchOpen(true)} />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <header
+        className="h-20 flex items-center w-full px-6 sm:px-12 md:px-16 lg:px-60 justify-between border-b border-gray-200"
+        role="banner"
+        aria-label="White Trading Company Header"
+      >
+        <Logo />
+        {/* Desktop nav */}
+        <nav
+          className="gap-10 mt-auto hidden md:flex"
+          role="navigation"
+          aria-label="Main navigation"
+        >
+          <SearchIcon onClick={() => setSearchOpen(true)} />
 
-        <div className="relative" ref={menuWrapperRef}>
-          <ul className="flex items-center gap-6">
-            {menuItems.map(({ key, label }) => (
-              <MenuItem
-                key={key}
-                href={`#${key}`}
-                label={label}
-                isActive={active === key}
-                menuRef={menuRefs[key]}
-                onClick={handleMenuClick}
-                menuKey={key}
-              />
-            ))}
-          </ul>
-          <div
-            className="absolute bottom-0 h-[3px] bg-cyan-900 rounded-[50px] transition-all duration-300 ease-in-out"
-            style={{ left: underlineStyle.left, width: underlineStyle.width }}
-          />
-        </div>
-      </nav>
-      {/* Mobile nav: Drawer trigger */}
-      <div className="flex md:hidden items-center gap-10 ml-auto">
-        <SearchIcon onClick={() => setSearchOpen(true)} />
-
-        <Drawer open={isDrawerOpen} onOpenChange={setDrawerOpen}>
-          <DrawerTrigger asChild>
-            <button aria-label="Open menu">
-              <Menu className="w-8 h-8" />
-            </button>
-          </DrawerTrigger>
-          <DrawerContent className="right-0 left-auto w-4/5 max-w-xs fixed top-0 h-full rounded-none p-0 flex flex-col !mt-0">
-            <div className="flex items-center justify-between px-4 py-6 border-b">
-              <Logo onClick={() => setDrawerOpen(false)} />
-              <DrawerTrigger asChild>
-                <button aria-label="Close menu">
-                  <Menu className="w-8 h-8 rotate-90" />
-                </button>
-              </DrawerTrigger>
-            </div>
-            <div className="flex flex-col gap-6 px-6 py-8">
-              <div className="flex justify-start mb-4">
-                <SearchIcon
-                  onClick={() => {
-                    setDrawerOpen(false)
-                    setSearchOpen(true)
-                  }}
+          <div className="relative" ref={menuWrapperRef}>
+            <ul className="flex items-center gap-6" role="menubar">
+              {menuItems.map(({ key, label }) => (
+                <MenuItem
+                  key={key}
+                  href={`#${key}`}
+                  label={label}
+                  isActive={active === key}
+                  menuRef={menuRefs[key]}
+                  onClick={handleMenuClick}
+                  menuKey={key}
                 />
-              </div>
-              <ul className="flex flex-col gap-4">
-                {menuItems.map(({ key, label }) => (
-                  <li key={key}>
-                    <a
-                      href={`#${key}`}
-                      className={`block text-lg font-medium py-2 px-2 rounded transition-colors duration-200 ${active === key ? 'text-cyan-900' : 'text-black'}`}
-                      onClick={(e) => {
-                        e.preventDefault()
-                        handleMenuClick(key)
-                      }}
-                    >
-                      {label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </DrawerContent>
-        </Drawer>
-      </div>
+              ))}
+            </ul>
+            <div
+              className="absolute bottom-0 h-[3px] bg-cyan-900 rounded-[50px] transition-all duration-300 ease-in-out"
+              style={{ left: underlineStyle.left, width: underlineStyle.width }}
+              aria-hidden="true"
+            />
+          </div>
+        </nav>
+        {/* Mobile nav: Drawer trigger */}
+        <div className="flex md:hidden items-center gap-10 ml-auto">
+          <SearchIcon onClick={() => setSearchOpen(true)} />
 
-      {/* Search Drawer */}
-      <Drawer open={isSearchOpen} onOpenChange={setSearchOpen}>
-        <SearchContent onClose={() => setSearchOpen(false)} />
-      </Drawer>
-    </header>
+          <Drawer open={isDrawerOpen} onOpenChange={setDrawerOpen}>
+            <DrawerTrigger asChild>
+              <button aria-label="Open mobile menu" type="button">
+                <Menu className="w-8 h-8" />
+              </button>
+            </DrawerTrigger>
+            <DrawerContent className="right-0 left-auto w-4/5 max-w-xs fixed top-0 h-full rounded-none p-0 flex flex-col !mt-0">
+              <div className="flex items-center justify-between px-4 py-6 border-b">
+                <Logo onClick={() => setDrawerOpen(false)} />
+                <DrawerTrigger asChild>
+                  <button aria-label="Close mobile menu" type="button">
+                    <Menu className="w-8 h-8 rotate-90" />
+                  </button>
+                </DrawerTrigger>
+              </div>
+              <nav
+                className="flex flex-col gap-6 px-6 py-8"
+                role="navigation"
+                aria-label="Mobile navigation"
+              >
+                <div className="flex justify-start mb-4">
+                  <SearchIcon
+                    onClick={() => {
+                      setDrawerOpen(false)
+                      setSearchOpen(true)
+                    }}
+                  />
+                </div>
+                <ul className="flex flex-col gap-4" role="menubar">
+                  {menuItems.map(({ key, label }) => (
+                    <li key={key} role="none">
+                      <a
+                        href={`#${key}`}
+                        className={`block text-lg font-medium py-2 px-2 rounded transition-colors duration-200 ${active === key ? 'text-cyan-900' : 'text-black'}`}
+                        onClick={(e) => {
+                          e.preventDefault()
+                          handleMenuClick(key)
+                        }}
+                        role="menuitem"
+                        aria-label={`Navigate to ${label} section`}
+                        aria-current={active === key ? 'page' : undefined}
+                      >
+                        {label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </DrawerContent>
+          </Drawer>
+        </div>
+
+        {/* Search Drawer */}
+        <Drawer open={isSearchOpen} onOpenChange={setSearchOpen}>
+          <SearchContent onClose={() => setSearchOpen(false)} />
+        </Drawer>
+      </header>
+    </>
   )
 }

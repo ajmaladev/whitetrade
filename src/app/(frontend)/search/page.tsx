@@ -1,12 +1,12 @@
 import type { Metadata } from 'next/types'
 
+import { CardPostData } from '@/components/Card'
 import { CollectionArchive } from '@/components/CollectionArchive'
+import { generateDynamicSEO } from '@/components/SEO'
+import { Search } from '@/search/Component'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import React from 'react'
-import { Search } from '@/search/Component'
 import PageClient from './page.client'
-import { CardPostData } from '@/components/Card'
 
 type Args = {
   searchParams: Promise<{
@@ -81,8 +81,33 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
   )
 }
 
-export function generateMetadata(): Metadata {
-  return {
-    title: `Payload Website Template Search`,
-  }
+export async function generateMetadata({
+  searchParams: searchParamsPromise,
+}: Args): Promise<Metadata> {
+  const { q: query } = await searchParamsPromise
+
+  const title = query
+    ? `Search Results for "${query}" - White Trading Company`
+    : 'Search White Trading Company - Find Trading Resources & Insights'
+
+  const description = query
+    ? `Search results for "${query}" on White Trading Company. Find relevant trading resources, market analysis, and investment insights.`
+    : 'Search White Trading Company for trading resources, market analysis, investment insights, and comprehensive financial services.'
+
+  return generateDynamicSEO({
+    data: null,
+    type: 'page',
+    title,
+    description,
+    keywords: [
+      'White Trading Company search',
+      'trading search',
+      'investment search',
+      'market analysis search',
+      'trading resources',
+      'financial services search',
+      'trading platform search',
+      'investment insights search',
+    ],
+  })
 }

@@ -11,6 +11,13 @@ export default function ProductDetails({ products }: { products: Product[] }) {
 
   return (
     <div className="w-[90%] lg:w-[36%]">
+      {/* SEO Hidden H2 Elements */}
+      <div className="sr-only">
+        {products.map((product) => (
+          <h2 key={product.id}>{product.title}</h2>
+        ))}
+      </div>
+
       {/* Dropdown Trigger */}
       <div
         className={`h-14 relative flex justify-between items-center pl-4 md:pl-10 pr-10 md:pr-16 bg-gradient-to-r from-cyan-900 to-blue-600  ${!dropdownOpen ? 'rounded-[49.41px]' : 'rounded-t-[29.41px]'} shadow-[0px_3.95px_3.95px_0px_rgba(0,0,0,0.25)]  cursor-pointer`}
@@ -58,9 +65,9 @@ export default function ProductDetails({ products }: { products: Product[] }) {
       </div>
 
       {/* Description */}
-      <div className="mt-6 mb-4 ml-3 md:ml-6 justify-start text-cyan-900 text-sm font-medium font-['Poppins']">
+      <p className="mt-6 mb-4 ml-3 md:ml-6 justify-start text-cyan-900 text-sm font-medium font-['Poppins']">
         {selectedProduct?.description}
-      </div>
+      </p>
 
       {/* Buy Now Button */}
       <div className="w-full flex items-center lg:items-start">

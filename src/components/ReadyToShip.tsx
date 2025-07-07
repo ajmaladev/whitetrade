@@ -2,14 +2,37 @@ import Image from 'next/image'
 
 export default function ReadyToShip() {
   return (
-    <div className="w-full hidden md:block">
-      <Image
-        src="/ready-to-ship.png"
-        alt="Ready to Ship"
-        width={513}
-        height={111}
-        className="md:ml-52 md:mt-32 mt-10 object-cover w-3/4 md:w-auto mx-auto"
+    <>
+      {/* Structured Data for Shipping Information */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: 'Ready to Ship',
+            description: 'Products available for immediate shipping',
+            serviceType: 'Shipping Service',
+            provider: {
+              '@type': 'Organization',
+              name: 'White Trading Company',
+            },
+            areaServed: 'Worldwide',
+            availability: 'https://schema.org/InStock',
+          }),
+        }}
       />
-    </div>
+
+      <section className="w-full hidden md:block" aria-label="Ready to ship products">
+        <Image
+          src="/ready-to-ship.png"
+          alt="Ready to Ship - Products available for immediate shipping"
+          width={513}
+          height={111}
+          className="md:ml-52 md:mt-32 mt-10 object-cover w-3/4 md:w-auto mx-auto"
+          priority={false}
+        />
+      </section>
+    </>
   )
 }

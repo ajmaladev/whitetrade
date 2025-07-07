@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { RelatedPosts } from '@/blocks/RelatedPosts/Component'
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import RichText from '@/components/RichText'
+import { generateDynamicSEO } from '@/components/SEO'
 import configPromise from '@payload-config'
 import { draftMode } from 'next/headers'
 import { getPayload } from 'payload'
@@ -10,7 +11,6 @@ import { cache } from 'react'
 
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { PostHero } from '@/heros/PostHero'
-import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 
 export async function generateStaticParams() {
@@ -77,7 +77,19 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
   const { slug = '' } = await paramsPromise
   const post = await queryPostBySlug({ slug })
 
-  return generateMeta({ doc: post })
+  if (!post) {
+    return generateDynamicSEO({
+      data: null,
+      type: 'post',
+      title: 'Post Not Found',
+      description: 'The requested blog post could not be found on White Trading Company.',
+    })
+  }
+
+  return generateDynamicSEO({
+    data: post,
+    type: 'post',
+  })
 }
 
 const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
