@@ -165,7 +165,6 @@ const calculateAccessibilityScore = (data: {
 }): number => {
   let score = 100
 
-  // Penalize multiple H1 tags
   if (data.h1Count > 1) {
     score -= (data.h1Count - 1) * 10
   }
@@ -195,7 +194,7 @@ const calculateAccessibilityScore = (data: {
 export const generateSEOReport = (data: SEOAnalyticsData): SEOReport => {
   const issues: string[] = []
   const recommendations: string[] = []
-  let score = data.accessibilityScore
+  const score = data.accessibilityScore
 
   // Check for issues
   if (data.h1Count === 0) {

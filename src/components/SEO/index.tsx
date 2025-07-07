@@ -54,9 +54,9 @@ export const generateDynamicSEO = (props: DynamicSEOProps): Metadata => {
   let url = customProps.url
   let publishedAt = customProps.publishedAt
   let updatedAt = customProps.updatedAt
-  let author = customProps.author
-  let category = customProps.category
-  let tags: string[] = customProps.tags || []
+  const author = customProps.author
+  const category = customProps.category
+  const tags: string[] = customProps.tags || []
 
   // Generate SEO data based on content type
   switch (type) {

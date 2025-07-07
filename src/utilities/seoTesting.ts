@@ -153,6 +153,7 @@ const testStructuredData = async (): Promise<SEOTestResult[]> => {
       }
     } catch (error) {
       // Invalid JSON
+      console.error('Invalid JSON in structured data:', error)
     }
   })
 
@@ -326,6 +327,7 @@ const testTechnicalSEO = async (): Promise<SEOTestResult[]> => {
         : ['Create robots.txt file'],
     })
   } catch (error) {
+    console.error('Error fetching robots.txt:', error)
     tests.push({
       test: 'Robots.txt',
       passed: false,
@@ -348,6 +350,7 @@ const testTechnicalSEO = async (): Promise<SEOTestResult[]> => {
         : ['Create XML sitemap'],
     })
   } catch (error) {
+    console.error('Error fetching sitemap:', error)
     tests.push({
       test: 'XML Sitemap',
       passed: false,

@@ -1,5 +1,6 @@
 import { generateDynamicSEO } from '@/components/SEO'
 import type { Metadata } from 'next'
+import Link from 'next/link'
 
 export default function NotFound() {
   return (
@@ -11,12 +12,12 @@ export default function NotFound() {
           The page you are looking for might have been removed, had its name changed, or is
           temporarily unavailable.
         </p>
-        <a
+        <Link
           href="/"
           className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
         >
           Go Home
-        </a>
+        </Link>
       </div>
     </div>
   )
