@@ -1,6 +1,7 @@
 'use client'
 import { HomePage } from '@/payload-types'
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
+import Image from 'next/image'
 import React, { useRef, useState } from 'react'
 
 interface Review {
@@ -154,9 +155,11 @@ export const Reviews = ({ reviews }: { reviews: HomePage['reviews'] }) => {
         className="relative overflow-hidden w-full min-h-[80vh] sm:min-h-[120vh]"
         aria-labelledby="reviews-heading"
       >
-        <img
+        <Image
           src="/testimonial-background.webp"
           alt="Testimonial background"
+          width={1000}
+          height={1000}
           className="absolute inset-0 w-full h-full object-cover"
           style={{ zIndex: -1 }}
         />

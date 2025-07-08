@@ -128,12 +128,28 @@ export const Media: CollectionConfig = {
     disableLocalStorage: true,
     crop: true,
     focalPoint: true,
+    formatOptions: {
+      format: 'webp',
+      options: {
+        quality: 100,
+        alphaQuality: 100,
+      },
+    },
   },
   hooks: {
     beforeValidate: [
       async ({ req, data = {} }) => {
         if (!req.file) return data
         const file = req.file
+
+        // Check file size (300KB = 300 * 1024 bytes)
+        // const maxSize = 300 * 1024 // 300KB in bytes
+        // if (file.size > maxSize) {
+        //   throw new Error(
+        //     `File size exceeds the maximum allowed size of 300KB. Current file size: ${(file.size / 1024).toFixed(2)}KB`,
+        //   )
+        // }
+
         const fileName = generateImageName(file.name)
 
         // Use constant folder structure: /whitetrade/media/{file}
