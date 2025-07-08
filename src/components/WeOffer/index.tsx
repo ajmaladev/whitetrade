@@ -19,18 +19,6 @@ interface WeOfferProps {
   weOffer: WeOfferData
 }
 
-const CARD_COLORS = [
-  'bg-gradient-to-br from-white to-gray-100', // White to light gray
-  'bg-gradient-to-br from-gray-100 to-teal-50', // Light gray to teal
-  'bg-gradient-to-br from-teal-50 to-green-100', // Teal to green
-  'bg-gradient-to-br from-green-100 to-yellow-100', // Green to yellow
-  'bg-gradient-to-br from-yellow-100 to-orange-100', // Yellow to orange
-]
-
-function getCardColor(index: number) {
-  return CARD_COLORS[index % CARD_COLORS.length]
-}
-
 export const WeOffer = ({ weOffer }: WeOfferProps) => {
   const animationRefs = useRef<(HTMLElement | null)[]>([])
 
@@ -123,7 +111,7 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                   ref={(el) => {
                     animationRefs.current[index] = el
                   }}
-                  className={`sticky pb-6 px-4 sm:px-6 top-0 ${isLeft ? 'left' : 'right'} ${getCardColor(index)} pt-[60px] sm:pt-[80px] lg:pt-[156px] glass-container w-full`}
+                  className={`sticky pb-6 px-4 sm:px-6 top-0 ${isLeft ? 'left' : 'right'} bg-white pt-[60px] sm:pt-[80px] lg:pt-[156px] glass-container w-full`}
                   role="listitem"
                 >
                   <div className={`${isLeft ? 'mr-auto lg:pl-8' : 'ml-auto lg:pr-8'}`}>
@@ -156,9 +144,9 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                           </div>
                         )}
                         <div
-                          className={`w-52 p-2.5 sm:w-[400px] md:w-[550px] sm:p-6 lg:p-7 bg-blue-600 ${isLeft ? '' : 'lg:text-right'}`}
+                          className={`w-60 p-2.5 sm:w-[400px] md:w-[550px] sm:p-6 lg:p-7 bg-blue-600 ${isLeft ? '' : 'lg:text-right'}`}
                         >
-                          <h3 className="text-white text-[13px] sm:text-2xl lg:text-3xl xl:text-[28px] font-bold font-['Manrope']">
+                          <h3 className="text-white text-[15px] sm:text-2xl lg:text-3xl xl:text-[28px] font-bold font-['Manrope']">
                             {item.title}
                           </h3>
                         </div>
@@ -167,7 +155,7 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                             isLeft ? 'ml-16 md:ml-32' : 'mr-16 md:mr-32'
                           } p-4 sm:p-6 lg:p-7 bg-zinc-950 ${isLeft ? '' : 'lg:text-right'}`}
                         >
-                          <p className="text-white text-[11.21px] sm:text-base lg:text-lg xl:text-xl font-normal font-['Manrope'] leading-relaxed lg:leading-loose">
+                          <p className="text-white text-[12.21px] sm:text-base lg:text-lg xl:text-xl font-normal font-['Manrope'] leading-relaxed lg:leading-loose">
                             {item.description}
                           </p>
                         </div>
