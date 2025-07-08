@@ -12,7 +12,7 @@ export const getCachedCategories = () =>
 
 export const getCategories = async () => {
   const payload = await getPayloadClient()
-  const categories = await payload.find({ collection: 'categories' })
+  const categories = await payload.find({ collection: 'categories', limit: 9, sort: 'order' })
   return categories
 }
 

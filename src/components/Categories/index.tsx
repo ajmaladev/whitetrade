@@ -1,213 +1,158 @@
 'use client'
 
 import { Category } from '@/payload-types'
-import { cn } from '@/utilities/ui'
-import { motion, useScroll, useTransform, Variants } from 'framer-motion'
+import { motion } from 'framer-motion'
+import { ArrowRightIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { PaginatedDocs } from 'payload'
-import { useRef } from 'react'
 
-// Separate component for individual category cards
-export function CategoryCard({
+const CARD_COLORS = [
+  'bg-zinc-100', // Card 1
+  'bg-yellow-100', // Card 2
+  'bg-[#d4edf8]', // Card 3
+  'bg-red-100', // Card 4
+  'bg-[#f2e7e3]', // Card 5
+  'bg-green-100', // Card 6
+  'bg-[#faf0e8]', // Card 7
+  'bg-[#d9fec4]', // Card 8
+  'bg-[#e6e7d6]', // Card 9
+]
+
+const BUTTON_COLORS = [
+  'bg-[#444444]', // Card 1
+  'bg-neutral-700', // Card 2
+  'bg-neutral-700', // Card 3
+  'bg-orange-400', // Card 4
+  'bg-neutral-700', // Card 5
+  'bg-neutral-700', // Card 6
+  'bg-[#c67f3d]', // Card 7
+  'bg-neutral-700', // Card 8
+  'bg-neutral-700', // Card 9
+]
+
+// Define the specific grid layout for 9 cards in 6 columns, 2 rows
+const gridLayout = [
+  { colSpan: 2, rowSpan: 1 }, // Card 1: 2 columns
+  { colSpan: 1, rowSpan: 1 }, // Card 2: 1 column
+  { colSpan: 1, rowSpan: 1 }, // Card 3: 1 column
+  { colSpan: 2, rowSpan: 1 }, // Card 4: 2 columns
+  { colSpan: 1, rowSpan: 1 }, // Card 5: 1 column
+  { colSpan: 1, rowSpan: 1 }, // Card 6: 1 column
+  { colSpan: 2, rowSpan: 1 }, // Card 7: 2 columns
+  { colSpan: 1, rowSpan: 1 }, // Card 8: 1 column
+  { colSpan: 1, rowSpan: 1 }, // Card 9: 1 column
+]
+
+function getCardColor(index: number) {
+  return CARD_COLORS[index % CARD_COLORS.length]
+}
+
+function getButtonColor(index: number) {
+  return BUTTON_COLORS[index % BUTTON_COLORS.length]
+}
+
+function getGridClass(layout: { colSpan: number; rowSpan: number }) {
+  const { colSpan, rowSpan } = layout
+  const isLarge = colSpan === 2
+
+  return `col-span-${colSpan} row-span-${rowSpan} h-[250px]`
+}
+
+function ShopNowButton({ href, buttonColor }: { href: string; buttonColor: string }) {
+  return (
+    <Link href={href}>
+      <span
+        className={`inline-flex items-center gap-2 px-4 py-2 mt-4 rounded-md ${buttonColor} text-white group-hover:scale-105 text-sm font-semibold shadow transition`}
+      >
+        Shop Now
+        <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+      </span>
+    </Link>
+  )
+}
+
+function CategoryCard({
   category,
   index,
-  className,
-  categoryPage,
+  layout,
+  showButton = false,
 }: {
   category: Category
   index: number
-  className?: string
-  categoryPage?: boolean
+  layout: { colSpan: number; rowSpan: number }
+  showButton?: boolean
 }) {
-  const cardRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ['start end', 'end start'],
-  })
-
-  // Helper function to determine text size based on word count
-  const getTextSizeClass = (title: string) => {
-    const wordCount = title.trim().split(/\s+/).length
-    return wordCount === 1 ? 'text-2xl md:text-4xl' : 'text-xl md:text-3xl'
-  }
-
-  // Subtle floating animation based on scroll
-  const floatingY = useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], [0, -8, 0, -4, 0])
-
-  // Subtle scale animation
-  const floatingScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.02, 1])
-
-  // Image floating animation
-  const imageFloatingY = useTransform(scrollYProgress, [0, 0.3, 0.6, 0.9, 1], [0, -12, 0, -8, 0])
-
   let imageUrl = category?.category_image
   if (imageUrl) {
     imageUrl = process.env.NEXT_PUBLIC_BUNNY_CDN + imageUrl
   }
 
-  const cardVariants: Variants = {
-    hidden: {
-      opacity: 0,
-      y: 60,
-      scale: 0.95,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.7,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
-    },
-  }
-
-  const imageVariants: Variants = {
-    hidden: {
-      opacity: 0,
-      scale: 0.9,
-      y: 20,
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        delay: 0.2,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
-    },
-  }
+  const isLarge = layout.colSpan === 2
 
   return (
-    <motion.article
-      ref={cardRef}
-      variants={cardVariants}
-      className={cn('relative group flex-shrink-0', className)}
-      id="products"
-      custom={index}
-      style={{
-        y: floatingY,
-        scale: floatingScale,
-      }}
-      whileHover={{
-        y: -8,
-        scale: 1.03,
-        transition: { duration: 0.3, ease: 'easeOut' },
-      }}
-      itemScope
-      itemType="https://schema.org/Service"
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.08 }}
+      viewport={{ once: true }}
+      className={`
+        relative flex flex-col justify-between overflow-hidden rounded-3xl shadow-lg
+        ${getCardColor(index)}
+        ${getGridClass(layout)}
+        p-5
+        transition-all duration-300 ease-in-out
+        hover:shadow-2xl hover:shadow-black/20
+        hover:bg-opacity-90
+        group
+      `}
     >
-      <Link href={`/${category.slug || ''}`} className="block">
-        <motion.div
-          className="relative w-48 sm:w-72 h-[140px] sm:h-44 cursor-pointer rounded-lg overflow-hidden"
-          whileHover={{
-            transition: { duration: 0.4, ease: 'easeOut' },
-          }}
+      <div>
+        <h2
+          className={`font-extrabold text-neutral-600/60 text-xl font-['Montserrat'] sm:text-2xl mb-2 !leading-none
+            transition-colors duration-300 group-hover:text-neutral-800/80`}
         >
-          {/* Background image as absolute positioned element */}
-          <div className="absolute inset-0 z-0 block sm:hidden">
-            <Image
-              src="/product-bg.webp"
-              alt=""
-              className="object-cover w-48 sm:w-72 h-[140px] sm:h-44"
-              width={1000}
-              height={1000}
-            />
-          </div>
-
-          {/* Responsive background for larger screens */}
-          <div className="absolute inset-0 z-0 hidden sm:block">
-            <Image
-              src="/productcard-bg.webp"
-              alt=""
-              className="object-cover w-48 sm:w-72 h-[140px] sm:h-44"
-              width={1000}
-              height={1000}
-            />
-          </div>
-
-          <motion.div className="relative z-10 flex h-full items-center w-[70%]">
-            {categoryPage ? (
-              <h1
-                className={`justify-center text-sky-950 ${getTextSizeClass(category.title)} pl-6 font-bold font-['Philosopher'] md:leading-[40.52px]`}
-                itemProp="name"
-              >
-                {category.title}
-              </h1>
-            ) : (
-              <h2
-                className={`justify-center text-sky-950 ${getTextSizeClass(category.title)} pl-6 font-bold font-['Philosopher'] md:leading-[40.52px]`}
-                itemProp="name"
-              >
-                {category.title}
-              </h2>
-            )}
-          </motion.div>
-
-          {/* Enhanced background overlay on hover */}
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-sky-50/30 to-transparent"
-            initial={{ opacity: 0 }}
-            whileHover={{ opacity: 1 }}
-            transition={{ duration: 0.4 }}
+          {category.title}
+        </h2>
+      </div>
+      <div
+        className={`flex-1 flex items-end justify-end ${showButton ? 'justify-between items-center' : 'justify-end'}`}
+      >
+        {showButton && (
+          <ShopNowButton
+            href={`/${category.slug || ''}`}
+            buttonColor={getButtonColor(index) || 'bg-neutral-700'}
           />
-        </motion.div>
-
-        <motion.div
-          className="absolute left-[100px] bottom-[69px] sm:left-[160px] sm:bottom-[69px] md:left-[170px] md:bottom-[57px] w-36 h-28 sm:w-48 sm:h-32 z-30"
-          variants={imageVariants}
-          style={{
-            y: imageFloatingY,
-          }}
-          whileHover={{
-            scale: 1.05,
-            transition: { duration: 0.3, ease: 'easeOut' },
-          }}
-        >
-          <motion.div className="w-full h-full">
-            <Image
-              src={imageUrl || ''}
-              alt={`${category.title} trading services and products`}
-              fill
-              className="object-contain drop-shadow-lg"
-              itemProp="image"
-            />
-          </motion.div>
-        </motion.div>
-      </Link>
-    </motion.article>
+        )}
+        <div className="relative w-40 h-32 sm:w-48 sm:h-40 transition-transform duration-300 group-hover:translate-y-[-8px]">
+          <Image
+            src={imageUrl || '/logo.svg'}
+            alt={category.title}
+            fill
+            className="object-contain drop-shadow-xl transition-all duration-300 group-hover:drop-shadow-2xl"
+            sizes="(max-width: 640px) 100vw, 33vw"
+          />
+        </div>
+      </div>
+    </motion.div>
   )
 }
 
 export default function Categories({ categories }: { categories: PaginatedDocs<Category> }) {
-  const containerRef = useRef<HTMLDivElement>(null)
+  // Get the first 9 categories
+  const cards = categories.docs.slice(0, 9)
 
-  // Animation variants for scroll-triggered animations
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1,
-      },
-    },
+  // Repeat categories if we don't have enough
+  while (cards.length < 9) {
+    cards.push(...categories.docs.slice(0, 9 - cards.length))
   }
 
-  // Split categories into two rows
-  const midPoint = Math.ceil(categories.docs.length / 2)
-  const firstRow = categories.docs.slice(0, midPoint)
-  const secondRow = categories.docs.slice(midPoint)
-
-  // Generate structured data for categories
+  // Structured data for SEO
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'White Trading Company Trading Categories',
-    description: 'Comprehensive trading categories and services offered by White Trading Company',
+    name: 'White Trading Company Categories',
+    description: 'Explore our comprehensive trading categories and services',
     numberOfItems: categories.docs.length,
     itemListElement: categories.docs.map((category, index) => ({
       '@type': 'ListItem',
@@ -221,7 +166,6 @@ export default function Categories({ categories }: { categories: PaginatedDocs<C
           '@type': 'Organization',
           name: 'White Trading Company',
         },
-        category: 'Trading Services',
       },
     })),
   }
@@ -232,36 +176,29 @@ export default function Categories({ categories }: { categories: PaginatedDocs<C
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <section aria-labelledby="categories-heading" className="relative small-screen-categories">
-        <h2 id="categories-heading" className="sr-only">
-          White Trading Company Trading Categories
-        </h2>
-        <motion.div
-          ref={containerRef}
-          className="flex flex-col gap-8 pb-8 sm:pl-6 md:pl-8 lg:pl-32 xl:pl-32 w-full"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          role="list"
-          aria-label="Trading categories"
-        >
-          {/* First Row */}
-          <div className="flex overflow-x-auto pl-3 sm:pl-0 pt-16 md:pt-10 gap-20 md:gap-24 lg:gap-28 pb-4 scrollbar-hide">
-            {firstRow.map((category, index) => (
-              <CategoryCard key={category.id} category={category} index={index} />
+      <section className="py-16 px-2 sm:px-6 lg:px-12">
+        <div className="max-w-7xl mx-auto">
+          {/* Grid with 6 columns for desktop */}
+          <div
+            className="
+              grid 
+              grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6
+              gap-x-4 gap-y-8
+              auto-rows-fr
+            "
+            style={{ minHeight: 500 }}
+          >
+            {gridLayout.map((layout, index) => (
+              <CategoryCard
+                key={`${cards[index]?.id || index}-${index}`}
+                category={cards[index] as Category}
+                index={index}
+                layout={layout}
+                showButton={layout.colSpan === 2}
+              />
             ))}
           </div>
-
-          {/* Second Row */}
-          <div className="flex overflow-x-auto pl-3 sm:pl-0 pt-16 md:pt-10 gap-20 md:gap-24 lg:gap-28 pb-4 scrollbar-hide">
-            {secondRow.map((category, index) => (
-              <CategoryCard key={category.id} category={category} index={index + midPoint} />
-            ))}
-          </div>
-
-          <div className="hidden lg:block w-[275px] h-[550px] bg-gradient-to-bl from-[#eaf5ff] to-white/0 rounded-l-full absolute bottom-[-200px] right-0 z-[-1]" />
-        </motion.div>
+        </div>
       </section>
     </>
   )
