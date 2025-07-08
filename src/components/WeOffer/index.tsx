@@ -221,7 +221,7 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                     ease: 'easeOut',
                   }}
                   viewport={{ once: true, margin: '-100px' }}
-                  className={`sticky ${index === weOffer.item.length - 1 ? 'pt-[90px]' : 'pt-[100px]'} pb-6 px-4 sm:px-6 top-[100px] ${isLeft ? 'left' : 'right'} bg-white/5 backdrop-blur-sm pt-[60px] sm:pt-[80px] lg:pt-[156px] glass-container w-full`}
+                  className={`sticky ${index === weOffer.item.length - 1 ? 'pt-[139px] sm:pt-[135px]' : 'pt-[120px] sm:pt-[100px]'} pb-6 px-4 sm:px-6 top-[60px] md:top-[140px] ${isLeft ? 'left' : 'right'} bg-white/5 backdrop-blur-sm pt-[60px] sm:pt-[80px] lg:pt-[156px] glass-container w-full`}
                   role="listitem"
                 >
                   <div className={`${isLeft ? 'mr-auto lg:pl-8' : 'ml-auto lg:pr-8'}`}>
@@ -264,31 +264,6 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                               width={224}
                               height={224}
                               className="w-16 h-16 sm:w-40 sm:h-40 lg:w-56 lg:h-56 object-contain filter drop-shadow-lg"
-                            />
-                            {/* Enhanced animated shine effect */}
-                            <motion.div
-                              className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                              initial={{ x: '-100%' }}
-                              animate={{ x: '100%' }}
-                              transition={{
-                                duration: 2,
-                                ease: 'linear',
-                                repeat: Infinity,
-                                repeatDelay: 3,
-                              }}
-                            />
-                            {/* Additional glow effect */}
-                            <motion.div
-                              className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20"
-                              animate={{
-                                opacity: [0.3, 0.6, 0.3],
-                                scale: [1, 1.1, 1],
-                              }}
-                              transition={{
-                                duration: 3,
-                                repeat: Infinity,
-                                ease: 'easeInOut',
-                              }}
                             />
                           </motion.div>
                         )}
