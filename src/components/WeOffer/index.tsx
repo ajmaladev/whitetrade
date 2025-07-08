@@ -190,13 +190,26 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
         aria-labelledby="we-offer-heading"
       >
         <div className="relative w-full">
-          <Image
+          {/* <Image
             src="/we-offer-title.webp"
             alt="We Offer section heading"
             width={1000}
             height={1000}
             className="w-full md:w-[36%] lg:ml-40 px-6 sm:mx-auto sticky top-0"
-          />
+          /> */}
+
+          <div
+            className="justify-start sticky top-0 text-[4rem] text-center w-full lg:text-left md:text-[5rem] lg:text-[7rem] xs:ml-10 md:ml-40 font-bold font-['Poppins'] bg-clip-text text-transparent inline-block"
+            style={{
+              background: 'linear-gradient(90deg, #3E66DF 0%, #3E66DF 25%, #4C6284 100%)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              display: 'inline-block',
+            }}
+          >
+            We Offer
+          </div>
 
           <div
             className="flex flex-col mt-10 md:mt-10 lg:mt-20 w-full"
@@ -219,7 +232,7 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                     ease: 'easeOut',
                   }}
                   viewport={{ once: true, margin: '-100px' }}
-                  className={`sticky ${index === weOffer.item.length - 1 ? 'pt-[102px] sm:pt-[135px]' : 'pt-[80px] sm:pt-[140px]'} pb-6 px-4 sm:px-6 top-[90px] md:top-[80px] lg:top-[100px] ${isLeft ? 'left' : 'right'} bg-white/5 backdrop-blur-sm glass-container w-full`}
+                  className={`sticky ${index === weOffer.item.length - 1 ? 'pt-[102px] sm:pt-[135px]' : 'pt-[80px] sm:pt-[140px]'} pb-6 px-4 sm:px-6 top-[90px] md:top-[80px] lg:top-[145px] ${isLeft ? 'left' : 'right'} bg-white/5 backdrop-blur-sm glass-container w-full`}
                   role="listitem"
                 >
                   <div className={`${isLeft ? 'mr-auto lg:pl-8' : 'ml-auto lg:pr-8'}`}>

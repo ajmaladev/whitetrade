@@ -73,14 +73,26 @@ export default function HomePageGallery({ gallery }: { gallery: PaginatedDocs<Ga
         className="lg:mt-20 lg:mb-40 mb-10 md:mb-32 mt-0 w-full"
         aria-labelledby="gallery-heading"
       >
-        <Image
+        {/* <Image
           src="/export-stories.webp"
           alt="Export Stories Gallery"
           width={1000}
           height={1000}
           priority
           className="w-full md:w-[36%] lg:ml-40 px-6 sm:mx-auto"
-        />
+        /> */}
+        <div
+          className="justify-start text-[37px] text-center w-full lg:text-left md:text-[4rem] lg:text-[6rem] lg:pl-40 font-bold font-['Poppins'] bg-clip-text text-transparent inline-block"
+          style={{
+            background: 'linear-gradient(90deg, #3E66DF 0%, #3E66DF 25%, #4C6284 100%)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            display: 'inline-block',
+          }}
+        >
+          Export Stories
+        </div>
         <h2
           id="gallery-heading"
           className="text-center text-black text-base font-normal font-['Manrope'] leading-normal mt-3 lg:-mt-3 mb-8"
