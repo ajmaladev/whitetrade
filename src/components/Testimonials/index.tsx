@@ -88,7 +88,7 @@ export default function Testimonials({ testimonials }: { testimonials: Testimoni
                   aria-label={`${end}${suffix} ${item.title}`}
                 >
                   {inView ? (
-                    <CountUp start={start} end={end} duration={2.5} suffix={suffix} />
+                    <CountUp start={start} end={end} duration={6} suffix={suffix} />
                   ) : (
                     `${start}${suffix}`
                   )}

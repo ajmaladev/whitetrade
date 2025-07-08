@@ -54,7 +54,6 @@ function getButtonColor(index: number) {
 
 function getGridClass(layout: { colSpan: number; rowSpan: number }) {
   const { colSpan, rowSpan } = layout
-  const isLarge = colSpan === 2
 
   return `col-span-${colSpan} row-span-${rowSpan} h-[250px]`
 }
@@ -63,7 +62,7 @@ function ShopNowButton({ href, buttonColor }: { href: string; buttonColor: strin
   return (
     <Link href={href}>
       <span
-        className={`inline-flex items-center gap-2 px-4 py-2 mt-4 rounded-md ${buttonColor} text-white group-hover:scale-105 text-sm font-semibold shadow transition`}
+        className={`inline-flex items-center gap-2 px-4 py-2 mt-4 rounded-xl ${buttonColor} text-white group-hover:scale-105 text-sm font-semibold shadow transition`}
       >
         Shop Now
         <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
@@ -87,8 +86,6 @@ export function CategoryCard({
   if (imageUrl) {
     imageUrl = process.env.NEXT_PUBLIC_BUNNY_CDN + imageUrl
   }
-
-  const isLarge = layout.colSpan === 2
 
   return (
     <motion.div

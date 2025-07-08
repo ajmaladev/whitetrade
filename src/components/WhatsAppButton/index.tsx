@@ -21,6 +21,9 @@ export default function WhatsAppButton({
     <button
       onClick={handleWhatsAppClick}
       className="fixed bottom-6 right-6 z-50 w-16 h-16 transition-all duration-300 ease-in-out transform hover:scale-110 flex items-center justify-center group"
+      style={{
+        animation: 'whatsappJump 3s ease-in-out infinite',
+      }}
       aria-label="Contact us on WhatsApp"
       title="Chat with us on WhatsApp"
     >
