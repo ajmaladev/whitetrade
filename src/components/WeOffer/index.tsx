@@ -32,14 +32,14 @@ const CardWithEffect = ({
   const [isHovered, setIsHovered] = useState(false)
   const cardRef = useRef<HTMLDivElement>(null)
 
-  // 3D tilt effect
+  // 3D tilt effect - reduced intensity
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
 
-  const rotateX = useTransform(mouseY, [-0.5, 0.5], ['15deg', '-15deg'])
-  const rotateY = useTransform(mouseX, [-0.5, 0.5], ['-15deg', '15deg'])
+  const rotateX = useTransform(mouseY, [-0.5, 0.5], ['8deg', '-8deg']) // Reduced from 15deg to 8deg
+  const rotateY = useTransform(mouseX, [-0.5, 0.5], ['-8deg', '8deg']) // Reduced from 15deg to 8deg
 
-  const springConfig = { damping: 20, stiffness: 300, mass: 0.5 }
+  const springConfig = { damping: 25, stiffness: 200, mass: 0.8 } // Reduced stiffness and increased damping
   const springRotateX = useSpring(rotateX, springConfig)
   const springRotateY = useSpring(rotateY, springConfig)
 
@@ -78,15 +78,15 @@ const CardWithEffect = ({
         rotateY: isHovered ? springRotateY : 0,
         willChange: 'transform',
       }}
-      whileHover={{ scale: 1.02 }}
-      transition={{ duration: 0.3 }}
+      whileHover={{ scale: 1.01 }} // Reduced from 1.02 to 1.01
+      transition={{ duration: 0.4 }} // Increased duration for smoother effect
     >
-      {/* Enhanced cursor background effect */}
+      {/* Enhanced cursor background effect - reduced opacity */}
       {isHovered && (
         <motion.div
           className="pointer-events-none absolute rounded-full"
           initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 0.4, scale: 1 }}
+          animate={{ opacity: 0.2, scale: 1 }} // Reduced opacity from 0.4 to 0.2
           exit={{ opacity: 0, scale: 0 }}
           style={{
             width: '400px',
@@ -94,29 +94,27 @@ const CardWithEffect = ({
             top: mousePosition.y - 200,
             left: mousePosition.x - 200,
             background:
-              'radial-gradient(circle, rgba(93, 44, 168, 0.8) 0%, rgba(139, 92, 246, 0.4) 50%, transparent 70%)',
+              'radial-gradient(circle, rgba(93, 44, 168, 0.6) 0%, rgba(139, 92, 246, 0.3) 50%, transparent 70%)', // Reduced opacity
             filter: 'blur(60px)',
             zIndex: 10,
             willChange: 'transform, top, left',
           }}
         />
       )}
-
-      {/* Shine effect */}
+      {/* Shine effect - reduced opacity */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent" // Reduced from /10 to /5
         initial={{ x: '-100%' }}
         animate={{ x: '100%' }}
         transition={{
-          duration: 1.5,
+          duration: 2, // Increased from 1.5 to 2 for slower effect
           ease: 'linear',
           repeat: Infinity,
-          repeatDelay: 2,
+          repeatDelay: 3, // Increased from 2 to 3
         }}
         style={{ willChange: 'transform' }}
       />
-
-      <div style={{ transform: 'translateZ(50px)' }}>{children}</div>
+      <div style={{ transform: 'translateZ(30px)' }}>{children}</div>
     </motion.div>
   )
 }
@@ -213,8 +211,8 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                   ref={(el) => {
                     animationRefs.current[index] = el
                   }}
-                  initial={{ opacity: 0, y: 100 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0 }} // Removed y: 100 to eliminate upward movement
+                  whileInView={{ opacity: 1 }} // Removed y: 0
                   transition={{
                     duration: 0.8,
                     delay: index * 0.2,
@@ -239,13 +237,13 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                               duration: 0.8,
                               delay: index * 0.2 + 0.3,
                               type: 'spring',
-                              stiffness: 100,
+                              stiffness: 80,
                             }}
                             viewport={{ once: true }}
                             whileHover={{
-                              scale: 1.1,
-                              rotate: [0, -10, 10, 0],
-                              transition: { duration: 0.6 },
+                              scale: 1.05,
+                              rotate: [0, -5, 5, 0],
+                              transition: { duration: 0.8 },
                             }}
                             className={`flex-shrink-0 absolute w-32 h-32 sm:w-40 sm:h-40 lg:w-56 lg:h-56 rounded-full flex items-center justify-center p-2 mx-auto lg:mx-0 mb-4 lg:mb-0 bg-gradient-to-br from-purple-600/20 to-blue-600/20 border border-white/20 backdrop-blur-sm ${
                               isLeft
@@ -272,7 +270,7 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                           className={`w-60 p-2.5 sm:w-[400px] md:w-[550px] sm:p-6 lg:p-7 bg-gradient-to-r from-blue-600 to-purple-600 ${isLeft ? '' : 'lg:text-right'}`}
                         >
                           <motion.h3
-                            initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
+                            initial={{ opacity: 0, x: isLeft ? -30 : 30 }} // Reduced x movement from 50 to 30
                             whileInView={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.6, delay: index * 0.2 + 0.5 }}
                             viewport={{ once: true }}
@@ -288,8 +286,8 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                           } p-4 sm:p-6 lg:p-7 bg-gradient-to-r from-zinc-950 to-zinc-900 ${isLeft ? '' : 'lg:text-right'}`}
                         >
                           <motion.p
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
+                            initial={{ opacity: 0 }} // Removed y: 30 to eliminate upward movement
+                            whileInView={{ opacity: 1 }} // Removed y: 0
                             transition={{ duration: 0.6, delay: index * 0.2 + 0.7 }}
                             viewport={{ once: true }}
                             className="text-white text-[12.21px] sm:text-base lg:text-lg xl:text-xl font-normal font-['Manrope'] leading-relaxed lg:leading-loose"
