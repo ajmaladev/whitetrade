@@ -144,18 +144,18 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                           </div>
                         )}
                         <div
-                          className={`w-48 p-2.5 sm:w-[400px] md:w-[550px] sm:p-6 lg:p-7 bg-blue-600 ${isLeft ? '' : 'lg:text-right'}`}
+                          className={`w-52 p-2.5 sm:w-[400px] md:w-[550px] sm:p-6 lg:p-7 bg-blue-600 ${isLeft ? '' : 'lg:text-right'}`}
                         >
-                          <h3 className="text-white text-xs sm:text-2xl lg:text-3xl xl:text-[28px] font-bold font-['Manrope']">
+                          <h3 className="text-white text-[13px] sm:text-2xl lg:text-3xl xl:text-[28px] font-bold font-['Manrope']">
                             {item.title}
                           </h3>
                         </div>
                         <div
-                          className={`w-52 p-3 sm:w-[400px] md:w-[600px] ${
+                          className={`w-64 p-3 sm:w-[400px] md:w-[600px] ${
                             isLeft ? 'ml-16 md:ml-32' : 'mr-16 md:mr-32'
                           } p-4 sm:p-6 lg:p-7 bg-zinc-950 ${isLeft ? '' : 'lg:text-right'}`}
                         >
-                          <p className="text-white text-[9.21px] sm:text-base lg:text-lg xl:text-xl font-normal font-['Manrope'] leading-relaxed lg:leading-loose">
+                          <p className="text-white text-[11.21px] sm:text-base lg:text-lg xl:text-xl font-normal font-['Manrope'] leading-relaxed lg:leading-loose">
                             {item.description}
                           </p>
                         </div>
