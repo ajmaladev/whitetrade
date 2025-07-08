@@ -95,11 +95,11 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
             alt="We Offer section heading"
             width={1000}
             height={1000}
-            className="w-full md:w-[36%] lg:ml-40 px-6 sm:mx-auto"
+            className="w-full md:w-[36%] lg:ml-40 px-6 sm:mx-auto sticky top-0"
           />
 
           <div
-            className="relative flex flex-col mt-10 md:mt-10 lg:mt-20 w-full"
+            className=" flex flex-col mt-10 md:mt-10 lg:mt-20 w-full"
             role="list"
             aria-label="Services and offerings"
           >
@@ -111,7 +111,7 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                   ref={(el) => {
                     animationRefs.current[index] = el
                   }}
-                  className={`sticky pb-6 px-4 sm:px-6 top-0 ${isLeft ? 'left' : 'right'} bg-white pt-[60px] sm:pt-[80px] lg:pt-[156px] glass-container w-full`}
+                  className={`sticky ${index === weOffer.item.length - 1 ? 'pt-[90px]' : 'pt-[60px]'} pb-6 px-4 sm:px-6 top-[100px] ${isLeft ? 'left' : 'right'} bg-white pt-[60px] sm:pt-[80px] lg:pt-[156px] glass-container w-full`}
                   role="listitem"
                 >
                   <div className={`${isLeft ? 'mr-auto lg:pl-8' : 'ml-auto lg:pr-8'}`}>

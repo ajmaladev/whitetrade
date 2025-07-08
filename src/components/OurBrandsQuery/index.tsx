@@ -68,10 +68,10 @@ export const OurBrandsQuery = ({ brands, products }: OurBrandsQueryProps) => {
                 name="name"
                 placeholder="Name"
                 required
-                className="w-full h-12 px-4 bg-white rounded-md"
+                className="w-full h-12 px-4 bg-white rounded-xl"
               />
               <Select value={selectedProduct} onValueChange={setSelectedProduct}>
-                <SelectTrigger className="w-full h-12 px-4 bg-white rounded-md">
+                <SelectTrigger className="w-full h-12 px-4 bg-white rounded-xl">
                   <SelectValue placeholder="Product" />
                 </SelectTrigger>
                 <SelectContent>
@@ -94,7 +94,7 @@ export const OurBrandsQuery = ({ brands, products }: OurBrandsQueryProps) => {
                 name="phone"
                 placeholder="Your phone number"
                 required
-                className="w-full h-12 px-4 bg-white rounded-md"
+                className="w-full h-12 px-4 bg-white rounded-xl"
               />
             </div>
             <div className="flex flex-col items-center mt-8 md:mt-16 gap-4">
