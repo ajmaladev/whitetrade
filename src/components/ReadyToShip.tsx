@@ -23,7 +23,7 @@ export default function ReadyToShip() {
         }}
       />
 
-      <section className="w-full" aria-label="Ready to ship products">
+      <section className="w-full" aria-label="Ready to ship products" id="products">
         <Image
           src="/ready-to-ship.webp"
           alt="Ready to Ship - Products available for immediate shipping"

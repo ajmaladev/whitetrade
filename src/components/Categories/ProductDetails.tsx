@@ -1,5 +1,5 @@
 'use client'
-import { Product } from '@/payload-types'
+import { Category, Product } from '@/payload-types'
 import { ChevronDownIcon } from 'lucide-react'
 import { useState } from 'react'
 
@@ -8,6 +8,36 @@ export default function ProductDetails({ products }: { products: Product[] }) {
   const [dropdownOpen, setDropdownOpen] = useState(false)
 
   const selectedProduct = products[selectedIndex]
+  const handleBuyNow = () => {
+    // Get category title from the product
+    const categoryTitle = (selectedProduct?.category?.[0]?.value as Category)?.title || 'Product'
+
+    // Create a professional and detailed WhatsApp message
+    const message = `
+Hello!
+
+I'm interested in purchasing the following product and would love to get more detailed information:
+
+✨ **Product Name:** ${selectedProduct?.title}
+🏷️ **Category:** ${categoryTitle}
+
+Could you please provide more details about this product, including its features, pricing, and any additional information?
+
+Looking forward to hearing from you!
+`
+
+    // Encode the message for WhatsApp URL
+    const encodedMessage = encodeURIComponent(message)
+
+    // WhatsApp business number (you can replace this with your actual WhatsApp number)
+    const whatsappNumber = '+919544889253' // Replace with your actual WhatsApp number
+
+    // Create WhatsApp URL
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`
+
+    // Open WhatsApp in a new tab
+    window.open(whatsappUrl, '_blank')
+  }
 
   return (
     <div className="w-[90%] lg:w-[36%]">
@@ -71,7 +101,11 @@ export default function ProductDetails({ products }: { products: Product[] }) {
 
       {/* Buy Now Button */}
       <div className="w-full flex items-center lg:items-start">
-        <button className="px-7 py-3 mx-auto md:ml-4 bg-orange-500 rounded-xl inline-flex justify-start items-start gap-2 text-white text-sm font-semibold font-['Manrope'] leading-normal">
+        <button
+          onClick={handleBuyNow}
+          className="px-7 py-3 mx-auto md:ml-4 bg-orange-500 rounded-xl inline-flex justify-start items-start gap-2 text-white text-sm font-semibold font-['Manrope'] leading-normal hover:bg-orange-600 transition-colors duration-200"
+          aria-label={`Purchase ${selectedProduct?.title} via WhatsApp`}
+        >
           Buy Now
         </button>
       </div>

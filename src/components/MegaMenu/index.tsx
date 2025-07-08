@@ -2,6 +2,7 @@
 import { Menu } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
 import { memo, RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Drawer, DrawerContent, DrawerTrigger } from '../ui/drawer'
 import SearchContent from './SearchContent'
@@ -87,6 +88,10 @@ export default function MegaMenu() {
   const [isDrawerOpen, setDrawerOpen] = useState(false)
   const [isSearchOpen, setSearchOpen] = useState(false)
 
+  const pathname = usePathname()
+  const router = useRouter()
+  const isHomePage = pathname === '/'
+
   const productsRef = useRef<HTMLAnchorElement>(null)
   const aboutRef = useRef<HTMLAnchorElement>(null)
   const contactRef = useRef<HTMLAnchorElement>(null)
@@ -106,7 +111,7 @@ export default function MegaMenu() {
   const smoothScrollTo = useCallback(
     (targetElement: HTMLElement, duration: number = 2000, key: MenuKey) => {
       const height = key === 'products' ? 200 : 0
-      const targetPosition = targetElement.offsetTop - height // Account for header height
+      const targetPosition = targetElement.offsetTop - 0 // Account for header height
       const startPosition = window.pageYOffset
       const distance = targetPosition - startPosition
       let startTime: number | null = null
@@ -134,6 +139,15 @@ export default function MegaMenu() {
 
   const handleMenuClick = useCallback(
     (key: MenuKey) => {
+      // Special handling for "about" and "contact" menu items
+      if ((key === 'about' || key === 'contact') && !isHomePage) {
+        // If not on home page, redirect to home page with the appropriate hash
+        router.push(`/#${key}`)
+        setDrawerOpen(false)
+        return
+      }
+
+      // For home page or other menu items, use existing behavior
       const url = new URL(window.location.href)
       url.hash = key
       window.history.pushState({}, '', url.toString())
@@ -148,7 +162,7 @@ export default function MegaMenu() {
       // Close the drawer after clicking a link (for mobile)
       setDrawerOpen(false)
     },
-    [smoothScrollTo],
+    [smoothScrollTo, isHomePage, router],
   )
 
   useEffect(() => {

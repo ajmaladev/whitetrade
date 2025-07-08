@@ -1,6 +1,18 @@
+'use client'
+
 import { MailIcon, MapPinIcon, PhoneIcon, StarIcon } from 'lucide-react'
+import Link from 'next/link'
 
 export const AboutUs = () => {
+  const handleWhatsAppClick = () => {
+    const phoneNumber = '+919544889253' // Replace with actual number
+    const message =
+      'Hello! I would like to book a service with your company. Can you please provide me with more information about your services and availability?'
+    const encodedMessage = encodeURIComponent(message)
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`
+    window.open(whatsappUrl, '_blank')
+  }
+
   // Generate structured data for the About Us section
   const structuredData = {
     '@context': 'https://schema.org',
@@ -75,7 +87,11 @@ export const AboutUs = () => {
           </div>
 
           {/* Rating Card */}
-          <div className="flex justify-center mb-8 sm:mb-12 lg:mb-16">
+          <Link
+            href="https://g.co/kgs/NU7JFgw"
+            className="flex justify-center mb-8 sm:mb-12 lg:mb-16"
+            target="_blank"
+          >
             <div
               className="w-64 h-20 bg-white rounded-[47.88px] shadow-[0px_22.722957611083984px_95.76103210449219px_0px_rgba(109,108,115,0.12)] outline outline-[9.74px] outline-neutral-200/40 flex items-center justify-center gap-2 hover:scale-105 hover:shadow-[0px_30px_120px_0px_rgba(109,108,115,0.25)] hover:outline-orange-400/60 transition-all duration-300 ease-in-out cursor-pointer"
               style={{
@@ -108,7 +124,7 @@ export const AboutUs = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
         </div>
 
         {/* Main Content */}
@@ -133,7 +149,8 @@ export const AboutUs = () => {
         {/* CTA Button */}
         <div className="flex justify-center mb-12 sm:mb-16 lg:mb-20">
           <button
-            className="px-6 sm:px-8 lg:px-10 py-3 sm:py-4 bg-orange-500 rounded-xl inline-flex justify-start items-start gap-2.5 hover:bg-orange-600 hover:shadow-[0px_8px_16px_0px_rgba(0,0,0,0.35)] transition-all duration-300 ease-in-out"
+            onClick={handleWhatsAppClick}
+            className="px-6 sm:px-8 lg:px-10 py-3 sm:py-4 bg-orange-500 rounded-xl inline-flex justify-start items-start gap-2.5 hover:bg-orange-600 hover:shadow-[0px_8px_16px_0px_rgba(0,0,0,0.35)] transition-all duration-300 ease-in-out hover:scale-105"
             aria-label="Book a service with White Trading Company"
           >
             <div className="justify-start text-white text-base sm:text-lg font-semibold font-['Manrope'] leading-loose">
@@ -148,7 +165,7 @@ export const AboutUs = () => {
             Contacts
           </h4>
 
-          <address className="flex flex-col md:flex-row items-center justify-between gap-8 sm:gap-12 not-italic">
+          <address className="flex flex-col md:flex-row items-baseline justify-start gap-8 sm:gap-12 not-italic">
             <div className="flex flex-col gap-4 w-1/2 items-center md:items-start">
               <div className="text-center md:text-left">
                 <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
@@ -165,6 +182,7 @@ export const AboutUs = () => {
                   <a href="tel:+919843044443" className="hover:underline">
                     98430 44443
                   </a>
+                  <p className="mt-1">Noufal Riyas (Manager)</p>
                 </div>
               </div>
 

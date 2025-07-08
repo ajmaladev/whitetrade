@@ -1,7 +1,7 @@
 'use client'
 import { HomePage } from '@/payload-types'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
 
 interface HeroSectionProps {
@@ -12,13 +12,13 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
   const [current, setCurrent] = useState(0)
   const isMobile = useMediaQuery({ maxWidth: 635 })
 
-  // useEffect(() => {
-  //   if (!carousal?.length) return
-  //   const interval = setInterval(() => {
-  //     setCurrent((prev) => (prev + 1) % carousal?.length)
-  //   }, 4000)
-  //   return () => clearInterval(interval)
-  // }, [carousal?.length])
+  useEffect(() => {
+    if (!carousal?.length) return
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % carousal?.length)
+    }, 4000)
+    return () => clearInterval(interval)
+  }, [carousal?.length])
 
   // Generate structured data for the organization
   const generateStructuredData = () => {
@@ -140,6 +140,14 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
                   over a decade now
                 </div>
                 <button
+                  onClick={() => {
+                    const phoneNumber = '+919544889253' // Replace with actual number
+                    const message =
+                      'Hello! I would like to schedule a call with your team to discuss your products and services.'
+                    const encodedMessage = encodeURIComponent(message)
+                    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`
+                    window.open(whatsappUrl, '_blank')
+                  }}
                   className="w-full md:mt-10 max-w-[280px] sm:max-w-[320px] md:max-w-[380px] lg:max-w-[454px] h-10 sm:h-12 md:h-13 lg:h-14 relative bg-gradient-to-r from-[#1C3A6A] to-[#3661c1] rounded-[25px] sm:rounded-[30px] md:rounded-[40px] lg:rounded-[50px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] hover:shadow-[0px_8px_16px_0px_rgba(0,0,0,0.35)] transition-all duration-300 ease-in-out cursor-pointer group"
                   aria-label="Schedule a call with our team"
                 >
