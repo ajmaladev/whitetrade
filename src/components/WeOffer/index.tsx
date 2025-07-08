@@ -95,11 +95,11 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
             alt="We Offer section heading"
             width={1000}
             height={1000}
-            className="w-full md:w-[36%] lg:ml-40 px-6 sm:mx-auto"
+            className="w-full md:w-[36%] lg:ml-40 px-6 sm:mx-auto sticky top-0"
           />
 
           <div
-            className="relative flex flex-col mt-3 md:mt-10 lg:mt-20 w-full gap-4 sm:gap-12 lg:gap-16"
+            className=" flex flex-col mt-10 md:mt-10 lg:mt-20 w-full"
             role="list"
             aria-label="Services and offerings"
           >
@@ -111,7 +111,7 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                   ref={(el) => {
                     animationRefs.current[index] = el
                   }}
-                  className={`sticky pb-6 px-4 sm:px-6 top-0 ${isLeft ? 'left' : 'right'} bg-white pt-[60px] sm:pt-[80px] lg:pt-[156px] glass-container w-full`}
+                  className={`sticky ${index === weOffer.item.length - 1 ? 'pt-[90px]' : 'pt-[60px]'} pb-6 px-4 sm:px-6 top-[100px] ${isLeft ? 'left' : 'right'} bg-white pt-[60px] sm:pt-[80px] lg:pt-[156px] glass-container w-full`}
                   role="listitem"
                 >
                   <div className={`${isLeft ? 'mr-auto lg:pl-8' : 'ml-auto lg:pr-8'}`}>
@@ -144,18 +144,18 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                           </div>
                         )}
                         <div
-                          className={`w-48 p-2.5 sm:w-[400px] md:w-[550px] sm:p-6 lg:p-7 bg-blue-600 ${isLeft ? '' : 'lg:text-right'}`}
+                          className={`w-60 p-2.5 sm:w-[400px] md:w-[550px] sm:p-6 lg:p-7 bg-blue-600 ${isLeft ? '' : 'lg:text-right'}`}
                         >
-                          <h3 className="text-white text-xs sm:text-2xl lg:text-3xl xl:text-[28px] font-bold font-['Manrope']">
+                          <h3 className="text-white text-[15px] sm:text-2xl lg:text-3xl xl:text-[28px] font-bold font-['Manrope']">
                             {item.title}
                           </h3>
                         </div>
                         <div
-                          className={`w-52 p-3 sm:w-[400px] md:w-[600px] ${
+                          className={`w-64 p-3 sm:w-[400px] md:w-[600px] ${
                             isLeft ? 'ml-16 md:ml-32' : 'mr-16 md:mr-32'
                           } p-4 sm:p-6 lg:p-7 bg-zinc-950 ${isLeft ? '' : 'lg:text-right'}`}
                         >
-                          <p className="text-white text-[9.21px] sm:text-base lg:text-lg xl:text-xl font-normal font-['Manrope'] leading-relaxed lg:leading-loose">
+                          <p className="text-white text-[12.21px] sm:text-base lg:text-lg xl:text-xl font-normal font-['Manrope'] leading-relaxed lg:leading-loose">
                             {item.description}
                           </p>
                         </div>

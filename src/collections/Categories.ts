@@ -64,5 +64,24 @@ export const Categories: CollectionConfig = {
         }),
       ],
     },
+    {
+      name: 'order',
+      label: 'Order',
+      type: 'number',
+      admin: {
+        readOnly: true,
+      },
+    },
+    {
+      name: 'order_management',
+      label: 'Order Management',
+      type: 'text',
+      virtual: true,
+      admin: {
+        components: {
+          Field: '@/components/Categories/OrderedCategory',
+        },
+      },
+    },
   ],
 }

@@ -9,7 +9,7 @@ export default function HomePageGallery({ gallery }: { gallery: PaginatedDocs<Ga
   const images = gallery.docs[0]?.images as any
 
   const { ref, inView } = useInView({
-    threshold: 1.0,
+    threshold: 0.5,
     triggerOnce: true,
     rootMargin: '0px',
   })
@@ -99,7 +99,7 @@ export default function HomePageGallery({ gallery }: { gallery: PaginatedDocs<Ga
               alt={galleryImages[0]?.alt || 'Gallery Image'}
               width={288}
               height={320}
-              className="object-cover shadow-[0_20px_50px_rgba(0,0,0,0.3)] w-40 h-48 sm:w-64 sm:h-72 md:w-72 md:h-80 hover:shadow-[0_30px_60px_rgba(0,0,0,0.4)]"
+              className="object-cover rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] w-40 h-48 sm:w-64 sm:h-72 md:w-72 md:h-80 hover:shadow-[0_30px_60px_rgba(0,0,0,0.4)]"
             />
             <figcaption className="sr-only">{galleryImages[0]?.alt}</figcaption>
           </figure>
@@ -111,7 +111,7 @@ export default function HomePageGallery({ gallery }: { gallery: PaginatedDocs<Ga
               alt={galleryImages[1]?.alt || 'Gallery Image'}
               width={320}
               height={384}
-              className="object-cover shadow-[0_25px_60px_rgba(0,0,0,0.35)] w-72 h-56 sm:w-64 sm:h-72 md:w-[554px] md:h-96 hover:shadow-[0_35px_70px_rgba(0,0,0,0.45)]"
+              className="object-cover rounded-xl shadow-[0_25px_60px_rgba(0,0,0,0.35)] w-72 h-56 sm:w-64 sm:h-72 md:w-[554px] md:h-96 hover:shadow-[0_35px_70px_rgba(0,0,0,0.45)]"
             />
             <figcaption className="sr-only">{galleryImages[1]?.alt}</figcaption>
           </figure>
@@ -123,7 +123,7 @@ export default function HomePageGallery({ gallery }: { gallery: PaginatedDocs<Ga
               alt={galleryImages[2]?.alt || 'Gallery Image'}
               width={288}
               height={320}
-              className="object-cover shadow-[0_20px_50px_rgba(0,0,0,0.3)] w-40 h-48 sm:w-64 sm:h-72 md:w-72 md:h-80 hover:shadow-[0_30px_60px_rgba(0,0,0,0.4)]"
+              className="object-cover rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] w-40 h-48 sm:w-64 sm:h-72 md:w-72 md:h-80 hover:shadow-[0_30px_60px_rgba(0,0,0,0.4)]"
             />
             <figcaption className="sr-only">{galleryImages[2]?.alt}</figcaption>
           </figure>

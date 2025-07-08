@@ -40,11 +40,29 @@ export default function SearchContent({ onClose }: SearchContentProps) {
     products: ExtendedProduct[]
   }>({ categories: [], products: [] })
   const [hasSearched, setHasSearched] = useState(false)
+  const [defaultCategories, setDefaultCategories] = useState<Category[]>([])
+  const [isLoadingDefaults, setIsLoadingDefaults] = useState(true)
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     inputRef.current?.focus()
+    fetchDefaultCategories()
   }, [])
+
+  const fetchDefaultCategories = async () => {
+    try {
+      setIsLoadingDefaults(true)
+      const response = await fetch('/api/categories?limit=6&sort=order')
+      if (response.ok) {
+        const data = await response.json()
+        setDefaultCategories(data.docs || [])
+      }
+    } catch (error) {
+      console.error('Error fetching default categories:', error)
+    } finally {
+      setIsLoadingDefaults(false)
+    }
+  }
 
   const handleSearch = async () => {
     if (!searchTerm.trim()) {
@@ -477,15 +495,78 @@ export default function SearchContent({ onClose }: SearchContentProps) {
             </div>
           )}
 
+          {/* Default Categories Section - Show when not searched */}
           {!hasSearched && !isLoading && (
-            <div className="text-center py-12">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Sparkles className="w-8 h-8 text-blue-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">Start your search</h3>
-              <p className="text-gray-600">
-                Enter a search term to discover amazing products and categories
-              </p>
+            <div className="space-y-8">
+              {isLoadingDefaults ? (
+                <div className="flex flex-col items-center justify-center py-12">
+                  <div className="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mb-4" />
+                  <p className="text-gray-500 text-sm md:text-lg">Loading categories...</p>
+                </div>
+              ) : defaultCategories.length > 0 ? (
+                <div className="animate-fade-in">
+                  <div className="flex items-center gap-2 mb-6">
+                    <Tag className="w-5 h-5 text-indigo-600" />
+                    <h3 className="text-lg md:text-xl font-bold text-gray-800">
+                      Popular Categories
+                    </h3>
+                    <span className="bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full text-sm font-medium">
+                      {defaultCategories.length}
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-1 gap-4">
+                    {defaultCategories.map((category, index) => (
+                      <div
+                        key={category.id}
+                        className="group cursor-pointer transform transition-all duration-300 hover:scale-105"
+                        style={{ animationDelay: `${index * 100}ms` }}
+                      >
+                        <CategoryLink category={category}>
+                          <div className="flex items-center p-4 bg-gradient-to-r from-white to-gray-50 rounded-2xl border border-gray-200/50 hover:shadow-xl hover:border-indigo-200 transition-all duration-300">
+                            <div className="relative w-16 h-16 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
+                              {category.category_image && (
+                                <Image
+                                  src={process.env.NEXT_PUBLIC_BUNNY_CDN + category.category_image}
+                                  alt={category.title || 'Category'}
+                                  width={64}
+                                  height={64}
+                                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                                />
+                              )}
+                            </div>
+                            <div className="ml-4 flex-1">
+                              <h4 className="font-bold text-lg text-gray-800 group-hover:text-indigo-600 transition-colors duration-200">
+                                {category.title}
+                              </h4>
+                              {category.products?.docs && category.products.docs.length > 0 && (
+                                <p className="text-gray-600 text-sm mt-1">
+                                  {category.products.docs.length} product
+                                  {category.products.docs.length !== 1 ? 's' : ''} available
+                                </p>
+                              )}
+                            </div>
+                            <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                              <div className="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center">
+                                <span className="text-indigo-600 text-sm">→</span>
+                              </div>
+                            </div>
+                          </div>
+                        </CategoryLink>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <div className="text-center py-12">
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Sparkles className="w-8 h-8 text-blue-600" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">Start your search</h3>
+                  <p className="text-gray-600">
+                    Enter a search term to discover amazing products and categories
+                  </p>
+                </div>
+              )}
             </div>
           )}
         </div>

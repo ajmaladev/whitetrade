@@ -77,7 +77,10 @@ export const AboutUs = () => {
           {/* Rating Card */}
           <div className="flex justify-center mb-8 sm:mb-12 lg:mb-16">
             <div
-              className="w-64 h-20 bg-white rounded-[47.88px] shadow-[0px_22.722957611083984px_95.76103210449219px_0px_rgba(109,108,115,0.12)] outline outline-[9.74px] outline-neutral-200/40 flex items-center justify-center gap-2"
+              className="w-64 h-20 bg-white rounded-[47.88px] shadow-[0px_22.722957611083984px_95.76103210449219px_0px_rgba(109,108,115,0.12)] outline outline-[9.74px] outline-neutral-200/40 flex items-center justify-center gap-2 hover:scale-105 hover:shadow-[0px_30px_120px_0px_rgba(109,108,115,0.25)] hover:outline-orange-400/60 transition-all duration-300 ease-in-out cursor-pointer"
+              style={{
+                animation: 'buttonPulse 3s ease-in-out infinite',
+              }}
               itemScope
               itemType="https://schema.org/AggregateRating"
             >

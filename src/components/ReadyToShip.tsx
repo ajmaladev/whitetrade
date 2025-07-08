@@ -23,13 +23,13 @@ export default function ReadyToShip() {
         }}
       />
 
-      <section className="w-full hidden md:block" aria-label="Ready to ship products">
+      <section className="w-full" aria-label="Ready to ship products">
         <Image
           src="/ready-to-ship.webp"
           alt="Ready to Ship - Products available for immediate shipping"
           width={513}
           height={111}
-          className="md:ml-40 md:mt-32 mt-10 object-cover w-3/4 md:w-[513px] mx-auto"
+          className="md:ml-40 md:mt-32 sm:mt-10 object-cover w-3/4 md:w-[513px] mx-auto"
           priority={false}
         />
       </section>

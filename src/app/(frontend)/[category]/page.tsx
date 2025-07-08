@@ -14,12 +14,12 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
   }
   return (
     <div className="flex flex-col mb-10 lg:mb-5 mt-5 md:mt-10">
-      <div className="flex flex-col lg:flex-row items-center justify-center min-[50vh] lg:gap-40">
+      <div className="flex flex-col lg:flex-row items-center justify-center gap-10 min-[50vh] lg:gap-40">
         <CategoryCard
           category={category.docs[0] as Category}
-          className="!mt-[70px] md:!mt-[130px] !mb-12"
           index={0}
-          categoryPage
+          layout={{ colSpan: 2, rowSpan: 1 }}
+          showButton={true}
         />
         <ProductDetails products={category.docs[0]?.products?.docs as Product[]} />
       </div>

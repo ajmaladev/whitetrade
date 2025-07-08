@@ -253,7 +253,7 @@ export default function MegaMenu() {
         <div className="flex md:hidden items-center gap-10 ml-auto">
           <SearchIcon onClick={() => setSearchOpen(true)} />
 
-          <Drawer open={isDrawerOpen} onOpenChange={setDrawerOpen}>
+          <Drawer open={isDrawerOpen} onOpenChange={setDrawerOpen} direction="right">
             <DrawerTrigger asChild>
               <button aria-label="Open mobile menu" type="button">
                 <Menu className="w-8 h-8" />
@@ -306,7 +306,7 @@ export default function MegaMenu() {
         </div>
 
         {/* Search Drawer */}
-        <Drawer open={isSearchOpen} onOpenChange={setSearchOpen}>
+        <Drawer open={isSearchOpen} onOpenChange={setSearchOpen} direction="right">
           <SearchContent onClose={() => setSearchOpen(false)} />
         </Drawer>
       </header>

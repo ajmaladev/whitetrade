@@ -170,6 +170,8 @@ export interface Category {
         id?: string | null;
       }[]
     | null;
+  order?: number | null;
+  order_management?: string | null;
   parent?: (string | null) | Category;
   breadcrumbs?:
     | {
@@ -1102,6 +1104,8 @@ export interface CategoriesSelect<T extends boolean = true> {
         image?: T;
         id?: T;
       };
+  order?: T;
+  order_management?: T;
   parent?: T;
   breadcrumbs?:
     | T

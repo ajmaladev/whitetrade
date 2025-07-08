@@ -1,7 +1,7 @@
 'use client'
 import { HomePage } from '@/payload-types'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
 
 interface HeroSectionProps {
@@ -12,13 +12,13 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
   const [current, setCurrent] = useState(0)
   const isMobile = useMediaQuery({ maxWidth: 635 })
 
-  useEffect(() => {
-    if (!carousal?.length) return
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % carousal?.length)
-    }, 4000)
-    return () => clearInterval(interval)
-  }, [carousal?.length])
+  // useEffect(() => {
+  //   if (!carousal?.length) return
+  //   const interval = setInterval(() => {
+  //     setCurrent((prev) => (prev + 1) % carousal?.length)
+  //   }, 4000)
+  //   return () => clearInterval(interval)
+  // }, [carousal?.length])
 
   // Generate structured data for the organization
   const generateStructuredData = () => {
@@ -158,8 +158,8 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
             {/* Carousel with small_image */}
             {carousal?.map((img, idx) => {
               let src = ''
-              if (img.small_image && typeof img.small_image === 'string') {
-                src = img.small_image
+              if (img.big_image && typeof img.big_image === 'string') {
+                src = img.big_image
               }
 
               if (src && !src.startsWith('http')) {
@@ -172,7 +172,7 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
                   key={src + idx}
                   src={src}
                   alt={img.alt || `Mobile hero image ${idx + 1}`}
-                  width={360}
+                  width={450}
                   height={200}
                   className={`absolute top-0 left-0 w-auto h-auto object-cover transition-opacity duration-1000 z-[2] ${idx === current ? 'opacity-100' : 'opacity-0'}`}
                   priority={idx === 0}
@@ -203,7 +203,7 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
                 White Trading Company
               </p>
             )}
-            <div className="text-[#1C3A6A] text-[20px] font-medium font-['Poppins']">
+            <div className="text-[#1C3A6A] text-[18px] font-medium font-['Poppins']">
               Worldwide Exporters & Supplier
             </div>
             <div className="text-[#1C3A6A] text-sm font-normal font-['Poppins']">
