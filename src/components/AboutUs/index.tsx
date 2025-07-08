@@ -160,61 +160,78 @@ export const AboutUs = () => {
         </div>
 
         {/* Contacts Section */}
-        <div className="max-w-3xl mx-auto">
-          <h4 className="text-center mb-8 sm:mb-12 text-2xl sm:text-3xl lg:text-4xl font-bold font-['Poppins'] text-white">
+        <div className="max-w-6xl mx-auto">
+          <h4 className="text-center mb-12 sm:mb-16 text-2xl sm:text-3xl lg:text-4xl font-bold font-['Poppins'] text-white">
             Contacts
           </h4>
 
-          <address className="flex flex-col md:flex-row items-baseline justify-start gap-8 sm:gap-12 not-italic">
-            <div className="flex flex-col gap-4 w-1/2 items-center md:items-start">
-              <div className="text-center md:text-left">
-                <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
-                  <span className="text-white text-lg sm:text-xl font-medium font-['Poppins']">
-                    Phone
-                  </span>
-                  <PhoneIcon className="w-5 h-5 text-white" aria-hidden="true" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+            {/* Phone Card */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 lg:p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105">
+              <div className="flex flex-col items-center text-center">
+                <div className="w-16 h-16 bg-[#5a6694] rounded-full flex items-center justify-center mb-4 lg:mb-6">
+                  <PhoneIcon className="w-8 h-8 text-white" aria-hidden="true" />
                 </div>
-                <div className="text-white text-base sm:text-lg lg:text-xl font-normal font-['Poppins']">
-                  <a href="tel:+914222321811" className="hover:underline">
+                <h5 className="text-white text-xl lg:text-2xl font-semibold font-['Poppins'] mb-3">
+                  Phone
+                </h5>
+                <div className="space-y-2">
+                  <a
+                    href="tel:+914222321811"
+                    className="block text-white/90 text-base lg:text-lg font-medium font-['Poppins'] hover:text-orange-400 transition-colors duration-200"
+                  >
                     0422 2321811
-                  </a>{' '}
-                  |{' '}
-                  <a href="tel:+919843044443" className="hover:underline">
+                  </a>
+                  <a
+                    href="tel:+919843044443"
+                    className="block text-white/90 text-base lg:text-lg font-medium font-['Poppins'] hover:text-orange-400 transition-colors duration-200"
+                  >
                     98430 44443
                   </a>
-                  <p className="mt-1">Noufal Riyas (Manager)</p>
-                </div>
-              </div>
-
-              {/* Email */}
-              <div className="text-center md:text-left items-center md:items-start">
-                <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
-                  <span className="text-white text-lg sm:text-xl font-medium font-['Poppins']">
-                    Email
-                  </span>
-                  <MailIcon className="w-5 h-5 text-white" aria-hidden="true" />
-                </div>
-                <div className="text-white text-base sm:text-lg lg:text-xl font-normal font-['Poppins']">
-                  <a href="mailto:info@whitetradingcompany.com" className="hover:underline">
-                    info@whitetradingcompany.com
-                  </a>
+                  <p className="text-white/70 text-sm lg:text-base font-medium font-['Poppins'] mt-2">
+                    Noufal Riyas (Manager)
+                  </p>
                 </div>
               </div>
             </div>
 
-            <div className="text-center md:text-left w-1/2">
-              <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
-                <span className="text-white text-lg sm:text-xl font-medium font-['Poppins']">
+            {/* Email Card */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105">
+              <div className="flex flex-col items-center text-center">
+                <div className="w-16 h-16 bg-[#5a6694] rounded-full flex items-center justify-center mb-4 lg:mb-6">
+                  <MailIcon className="w-8 h-8 text-white" aria-hidden="true" />
+                </div>
+                <h5 className="text-white text-xl lg:text-2xl font-semibold font-['Poppins'] mb-3">
+                  Email
+                </h5>
+                <a
+                  href="mailto:info@whitetradingcompany.com"
+                  className="text-white/90 text-base lg:text-lg font-medium font-['Poppins'] hover:text-orange-400 transition-colors duration-200 break-all"
+                >
+                  info@whitetradingcompany.com
+                </a>
+              </div>
+            </div>
+
+            {/* Location Card */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 lg:p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105">
+              <div className="flex flex-col items-center text-center">
+                <div className="w-16 h-16 bg-[#5a6694] rounded-full flex items-center justify-center mb-4 lg:mb-6">
+                  <MapPinIcon className="w-8 h-8 text-white" aria-hidden="true" />
+                </div>
+                <h5 className="text-white text-xl lg:text-2xl font-semibold font-['Poppins'] mb-3">
                   Location
-                </span>
-                <MapPinIcon className="w-5 h-5 text-white" aria-hidden="true" />
-              </div>
-              <div className="text-white text-base sm:text-lg lg:text-xl font-normal font-['Poppins']">
-                45/2A - 1, Sungam Byepass Road 641045, Ramanathapuram, Coimbatore, Tamil Nadu, India
-                - 641045
+                </h5>
+                <address className="text-white/90 text-base lg:text-lg font-medium font-['Poppins'] leading-relaxed not-italic">
+                  45/2A - 1, Sungam Byepass Road
+                  <br />
+                  Ramanathapuram, Coimbatore
+                  <br />
+                  Tamil Nadu, India - 641045
+                </address>
               </div>
             </div>
-          </address>
+          </div>
         </div>
       </section>
     </>
