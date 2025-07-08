@@ -19,6 +19,18 @@ interface WeOfferProps {
   weOffer: WeOfferData
 }
 
+const CARD_COLORS = [
+  'bg-gradient-to-br from-white to-gray-100', // White to light gray
+  'bg-gradient-to-br from-gray-100 to-teal-50', // Light gray to teal
+  'bg-gradient-to-br from-teal-50 to-green-100', // Teal to green
+  'bg-gradient-to-br from-green-100 to-yellow-100', // Green to yellow
+  'bg-gradient-to-br from-yellow-100 to-orange-100', // Yellow to orange
+]
+
+function getCardColor(index: number) {
+  return CARD_COLORS[index % CARD_COLORS.length]
+}
+
 export const WeOffer = ({ weOffer }: WeOfferProps) => {
   const animationRefs = useRef<(HTMLElement | null)[]>([])
 
@@ -99,7 +111,7 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
           />
 
           <div
-            className="relative flex flex-col mt-3 md:mt-10 lg:mt-20 w-full gap-4 sm:gap-12 lg:gap-16"
+            className="relative flex flex-col mt-10 md:mt-10 lg:mt-20 w-full"
             role="list"
             aria-label="Services and offerings"
           >
@@ -111,7 +123,7 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                   ref={(el) => {
                     animationRefs.current[index] = el
                   }}
-                  className={`sticky pb-6 px-4 sm:px-6 top-0 ${isLeft ? 'left' : 'right'} bg-white pt-[60px] sm:pt-[80px] lg:pt-[156px] glass-container w-full`}
+                  className={`sticky pb-6 px-4 sm:px-6 top-0 ${isLeft ? 'left' : 'right'} ${getCardColor(index)} pt-[60px] sm:pt-[80px] lg:pt-[156px] glass-container w-full`}
                   role="listitem"
                 >
                   <div className={`${isLeft ? 'mr-auto lg:pl-8' : 'ml-auto lg:pr-8'}`}>

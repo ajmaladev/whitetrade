@@ -107,33 +107,35 @@ export function CategoryCard({
         group
       `}
     >
-      <div>
-        <h2
-          className={`font-extrabold text-neutral-600/60 text-xl font-['Montserrat'] sm:text-2xl mb-2 !leading-none
+      <Link href={`/${category.slug}`}>
+        <div>
+          <h2
+            className={`font-extrabold text-neutral-600/60 text-xl font-['Montserrat'] sm:text-2xl mb-2 !leading-none
             transition-colors duration-300 group-hover:text-neutral-800/80`}
-        >
-          {category.title}
-        </h2>
-      </div>
-      <div
-        className={`flex-1 flex items-end justify-end ${showButton ? 'justify-between items-center' : 'justify-end'}`}
-      >
-        {showButton && (
-          <ShopNowButton
-            href={`/${category.slug || ''}`}
-            buttonColor={getButtonColor(index) || 'bg-neutral-700'}
-          />
-        )}
-        <div className="relative w-40 h-32 sm:w-48 sm:h-40 transition-transform duration-300 group-hover:translate-y-[-8px]">
-          <Image
-            src={imageUrl || '/logo.svg'}
-            alt={category.title}
-            fill
-            className="object-contain drop-shadow-xl transition-all duration-300 group-hover:drop-shadow-2xl"
-            sizes="(max-width: 640px) 100vw, 33vw"
-          />
+          >
+            {category.title}
+          </h2>
         </div>
-      </div>
+        <div
+          className={`flex-1 flex items-end justify-end ${showButton ? 'justify-between items-center' : 'justify-end'}`}
+        >
+          {showButton && (
+            <ShopNowButton
+              href={`/${category.slug || ''}`}
+              buttonColor={getButtonColor(index) || 'bg-neutral-700'}
+            />
+          )}
+          <div className="relative w-40 h-32 sm:w-48 sm:h-40 transition-transform duration-300 group-hover:translate-y-[-8px]">
+            <Image
+              src={imageUrl || '/logo.svg'}
+              alt={category.title}
+              fill
+              className="object-contain drop-shadow-xl transition-all duration-300 group-hover:drop-shadow-2xl"
+              sizes="(max-width: 640px) 100vw, 33vw"
+            />
+          </div>
+        </div>
+      </Link>
     </motion.div>
   )
 }
