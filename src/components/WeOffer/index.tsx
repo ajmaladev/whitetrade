@@ -221,7 +221,7 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                     ease: 'easeOut',
                   }}
                   viewport={{ once: true, margin: '-100px' }}
-                  className={`sticky ${index === weOffer.item.length - 1 ? 'pt-[139px] sm:pt-[135px]' : 'pt-[120px] sm:pt-[100px]'} pb-6 px-4 sm:px-6 top-[60px] md:top-[140px] ${isLeft ? 'left' : 'right'} bg-white/5 backdrop-blur-sm pt-[60px] sm:pt-[80px] lg:pt-[156px] glass-container w-full`}
+                  className={`sticky ${index === weOffer.item.length - 1 ? 'pt-[102px] sm:pt-[135px]' : 'pt-[80px] sm:pt-[140px]'} pb-6 px-4 sm:px-6 top-[90px] md:top-[80px] lg:top-[100px] ${isLeft ? 'left' : 'right'} bg-white/5 backdrop-blur-sm glass-container w-full`}
                   role="listitem"
                 >
                   <div className={`${isLeft ? 'mr-auto lg:pl-8' : 'ml-auto lg:pr-8'}`}>
