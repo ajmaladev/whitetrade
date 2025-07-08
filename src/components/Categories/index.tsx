@@ -72,7 +72,7 @@ function ShopNowButton({ href, buttonColor }: { href: string; buttonColor: strin
   )
 }
 
-function CategoryCard({
+export function CategoryCard({
   category,
   index,
   layout,
