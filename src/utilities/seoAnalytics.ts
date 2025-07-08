@@ -306,7 +306,6 @@ export const monitorCoreWebVitals = (): void => {
     // Basic performance monitoring without web-vitals dependency
     const observer = new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
-        console.log(`${entry.name}: ${entry.startTime}ms`)
       }
     })
 
@@ -381,7 +380,6 @@ export const initializeSEOMonitoring = (): void => {
 
       // Log report in development
       if (process.env.NODE_ENV === 'development') {
-        console.log('SEO Report:', report)
       }
 
       // Track metrics

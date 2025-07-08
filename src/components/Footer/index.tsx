@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { Logo } from '../Logo/Logo'
+import SearchContent from '../MegaMenu/SearchContent'
+import { Drawer, DrawerTrigger } from '../ui/drawer'
 
 export const Footer = () => {
   // Generate structured data for the footer
@@ -44,14 +46,14 @@ export const Footer = () => {
           aria-label="Footer navigation"
         >
           <Link
-            href="/"
+            href="#about"
             className="text-slate-900 text-sm sm:text-base font-normal font-['Manrope'] hover:opacity-75 transition-opacity"
             aria-label="About White Trading Company"
           >
             About us
           </Link>
           <Link
-            href="/posts"
+            href="#products"
             className="text-slate-900 text-sm sm:text-base font-normal font-['Manrope'] hover:opacity-75 transition-opacity"
             aria-label="Discover trading insights and blog posts"
           >
@@ -64,13 +66,15 @@ export const Footer = () => {
           >
             Explore
           </Link>
-          <Link
-            href="/search"
-            className="text-slate-900 text-sm sm:text-base font-normal font-['Manrope'] hover:opacity-75 transition-opacity"
-            aria-label="Search trading resources"
-          >
-            Search
-          </Link>
+          <Drawer direction="right">
+            <DrawerTrigger
+              className="text-slate-900 text-sm sm:text-base font-normal font-['Manrope'] hover:opacity-75 transition-opacity"
+              aria-label="Search trading resources"
+            >
+              Search
+            </DrawerTrigger>
+            <SearchContent />
+          </Drawer>
         </nav>
 
         {/* Divider */}
@@ -94,14 +98,14 @@ export const Footer = () => {
             aria-label="Legal links"
           >
             <Link
-              href="/terms"
+              href="#"
               className="text-slate-900 text-xs sm:text-sm font-normal font-['Manrope'] hover:opacity-75 transition-opacity"
               aria-label="Terms of Service"
             >
               Terms of Service
             </Link>
             <Link
-              href="/privacy"
+              href="#"
               className="text-slate-900 text-xs sm:text-sm font-normal font-['Manrope'] hover:opacity-75 transition-opacity"
               aria-label="Privacy Policy"
             >

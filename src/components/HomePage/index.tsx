@@ -9,8 +9,8 @@ import { OurBrandsQuery } from '../OurBrandsQuery'
 import ReadyToShip from '../ReadyToShip'
 import { Reviews } from '../Reviews'
 import Testimonials from '../Testimonials'
-import { Button } from '../ui/button'
 import { WeOffer as WeOfferComponent } from '../WeOffer'
+import BuyNow from './BuyNow'
 
 type TestimonialItem = {
   id: string
@@ -101,14 +101,7 @@ export default function HomePage({
         <HeroSection carousal={carousal} />
         <ReadyToShip />
         <Categories categories={categories} />
-        <section className="flex justify-center w-full" aria-label="Call to action">
-          <Button
-            className="relative bg-gradient-to-r from-cyan-900 hover:shadow-[0px_8px_16px_0px_rgba(0,0,0,0.35)] transition-all duration-300 ease-in-out to-[#36559b] px-10 rounded-[50px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] justify-start text-white text-2xl font-semibold"
-            aria-label="Start trading with White Trading Company"
-          >
-            BUY NOW
-          </Button>
-        </section>
+        <BuyNow />
         <Testimonials testimonials={testimonials} />
         <Certificates certificates={certificates} />
         <HomePageGallery gallery={gallery} />
