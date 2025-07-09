@@ -211,7 +211,7 @@ export const ProductPage = ({ product }: ProductPageProps) => {
                   onClick={handleBuyNow}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-full bg-gradient-to-br from-[#faf0e8] via-[#f8e8d8] to-[#f5e0c8] text-gray-800 font-bold py-4 px-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-white/60 backdrop-blur-sm hover:bg-gradient-to-br hover:from-[#f5e0c8] hover:via-[#f8e8d8] hover:to-[#faf0e8]"
+                  className="w-full bg-gradient-to-br from-[#faf0e8] via-[#f8e8d8] to-[#f5e0c8] text-gray-800 font-bold py-2 md:py-4 px-4 md:px-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-white/60 backdrop-blur-sm hover:bg-gradient-to-br hover:from-[#f5e0c8] hover:via-[#f8e8d8] hover:to-[#faf0e8]"
                 >
                   <span className="mr-2">🛒</span>
                   Buy Now
