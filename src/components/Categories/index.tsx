@@ -102,7 +102,7 @@ export function CategoryCard({
         group
       `}
     >
-      <Link href={`/${category.slug}`}>
+      <Link href={`/${category?.slug}`}>
         <div>
           <h2
             className={`font-extrabold text-neutral-600/60 text-xl font-['Montserrat'] sm:text-2xl mb-2 !leading-none
