@@ -1,7 +1,9 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import { MailIcon, MapPinIcon, PhoneIcon, StarIcon } from 'lucide-react'
 import Link from 'next/link'
+import { useInView } from 'react-intersection-observer'
 
 export const AboutUs = () => {
   const handleWhatsAppClick = () => {
@@ -11,6 +13,49 @@ export const AboutUs = () => {
     const encodedMessage = encodeURIComponent(message)
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`
     window.open(whatsappUrl, '_blank')
+  }
+
+  // Intersection Observer hooks for different sections
+  const [titleRef, titleInView] = useInView({ triggerOnce: true, threshold: 0.3 })
+  const [ratingRef, ratingInView] = useInView({ triggerOnce: true, threshold: 0.3 })
+  const [contentRef, contentInView] = useInView({ triggerOnce: true, threshold: 0.3 })
+  const [ctaRef, ctaInView] = useInView({ triggerOnce: true, threshold: 0.3 })
+  const [contactsRef, contactsInView] = useInView({ triggerOnce: true, threshold: 0.3 })
+
+  // Animation variants for right-to-left movement
+  const slideInFromRight = {
+    hidden: { x: 100, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        ease: 'easeOut' as const,
+      },
+    },
+  }
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1,
+      },
+    },
+  }
+
+  const staggerItem = {
+    hidden: { x: 100, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: 'easeOut' as const,
+      },
+    },
   }
 
   // Generate structured data for the About Us section
@@ -77,77 +122,111 @@ export const AboutUs = () => {
       >
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:gap-16 gap-8 justify-center items-center">
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+          <motion.div
+            ref={titleRef}
+            initial="hidden"
+            animate={titleInView ? 'visible' : 'hidden'}
+            variants={slideInFromRight}
+            className="text-center mb-8 sm:mb-12 lg:mb-16"
+          >
             <h4
               id="about-heading"
               className="text-4xl sm:text-6xl lg:text-8xl xl:text-9xl font-bold font-['Poppins'] text-white"
             >
               About Us
             </h4>
-          </div>
+          </motion.div>
 
           {/* Rating Card */}
-          <Link
-            href="https://g.co/kgs/NU7JFgw"
-            className="flex justify-center mb-8 sm:mb-12 lg:mb-16"
-            target="_blank"
+          <motion.div
+            ref={ratingRef}
+            initial="hidden"
+            animate={ratingInView ? 'visible' : 'hidden'}
+            variants={slideInFromRight}
+            transition={{ delay: 0.3 }}
           >
-            <div
-              className="w-64 h-20 bg-white rounded-[47.88px] shadow-[0px_22.722957611083984px_95.76103210449219px_0px_rgba(109,108,115,0.12)] outline outline-[9.74px] outline-neutral-200/40 flex items-center justify-center gap-2 hover:scale-105 hover:shadow-[0px_30px_120px_0px_rgba(109,108,115,0.25)] hover:outline-orange-400/60 transition-all duration-300 ease-in-out cursor-pointer"
-              style={{
-                animation: 'buttonPulse 3s ease-in-out infinite',
-              }}
-              itemScope
-              itemType="https://schema.org/AggregateRating"
+            <Link
+              href="https://g.co/kgs/NU7JFgw"
+              className="flex justify-center mb-8 sm:mb-12 lg:mb-16"
+              target="_blank"
             >
-              <div>
-                <div
-                  className="text-black text-xl font-semibold font-['Manrope'] leading-7"
-                  itemProp="ratingValue"
-                >
-                  4.5/5
+              <div
+                className="w-64 h-20 bg-white rounded-[47.88px] shadow-[0px_22.722957611083984px_95.76103210449219px_0px_rgba(109,108,115,0.12)] outline outline-[9.74px] outline-neutral-200/40 flex items-center justify-center gap-2 hover:scale-105 hover:shadow-[0px_30px_120px_0px_rgba(109,108,115,0.25)] hover:outline-orange-400/60 transition-all duration-300 ease-in-out cursor-pointer"
+                style={{
+                  animation: 'buttonPulse 3s ease-in-out infinite',
+                }}
+                itemScope
+                itemType="https://schema.org/AggregateRating"
+              >
+                <div>
+                  <div
+                    className="text-black text-xl font-semibold font-['Manrope'] leading-7"
+                    itemProp="ratingValue"
+                  >
+                    4.5/5
+                  </div>
+                  <div className="opacity-70 text-black text-xs font-medium font-['Manrope'] leading-tight">
+                    Rating
+                  </div>
                 </div>
-                <div className="opacity-70 text-black text-xs font-medium font-['Manrope'] leading-tight">
-                  Rating
-                </div>
-              </div>
-              <div className="flex gap-1 mb-1" aria-label="4.5 out of 5 stars">
-                <StarIcon className="w-5 h-5 fill-amber-300 text-amber-300" />
-                <StarIcon className="w-5 h-5 fill-amber-300 text-amber-300" />
-                <StarIcon className="w-5 h-5 fill-amber-300 text-amber-300" />
-                <StarIcon className="w-5 h-5 fill-amber-300 text-amber-300" />
-                <div className="relative w-5 h-5">
-                  <StarIcon className="w-5 h-5 fill-gray-300 text-gray-300 absolute inset-0" />
-                  <div className="absolute inset-0 w-1/2 overflow-hidden">
-                    <StarIcon className="w-5 h-5 fill-amber-300 text-amber-300" />
+                <div className="flex gap-1 mb-1" aria-label="4.5 out of 5 stars">
+                  <StarIcon className="w-5 h-5 fill-amber-300 text-amber-300" />
+                  <StarIcon className="w-5 h-5 fill-amber-300 text-amber-300" />
+                  <StarIcon className="w-5 h-5 fill-amber-300 text-amber-300" />
+                  <StarIcon className="w-5 h-5 fill-amber-300 text-amber-300" />
+                  <div className="relative w-5 h-5">
+                    <StarIcon className="w-5 h-5 fill-gray-300 text-gray-300 absolute inset-0" />
+                    <div className="absolute inset-0 w-1/2 overflow-hidden">
+                      <StarIcon className="w-5 h-5 fill-amber-300 text-amber-300" />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+          </motion.div>
         </div>
 
         {/* Main Content */}
-        <div className="max-w-3xl mx-auto mb-12 sm:mb-16 lg:mb-20">
+        <motion.div
+          ref={contentRef}
+          initial="hidden"
+          animate={contentInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+          className="max-w-3xl mx-auto mb-12 sm:mb-16 lg:mb-20"
+        >
           <div className="text-white text-base sm:text-lg lg:text-xl font-normal font-['Poppins'] leading-relaxed">
-            At White Trading Company, we&apos;re more than a supplier—we&apos;re your trusted
-            partner in growth. Built on a foundation of integrity, innovation, and customer-first
-            service, we strive to deliver exceptional value through high-quality products and
-            reliable solutions.
-            <br />
-            <br />
-            Our mission is to empower businesses and individuals by making premium products and
-            outstanding support easily accessible. Whether you&apos;re sourcing for retail,
-            wholesale, or personal use, we&apos;re here to help you succeed.
-            <br />
-            <br />
-            Driven by our core values—trust, quality, and innovation—we are committed to building
-            lasting relationships and exceeding expectations at every step.
+            {/* First paragraph */}
+            <motion.div variants={staggerItem} transition={{ delay: 0.2 }} className="mb-4">
+              At White Trading Company, we&apos;re more than a supplier—we&apos;re your trusted
+              partner in growth. Built on a foundation of integrity, innovation, and customer-first
+              service, we strive to deliver exceptional value through high-quality products and
+              reliable solutions.
+            </motion.div>
+
+            {/* Second paragraph */}
+            <motion.div variants={staggerItem} transition={{ delay: 0.6 }} className="mb-4">
+              Our mission is to empower businesses and individuals by making premium products and
+              outstanding support easily accessible. Whether you&apos;re sourcing for retail,
+              wholesale, or personal use, we&apos;re here to help you succeed.
+            </motion.div>
+
+            {/* Third paragraph */}
+            <motion.div variants={staggerItem} transition={{ delay: 0.8 }}>
+              Driven by our core values—trust, quality, and innovation—we are committed to building
+              lasting relationships and exceeding expectations at every step.
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
 
         {/* CTA Button */}
-        <div className="flex justify-center mb-12 sm:mb-16 lg:mb-20">
+        <motion.div
+          ref={ctaRef}
+          initial="hidden"
+          animate={ctaInView ? 'visible' : 'hidden'}
+          variants={slideInFromRight}
+          transition={{ delay: 0.5 }}
+          className="flex justify-center mb-12 sm:mb-16 lg:mb-20"
+        >
           <button
             onClick={handleWhatsAppClick}
             className="px-6 sm:px-8 lg:px-10 py-3 sm:py-4 bg-orange-500 rounded-xl inline-flex justify-start items-start gap-2.5 hover:bg-orange-600 hover:shadow-[0px_8px_16px_0px_rgba(0,0,0,0.35)] transition-all duration-300 ease-in-out hover:scale-105"
@@ -157,17 +236,32 @@ export const AboutUs = () => {
               Book a service
             </div>
           </button>
-        </div>
+        </motion.div>
 
         {/* Contacts Section */}
-        <div className="max-w-6xl mx-auto">
-          <h4 className="text-center mb-12 sm:mb-16 text-2xl sm:text-3xl lg:text-4xl font-bold font-['Poppins'] text-white">
+        <motion.div
+          ref={contactsRef}
+          initial="hidden"
+          animate={contactsInView ? 'visible' : 'hidden'}
+          variants={slideInFromRight}
+          className="max-w-6xl mx-auto"
+        >
+          <motion.h4
+            variants={slideInFromRight}
+            className="text-center mb-12 sm:mb-16 text-2xl sm:text-3xl lg:text-4xl font-bold font-['Poppins'] text-white"
+          >
             Contacts
-          </h4>
+          </motion.h4>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+          <motion.div
+            variants={slideInFromRight}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12"
+          >
             {/* Phone Card */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 lg:p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105">
+            <motion.div
+              variants={slideInFromRight}
+              className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 lg:p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105"
+            >
               <div className="flex flex-col items-center text-center">
                 <div className="w-16 h-16 bg-[#5a6694] rounded-full flex items-center justify-center mb-4 lg:mb-6">
                   <PhoneIcon className="w-8 h-8 text-white" aria-hidden="true" />
@@ -193,10 +287,13 @@ export const AboutUs = () => {
                   </p>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Email Card */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105">
+            <motion.div
+              variants={slideInFromRight}
+              className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105"
+            >
               <div className="flex flex-col items-center text-center">
                 <div className="w-16 h-16 bg-[#5a6694] rounded-full flex items-center justify-center mb-4 lg:mb-6">
                   <MailIcon className="w-8 h-8 text-white" aria-hidden="true" />
@@ -211,10 +308,13 @@ export const AboutUs = () => {
                   info@whitetradingcompany.com
                 </a>
               </div>
-            </div>
+            </motion.div>
 
             {/* Location Card */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 lg:p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105">
+            <motion.div
+              variants={slideInFromRight}
+              className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 lg:p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105"
+            >
               <div className="flex flex-col items-center text-center">
                 <div className="w-16 h-16 bg-[#5a6694] rounded-full flex items-center justify-center mb-4 lg:mb-6">
                   <MapPinIcon className="w-8 h-8 text-white" aria-hidden="true" />
@@ -230,9 +330,9 @@ export const AboutUs = () => {
                   Tamil Nadu, India - 641045
                 </address>
               </div>
-            </div>
-          </div>
-        </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </section>
     </>
   )

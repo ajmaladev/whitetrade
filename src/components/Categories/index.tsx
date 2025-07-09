@@ -60,14 +60,12 @@ function getGridClass(layout: { colSpan: number; rowSpan: number }) {
 
 function ShopNowButton({ href, buttonColor }: { href: string; buttonColor: string }) {
   return (
-    <Link href={href}>
-      <span
-        className={`inline-flex items-center gap-2 px-4 py-2 mt-4 rounded-xl ${buttonColor} text-white group-hover:scale-105 text-sm font-semibold shadow transition`}
-      >
-        Shop Now
-        <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-      </span>
-    </Link>
+    <span
+      className={`inline-flex items-center gap-2 px-4 py-2 mt-4 rounded-xl ${buttonColor} text-white group-hover:scale-105 text-sm font-semibold shadow transition`}
+    >
+      Shop Now
+      <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+    </span>
   )
 }
 

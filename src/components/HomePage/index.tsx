@@ -6,7 +6,6 @@ import { Certificates } from '../Certificates'
 import HeroSection from '../HeroSection'
 import HomePageGallery from '../HomePageGallery'
 import { OurBrandsQuery } from '../OurBrandsQuery'
-import ReadyToShip from '../ReadyToShip'
 import { Reviews } from '../Reviews'
 import Testimonials from '../Testimonials'
 import { WeOffer as WeOfferComponent } from '../WeOffer'
@@ -99,8 +98,10 @@ export default function HomePage({
       />
       <main className="w-full" role="main" aria-label="White Trading Company Homepage">
         <HeroSection carousal={carousal} />
-        <ReadyToShip />
-        <Categories categories={categories} />
+        {/* <ReadyToShip /> */}
+        <div className="!mt-[-18px] sm:mt-14">
+          <Categories categories={categories} />
+        </div>
         <BuyNow />
         <Testimonials testimonials={testimonials} />
         <Certificates certificates={certificates} />
