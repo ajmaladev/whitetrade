@@ -8,7 +8,6 @@ export default async function ProductPageRoute({ params }: { params: Promise<{ s
   const { slug } = await params
   const product = await getCachedProduct(slug)()
   const productData = product.docs[0]
-  console.log(productData)
   if (!productData) {
     return <div>Product not found</div>
   }

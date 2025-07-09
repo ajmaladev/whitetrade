@@ -85,7 +85,7 @@ export const ProductPage = ({ product }: ProductPageProps) => {
     name: product.title,
     description: product.description,
     image: imageUrl,
-    url: `https://whitetradingcompany.com/products/${product.slug}`,
+    url: `https://whitetradingcompany.com/products/${product.slug || product.id}`,
     provider: {
       '@type': 'Organization',
       name: 'White Trading Company',
@@ -151,21 +151,8 @@ export const ProductPage = ({ product }: ProductPageProps) => {
                   className="object-contain drop-shadow-2xl transition-all duration-700 hover:scale-105"
                   sizes="(max-width: 1024px) 100vw, 33vw"
                 />
-
-                {/* Floating decorative elements */}
-                <div className="absolute top-4 right-4 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full flex items-center justify-center shadow-lg opacity-90 animate-pulse">
-                  <span className="text-xs font-bold text-white">★</span>
-                </div>
                 <div className="absolute bottom-4 left-4 w-4 h-4 bg-white/80 rounded-full opacity-70 animate-bounce"></div>
                 <div className="absolute top-1/2 left-4 w-3 h-3 bg-white/60 rounded-full opacity-50"></div>
-              </div>
-
-              {/* Floating sparkles */}
-              <div className="absolute top-2 left-2 text-yellow-400 opacity-70 animate-bounce text-lg">
-                ✨
-              </div>
-              <div className="absolute bottom-2 right-2 text-pink-400 opacity-60 animate-pulse text-sm">
-                💫
               </div>
             </motion.div>
 
@@ -193,7 +180,17 @@ export const ProductPage = ({ product }: ProductPageProps) => {
                   )}
                 </motion.div>
               </div>
-
+              <motion.div variants={itemVariants}>
+                <motion.button
+                  onClick={handleBuyNow}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full bg-gradient-to-br from-[#faf0e8] via-[#f8e8d8] to-[#f5e0c8] text-gray-800 font-bold py-2 md:py-4 px-4 md:px-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-white/60 backdrop-blur-sm hover:bg-gradient-to-br hover:from-[#f5e0c8] hover:via-[#f8e8d8] hover:to-[#faf0e8]"
+                >
+                  <span className="mr-2">🛒</span>
+                  Buy Now
+                </motion.button>
+              </motion.div>
               {/* Description */}
               <motion.div variants={itemVariants} className="space-y-4">
                 <h3 className="text-lg md:text-xl font-semibold text-gray-700 font-['Montserrat']">
@@ -206,17 +203,6 @@ export const ProductPage = ({ product }: ProductPageProps) => {
               </motion.div>
 
               {/* Buy Now Button */}
-              <motion.div variants={itemVariants} className="pt-6">
-                <motion.button
-                  onClick={handleBuyNow}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-full bg-gradient-to-br from-[#faf0e8] via-[#f8e8d8] to-[#f5e0c8] text-gray-800 font-bold py-2 md:py-4 px-4 md:px-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-white/60 backdrop-blur-sm hover:bg-gradient-to-br hover:from-[#f5e0c8] hover:via-[#f8e8d8] hover:to-[#faf0e8]"
-                >
-                  <span className="mr-2">🛒</span>
-                  Buy Now
-                </motion.button>
-              </motion.div>
             </motion.div>
           </div>
         </div>

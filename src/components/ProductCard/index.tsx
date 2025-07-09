@@ -38,14 +38,6 @@ export const ProductCard = ({ product, index }: ProductCardProps) => {
       <div className="absolute bottom-4 left-4 w-3 h-3 bg-white/60 rounded-full opacity-70"></div>
       <div className="absolute top-1/2 left-2 w-2 h-2 bg-white/40 rounded-full opacity-50"></div>
 
-      {/* Floating sparkles */}
-      <div className="absolute top-2 left-2 text-yellow-400 opacity-70 animate-bounce text-sm">
-        ✨
-      </div>
-      <div className="absolute bottom-2 right-2 text-pink-400 opacity-60 animate-pulse text-xs">
-        💫
-      </div>
-
       <Link href={`/products/${product.slug || product.id}`} className="h-full flex flex-col">
         <div className="flex-1">
           {product.is_best_seller ? (

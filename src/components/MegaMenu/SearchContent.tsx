@@ -202,7 +202,6 @@ export default function SearchContent({ onClose }: SearchContentProps) {
 
   const uniqueCategories = getUniqueCategoriesFromProducts(searchResults.products)
   const categoryProducts = getAllProductsFromCategories(searchResults.categories)
-
   return (
     <DrawerContent className="right-0 left-auto w-4/5 max-w-2xl fixed top-0 h-full rounded-none p-0 flex flex-col !mt-0">
       <DrawerHeader className="border-b bg-gradient-to-r from-blue-50/80 to-indigo-50/80 rounded-t-2xl flex-shrink-0">
@@ -353,7 +352,7 @@ export default function SearchContent({ onClose }: SearchContentProps) {
                         style={{ animationDelay: `${index * 100}ms` }}
                       >
                         <DrawerClose asChild>
-                          <Link href={`/${product.categorySlug}`} className="block">
+                          <Link href={`/products/${product.slug || product.id}`} className="block">
                             <div className="p-4 bg-gradient-to-br from-white to-gray-50 rounded-2xl border border-gray-200/50 hover:shadow-xl hover:border-blue-200 transition-all duration-300 h-full">
                               <div className="space-y-2">
                                 <h4 className="font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-200">
@@ -450,7 +449,7 @@ export default function SearchContent({ onClose }: SearchContentProps) {
                         style={{ animationDelay: `${index * 100}ms` }}
                       >
                         <DrawerClose asChild>
-                          <Link href={`/${getProductCategorySlug(product)}`} className="block">
+                          <Link href={`/products/${product.slug || product.id}`} className="block">
                             <div className="p-4 bg-gradient-to-br from-white to-gray-50 rounded-2xl border border-gray-200/50 hover:shadow-xl hover:border-blue-200 transition-all duration-300 h-full">
                               <div className="space-y-2">
                                 <h4 className="font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-200">

@@ -1,6 +1,7 @@
 'use client'
 import { Category, Product } from '@/payload-types'
 import { ChevronDownIcon } from 'lucide-react'
+import Link from 'next/link'
 import { useState } from 'react'
 
 export default function ProductDetails({ products }: { products: Product[] }) {
@@ -94,22 +95,27 @@ Looking forward to hearing from you!
           </div>
         )}
       </div>
-
-      {/* Description */}
-      <p className="mt-6 mb-4 ml-3 md:ml-6 justify-start text-cyan-900 text-sm font-medium font-['Poppins']">
-        {selectedProduct?.description}
-      </p>
-
-      {/* Buy Now Button */}
-      <div className="w-full flex items-center lg:items-start">
+      <div className="w-full flex items-center gap-3 mt-4 md:mt-6">
+        <Link
+          href={`/products/${selectedProduct?.slug || selectedProduct?.id}`}
+          className="w-1/2 py-3 bg-blue-600 rounded-xl inline-flex justify-center items-center gap-2 text-white text-sm font-semibold font-['Manrope'] leading-normal hover:bg-blue-700 transition-colors duration-200"
+          aria-label={`View ${selectedProduct?.title}`}
+        >
+          View Product
+        </Link>
         <button
           onClick={handleBuyNow}
-          className="px-7 py-3 mx-auto md:ml-4 bg-orange-500 rounded-xl inline-flex justify-start items-start gap-2 text-white text-sm font-semibold font-['Manrope'] leading-normal hover:bg-orange-600 transition-colors duration-200"
+          className="w-1/2 py-3 bg-green-600 rounded-xl inline-flex justify-center items-center gap-2 text-white text-sm font-semibold font-['Manrope'] leading-normal hover:bg-green-700 transition-colors duration-200"
           aria-label={`Purchase ${selectedProduct?.title} via WhatsApp`}
         >
           Buy Now
         </button>
       </div>
+      <p className="mt-6 mb-4 justify-start text-cyan-900 text-sm font-medium font-['Poppins']">
+        {selectedProduct?.description}
+      </p>
+
+      {/* Buy Now Button */}
     </div>
   )
 }

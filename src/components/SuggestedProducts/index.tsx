@@ -44,15 +44,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       <div className="absolute bottom-4 left-4 w-3 h-3 bg-white/60 rounded-full opacity-70"></div>
       <div className="absolute top-1/2 left-2 w-2 h-2 bg-white/40 rounded-full opacity-50"></div>
 
-      {/* Floating sparkles */}
-      <div className="absolute top-2 left-2 text-yellow-400 opacity-70 animate-bounce text-sm">
-        ✨
-      </div>
-      <div className="absolute bottom-2 right-2 text-pink-400 opacity-60 animate-pulse text-xs">
-        💫
-      </div>
-
-      <Link href={`/products/${product.slug}`} className="h-full flex flex-col">
+      <Link href={`/products/${product.slug || product.id}`} className="h-full flex flex-col">
         <div className="flex-1">
           <div className="flex items-center justify-between mb-3">
             <div className="text-xs font-bold text-white/95 bg-gradient-to-r from-blue-500/30 to-purple-500/30 px-3 py-1.5 rounded-full border border-white/40 backdrop-blur-sm">
@@ -163,7 +155,7 @@ export const SuggestedProducts = ({ products, currentProductId }: SuggestedProdu
         '@type': 'Product',
         name: product.title,
         description: product.description || `Related product: ${product.title}`,
-        url: `https://whitetradingcompany.com/products/${product.slug}`,
+        url: `https://whitetradingcompany.com/products/${product.slug || product.id}`,
         provider: {
           '@type': 'Organization',
           name: 'White Trading Company',
@@ -199,7 +191,7 @@ export const SuggestedProducts = ({ products, currentProductId }: SuggestedProdu
           >
             <div className="relative inline-block">
               <h3 className="text-xl xs:text-2xl sm:text-4xl lg:text-6xl font-bold text-neutral-800 mb-4 font-['Poppins'] relative z-10">
-                💡 You Might Also Like
+                You Might Also Like
               </h3>
               <div className="absolute inset-0 bg-gradient-to-r from-blue-100/60 via-purple-100/60 to-cyan-100/60 rounded-3xl blur-xl -z-10"></div>
             </div>
