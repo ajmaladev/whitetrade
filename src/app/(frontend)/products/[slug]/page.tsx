@@ -33,8 +33,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export async function generateStaticParams() {
   const products = await getCachedAllProducts()()
   return products.docs
-    .filter((product) => product.slug) // Only include products with slugs
+    .filter((product) => product.slug || product.id) // Only include products with slugs
     .map((product) => ({
-      slug: product.slug,
+      slug: product.slug || product.id,
     }))
 }

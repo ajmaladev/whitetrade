@@ -53,7 +53,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         💫
       </div>
 
-      <Link href={`/products/${product.slug}`} className="h-full flex flex-col">
+      <Link href={`/products/${product.slug || product.id}`} className="h-full flex flex-col">
         <div className="flex-1">
           <div className="flex items-center justify-between mb-3">
             <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full flex items-center justify-center shadow-lg">
@@ -163,7 +163,7 @@ export const BestSellerProducts = ({ products }: { products: Product[] }) => {
         '@type': 'Product',
         name: product.title,
         description: product.description || `Best selling product: ${product.title}`,
-        url: `https://whitetradingcompany.com/products/${product.slug}`,
+        url: `https://whitetradingcompany.com/products/${product.slug || product.id}`,
         provider: {
           '@type': 'Organization',
           name: 'White Trading Company',
@@ -179,33 +179,6 @@ export const BestSellerProducts = ({ products }: { products: Product[] }) => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <section className="pb-2 px-4 sm:px-6 lg:px-12 md:my-14 md:mb-20 relative" id="best-sellers">
-        {/* Browse All Products Button - Top Right Corner */}
-        <div className="absolute top-4 right-4 sm:top-6 sm:right-6 lg:top-8 lg:right-8 z-20">
-          <Link
-            href="/products"
-            className="
-              inline-flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-3
-              bg-gray-50 hover:bg-gray-200
-              text-gray-500 font-semibold text-sm sm:text-base
-              rounded-xl shadow-md hover:shadow-xl
-              transition-all duration-300 ease-out
-              transform hover:scale-105 hover:-translate-y-1
-              border border-white/20 backdrop-blur-sm
-              group
-            "
-          >
-            <span>Browse all products</span>
-            <svg
-              className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </Link>
-        </div>
-
         {/* Background decorative elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-br from-pink-200/20 to-purple-200/20 rounded-full blur-3xl animate-pulse"></div>
@@ -266,6 +239,38 @@ export const BestSellerProducts = ({ products }: { products: Product[] }) => {
                 ))}
               </div>
             </motion.div>
+
+            {/* Browse All Products Button - Top Right Corner */}
+            <div className="flex justify-center z-20">
+              <Link
+                href="/products"
+                className="
+              inline-flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-3
+              bg-gray-100 hover:bg-gray-200
+              text-gray-500 font-semibold text-sm sm:text-base
+              rounded-xl shadow- hover:shadow-xl
+              transition-all duration-300 ease-out
+              transform hover:scale-105 hover:-translate-y-1
+              border border-white/20 backdrop-blur-sm
+              group
+            "
+              >
+                <span>Browse all products</span>
+                <svg
+                  className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

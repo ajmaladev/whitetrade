@@ -124,6 +124,11 @@ export const getCachedProduct = (slug: string) =>
 
 export const getProduct = async (slug: string) => {
   const payload = await getPayloadClient()
-  const product = await payload.find({ collection: 'products', where: { slug: { equals: slug } } })
+  const product = await payload.find({
+    collection: 'products',
+    where: {
+      or: [{ slug: { equals: slug } }, { id: { equals: slug } }],
+    },
+  })
   return product as PaginatedDocs<Product>
 }

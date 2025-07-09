@@ -46,7 +46,7 @@ export const ProductCard = ({ product, index }: ProductCardProps) => {
         💫
       </div>
 
-      <Link href={`/products/${product.slug}`} className="h-full flex flex-col">
+      <Link href={`/products/${product.slug || product.id}`} className="h-full flex flex-col">
         <div className="flex-1">
           {product.is_best_seller ? (
             <div className="flex items-center justify-between mb-3">

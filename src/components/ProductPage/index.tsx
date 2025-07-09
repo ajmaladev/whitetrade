@@ -111,7 +111,7 @@ export const ProductPage = ({ product }: ProductPageProps) => {
         initial="hidden"
         animate={inView ? 'visible' : 'hidden'}
         variants={containerVariants}
-        className="min-h-screen bg-gradient-to-br from-[#faf0e8] via-[#f8e8d8] to-[#f5e0c8] py-8 px-4 sm:px-6 lg:px-12"
+        className=" bg-gradient-to-br from-[#faf0e8] via-[#f8e8d8] to-[#f5e0c8] py-8 px-4 sm:px-6 lg:px-12"
       >
         {/* Background decorative elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
