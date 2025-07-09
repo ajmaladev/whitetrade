@@ -1,5 +1,6 @@
 import { revalidate } from '@/app/(frontend)/actions'
 import globalUpload from '@/components/Globals/GlobalUpload'
+import { slugField } from '@/fields/slug'
 import { CollectionConfig } from 'payload'
 
 export const Products: CollectionConfig = {
@@ -31,6 +32,7 @@ export const Products: CollectionConfig = {
       label: 'Product Title',
       type: 'text',
     },
+    ...slugField(),
     globalUpload({
       field_name: 'product_image',
       label: 'Product Image',

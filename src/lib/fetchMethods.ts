@@ -43,9 +43,29 @@ export const getBestSellerProducts = async () => {
     select: {
       title: true,
       product_image: true,
+      slug: true,
     },
     where: {
       is_best_seller: { equals: true },
+    },
+  })
+  return products as PaginatedDocs<Product>
+}
+
+export const getCachedAllProducts = () =>
+  unstable_cache(async () => getAllProducts(), ['all-products'], {
+    revalidate: CACHE_REVALIDATE_TIME,
+    tags: ['products'],
+  })
+
+export const getAllProducts = async () => {
+  const payload = await getPayloadClient()
+  const products = await payload.find({
+    collection: 'products',
+    pagination: false,
+    limit: 1000,
+    select: {
+      slug: true,
     },
   })
   return products as PaginatedDocs<Product>
@@ -76,4 +96,16 @@ export const getGallery = async (limit: number) => {
   const payload = await getPayloadClient()
   const gallery = await payload.find({ collection: 'gallery', limit })
   return gallery as PaginatedDocs<Gallery>
+}
+
+export const getCachedProduct = (slug: string) =>
+  unstable_cache(async () => getProduct(slug), ['product', slug], {
+    revalidate: CACHE_REVALIDATE_TIME,
+    tags: ['product', slug],
+  })
+
+export const getProduct = async (slug: string) => {
+  const payload = await getPayloadClient()
+  const product = await payload.find({ collection: 'products', where: { slug: { equals: slug } } })
+  return product as PaginatedDocs<Product>
 }

@@ -53,7 +53,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         💫
       </div>
 
-      <Link href={`/products/${product.id}`} className="h-full flex flex-col">
+      <Link href={`/products/${product.slug}`} className="h-full flex flex-col">
         <div className="flex-1">
           <div className="flex items-center justify-between mb-3">
             <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full flex items-center justify-center shadow-lg">
@@ -163,7 +163,7 @@ export const BestSellerProducts = ({ products }: { products: Product[] }) => {
         '@type': 'Product',
         name: product.title,
         description: product.description || `Best selling product: ${product.title}`,
-        url: `https://whitetradingcompany.com/products/${product.id}`,
+        url: `https://whitetradingcompany.com/products/${product.slug}`,
         provider: {
           '@type': 'Organization',
           name: 'White Trading Company',
