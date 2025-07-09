@@ -66,6 +66,10 @@ export const getAllProducts = async () => {
     limit: 1000,
     select: {
       slug: true,
+      title: true,
+      description: true,
+      product_image: true,
+      is_best_seller: true,
     },
   })
   return products as PaginatedDocs<Product>
@@ -131,4 +135,82 @@ export const getProduct = async (slug: string) => {
     },
   })
   return product as PaginatedDocs<Product>
+}
+
+export const getCachedCategoryProducts = (slug: string) =>
+  unstable_cache(async () => getCategoryProducts(slug), ['category-products', slug], {
+    revalidate: CACHE_REVALIDATE_TIME,
+    tags: ['category-products', slug],
+  })
+
+export const getCategoryProducts = async (slug: string) => {
+  const payload = await getPayloadClient()
+
+  try {
+    // Use aggregation to join products with categories
+    const result = await payload.db?.collections.products?.aggregate([
+      {
+        $lookup: {
+          from: 'categories',
+          localField: 'category.value',
+          foreignField: '_id',
+          as: 'categoryDetails',
+          pipeline: [{ $match: { slug: slug } }, { $project: { _id: 1, slug: 1 } }],
+        },
+      },
+      {
+        $match: {
+          categoryDetails: { $ne: [] },
+        },
+      },
+      {
+        $project: {
+          title: 1,
+          slug: 1,
+          product_image: 1,
+          description: 1,
+          is_best_seller: 1,
+          category: 1,
+          updatedAt: 1,
+          createdAt: 1,
+        },
+      },
+      {
+        $sort: { createdAt: -1 },
+      },
+    ])
+
+    if (!result || result.length === 0) {
+      return {
+        docs: [],
+        totalDocs: 0,
+        totalPages: 0,
+        page: 1,
+        hasNextPage: false,
+        hasPrevPage: false,
+        pagingCounter: 1,
+        limit: 20,
+      } as PaginatedDocs<Product>
+    }
+
+    // Transform the result to match PaginatedDocs format
+    const products = result.map((product: any) => ({
+      ...product,
+      id: product._id,
+    }))
+
+    return {
+      docs: products,
+      totalDocs: products.length,
+      totalPages: 1,
+      page: 1,
+      hasNextPage: false,
+      hasPrevPage: false,
+      pagingCounter: 1,
+      limit: products.length,
+    } as PaginatedDocs<Product>
+  } catch (error) {
+    console.error('Error in getCategoryProducts:', error)
+    throw new Error('Failed to fetch category products')
+  }
 }

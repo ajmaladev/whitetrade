@@ -1,7 +1,11 @@
 import { CategoryCard } from '@/components/Categories'
 import ProductDetails from '@/components/Categories/ProductDetails'
 import { generateDynamicSEO } from '@/components/SEO'
-import { getCachedCategories, getCachedCategory } from '@/lib/fetchMethods'
+import {
+  getCachedCategories,
+  getCachedCategory,
+  getCachedCategoryProducts,
+} from '@/lib/fetchMethods'
 import { Category, Gallery, Product } from '@/payload-types'
 import type { Metadata } from 'next'
 import GalleryGrid from '../gallery/GalleryGrid'
@@ -9,6 +13,7 @@ import NotFound from '../not-found'
 
 export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
   const category = await getCachedCategory((await params).category)()
+  const allProducts = await getCachedCategoryProducts((await params).category)()
   if (!category) {
     NotFound()
   }
@@ -19,9 +24,9 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
           category={category.docs[0] as Category}
           index={0}
           layout={{ colSpan: 2, rowSpan: 1 }}
-          showButton={true}
+          showButton={false}
         />
-        <ProductDetails products={category.docs[0]?.products?.docs as Product[]} />
+        <ProductDetails products={allProducts.docs as Product[]} />
       </div>
       <GalleryGrid images={category.docs[0]?.category_images as Gallery['images']} />
     </div>
