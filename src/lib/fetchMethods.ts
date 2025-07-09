@@ -71,6 +71,24 @@ export const getAllProducts = async () => {
   return products as PaginatedDocs<Product>
 }
 
+export const getPaginatedProducts = async (page: number = 1, limit: number = 20) => {
+  const payload = await getPayloadClient()
+  const products = await payload.find({
+    collection: 'products',
+    page,
+    limit,
+    sort: '-createdAt',
+    select: {
+      title: true,
+      product_image: true,
+      slug: true,
+      description: true,
+      is_best_seller: true,
+    },
+  })
+  return products as PaginatedDocs<Product>
+}
+
 export const getCachedCategory = (slug: string) =>
   unstable_cache(async () => getCategory(slug), ['category', slug], {
     revalidate: CACHE_REVALIDATE_TIME,
