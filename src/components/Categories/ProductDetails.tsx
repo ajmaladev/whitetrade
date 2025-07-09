@@ -82,7 +82,8 @@ Looking forward to hearing from you!
                 className={`px-6 py-3 cursor-pointer hover:bg-blue-50 text-cyan-900 font-medium font-['Poppins'] transition-colors ${
                   idx === selectedIndex ? 'bg-blue-100' : ''
                 }`}
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation()
                   setSelectedIndex(idx)
                   setDropdownOpen(false)
                 }}
