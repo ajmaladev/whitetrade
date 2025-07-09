@@ -136,10 +136,10 @@ export const ProductPage = ({ product }: ProductPageProps) => {
             </nav>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-            {/* Product Image Section */}
-            <motion.div variants={imageVariants} className="relative">
-              <div className="relative aspect-square rounded-[2rem] overflow-hidden bg-gradient-to-br from-white/60 to-white/40 backdrop-blur-sm border-2 border-white/60 shadow-2xl">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+            {/* Product Image Section - Reduced size */}
+            <motion.div variants={imageVariants} className="relative lg:col-span-1">
+              <div className="relative aspect-square rounded-[2rem] overflow-hidden bg-gradient-to-br from-white/60 to-white/40 backdrop-blur-sm border-2 border-white/60 shadow-2xl max-w-md mx-auto">
                 {/* Enhanced glow effect */}
                 <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent rounded-[2rem] blur-lg"></div>
                 <div className="absolute inset-0 bg-white/30 rounded-[2rem] blur-md"></div>
@@ -149,7 +149,7 @@ export const ProductPage = ({ product }: ProductPageProps) => {
                   alt={product.title || product.description || 'Product Image'}
                   fill
                   className="object-contain drop-shadow-2xl transition-all duration-700 hover:scale-105"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
                 />
 
                 {/* Floating decorative elements */}
@@ -169,8 +169,8 @@ export const ProductPage = ({ product }: ProductPageProps) => {
               </div>
             </motion.div>
 
-            {/* Product Details Section */}
-            <motion.div variants={itemVariants} className="space-y-6">
+            {/* Product Details Section - Takes more space */}
+            <motion.div variants={itemVariants} className="space-y-6 lg:col-span-2">
               {/* Title and Badges */}
               <div className="space-y-4">
                 <motion.h1
@@ -196,10 +196,10 @@ export const ProductPage = ({ product }: ProductPageProps) => {
 
               {/* Description */}
               <motion.div variants={itemVariants} className="space-y-4">
-                <h3 className="text-xl font-semibold text-gray-700 font-['Montserrat']">
+                <h3 className="text-lg md:text-xl font-semibold text-gray-700 font-['Montserrat']">
                   Product Description
                 </h3>
-                <p className="text-gray-600 leading-relaxed text-lg">
+                <p className="text-gray-600 leading-relaxed text-sm md:text-lg">
                   {product.description ||
                     'Discover this amazing product that combines quality, style, and functionality. Perfect for your needs and designed to exceed expectations.'}
                 </p>
