@@ -108,15 +108,12 @@ export const SuggestedProducts = ({ products, currentProductId }: SuggestedProdu
   // Filter out the current product and get only products from the same category
   const suggestedProducts = products.filter((product) => product.id !== currentProductId)
 
+  const [titleRef, titleInView] = useInView({ triggerOnce: true, threshold: 0.3 })
+  const [gridRef, gridInView] = useInView({ triggerOnce: true, threshold: 0.3 })
   if (suggestedProducts.length === 0) {
     return null
   }
 
-  // Intersection Observer hooks for different sections
-  const [titleRef, titleInView] = useInView({ triggerOnce: true, threshold: 0.3 })
-  const [gridRef, gridInView] = useInView({ triggerOnce: true, threshold: 0.3 })
-
-  // Animation variants for right-to-left movement
   const slideInFromRight = {
     hidden: { x: 100, opacity: 0 },
     visible: {

@@ -12,7 +12,6 @@ interface ProductsGridProps {
 }
 
 export const ProductsGrid = ({ initialProducts, hasMore, totalProducts }: ProductsGridProps) => {
-  console.log(initialProducts)
   const [products, setProducts] = useState<Product[]>(initialProducts)
   const [page, setPage] = useState(1)
   const [hasMoreProducts, setHasMoreProducts] = useState(hasMore)
@@ -32,7 +31,6 @@ export const ProductsGrid = ({ initialProducts, hasMore, totalProducts }: Produc
     // Store scroll position and button position before loading
     scrollPositionRef.current = window.scrollY
     const buttonRect = loadMoreButtonRef.current?.getBoundingClientRect()
-    const buttonBottom = buttonRect ? buttonRect.bottom + window.scrollY : 0
 
     try {
       const nextPage = page + 1
@@ -185,7 +183,7 @@ export const ProductsGrid = ({ initialProducts, hasMore, totalProducts }: Produc
                 <span className="text-2xl">🎉</span>
               </div>
               <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                You've seen all products!
+                You&apos;ve seen all products!
               </h3>
               <p className="text-gray-600 text-sm">Thanks for browsing our collection</p>
             </div>
