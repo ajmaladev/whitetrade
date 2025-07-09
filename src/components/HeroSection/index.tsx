@@ -171,7 +171,7 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
               )
             })}
           </div>
-          <div className="flex flex-col absolute top-4 left-0 items-start justify-start z-[3] xs:mt-[162px] mt-[120px] pointer-events-none">
+          <div className="flex flex-col absolute top-0 left-0 xs:items-end justify-start z-[3] xs:mt-[162px] mt-[130px] pointer-events-none">
             <div
               className="rounded-r-[9.56px] px-7 py-3 pointer-events-auto "
               style={{
@@ -189,12 +189,8 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
                 over a decade now
               </div>
             </div>
-          </div>
-
-          {/* Centered button using absolute positioning */}
-          <div className="absolute left-1/2 transform !-translate-x-1/2 z-[5] w-max bottom-0 !xs:bottom-[-30px] pointer-events-auto">
-            <div className="bg-white pl-[32px] pr-[16px] py-[5px] w-fit rounded-[50px] shadow-[0px_4px_4px_0px_rgba(240,246,255,1.00)] outline outline-1 outline-offset-[-1px] outline-[#1C3A6A] flex gap-3 items-center justify-center">
-              <div className="justify-start text-[#1C3A6A] text-[10.23px] font-normal font-['Montserrat']">
+            <div className="bg-white mt-6 pl-[32px] pr-[16px] py-[5px] w-fit rounded-[50px] shadow-[0px_4px_4px_0px_rgba(240,246,255,1.00)] outline outline-1 outline-offset-[-1px] outline-[#1C3A6A] flex gap-3 items-center justify-center">
+              <div className=" justify-start text-[#1C3A6A] text-[10.23px] font-normal font-['Montserrat']">
                 Schedule a Call with Our Team
               </div>
               <Image
