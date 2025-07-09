@@ -158,9 +158,8 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
 
               if (!src) return null
               return (
-                <div className={`absolute top-0 left-0  z-[2]`}>
+                <div key={src + idx} className={`absolute top-0 left-0 z-[2]`}>
                   <Image
-                    key={src + idx}
                     src={src}
                     alt={img.alt || `Mobile hero image ${idx + 1}`}
                     width={450}
