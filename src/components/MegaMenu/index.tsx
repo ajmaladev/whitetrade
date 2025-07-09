@@ -67,18 +67,28 @@ const Logo = memo(({ onClick }: { onClick?: () => void }) => (
 
 Logo.displayName = 'Logo'
 
-const SearchIcon = memo(({ onClick }: { onClick?: () => void }) => (
-  <button onClick={onClick} className="mb-2" aria-label="Open search" type="button">
-    <Image
-      src="/search.svg"
-      alt="Search icon"
-      width={20}
-      height={20}
-      className="w-8 h-8"
-      priority
-    />
-  </button>
-))
+const SearchIcon = memo(
+  ({
+    onClick,
+    imageUrl,
+    className = 'w-8 h-8',
+  }: {
+    onClick?: () => void
+    imageUrl: string
+    className?: string
+  }) => (
+    <button onClick={onClick} aria-label="Open search" type="button">
+      <Image
+        src={imageUrl}
+        alt="Search icon"
+        width={20}
+        height={20}
+        className={className}
+        priority
+      />
+    </button>
+  ),
+)
 
 SearchIcon.displayName = 'SearchIcon'
 
@@ -229,7 +239,7 @@ export default function MegaMenu() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <header
-        className="h-20 flex items-center w-full px-6 sm:px-12 md:px-16 lg:px-60 justify-between border-b border-gray-200"
+        className="h-20 flex items-center w-full px-6 sm:px-12 md:px-16 lg:px-60 justify-between border-b border-gray-200 sticky top-0 z-30 backdrop-blur-md bg-white/50"
         role="banner"
         aria-label="White Trading Company Header"
       >
@@ -240,7 +250,7 @@ export default function MegaMenu() {
           role="navigation"
           aria-label="Main navigation"
         >
-          <SearchIcon onClick={() => setSearchOpen(true)} />
+          <SearchIcon onClick={() => setSearchOpen(true)} imageUrl="/search.svg" />
 
           <div className="relative" ref={menuWrapperRef}>
             <ul className="flex items-center gap-6" role="menubar">
@@ -265,12 +275,22 @@ export default function MegaMenu() {
         </nav>
         {/* Mobile nav: Drawer trigger */}
         <div className="flex md:hidden items-center gap-10 ml-auto">
-          <SearchIcon onClick={() => setSearchOpen(true)} />
+          <SearchIcon
+            onClick={() => setSearchOpen(true)}
+            imageUrl="/small-search.svg"
+            className="w-5 h-5"
+          />
 
           <Drawer open={isDrawerOpen} onOpenChange={setDrawerOpen} direction="right">
             <DrawerTrigger asChild>
               <button aria-label="Open mobile menu" type="button">
-                <Menu className="w-8 h-8" />
+                <Image
+                  src="/mobile-menu.svg"
+                  alt="Menu icon"
+                  width={20}
+                  height={20}
+                  className="w-5 h-5"
+                />
               </button>
             </DrawerTrigger>
             <DrawerContent className="right-0 left-auto w-4/5 max-w-xs fixed top-0 h-full rounded-none p-0 flex flex-col !mt-0">
@@ -293,6 +313,7 @@ export default function MegaMenu() {
                       setDrawerOpen(false)
                       setSearchOpen(true)
                     }}
+                    imageUrl="/search.svg"
                   />
                 </div>
                 <ul className="flex flex-col gap-4" role="menubar">

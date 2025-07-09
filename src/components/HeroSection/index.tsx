@@ -20,6 +20,16 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
     return () => clearInterval(interval)
   }, [carousal?.length])
 
+  // WhatsApp click handler
+  const handleWhatsAppClick = () => {
+    const phoneNumber = '+919544889253' // Default number from WhatsAppButton
+    const message =
+      'Hello! I would like to schedule a call with your team to discuss your products and services.'
+    const encodedMessage = encodeURIComponent(message)
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`
+    window.open(whatsappUrl, '_blank')
+  }
+
   // Generate structured data for the organization
   const generateStructuredData = () => {
     return {
@@ -128,8 +138,13 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
               </div>
             </div>
           </div>
-          <div className="bg-white mx-auto mt-6 pl-20 pr-10 py-3 w-fit rounded-[50px] shadow-[0px_4px_4px_0px_rgba(240,246,255,1.00)] outline outline-1 outline-offset-[-1px] outline-[#1C3A6A] flex gap-3 items-center justify-center">
-            <div className=" justify-start text-[#1C3A6A] text-2xl font-normal font-['Montserrat']">
+          <button
+            onClick={handleWhatsAppClick}
+            className="bg-white mx-auto mt-6 pl-20 pr-10 py-3 w-fit rounded-[50px] shadow-[0px_4px_4px_0px_rgba(240,246,255,1.00)] outline outline-1 outline-offset-[-1px] outline-[#1C3A6A] flex gap-3 items-center justify-center hover:shadow-lg transition-all duration-300 cursor-pointer"
+            aria-label="Schedule a call with our team via WhatsApp"
+            title="Click to schedule a call via WhatsApp"
+          >
+            <div className="justify-start text-[#1C3A6A] text-2xl font-normal font-['Montserrat']">
               Schedule a Call with Our Team
             </div>
             <Image
@@ -139,7 +154,7 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
               height={20}
               className="w-6 h-6"
             />
-          </div>
+          </button>
         </div>
 
         {/* Small screen design */}
@@ -189,8 +204,13 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
                 over a decade now
               </div>
             </div>
-            <div className="bg-white mt-6 pl-[32px] pr-[16px] py-[5px] w-fit rounded-[50px] shadow-[0px_4px_4px_0px_rgba(240,246,255,1.00)] outline outline-1 outline-offset-[-1px] outline-[#1C3A6A] flex gap-3 items-center justify-center">
-              <div className=" justify-start text-[#1C3A6A] text-[10.23px] font-normal font-['Montserrat']">
+            <button
+              onClick={handleWhatsAppClick}
+              className="bg-white mt-6 pl-[32px] pr-[16px] py-[5px] w-fit rounded-[50px] shadow-[0px_4px_4px_0px_rgba(240,246,255,1.00)] outline outline-1 outline-offset-[-1px] outline-[#1C3A6A] flex gap-3 items-center justify-center hover:shadow-lg transition-all duration-300 cursor-pointer pointer-events-auto"
+              aria-label="Schedule a call with our team via WhatsApp"
+              title="Click to schedule a call via WhatsApp"
+            >
+              <div className="justify-start text-[#1C3A6A] text-[10.23px] font-normal font-['Montserrat']">
                 Schedule a Call with Our Team
               </div>
               <Image
@@ -200,7 +220,7 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
                 height={20}
                 className="w-6 h-6"
               />
-            </div>
+            </button>
           </div>
         </div>
         <div className="hero-section-small-container sm:hidden absolute top-[43px] left-0 w-full h-[284px] flex flex-col items-center justify-center pointer-events-auto overflow-hidden rounded-b-2xl z-[1]">

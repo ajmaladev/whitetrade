@@ -199,7 +199,7 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
           /> */}
 
           <div
-            className="justify-start sticky top-0 text-[4rem] text-center w-full lg:text-left md:text-[5rem] lg:text-[7rem] xs:ml-10 md:ml-40 font-bold font-['Poppins'] bg-clip-text text-transparent inline-block"
+            className="justify-start sticky top-[65px] text-[4rem] text-center w-full lg:text-left md:text-[5rem] lg:text-[7rem] lg:ml-40 font-bold font-['Poppins'] bg-clip-text text-transparent inline-block"
             style={{
               background: 'linear-gradient(90deg, #3E66DF 0%, #3E66DF 25%, #4C6284 100%)',
               backgroundClip: 'text',
@@ -232,7 +232,7 @@ export const WeOffer = ({ weOffer }: WeOfferProps) => {
                     ease: 'easeOut',
                   }}
                   viewport={{ once: true, margin: '-100px' }}
-                  className={`sticky ${index === weOffer.item.length - 1 ? 'pt-[102px] sm:pt-[135px]' : 'pt-[80px] sm:pt-[140px]'} pb-6 px-4 sm:px-6 top-[90px] md:top-[80px] lg:top-[145px] ${isLeft ? 'left' : 'right'} bg-white/5 backdrop-blur-sm glass-container w-full`}
+                  className={`sticky ${index === weOffer.item.length - 1 ? 'pt-[102px] sm:pt-[135px]' : 'pt-[80px] sm:pt-[140px]'} pb-6 px-4 sm:px-6 top-[150px] lg:top-[175px] ${isLeft ? 'left' : 'right'} bg-white/5 backdrop-blur-sm glass-container w-full`}
                   role="listitem"
                 >
                   <div className={`${isLeft ? 'mr-auto lg:pl-8' : 'ml-auto lg:pr-8'}`}>

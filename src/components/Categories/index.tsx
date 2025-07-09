@@ -173,7 +173,7 @@ export default function Categories({ categories }: { categories: PaginatedDocs<C
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <section className="py-16 pt-8 px-2 sm:px-6 lg:px-12">
+      <section className="py-16 pt-8 px-2 sm:px-6 lg:px-12 md:mt-20" id="products">
         <div className="max-w-7xl mx-auto">
           {/* Grid with 6 columns for desktop */}
           <div

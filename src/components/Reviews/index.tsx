@@ -167,7 +167,7 @@ export const Reviews = ({ reviews }: { reviews: HomePage['reviews'] }) => {
         <div className=" px-2 sm:px-6 lg:px-8 relative z-10">
           <h3
             id="reviews-heading"
-            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-800 mt-24 sm:mt-20 md:mt-24 lg:mt-[100px] ml-0 sm:ml-8 md:ml-12 lg:ml-[57px]"
+            className="text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-800 mt-24 sm:mt-20 md:mt-24 lg:mt-[100px] ml-0 sm:ml-8 md:ml-12 lg:ml-[57px]"
           >
             Loved Across Continents
           </h3>
