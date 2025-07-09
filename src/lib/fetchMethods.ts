@@ -28,18 +28,25 @@ export const getHomePage = async () => {
   return homePage as PaginatedDocs<HomePage>
 }
 
-export const getCachedProducts = () =>
-  unstable_cache(async () => getProducts(), ['products'], {
+export const getCachedBestSellerProducts = () =>
+  unstable_cache(async () => getBestSellerProducts(), ['products'], {
     revalidate: CACHE_REVALIDATE_TIME,
     tags: ['products'],
   })
 
-export const getProducts = async () => {
+export const getBestSellerProducts = async () => {
   const payload = await getPayloadClient()
   const products = await payload.find({
     collection: 'products',
     pagination: false,
     limit: 1000,
+    select: {
+      title: true,
+      product_image: true,
+    },
+    where: {
+      is_best_seller: { equals: true },
+    },
   })
   return products as PaginatedDocs<Product>
 }

@@ -31,16 +31,24 @@ export const Products: CollectionConfig = {
       label: 'Product Title',
       type: 'text',
     },
-    {
-      name: 'description',
-      label: 'Product Description',
-      type: 'textarea',
-    },
     globalUpload({
       field_name: 'product_image',
       label: 'Product Image',
       description: 'Upload an image for the product',
     }),
+    {
+      name: 'description',
+      label: 'Product Description',
+      type: 'textarea',
+    },
+    {
+      name: 'is_best_seller',
+      label: 'Is Best Seller?',
+      type: 'checkbox',
+      admin: {
+        position: 'sidebar',
+      },
+    },
     {
       label: 'Category',
       name: 'category',
@@ -48,6 +56,9 @@ export const Products: CollectionConfig = {
       relationTo: ['categories'],
       required: true,
       hasMany: true,
+      admin: {
+        position: 'sidebar',
+      },
     },
   ],
 }

@@ -2,7 +2,6 @@
 import { HomePage } from '@/payload-types'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { useMediaQuery } from 'react-responsive'
 
 interface HeroSectionProps {
   carousal: HomePage['carousal']
@@ -10,7 +9,6 @@ interface HeroSectionProps {
 
 export default function HeroSection({ carousal = [] }: HeroSectionProps) {
   const [current, setCurrent] = useState(0)
-  const isMobile = useMediaQuery({ maxWidth: 635 })
 
   useEffect(() => {
     if (!carousal?.length) return

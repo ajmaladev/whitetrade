@@ -1,20 +1,21 @@
 import HomePage from '@/components/HomePage'
 import { generateDynamicSEO } from '@/components/SEO'
 import {
+  getCachedBestSellerProducts,
   getCachedCategories,
   getCachedGallery,
   getCachedHomePage,
-  getCachedProducts,
 } from '@/lib/fetchMethods'
 import type { Metadata } from 'next'
 
 export default async function Home() {
   const categories = await getCachedCategories()()
   const homePage = await getCachedHomePage()()
-  const products = await getCachedProducts()()
+  const products = await getCachedBestSellerProducts()()
   const gallery = await getCachedGallery(3)()
   const { carousal, testimonials, certificates, weOffer, reviews } = homePage.docs[0] as any
   const ourBrands = homePage.docs[0]?.['our-brands']
+  console.log(products)
   return (
     <HomePage
       carousal={carousal}

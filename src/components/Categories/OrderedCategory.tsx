@@ -107,7 +107,7 @@ export default function OrderedCategory({ path, value, onChange }: OrderedCatego
   const fetchCategories = useCallback(async () => {
     try {
       setIsLoading(true)
-      const response = await fetch('/api/categories?limit=100&sort=order')
+      const response = await fetch('/api/category?limit=100&sort=order')
       if (response.ok) {
         const data = await response.json()
         const sortedCategories = data.docs.sort(

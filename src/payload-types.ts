@@ -191,8 +191,9 @@ export interface Category {
 export interface Product {
   id: string;
   title?: string | null;
-  description?: string | null;
   product_image?: string | null;
+  description?: string | null;
+  is_best_seller?: boolean | null;
   category: {
     relationTo: 'categories';
     value: string | Category;
@@ -1413,8 +1414,9 @@ export interface PostsSelect<T extends boolean = true> {
  */
 export interface ProductsSelect<T extends boolean = true> {
   title?: T;
-  description?: T;
   product_image?: T;
+  description?: T;
+  is_best_seller?: T;
   category?: T;
   updatedAt?: T;
   createdAt?: T;

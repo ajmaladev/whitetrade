@@ -52,7 +52,7 @@ export default function SearchContent({ onClose }: SearchContentProps) {
   const fetchDefaultCategories = async () => {
     try {
       setIsLoadingDefaults(true)
-      const response = await fetch('/api/categories?limit=6&sort=order')
+      const response = await fetch('/api/category?limit=6&sort=order')
       if (response.ok) {
         const data = await response.json()
         setDefaultCategories(data.docs || [])

@@ -1,7 +1,7 @@
 'use client'
 import { Product } from '@/payload-types'
 import Image from 'next/image'
-import { useActionState, useState } from 'react'
+import { useActionState, useEffect, useState } from 'react'
 import { Input } from '../ui/input'
 import { Marquee } from '../ui/marquee'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
@@ -14,13 +14,21 @@ type OurBrands =
 
 interface OurBrandsQueryProps {
   brands: OurBrands
-  products: Product[]
 }
 
-export const OurBrandsQuery = ({ brands, products }: OurBrandsQueryProps) => {
+export const OurBrandsQuery = ({ brands }: OurBrandsQueryProps) => {
   const [state, formAction] = useActionState(submitQuery, { message: '', error: false })
   const [selectedProduct, setSelectedProduct] = useState<string>('')
+  const [products, setProducts] = useState<Product[]>([])
 
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const products = await fetch('/api/products?limit=100&sort=order')
+      const data = await products.json()
+      setProducts(data.docs.filter((product: Product) => product.is_best_seller))
+    }
+    fetchProducts()
+  }, [])
   const handleSubmit = async (formData: FormData) => {
     const name = formData.get('name') as string
     const product = formData.get('product') as string
@@ -82,7 +90,7 @@ export const OurBrandsQuery = ({ brands, products }: OurBrandsQueryProps) => {
                       </SelectItem>
                     ))
                   ) : (
-                    <SelectItem value="" disabled>
+                    <SelectItem value="no-products" disabled>
                       No products found
                     </SelectItem>
                   )}
