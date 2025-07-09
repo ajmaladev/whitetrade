@@ -193,7 +193,7 @@ export const BestSellerProducts = ({ products }: { products: Product[] }) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <section className="pb-8 px-4 sm:px-6 lg:px-12 md:my-14 md:mb-20 relative" id="best-sellers">
+      <section className="pb-2 px-4 sm:px-6 lg:px-12 md:my-14 md:mb-20 relative" id="best-sellers">
         {/* Background decorative elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-br from-pink-200/20 to-purple-200/20 rounded-full blur-3xl animate-pulse"></div>
@@ -216,8 +216,8 @@ export const BestSellerProducts = ({ products }: { products: Product[] }) => {
               <div className="absolute inset-0 bg-gradient-to-r from-pink-100/60 via-purple-100/60 to-blue-100/60 rounded-3xl blur-xl -z-10"></div>
             </div>
             <p className="text-gray-600 text-sm sm:text-base max-w-xl mx-auto leading-relaxed font-medium">
-              Discover our most loved and trending products that customers can't stop raving about!
-              🎉
+              Discover our most loved and trending products that customers can&apos;t stop raving
+              about! 🎉
             </p>
           </motion.div>
 
