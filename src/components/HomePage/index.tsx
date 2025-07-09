@@ -99,7 +99,7 @@ export default function HomePage({
       <main className="w-full" role="main" aria-label="White Trading Company Homepage">
         <HeroSection carousal={carousal} />
         {/* <ReadyToShip /> */}
-        <div className="-mt-2 xs:mt-14">
+        <div className="mt-[-18px] sm:mt-14">
           <Categories categories={categories} />
         </div>
         <BuyNow />
