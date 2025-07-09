@@ -6,21 +6,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useInView } from 'react-intersection-observer'
 
-const CARD_COLORS = [
-  'bg-gradient-to-br from-pink-100 via-rose-50 to-pink-200', // Card 1 - Soft pink
-  'bg-gradient-to-br from-yellow-100 via-orange-50 to-yellow-200', // Card 2 - Warm yellow
-  'bg-gradient-to-br from-blue-100 via-cyan-50 to-blue-200', // Card 3 - Soft blue
-  'bg-gradient-to-br from-purple-100 via-pink-50 to-purple-200', // Card 4 - Lavender
-  'bg-gradient-to-br from-green-100 via-emerald-50 to-green-200', // Card 5 - Mint
-  'bg-gradient-to-br from-orange-100 via-red-50 to-orange-200', // Card 6 - Peach
-  'bg-gradient-to-br from-indigo-100 via-purple-50 to-indigo-200', // Card 7 - Soft purple
-  'bg-gradient-to-br from-teal-100 via-cyan-50 to-teal-200', // Card 8 - Ocean
-]
-
-function getCardColor(index: number) {
-  return CARD_COLORS[index % CARD_COLORS.length]
-}
-
 function ProductCard({ product, index }: { product: Product; index: number }) {
   let imageUrl = product?.product_image
   if (imageUrl) {
@@ -40,9 +25,9 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       className={`
         relative flex flex-col justify-between overflow-hidden 
         rounded-[2.5rem]
-        ${getCardColor(index)}
-        h-[200px] sm:h-[300px]
-        w-[160px] sm:w-[200px] lg:w-[220px]
+        bg-gradient-to-br from-[#faf0e8] via-[#f8e8d8] to-[#f5e0c8]
+        h-[250px] sm:h-[300px]
+        w-[200px] sm:w-[250px] lg:w-[300px]
         p-4 sm:p-5
         transition-all duration-500 ease-out
         hover:scale-110
@@ -230,7 +215,7 @@ export const BestSellerProducts = ({ products }: { products: Product[] }) => {
               animate={firstRowInView ? 'visible' : 'hidden'}
               variants={staggerContainer}
             >
-              <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide">
+              <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-6 scrollbar-hide">
                 {firstRowProducts.map((product, index) => (
                   <motion.div key={product.id} variants={staggerItem}>
                     <ProductCard product={product} index={index} />
