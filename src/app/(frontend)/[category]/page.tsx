@@ -17,19 +17,56 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
   if (!category) {
     NotFound()
   }
+
+  const categoryData = category.docs[0] as Category
+  const products = allProducts.docs as Product[]
+
+  // Generate structured data for category page
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: categoryData.title,
+    description: `Explore ${categoryData.title} from White Trading Company. Leading supplier in Coimbatore since 2011.`,
+    url: `https://whitetradingcompany.com/${categoryData.slug}`,
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: products.map((product, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'Product',
+          name: product.title,
+          description: product.description,
+          url: `https://whitetradingcompany.com/products/${product.slug || product.id}`,
+        },
+      })),
+    },
+  }
+
   return (
-    <div className="flex flex-col mb-10 lg:mb-5 mt-5 md:mt-10">
-      <div className="flex flex-col lg:flex-row items-center justify-center gap-10 min-[50vh] lg:gap-40">
-        <CategoryCard
-          category={category.docs[0] as Category}
-          index={0}
-          layout={{ colSpan: 2, rowSpan: 1 }}
-          showButton={false}
-        />
-        <ProductDetails products={allProducts.docs as Product[]} />
-      </div>
-      <GalleryGrid images={category.docs[0]?.category_images as Gallery['images']} />
-    </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <main
+        className="flex flex-col mb-10 lg:mb-5 mt-5 md:mt-10"
+        role="main"
+        aria-label={`${categoryData.title} - White Trading Company Category Page`}
+      >
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-10 min-[50vh] lg:gap-40">
+          <CategoryCard
+            category={categoryData}
+            index={0}
+            layout={{ colSpan: 2, rowSpan: 1 }}
+            showButton={false}
+            isCategoryPage={true}
+          />
+          <ProductDetails products={products} />
+        </div>
+        <GalleryGrid images={categoryData?.category_images as Gallery['images']} />
+      </main>
+    </>
   )
 }
 
@@ -52,7 +89,7 @@ export async function generateMetadata({
     return generateDynamicSEO({
       data: null,
       type: 'category',
-      title: 'Category Not Found',
+      title: 'Category Not Found - White Trading Company',
       description: 'The requested category could not be found on White Trading Company.',
     })
   }

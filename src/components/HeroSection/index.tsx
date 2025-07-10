@@ -124,9 +124,9 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
                     'linear-gradient(90deg, rgba(255, 255, 255, 0.00) 0%, rgba(255, 255, 255, 0.74) 100%), rgba(255, 255, 255, 0.38)',
                 }}
               >
-                <div className="text-[#1C3A6A] text-3xl md:text-4xl lg:text-5xl font-semibold font-['Montserrat'] mb-2">
+                <h1 className="text-[#1C3A6A] text-3xl md:text-4xl lg:text-5xl font-semibold font-['Montserrat'] mb-2">
                   WHITE TRADING COMPANY
-                </div>
+                </h1>
                 <div className="text-[#1C3A6A] text-xl md:text-2xl lg:text-4xl font-normal font-['Montserrat'] mb-1">
                   Worldwide Exporters & Supplier
                 </div>

@@ -19,6 +19,7 @@ const poppins = Poppins({
   weight: ['400', '500', '600', '700'],
   variable: '--font-poppins',
   display: 'swap',
+  preload: true,
 })
 
 const manrope = Manrope({
@@ -26,6 +27,7 @@ const manrope = Manrope({
   weight: ['400', '500', '600', '700'],
   variable: '--font-manrope',
   display: 'swap',
+  preload: true,
 })
 
 const montserrat = Montserrat({
@@ -33,6 +35,7 @@ const montserrat = Montserrat({
   weight: ['400', '500', '600', '700'],
   variable: '--font-montserrat',
   display: 'swap',
+  preload: true,
 })
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -50,13 +53,22 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     >
       <head>
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
-        {/* <link href="/favicon.svg" rel="icon" type="image/svg+xml" /> */}
+        <link href="/logo.svg" rel="icon" type="image/svg+xml" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <meta name="theme-color" content="#1C3A6A" />
+        <meta name="color-scheme" content="light" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
       </head>
       <body>
-        <MegaMenu />
+        <header role="banner" aria-label="White Trading Company Header">
+          <MegaMenu />
+        </header>
         {children}
-        <NewsLetter />
-        <Footer />
+        <footer role="contentinfo" aria-label="White Trading Company Footer">
+          <NewsLetter />
+          <Footer />
+        </footer>
         <WhatsAppButton />
       </body>
     </html>
@@ -65,16 +77,76 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
 export const metadata: Metadata = {
   metadataBase: new URL(getServerSideURL()),
-  title:
-    'White Trading Company - Safety Products, Fruits & Vegetables, Grains & Rice, Food Products, Textile',
+  title: {
+    default: 'White Trading Company - Safety Products & Food Supplies',
+    template: '%s | White Trading Company',
+  },
   description:
-    'White Trading Company - Leading supplier of safety products, fruits & vegetables, grains & rice, food products, and textile materials. Established in 2011, serving Coimbatore.',
-  keywords:
-    'White Trading Company, safety products, fruits vegetables, grains rice, food products, textile products, Coimbatore, safety gear, basmati rice, cotton materials',
-  openGraph: mergeOpenGraph(),
+    'Leading supplier of safety products, fruits & vegetables, grains & rice, food products, and textile materials in Coimbatore since 2011.',
+  keywords: [
+    'White Trading Company',
+    'safety products Coimbatore',
+    'safety jackets',
+    'safety helmets',
+    'safety shoes',
+    'fruits and vegetables supplier',
+    'grains and rice supplier',
+    'food products supplier',
+    'textile products Coimbatore',
+    'safety gear supplier',
+    'basmati rice supplier',
+    'cotton materials',
+    'fashion wear',
+    'bedcovers',
+    'safety harness',
+    'safety gloves',
+    'safety goggles',
+    'hardware tools',
+    'toppy noodles',
+    'ghee supplier',
+    'sweetcorn supplier',
+    'trading company Coimbatore',
+    'wholesale supplier',
+    'bulk purchase',
+    'corporate supplies',
+  ].join(', '),
+  authors: [{ name: 'White Trading Company' }],
+  creator: 'White Trading Company',
+  publisher: 'White Trading Company',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  openGraph: {
+    ...mergeOpenGraph(),
+    title: 'White Trading Company - Safety Products & Food Supplies',
+    description:
+      'Leading supplier of safety products, fruits & vegetables, grains & rice, food products, and textile materials in Coimbatore since 2011.',
+    siteName: 'White Trading Company',
+    locale: 'en_US',
+    type: 'website',
+  },
   twitter: {
     card: 'summary_large_image',
+    title: 'White Trading Company - Safety Products & Food Supplies',
+    description:
+      'Leading supplier of safety products, fruits & vegetables, grains & rice, food products, and textile materials in Coimbatore since 2011.',
     creator: '@whitetradingcompany',
     site: '@whitetradingcompany',
+  },
+  alternates: {
+    canonical: getServerSideURL(),
   },
 }

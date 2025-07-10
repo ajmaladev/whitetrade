@@ -190,9 +190,9 @@ export const SuggestedProducts = ({ products, currentProductId }: SuggestedProdu
             className="text-center mb-8 sm:mb-12"
           >
             <div className="relative inline-block">
-              <h3 className="text-xl xs:text-2xl sm:text-4xl lg:text-6xl font-bold text-[#1C3A6A] mb-4 font-['Montserrat'] relative z-10">
+              <h2 className="text-xl xs:text-2xl sm:text-4xl lg:text-6xl font-bold text-[#1C3A6A] mb-4 font-['Montserrat'] relative z-10">
                 You Might Also Like
-              </h3>
+              </h2>
               <div className="absolute inset-0 bg-gradient-to-r from-blue-100/60 via-purple-100/60 to-cyan-100/60 rounded-3xl blur-xl -z-10"></div>
             </div>
           </motion.div>

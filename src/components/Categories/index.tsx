@@ -64,7 +64,10 @@ function ShopNowButton({ href, buttonColor }: { href: string; buttonColor: strin
       className={`inline-flex items-center gap-2 px-4 py-2 mt-4 rounded-xl ${buttonColor} text-white group-hover:scale-105 text-sm font-semibold shadow transition`}
     >
       Shop Now
-      <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+      <ArrowRightIcon
+        className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
+        aria-hidden="true"
+      />
     </span>
   )
 }
@@ -74,11 +77,13 @@ export function CategoryCard({
   index,
   layout,
   showButton = false,
+  isCategoryPage = false,
 }: {
   category: Category
   index: number
   layout: { colSpan: number; rowSpan: number }
   showButton?: boolean
+  isCategoryPage?: boolean
 }) {
   let imageUrl = category?.category_image
   if (imageUrl) {
@@ -102,14 +107,26 @@ export function CategoryCard({
         group
       `}
     >
-      <Link href={`/${category?.slug}`}>
+      <Link
+        href={`/${category?.slug}`}
+        aria-label={`Explore ${category.title} products and services`}
+      >
         <div>
-          <h2
-            className={`font-extrabold text-neutral-600/60 text-xl font-['Montserrat'] sm:text-2xl mb-2 !leading-none
+          {isCategoryPage ? (
+            <h1
+              className={`font-extrabold text-neutral-600/60 text-xl font-['Montserrat'] sm:text-2xl mb-2 !leading-none
             transition-colors duration-300 group-hover:text-neutral-800/80`}
-          >
-            {category.title}
-          </h2>
+            >
+              {category.title}
+            </h1>
+          ) : (
+            <h2
+              className={`font-extrabold text-neutral-600/60 text-xl font-['Montserrat'] sm:text-2xl mb-2 !leading-none
+            transition-colors duration-300 group-hover:text-neutral-800/80`}
+            >
+              {category.title}
+            </h2>
+          )}
         </div>
         <div
           className={`flex-1 flex items-end justify-end ${showButton ? 'justify-between items-center' : 'justify-end'}`}
@@ -123,7 +140,7 @@ export function CategoryCard({
           <div className="relative w-40 h-32 sm:w-48 sm:h-40 transition-transform duration-300 group-hover:translate-y-[-8px]">
             <Image
               src={imageUrl || '/logo.svg'}
-              alt={category.title}
+              alt={`${category.title} - Category image`}
               fill
               className="object-contain drop-shadow-xl transition-all duration-300 group-hover:drop-shadow-2xl"
               sizes="(max-width: 640px) 100vw, 33vw"
@@ -144,12 +161,13 @@ export default function Categories({ categories }: { categories: PaginatedDocs<C
     cards.push(...categories.docs.slice(0, 9 - cards.length))
   }
 
-  // Structured data for SEO
+  // Enhanced structured data for SEO
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: 'White Trading Company Categories',
-    description: 'Explore our comprehensive trading categories and services',
+    description:
+      'Explore our comprehensive trading categories including safety products, food supplies, and textile materials',
     numberOfItems: categories.docs.length,
     itemListElement: categories.docs.map((category, index) => ({
       '@type': 'ListItem',
@@ -162,6 +180,14 @@ export default function Categories({ categories }: { categories: PaginatedDocs<C
         provider: {
           '@type': 'Organization',
           name: 'White Trading Company',
+          address: {
+            '@type': 'PostalAddress',
+            streetAddress: '#45/2a-1, Sungam Bye Pass Road',
+            addressLocality: 'Coimbatore',
+            addressRegion: 'Tamil Nadu',
+            postalCode: '641045',
+            addressCountry: 'IN',
+          },
         },
       },
     })),
@@ -173,8 +199,15 @@ export default function Categories({ categories }: { categories: PaginatedDocs<C
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <section className="py-16 pt-8 px-2 sm:px-6 lg:px-12 md:mt-20" id="products">
+      <section
+        className="py-16 pt-8 px-2 sm:px-6 lg:px-12 md:mt-20"
+        id="products"
+        aria-labelledby="categories-heading"
+      >
         <div className="max-w-7xl mx-auto">
+          <h2 id="categories-heading" className="sr-only">
+            White Trading Company Product Categories
+          </h2>
           {/* Grid with 6 columns for desktop */}
           <div
             className="
@@ -184,6 +217,8 @@ export default function Categories({ categories }: { categories: PaginatedDocs<C
               auto-rows-fr
             "
             style={{ minHeight: 500 }}
+            role="grid"
+            aria-label="Product categories grid"
           >
             {gridLayout.map((layout, index) => (
               <CategoryCard
