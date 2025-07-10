@@ -53,7 +53,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     >
       <head>
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
-        <link href="/logo.svg" rel="icon" type="image/svg+xml" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <meta name="theme-color" content="#1C3A6A" />
