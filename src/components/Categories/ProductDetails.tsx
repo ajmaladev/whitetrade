@@ -47,7 +47,7 @@ Looking forward to hearing from you!
     const encodedMessage = encodeURIComponent(message)
 
     // WhatsApp business number (you can replace this with your actual WhatsApp number)
-    const whatsappNumber = '+919544889253' // Replace with your actual WhatsApp number
+    const whatsappNumber = '+919843044489' // Replace with your actual WhatsApp number
 
     // Create WhatsApp URL
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`

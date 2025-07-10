@@ -20,7 +20,7 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
 
   // WhatsApp click handler
   const handleWhatsAppClick = () => {
-    const phoneNumber = '+919544889253' // Default number from WhatsAppButton
+    const phoneNumber = '+919843044489' // Default number from WhatsAppButton
     const message =
       'Hello! I would like to schedule a call with your team to discuss your products and services.'
     const encodedMessage = encodeURIComponent(message)

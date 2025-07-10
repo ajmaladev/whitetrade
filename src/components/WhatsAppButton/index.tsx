@@ -8,7 +8,7 @@ interface WhatsAppButtonProps {
 }
 
 export default function WhatsAppButton({
-  phoneNumber = '+919544889253', // Default number, replace with actual
+  phoneNumber = '+919843044489', // Default number, replace with actual
   message = 'Hello! I would like to know more about your products and services.',
 }: WhatsAppButtonProps) {
   const handleWhatsAppClick = () => {

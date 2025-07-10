@@ -71,7 +71,7 @@ export const ProductPage = ({ product }: ProductPageProps) => {
 
   // WhatsApp functionality
   const handleBuyNow = () => {
-    const phoneNumber = '+919544889253' // Default number
+    const phoneNumber = '+919843044489' // Default number
     const message = `Hello! I would like to buy ${product.title}. Can you provide more details?`
     const encodedMessage = encodeURIComponent(message)
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`

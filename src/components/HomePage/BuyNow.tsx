@@ -3,7 +3,7 @@ import { Button } from '../ui/button'
 
 export default function BuyNow() {
   const handleWhatsAppClick = () => {
-    const phoneNumber = '+919544889253' // Replace with actual number
+    const phoneNumber = '+919843044489' // Replace with actual number
     const message =
       'Hello! I would like to buy your products. Can you please provide me with more information about pricing and availability?'
     const encodedMessage = encodeURIComponent(message)

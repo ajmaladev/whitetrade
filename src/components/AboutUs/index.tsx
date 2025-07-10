@@ -7,7 +7,7 @@ import { useInView } from 'react-intersection-observer'
 
 export const AboutUs = () => {
   const handleWhatsAppClick = () => {
-    const phoneNumber = '+919544889253' // Replace with actual number
+    const phoneNumber = '+919843044489' // Replace with actual number
     const message =
       'Hello! I would like to book a service with your company. Can you please provide me with more information about your services and availability?'
     const encodedMessage = encodeURIComponent(message)
