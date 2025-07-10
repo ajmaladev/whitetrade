@@ -2,7 +2,7 @@
 import { Category, Product } from '@/payload-types'
 import { ChevronDownIcon, Search } from 'lucide-react'
 import Link from 'next/link'
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 export default function ProductDetails({ products }: { products: Product[] }) {
   const [selectedIndex, setSelectedIndex] = useState(-1)
@@ -64,14 +64,16 @@ Looking forward to hearing from you!
   }
 
   // Add event listener for clicks outside
-  useState(() => {
-    if (dropdownOpen) {
+  useEffect(() => {
+    if (dropdownOpen && typeof document !== 'undefined') {
       document.addEventListener('mousedown', handleClickOutside)
     }
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
+      if (typeof document !== 'undefined') {
+        document.removeEventListener('mousedown', handleClickOutside)
+      }
     }
-  })
+  }, [dropdownOpen])
 
   return (
     <div className="w-[90%] lg:w-[36%]">
