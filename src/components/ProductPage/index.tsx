@@ -162,7 +162,7 @@ export const ProductPage = ({ product }: ProductPageProps) => {
               <div className="space-y-4">
                 <motion.h1
                   variants={itemVariants}
-                  className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 font-['Poppins'] leading-tight"
+                  className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1C3A6A] font-['Montserrat'] leading-tight"
                 >
                   {product.title}
                 </motion.h1>
@@ -185,7 +185,7 @@ export const ProductPage = ({ product }: ProductPageProps) => {
                   onClick={handleBuyNow}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-full bg-gradient-to-br from-[#faf0e8] via-[#f8e8d8] to-[#f5e0c8] text-gray-800 font-bold py-2 md:py-4 px-4 md:px-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-white/60 backdrop-blur-sm hover:bg-gradient-to-br hover:from-[#f5e0c8] hover:via-[#f8e8d8] hover:to-[#faf0e8]"
+                  className="w-full bg-gradient-to-br from-[#faf0e8] via-[#f8e8d8] to-[#f5e0c8] text-[#1C3A6A] font-bold py-2 md:py-4 px-4 md:px-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-white/60 backdrop-blur-sm hover:bg-gradient-to-br hover:from-[#f5e0c8] hover:via-[#f8e8d8] hover:to-[#faf0e8]"
                 >
                   <span className="mr-2">🛒</span>
                   Buy Now
@@ -193,10 +193,10 @@ export const ProductPage = ({ product }: ProductPageProps) => {
               </motion.div>
               {/* Description */}
               <motion.div variants={itemVariants} className="space-y-4">
-                <h3 className="text-lg md:text-xl font-semibold text-gray-700 font-['Montserrat']">
+                <h3 className="text-lg md:text-xl font-semibold text-[#1C3A6A] font-['Montserrat']">
                   Product Description
                 </h3>
-                <p className="text-gray-600 leading-relaxed text-sm md:text-lg">
+                <p className="text-[#1C3A6A] font-['Montserrat'] leading-relaxed text-sm md:text-lg">
                   {product.description ||
                     'Discover this amazing product that combines quality, style, and functionality. Perfect for your needs and designed to exceed expectations.'}
                 </p>

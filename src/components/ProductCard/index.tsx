@@ -51,7 +51,7 @@ export const ProductCard = ({ product, index }: ProductCardProps) => {
           )}
 
           <h2
-            className={`font-bold text-center text-gray-800 text-sm sm:text-lg font-['Montserrat'] mb-3 !leading-tight
+            className={`font-bold text-center text-[#1C3A6A] text-sm sm:text-lg font-['Montserrat'] mb-3 !leading-tight
             transition-colors duration-300 group-hover:text-gray-900
             line-clamp-2 group-hover:line-clamp-none`}
           >

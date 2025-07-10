@@ -53,7 +53,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           </div>
 
           <h2
-            className={`font-bold text-gray-800 text-sm sm:text-lg font-['Montserrat'] mb-3 !leading-tight
+            className={`font-bold text-[#1C3A6A] text-sm sm:text-lg font-['Montserrat'] mb-3 !leading-tight
             transition-colors duration-300 group-hover:text-gray-900
             line-clamp-2 group-hover:line-clamp-none`}
           >
@@ -183,12 +183,12 @@ export const BestSellerProducts = ({ products }: { products: Product[] }) => {
             className="text-center mb-8 sm:mb-12"
           >
             <div className="relative inline-block">
-              <h3 className="text-2xl sm:text-4xl lg:text-6xl font-bold text-neutral-800 mb-4 font-['Poppins'] relative z-10">
+              <h3 className="text-2xl sm:text-4xl lg:text-6xl font-bold text-[#1C3A6A] mb-4 font-['Montserrat'] relative z-10">
                 Best Sellers
               </h3>
               <div className="absolute inset-0 bg-gradient-to-r from-pink-100/60 via-purple-100/60 to-blue-100/60 rounded-3xl blur-xl -z-10"></div>
             </div>
-            <p className="text-gray-600 text-sm sm:text-base max-w-xl mx-auto leading-relaxed font-medium">
+            <p className="text-[#1C3A6A] font-['Montserrat'] text-sm sm:text-base max-w-xl mx-auto leading-relaxed font-medium">
               Discover our most loved and trending products that customers can&apos;t stop raving
               about!
             </p>

@@ -38,10 +38,10 @@ export default async function ProductsPageRoute() {
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 font-['Montserrat']">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1C3A6A] mb-6 font-['Montserrat']">
                 Our Product Collection
               </h1>
-              <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
+              <p className="text-lg sm:text-xl text-[#1C3A6A] max-w-3xl mx-auto mb-8 leading-relaxed">
                 Discover our carefully curated selection of high-quality products. From best sellers
                 to unique finds, we have everything you need.
               </p>

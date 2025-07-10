@@ -133,7 +133,7 @@ export const ProductsGrid = ({ initialProducts, hasMore, totalProducts }: Produc
                 ${
                   isLoadingMore
                     ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                    : 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 hover:shadow-lg transform hover:scale-105'
+                    : 'bg-[#1C3A6A] text-white hover:shadow-lg transform hover:scale-105'
                 }
               `}
             >
