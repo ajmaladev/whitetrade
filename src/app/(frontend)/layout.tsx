@@ -61,14 +61,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
       </head>
       <body>
-        <header role="banner" aria-label="White Trading Company Header">
-          <MegaMenu />
-        </header>
+        <MegaMenu />
         {children}
-        <footer role="contentinfo" aria-label="White Trading Company Footer">
-          <NewsLetter />
-          <Footer />
-        </footer>
+        <NewsLetter />
+        <Footer />
         <WhatsAppButton />
       </body>
     </html>
