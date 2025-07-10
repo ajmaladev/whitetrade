@@ -26,15 +26,14 @@ const nextConfig = {
   },
   reactStrictMode: true,
   redirects,
-  // Enable static generation for better SEO
-  output: 'standalone',
+  // Only use standalone output on non-Windows systems or in production
+  ...(process.platform !== 'win32' && { output: 'standalone' }),
   // Optimize for search engines
   poweredByHeader: false,
   // Enable compression
   compress: true,
   // Optimize bundle size
   experimental: {
-    optimizeCss: true,
     optimizePackageImports: ['@payloadcms/next'],
   },
   // Headers for better SEO and security
