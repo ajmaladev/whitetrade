@@ -191,6 +191,8 @@ export interface Category {
 export interface Product {
   id: string;
   title?: string | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
   product_image?: string | null;
   description?: string | null;
   is_best_seller?: boolean | null;
@@ -1414,6 +1416,8 @@ export interface PostsSelect<T extends boolean = true> {
  */
 export interface ProductsSelect<T extends boolean = true> {
   title?: T;
+  slug?: T;
+  slugLock?: T;
   product_image?: T;
   description?: T;
   is_best_seller?: T;

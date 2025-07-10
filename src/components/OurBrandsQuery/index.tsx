@@ -25,7 +25,7 @@ export const OurBrandsQuery = ({ brands }: OurBrandsQueryProps) => {
     const fetchProducts = async () => {
       const products = await fetch('/api/products?limit=100&sort=order')
       const data = await products.json()
-      setProducts(data.docs.filter((product: Product) => product.is_best_seller))
+      setProducts(data?.docs?.filter((product: Product) => product.is_best_seller) || [])
     }
     fetchProducts()
   }, [])

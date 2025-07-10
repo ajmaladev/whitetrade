@@ -31,7 +31,6 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         p-4 sm:p-5
         transition-all duration-500 ease-out
         hover:scale-110
-        hover:rotate-2
         group
         border-2 border-white/60
         backdrop-blur-sm
@@ -45,27 +44,16 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       <div className="absolute bottom-4 left-4 w-3 h-3 bg-white/60 rounded-full opacity-70"></div>
       <div className="absolute top-1/2 left-2 w-2 h-2 bg-white/40 rounded-full opacity-50"></div>
 
-      {/* Floating sparkles */}
-      <div className="absolute top-2 left-2 text-yellow-400 opacity-70 animate-bounce text-sm">
-        ✨
-      </div>
-      <div className="absolute bottom-2 right-2 text-pink-400 opacity-60 animate-pulse text-xs">
-        💫
-      </div>
-
-      <Link href={`/products/${product.id}`} className="h-full flex flex-col">
+      <Link href={`/products/${product.slug || product.id}`} className="h-full flex flex-col">
         <div className="flex-1">
           <div className="flex items-center justify-between mb-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full flex items-center justify-center shadow-lg">
-              <span className="text-sm font-bold text-white">★</span>
-            </div>
             <div className="text-xs font-bold text-white/95 bg-gradient-to-r from-pink-500/30 to-purple-500/30 px-3 py-1.5 rounded-full border border-white/40 backdrop-blur-sm">
-              Best
+              Best Seller
             </div>
           </div>
 
           <h2
-            className={`font-bold text-gray-800 text-sm sm:text-lg font-['Montserrat'] mb-3 !leading-tight
+            className={`font-bold text-[#1C3A6A] text-sm sm:text-lg font-['Montserrat'] mb-3 !leading-tight
             transition-colors duration-300 group-hover:text-gray-900
             line-clamp-2 group-hover:line-clamp-none`}
           >
@@ -74,7 +62,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         </div>
 
         <div className="flex-1 flex items-end justify-center relative">
-          <div className="relative w-24 h-20 sm:w-32 sm:h-28 transition-all duration-700 group-hover:scale-125 group-hover:rotate-6">
+          <div className="relative w-24 h-20 sm:w-32 sm:h-28 transition-all duration-700 group-hover:scale-125">
             {/* Enhanced glow effect */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent rounded-3xl blur-lg group-hover:blur-xl transition-all duration-500"></div>
             <div className="absolute inset-0 bg-white/30 rounded-3xl blur-md"></div>
@@ -163,7 +151,7 @@ export const BestSellerProducts = ({ products }: { products: Product[] }) => {
         '@type': 'Product',
         name: product.title,
         description: product.description || `Best selling product: ${product.title}`,
-        url: `https://whitetradingcompany.com/products/${product.id}`,
+        url: `https://whitetradingcompany.com/products/${product.slug || product.id}`,
         provider: {
           '@type': 'Organization',
           name: 'White Trading Company',
@@ -195,14 +183,14 @@ export const BestSellerProducts = ({ products }: { products: Product[] }) => {
             className="text-center mb-8 sm:mb-12"
           >
             <div className="relative inline-block">
-              <h3 className="text-2xl sm:text-4xl lg:text-6xl font-bold text-neutral-800 mb-4 font-['Poppins'] relative z-10">
-                ✨ Best Sellers ✨
+              <h3 className="text-2xl sm:text-4xl lg:text-6xl font-bold text-[#1C3A6A] mb-4 font-['Montserrat'] relative z-10">
+                Best Sellers
               </h3>
               <div className="absolute inset-0 bg-gradient-to-r from-pink-100/60 via-purple-100/60 to-blue-100/60 rounded-3xl blur-xl -z-10"></div>
             </div>
-            <p className="text-gray-600 text-sm sm:text-base max-w-xl mx-auto leading-relaxed font-medium">
+            <p className="text-[#1C3A6A] font-['Montserrat'] text-sm sm:text-base max-w-xl mx-auto leading-relaxed font-medium">
               Discover our most loved and trending products that customers can&apos;t stop raving
-              about! 🎉
+              about!
             </p>
           </motion.div>
 
@@ -239,6 +227,38 @@ export const BestSellerProducts = ({ products }: { products: Product[] }) => {
                 ))}
               </div>
             </motion.div>
+
+            {/* Browse All Products Button - Top Right Corner */}
+            <div className="flex justify-center z-20">
+              <Link
+                href="/products"
+                className="
+              inline-flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-3
+              bg-gray-100 hover:bg-gray-200
+              text-gray-500 font-semibold text-sm sm:text-base
+              rounded-xl shadow- hover:shadow-xl
+              transition-all duration-300 ease-out
+              transform hover:scale-105 hover:-translate-y-1
+              border border-white/20 backdrop-blur-sm
+              group
+            "
+              >
+                <span>Browse all products</span>
+                <svg
+                  className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

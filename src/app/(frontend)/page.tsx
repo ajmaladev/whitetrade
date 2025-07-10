@@ -15,7 +15,6 @@ export default async function Home() {
   const gallery = await getCachedGallery(3)()
   const { carousal, testimonials, certificates, weOffer, reviews } = homePage.docs[0] as any
   const ourBrands = homePage.docs[0]?.['our-brands']
-  console.log(products)
   return (
     <HomePage
       carousal={carousal}
