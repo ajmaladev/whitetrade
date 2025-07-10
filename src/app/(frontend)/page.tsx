@@ -35,5 +35,6 @@ export async function generateMetadata(): Promise<Metadata> {
   return generateDynamicSEO({
     data: homePage.docs[0] || null,
     type: 'home',
+    image: '/logo.svg',
   })
 }

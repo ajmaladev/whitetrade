@@ -1,9 +1,10 @@
 'use client'
 
 import { Gallery } from '@/payload-types'
-import { ChevronLeft, ChevronRight, X, ZoomIn } from 'lucide-react'
+import { ChevronLeft, ChevronRight, RotateCcw, X, ZoomIn, ZoomOut } from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 
 interface GalleryGridProps {
   images: Gallery['images']
@@ -201,12 +202,14 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
                 </span>
               </div>
 
-              <button
-                onClick={closeModal}
-                className="bg-white/10 backdrop-blur-md hover:bg-white/20 rounded-full p-3 transition-all duration-200 border border-white/20 group"
-              >
-                <X className="w-5 h-5 text-white group-hover:rotate-90 transition-transform duration-300" />
-              </button>
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={closeModal}
+                  className="bg-white/10 backdrop-blur-md hover:bg-white/20 rounded-full p-3 transition-all duration-200 border border-white/20 group"
+                >
+                  <X className="w-5 h-5 text-white group-hover:rotate-90 transition-transform duration-300" />
+                </button>
+              </div>
             </div>
 
             {/* Navigation Buttons */}
@@ -224,15 +227,73 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
               <ChevronRight className="w-6 h-6 text-white group-hover:translate-x-1 transition-transform duration-300" />
             </button>
 
-            {/* Main Image Container */}
+            {/* Main Image Container with Zoom */}
             <div className="relative w-full h-full flex items-center justify-center">
-              <Image
-                src={`${process.env.NEXT_PUBLIC_BUNNY_CDN}${images[selectedImage]?.image}`}
-                alt={`Gallery image ${selectedImage + 1}`}
-                className="md:w-96 md:h-96 w-64 h-64 object-cover rounded-lg shadow-2xl animate-scale-in"
-                width={100}
-                height={100}
-              />
+              <TransformWrapper
+                initialScale={1}
+                minScale={0.5}
+                maxScale={3}
+                centerOnInit
+                wheel={{ step: 0.1 }}
+                pinch={{ step: 5 }}
+                doubleClick={{ step: 2 }}
+              >
+                {({ zoomIn, zoomOut, resetTransform, instance }) => (
+                  <>
+                    <TransformComponent
+                      wrapperClass="w-full h-full flex items-center justify-center"
+                      contentClass="w-full h-full flex items-center justify-center"
+                    >
+                      <Image
+                        src={`${process.env.NEXT_PUBLIC_BUNNY_CDN}${images[selectedImage]?.image || ''}`}
+                        alt={`Gallery image ${selectedImage + 1}`}
+                        className="max-w-[90vw] max-h-[90vh] w-auto h-auto object-contain rounded-lg shadow-2xl animate-scale-in"
+                        width={1200}
+                        height={800}
+                        priority
+                        draggable={false}
+                      />
+                    </TransformComponent>
+
+                    {/* Zoom Controls */}
+                    <div className="absolute top-20 right-6 z-30 flex flex-col space-y-2">
+                      <button
+                        onClick={() => zoomIn()}
+                        className="bg-white/10 backdrop-blur-md hover:bg-white/20 rounded-full p-3 transition-all duration-200 border border-white/20 group"
+                        disabled={instance.transformState.scale >= 3}
+                      >
+                        <ZoomIn className="w-4 h-4 text-white" />
+                      </button>
+
+                      <button
+                        onClick={() => zoomOut()}
+                        className="bg-white/10 backdrop-blur-md hover:bg-white/20 rounded-full p-3 transition-all duration-200 border border-white/20 group"
+                        disabled={instance.transformState.scale <= 0.5}
+                      >
+                        <ZoomOut className="w-4 h-4 text-white" />
+                      </button>
+
+                      <button
+                        onClick={() => resetTransform()}
+                        className="bg-white/10 backdrop-blur-md hover:bg-white/20 rounded-full p-3 transition-all duration-200 border border-white/20 group"
+                      >
+                        <RotateCcw className="w-4 h-4 text-white" />
+                      </button>
+                    </div>
+
+                    {/* Zoom Level Indicator */}
+                    {instance.transformState.scale !== 1 && (
+                      <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-20">
+                        <div className="bg-white/10 backdrop-blur-md rounded-full px-4 py-2 border border-white/20">
+                          <span className="text-white font-medium">
+                            {Math.round(instance.transformState.scale * 100)}%
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                  </>
+                )}
+              </TransformWrapper>
             </div>
 
             {/* Image Thumbnails Strip */}
@@ -268,7 +329,7 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
                         }`}
                       >
                         <Image
-                          src={`${process.env.NEXT_PUBLIC_BUNNY_CDN}${img?.image}`}
+                          src={`${process.env.NEXT_PUBLIC_BUNNY_CDN}${img?.image || ''}`}
                           alt=""
                           width={100}
                           height={100}

@@ -61,23 +61,22 @@ export const generateDynamicSEO = (props: DynamicSEOProps): Metadata => {
   // Generate SEO data based on content type
   switch (type) {
     case 'home':
-      const homeData = data as Partial<HomePageType>
       title = 'White Trading Company - Safety Products & Food Supplies'
+      // Optimized description: 155 characters
       description =
         'Leading supplier of safety products, fruits & vegetables, grains & rice, food products, and textile materials in Coimbatore since 2011.'
       keywords = [
         'White Trading Company',
-        'safety products',
+        'safety products Coimbatore',
         'safety jackets',
         'safety helmets',
         'safety shoes',
-        'fruits and vegetables',
-        'grains and rice',
-        'food products',
-        'textile products',
-        'Coimbatore',
-        'safety gear',
-        'basmati rice',
+        'fruits and vegetables supplier',
+        'grains and rice supplier',
+        'food products supplier',
+        'textile products Coimbatore',
+        'safety gear supplier',
+        'basmati rice supplier',
         'cotton materials',
         'fashion wear',
         'bedcovers',
@@ -86,8 +85,12 @@ export const generateDynamicSEO = (props: DynamicSEOProps): Metadata => {
         'safety goggles',
         'hardware tools',
         'toppy noodles',
-        'ghee',
-        'sweetcorn',
+        'ghee supplier',
+        'sweetcorn supplier',
+        'trading company Coimbatore',
+        'wholesale supplier',
+        'bulk purchase',
+        'corporate supplies',
       ]
       break
 
@@ -96,39 +99,67 @@ export const generateDynamicSEO = (props: DynamicSEOProps): Metadata => {
       title = pageData?.meta?.title || pageData?.title || 'White Trading Company'
       description =
         pageData?.meta?.description ||
-        `Explore ${pageData?.title} on White Trading Company - Your trusted partner for trading and investment solutions.`
-      image = pageData?.meta?.image || pageData?.hero?.media
+        `Explore ${pageData?.title} on White Trading Company - Your trusted partner for safety products, food supplies, and textile materials in Coimbatore since 2011.`
+      image = '/white-trading-company-brochure.webp'
       url = pageData?.slug ? `${serverUrl}/${pageData.slug}` : serverUrl
       publishedAt = pageData?.publishedAt || undefined
       updatedAt = pageData?.updatedAt
       keywords = [
         'White Trading Company',
         pageData?.title?.toLowerCase() || '',
-        'trading platform',
-        'financial services',
-        'investment',
-        'trading solutions',
+        'safety products',
+        'food supplies',
+        'textile materials',
+        'Coimbatore supplier',
+        'wholesale trading',
+        'corporate supplies',
       ].filter(Boolean)
       break
 
     case 'category':
       const categoryData = data as Partial<Category>
-      title = categoryData?.title || 'White Trading Company Categories'
-      description = `Explore ${categoryData?.title} - Comprehensive trading and investment solutions from White Trading Company.`
+      // Optimized category title: ~55 characters
+      title = `${categoryData?.title} - White Trading Company`
+      // Optimized category description: ~155 characters
+      description = `Explore ${categoryData?.title} from White Trading Company. Leading supplier in Coimbatore since 2011. Quality products, competitive prices.`
       image = categoryData?.category_image
       url = categoryData?.slug ? `${serverUrl}/${categoryData.slug}` : serverUrl
       keywords = [
-        'trading categories',
-        'investment categories',
-        'financial services',
-        'White Trading Company',
         categoryData?.title?.toLowerCase() || '',
-        'trading solutions',
-        'investment opportunities',
+        'White Trading Company',
+        'Coimbatore supplier',
+        'safety products',
+        'food supplies',
+        'textile materials',
+        'wholesale supplier',
+        'bulk purchase',
+        'corporate supplies',
+        'trading company',
+      ].filter(Boolean)
+      break
+
+    case 'product':
+      const productData = data as Partial<Product>
+      // Optimized product title: ~55 characters
+      title = `${productData?.title} - White Trading Company`
+      // Optimized product description: ~155 characters
+      description = `${productData?.title} from White Trading Company. Leading supplier in Coimbatore since 2011. Quality products, competitive prices.`
+      image = productData?.product_image
+      url = productData?.slug ? `${serverUrl}/products/${productData.slug}` : serverUrl
+      keywords = [
+        productData?.title?.toLowerCase() || '',
+        'White Trading Company',
+        'Coimbatore supplier',
+        'safety products',
+        'food supplies',
+        'textile materials',
+        'wholesale supplier',
+        'bulk purchase',
+        'corporate supplies',
+        'trading company',
       ].filter(Boolean)
       break
   }
-
   // Generate Open Graph data
   const openGraph = generateOpenGraph({
     title,
@@ -147,12 +178,11 @@ export const generateDynamicSEO = (props: DynamicSEOProps): Metadata => {
     title,
     description,
     image,
+    type,
   })
 
   return {
-    title: title
-      ? `${title}`
-      : 'White Trading Company - Safety Products, Fruits & Vegetables, Grains & Rice, Food Products, Textile',
+    title: title ? `${title}` : 'White Trading Company - Safety Products & Food Supplies',
     description,
     keywords: keywords.join(', '),
     authors: author ? [{ name: author }] : undefined,
@@ -187,149 +217,20 @@ export const generateDynamicSEO = (props: DynamicSEOProps): Metadata => {
       'article:section': category || '',
       'article:tag': tags.join(', '),
     },
-    verification: {
-      google: process.env.GOOGLE_VERIFICATION,
-      yandex: process.env.YANDEX_VERIFICATION,
-      yahoo: process.env.YAHOO_VERIFICATION,
-    },
   }
 }
 
-const generateStructuredData = (props: {
-  type: string
-  data: any
-  title?: string
-  description?: string
-  image?: Media | string | null
-  url?: string
-  publishedAt?: string
-  updatedAt?: string
-  author?: string
-  category?: string
-}) => {
-  const { type, data, title, description, image, url, publishedAt, updatedAt, author, category } =
-    props
-  const serverUrl = getServerSideURL()
-
-  const baseStructuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'White Trading Company',
-    url: serverUrl,
-    logo: `${serverUrl}/logo.svg`,
-    description:
-      'Leading supplier of safety products, fruits & vegetables, grains & rice, food products, and textile materials',
-    foundingDate: '2011',
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: '#45/2a-1, Sungam Bye Pass Road',
-      addressLocality: 'Coimbatore',
-      postalCode: '641045',
-      addressCountry: 'IN',
-    },
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: '+91-422-2321811',
-      contactType: 'customer service',
-      availableLanguage: 'English',
-    },
-    email: 'info@whitetradingcompany.com',
+const getAbsoluteImageUrl = (img: Media | string | null | undefined) => {
+  if (!img) return process.env.NEXT_PUBLIC_BUNNY_CDN + '/white-trading-company-brochure.webp'
+  if (typeof img === 'object' && img.url) {
+    if (img.url.startsWith('http')) return img.url
+    return process.env.NEXT_PUBLIC_BUNNY_CDN + img.url
   }
-
-  switch (type) {
-    case 'home':
-      return {
-        ...baseStructuredData,
-        '@type': 'WebSite',
-        name: 'White Trading Company',
-        description:
-          'Leading supplier of safety products, fruits & vegetables, grains & rice, food products, and textile materials',
-        potentialAction: {
-          '@type': 'SearchAction',
-          target: `${serverUrl}/search?q={search_term_string}`,
-          'query-input': 'required name=search_term_string',
-        },
-      }
-
-    case 'post':
-      return {
-        '@context': 'https://schema.org',
-        '@type': 'Article',
-        headline: title,
-        description,
-        image: typeof image === 'object' ? image?.url : image,
-        author: {
-          '@type': 'Person',
-          name: author || 'White Trading Company Team',
-        },
-        publisher: {
-          '@type': 'Organization',
-          name: 'White Trading Company',
-          logo: {
-            '@type': 'ImageObject',
-            url: `${serverUrl}/logo.svg`,
-          },
-        },
-        datePublished: publishedAt,
-        dateModified: updatedAt,
-        mainEntityOfPage: {
-          '@type': 'WebPage',
-          '@id': url,
-        },
-        articleSection: category,
-        keywords: ['trading', 'investment', 'financial services', 'White Trading Company'],
-      }
-
-    case 'product':
-      return {
-        '@context': 'https://schema.org',
-        '@type': 'Product',
-        name: title,
-        description,
-        image: typeof image === 'object' ? image?.url : image,
-        brand: {
-          '@type': 'Brand',
-          name: 'White Trading Company',
-        },
-        category: category || 'Trading Services',
-        offers: {
-          '@type': 'Offer',
-          availability: 'https://schema.org/InStock',
-          priceCurrency: 'USD',
-          price: '0',
-          seller: {
-            '@type': 'Organization',
-            name: 'White Trading Company',
-          },
-        },
-      }
-
-    case 'category':
-      return {
-        '@context': 'https://schema.org',
-        '@type': 'CollectionPage',
-        name: title,
-        description,
-        image: typeof image === 'object' ? image?.url : image,
-        url,
-        mainEntity: {
-          '@type': 'ItemList',
-          itemListElement:
-            data?.products?.docs?.map((product: any, index: number) => ({
-              '@type': 'ListItem',
-              position: index + 1,
-              item: {
-                '@type': 'Product',
-                name: product.title,
-                url: `${serverUrl}/products/${product.id}`,
-              },
-            })) || [],
-        },
-      }
-
-    default:
-      return baseStructuredData
+  if (typeof img === 'string') {
+    if (img.startsWith('http')) return img
+    return process.env.NEXT_PUBLIC_BUNNY_CDN + img
   }
+  return process.env.NEXT_PUBLIC_BUNNY_CDN + '/white-trading-company-brochure.webp'
 }
 
 const generateOpenGraph = (props: {
@@ -365,20 +266,15 @@ const generateOpenGraph = (props: {
   }
 
   return {
-    title:
-      title ||
-      'White Trading Company - Safety Products, Fruits & Vegetables, Grains & Rice, Food Products, Textile',
+    title: title || 'White Trading Company - Safety Products & Food Supplies',
     description:
       description ||
-      'White Trading Company - Leading supplier of safety products, fruits & vegetables, grains & rice, food products, and textile materials.',
+      'Leading supplier of safety products, fruits & vegetables, grains & rice, food products, and textile materials in Coimbatore since 2011.',
     url: url || serverUrl,
     siteName: 'White Trading Company',
     images: [
       {
-        url:
-          typeof image === 'object'
-            ? `${serverUrl}${image?.url}`
-            : image || `${serverUrl}/website-template-OG.webp`,
+        url: type === 'home' ? '/white-trading-company-brochure.webp' : getAbsoluteImageUrl(image),
         width: 1200,
         height: 630,
         alt: title || 'White Trading Company',
@@ -397,23 +293,20 @@ const generateTwitterCard = (props: {
   title?: string
   description?: string
   image?: Media | string | null
+  type?: string
 }) => {
-  const { title, description, image } = props
-  const serverUrl = getServerSideURL()
+  const { title, description, image, type } = props
+
+  const imageUrl =
+    type === 'home' ? '/white-trading-company-brochure.webp' : getAbsoluteImageUrl(image)
 
   return {
     card: 'summary_large_image',
-    title:
-      title ||
-      'White Trading Company - Safety Products, Fruits & Vegetables, Grains & Rice, Food Products, Textile',
+    title: title || 'White Trading Company - Safety Products & Food Supplies',
     description:
       description ||
-      'White Trading Company - Leading supplier of safety products, fruits & vegetables, grains & rice, food products, and textile materials.',
-    images: [
-      typeof image === 'object'
-        ? `${serverUrl}${image?.url}`
-        : image || `${serverUrl}/website-template-OG.webp`,
-    ],
+      'Leading supplier of safety products, fruits & vegetables, grains & rice, food products, and textile materials in Coimbatore since 2011.',
+    images: imageUrl,
     creator: '@whitetradingcompany',
     site: '@whitetradingcompany',
   }

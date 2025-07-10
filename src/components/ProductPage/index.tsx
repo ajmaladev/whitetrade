@@ -78,7 +78,7 @@ export const ProductPage = ({ product }: ProductPageProps) => {
     window.open(whatsappUrl, '_blank')
   }
 
-  // Structured data for SEO
+  // Enhanced structured data for SEO
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -86,9 +86,28 @@ export const ProductPage = ({ product }: ProductPageProps) => {
     description: product.description,
     image: imageUrl,
     url: `https://whitetradingcompany.com/products/${product.slug || product.id}`,
-    provider: {
-      '@type': 'Organization',
+    brand: {
+      '@type': 'Brand',
       name: 'White Trading Company',
+    },
+    category: (product.category?.[0]?.value as any)?.title || 'Trading Services',
+    offers: {
+      '@type': 'Offer',
+      availability: 'https://schema.org/InStock',
+      priceCurrency: 'INR',
+      price: '0',
+      seller: {
+        '@type': 'Organization',
+        name: 'White Trading Company',
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: '#45/2a-1, Sungam Bye Pass Road',
+          addressLocality: 'Coimbatore',
+          addressRegion: 'Tamil Nadu',
+          postalCode: '641045',
+          addressCountry: 'IN',
+        },
+      },
     },
     ...(product.is_best_seller && {
       additionalProperty: {
@@ -111,52 +130,87 @@ export const ProductPage = ({ product }: ProductPageProps) => {
         initial="hidden"
         animate={inView ? 'visible' : 'hidden'}
         variants={containerVariants}
-        className=" bg-gradient-to-br from-[#faf0e8] via-[#f8e8d8] to-[#f5e0c8] py-8 px-4 sm:px-6 lg:px-12"
+        className="bg-gradient-to-br from-[#faf0e8] via-[#f8e8d8] to-[#f5e0c8] py-8 px-4 sm:px-6 lg:px-12"
+        role="main"
+        aria-label={`${product.title} - Product Details`}
       >
         {/* Background decorative elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
           <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-pink-200/20 to-purple-200/20 rounded-full blur-3xl animate-pulse"></div>
           <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-br from-blue-200/20 to-cyan-200/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-gradient-to-br from-yellow-200/10 to-orange-200/10 rounded-full blur-3xl animate-pulse delay-500"></div>
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10">
-          {/* Breadcrumb */}
-          <motion.div variants={itemVariants} className="mb-6">
-            <nav className="flex items-center space-x-2 text-sm text-gray-600">
-              <Link href="/" className="hover:text-gray-800 transition-colors">
-                Home
-              </Link>
-              <span>/</span>
-              <Link href="/products" className="hover:text-gray-800 transition-colors">
-                Products
-              </Link>
-              <span>/</span>
-              <span className="text-gray-800 font-medium">{product.title}</span>
-            </nav>
-          </motion.div>
+          {/* Enhanced Breadcrumb with better accessibility */}
+          <motion.nav variants={itemVariants} className="mb-6" aria-label="Breadcrumb navigation">
+            <ol className="flex items-center space-x-2 text-sm text-gray-600">
+              <li>
+                <Link
+                  href="/"
+                  className="hover:text-gray-800 transition-colors"
+                  aria-label="Navigate to homepage"
+                >
+                  Home
+                </Link>
+              </li>
+              <li aria-hidden="true">
+                <span>/</span>
+              </li>
+              <li>
+                <Link
+                  href="/products"
+                  className="hover:text-gray-800 transition-colors"
+                  aria-label="Navigate to products page"
+                >
+                  Products
+                </Link>
+              </li>
+              <li aria-hidden="true">
+                <span>/</span>
+              </li>
+              <li>
+                <span className="text-gray-800 font-medium" aria-current="page">
+                  {product.title}
+                </span>
+              </li>
+            </ol>
+          </motion.nav>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-            {/* Product Image Section - Reduced size */}
+            {/* Product Image Section with enhanced accessibility */}
             <motion.div variants={imageVariants} className="relative lg:col-span-1">
               <div className="relative aspect-square rounded-[2rem] overflow-hidden bg-gradient-to-br from-white/60 to-white/40 backdrop-blur-sm border-2 border-white/60 shadow-2xl max-w-md mx-auto">
                 {/* Enhanced glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent rounded-[2rem] blur-lg"></div>
-                <div className="absolute inset-0 bg-white/30 rounded-[2rem] blur-md"></div>
+                <div
+                  className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent rounded-[2rem] blur-lg"
+                  aria-hidden="true"
+                ></div>
+                <div
+                  className="absolute inset-0 bg-white/30 rounded-[2rem] blur-md"
+                  aria-hidden="true"
+                ></div>
 
                 <Image
                   src={imageUrl || '/logo.svg'}
-                  alt={product.title || product.description || 'Product Image'}
+                  alt={`${product.title} - Product image`}
                   fill
                   className="object-contain drop-shadow-2xl transition-all duration-700 hover:scale-105"
                   sizes="(max-width: 1024px) 100vw, 33vw"
+                  priority
                 />
-                <div className="absolute bottom-4 left-4 w-4 h-4 bg-white/80 rounded-full opacity-70 animate-bounce"></div>
-                <div className="absolute top-1/2 left-4 w-3 h-3 bg-white/60 rounded-full opacity-50"></div>
+                <div
+                  className="absolute bottom-4 left-4 w-4 h-4 bg-white/80 rounded-full opacity-70 animate-bounce"
+                  aria-hidden="true"
+                ></div>
+                <div
+                  className="absolute top-1/2 left-4 w-3 h-3 bg-white/60 rounded-full opacity-50"
+                  aria-hidden="true"
+                ></div>
               </div>
             </motion.div>
 
-            {/* Product Details Section - Takes more space */}
+            {/* Product Details Section with enhanced accessibility */}
             <motion.div variants={itemVariants} className="space-y-6 lg:col-span-2">
               {/* Title and Badges */}
               <div className="space-y-4">
@@ -173,36 +227,44 @@ export const ProductPage = ({ product }: ProductPageProps) => {
                     <motion.div
                       variants={badgeVariants}
                       className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-pink-500/30 to-purple-500/30 text-white font-bold rounded-full border border-white/40 backdrop-blur-sm"
+                      role="status"
+                      aria-label="Best seller product"
                     >
-                      <span className="mr-2">★</span>
+                      <span className="mr-2" aria-hidden="true">
+                        ★
+                      </span>
                       Best Seller
                     </motion.div>
                   )}
                 </motion.div>
               </div>
+
+              {/* Enhanced Buy Now Button with better accessibility */}
               <motion.div variants={itemVariants}>
                 <motion.button
                   onClick={handleBuyNow}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="w-full bg-gradient-to-br from-[#faf0e8] via-[#f8e8d8] to-[#f5e0c8] text-[#1C3A6A] font-bold py-2 md:py-4 px-4 md:px-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-white/60 backdrop-blur-sm hover:bg-gradient-to-br hover:from-[#f5e0c8] hover:via-[#f8e8d8] hover:to-[#faf0e8]"
+                  aria-label={`Purchase ${product.title} via WhatsApp`}
                 >
-                  <span className="mr-2">🛒</span>
+                  <span className="mr-2" aria-hidden="true">
+                    🛒
+                  </span>
                   Buy Now
                 </motion.button>
               </motion.div>
-              {/* Description */}
-              <motion.div variants={itemVariants} className="space-y-4">
-                <h3 className="text-lg md:text-xl font-semibold text-[#1C3A6A] font-['Montserrat']">
+
+              {/* Description with enhanced accessibility */}
+              <motion.section variants={itemVariants} className="space-y-4">
+                <h2 className="text-lg md:text-xl font-semibold text-[#1C3A6A] font-['Montserrat']">
                   Product Description
-                </h3>
+                </h2>
                 <p className="text-[#1C3A6A] font-['Montserrat'] leading-relaxed text-sm md:text-lg">
                   {product.description ||
                     'Discover this amazing product that combines quality, style, and functionality. Perfect for your needs and designed to exceed expectations.'}
                 </p>
-              </motion.div>
-
-              {/* Buy Now Button */}
+              </motion.section>
             </motion.div>
           </div>
         </div>

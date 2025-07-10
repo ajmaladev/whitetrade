@@ -1,3 +1,4 @@
+import { getCachedAllProducts, getCachedCategories } from '@/lib/fetchMethods'
 import { getServerSideSitemap } from 'next-sitemap'
 import { unstable_cache } from 'next/cache'
 
@@ -10,7 +11,11 @@ const getSitemapIndex = unstable_cache(
 
     const dateFallback = new Date().toISOString()
 
-    return [
+    // Get categories and products for sitemap
+    const categories = await getCachedCategories()()
+    const products = await getCachedAllProducts()()
+
+    const sitemapEntries = [
       {
         loc: SITE_URL,
         lastmod: dateFallback,
@@ -24,12 +29,42 @@ const getSitemapIndex = unstable_cache(
         priority: 0.8,
       },
       {
-        loc: `${SITE_URL}/categories-sitemap.xml`,
+        loc: `${SITE_URL}/search`,
+        lastmod: dateFallback,
+        changefreq: 'weekly' as const,
+        priority: 0.7,
+      },
+      {
+        loc: `${SITE_URL}/posts`,
+        lastmod: dateFallback,
+        changefreq: 'weekly' as const,
+        priority: 0.6,
+      },
+    ]
+
+    // Add category pages
+    categories.docs.forEach((category) => {
+      sitemapEntries.push({
+        loc: `${SITE_URL}/${category.slug}`,
         lastmod: dateFallback,
         changefreq: 'weekly' as const,
         priority: 0.8,
-      },
-    ]
+      })
+    })
+
+    // Add product pages
+    products.docs.forEach((product) => {
+      if (product.slug || product.id) {
+        sitemapEntries.push({
+          loc: `${SITE_URL}/products/${product.slug || product.id}`,
+          lastmod: dateFallback,
+          changefreq: 'weekly' as const,
+          priority: 0.7,
+        })
+      }
+    })
+
+    return sitemapEntries
   },
   ['sitemap-index'],
   {

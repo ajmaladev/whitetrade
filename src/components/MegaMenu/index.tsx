@@ -59,7 +59,7 @@ const Logo = memo(({ onClick }: { onClick?: () => void }) => (
       alt="White Trading Company Logo"
       width={160}
       height={40}
-      className="w-32 md:w-40 h-10"
+      className="w-48 sm:w-64 md:w-72 h-10"
       priority
     />
   </Link>
@@ -120,7 +120,6 @@ export default function MegaMenu() {
   // Custom smooth scroll function with configurable duration
   const smoothScrollTo = useCallback(
     (targetElement: HTMLElement, duration: number = 2000, key: MenuKey) => {
-      const height = key === 'products' ? 200 : 0
       const targetPosition = targetElement.offsetTop - 0 // Account for header height
       const startPosition = window.pageYOffset
       const distance = targetPosition - startPosition
@@ -239,7 +238,7 @@ export default function MegaMenu() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <header
-        className="h-20 flex items-center w-full px-6 sm:px-12 md:px-16 lg:px-60 justify-between border-b border-gray-200 sticky top-0 z-30 backdrop-blur-md bg-white/50"
+        className="h-20 flex items-center w-full px-6 sm:px-[2%] md:px-[5%] lg:px-[15%] justify-between border-b border-gray-200 sticky top-0 z-30 backdrop-blur-md bg-white/50"
         role="banner"
         aria-label="White Trading Company Header"
       >

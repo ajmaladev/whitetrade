@@ -1,5 +1,5 @@
-import clsx from 'clsx'
 import Image from 'next/image'
+import Link from 'next/link'
 
 interface Props {
   className?: string
@@ -7,23 +7,22 @@ interface Props {
   priority?: 'auto' | 'high' | 'low'
 }
 
-export const Logo = (props: Props) => {
-  const { loading: loadingFromProps, priority: priorityFromProps, className } = props
-
-  const loading = loadingFromProps || 'lazy'
-  const priority = priorityFromProps || 'low'
-
+export const Logo = () => {
   return (
     /* eslint-disable @next/next/no-img-element */
-    <Image
-      alt="White Trading Company Logo"
-      width={193}
-      height={34}
-      loading={loading}
-      fetchPriority={priority}
-      decoding="async"
-      className={clsx('max-w-[9.375rem] w-full h-[34px]', className)}
-      src="/logo.svg"
-    />
+    <Link
+      href="/"
+      className="flex items-center flex-shrink-0"
+      aria-label="White Trading Company Homepage"
+    >
+      <Image
+        src="/logo.svg"
+        alt="White Trading Company Logo"
+        width={160}
+        height={40}
+        className="w-48 h-10"
+        priority
+      />
+    </Link>
   )
 }

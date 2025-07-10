@@ -9,14 +9,25 @@ export default async function ProductPageRoute({ params }: { params: Promise<{ s
   const product = await getCachedProduct(slug)()
   const productData = product.docs[0]
   if (!productData) {
-    return <div>Product not found</div>
+    return (
+      <main role="main" aria-label="Product not found">
+        <div className="container mx-auto px-4 py-8">
+          <h1 className="text-2xl font-bold text-gray-800 mb-4">Product Not Found</h1>
+          <p className="text-gray-600">
+            The requested product could not be found. Please check the URL or browse our other
+            products.
+          </p>
+        </div>
+      </main>
+    )
   }
   const products = (productData.category[0]?.value as any).products.docs as Product[]
+
   return (
-    <>
+    <main role="main" aria-label={`${productData.title} - White Trading Company Product Page`}>
       <ProductPage product={productData} />
       <SuggestedProducts products={products} currentProductId={productData.id} />
-    </>
+    </main>
   )
 }
 
