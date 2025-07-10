@@ -200,7 +200,7 @@ export default function Categories({ categories }: { categories: PaginatedDocs<C
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <section
-        className="py-16 pt-8 px-2 sm:px-6 lg:px-12 md:mt-20"
+        className="py-16 pt-3 px-2 sm:px-6 lg:px-12 md:mt-20"
         id="products"
         aria-labelledby="categories-heading"
       >
