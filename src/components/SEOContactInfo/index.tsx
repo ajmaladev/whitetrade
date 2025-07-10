@@ -264,7 +264,7 @@ export const whiteTradingCompanyContactInfo: ContactInfo = {
     country: 'India',
   },
   phone: '+91-422-2321811',
-  email: 'info@whitetradingcompany.com',
+  email: 'info@whitetrading.in',
   website: 'https://whitetradingcompany.com',
   businessHours: [
     { day: 'Monday - Friday', hours: '9:00 AM - 6:00 PM' },

@@ -21,7 +21,7 @@ export const NewsLetter = () => {
           }}
         ></div>
         <div className="w-full md:mx-0 border-box md:w-3/4 absolute rounded-xl top-20 left-1/2 transform -translate-x-1/2 bg-white md:px-[103px] md:py-[55px] px-[20px] py-[30px] flex flex-col lg:flex-row gap-4 justify-between items-center shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)]">
-          <div className="justify-start text-slate-900 text-3xl font-normal font-['Playfair_Display']">
+          <div className="justify-start text-slate-900 text-3xl font-normal font-['Montserrat']">
             Subscribe Newsletters
           </div>
           <form action={formAction} className="w-[300px] md:w-[510px] h-16 relative">
@@ -37,7 +37,7 @@ export const NewsLetter = () => {
               type="submit"
               className="w-32 h-10 md:w-44 md:h-14 left-[157px] md:left-[330px] top-[11px] md:top-[4px] absolute overflow-hidden bg-[#0081FE] rounded hover:bg-sky-600 disabled:bg-sky-300 disabled:cursor-not-allowed transition-colors duration-200 flex items-center justify-center"
             >
-              <div className="text-white text-base font-medium font-['Helvetica_Neue']">
+              <div className="text-white text-base font-medium font-['Montserrat']">
                 Subscribe Now
               </div>
             </button>

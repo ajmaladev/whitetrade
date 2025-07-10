@@ -177,9 +177,46 @@ export const ProductPage = ({ product }: ProductPageProps) => {
             </ol>
           </motion.nav>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 justify-between">
+            {/* Product Details Section with enhanced accessibility */}
+            <motion.div variants={itemVariants} className="space-y-6 lg:w-1/2">
+              {/* Title Section */}
+              <div className="space-y-4">
+                <motion.h1
+                  variants={itemVariants}
+                  className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1C3A6A] font-['Montserrat'] leading-tight"
+                >
+                  {product.title}
+                </motion.h1>
+              </div>
+
+              {/* Description with enhanced accessibility */}
+              <motion.section variants={itemVariants} className="space-y-4">
+                <h2 className="text-lg md:text-xl font-semibold text-[#1C3A6A] font-['Montserrat']">
+                  Product Description
+                </h2>
+                <p className="text-[#1C3A6A] font-['Montserrat'] leading-relaxed text-sm md:text-lg">
+                  {product.description ||
+                    'Discover this amazing product that combines quality, style, and functionality. Perfect for your needs and designed to exceed expectations.'}
+                </p>
+              </motion.section>
+
+              {/* Buy Now Button - Positioned below description */}
+              <motion.div variants={itemVariants} className="pt-4">
+                <motion.button
+                  onClick={handleBuyNow}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full text-white bg-[#1C3A6A] font-bold py-3 md:py-4 px-8 md:px-12 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-white/60 backdrop-blur-sm hover:bg-gradient-to-br hover:from-[#f5e0c8] hover:via-[#f8e8d8] hover:to-[#faf0e8]"
+                  aria-label={`Purchase ${product.title} via WhatsApp`}
+                >
+                  Buy Now
+                </motion.button>
+              </motion.div>
+            </motion.div>
+
             {/* Product Image Section with enhanced accessibility */}
-            <motion.div variants={imageVariants} className="relative lg:col-span-1">
+            <motion.div variants={imageVariants} className="lg:w-1/2 relative">
               <div className="relative aspect-square rounded-[2rem] overflow-hidden bg-gradient-to-br from-white/60 to-white/40 backdrop-blur-sm border-2 border-white/60 shadow-2xl max-w-md mx-auto">
                 {/* Enhanced glow effect */}
                 <div
@@ -190,6 +227,21 @@ export const ProductPage = ({ product }: ProductPageProps) => {
                   className="absolute inset-0 bg-white/30 rounded-[2rem] blur-md"
                   aria-hidden="true"
                 ></div>
+
+                {/* Best Seller Badge - Top Left Corner */}
+                {product.is_best_seller && (
+                  <motion.div
+                    variants={badgeVariants}
+                    className="absolute top-4 left-4 z-10 inline-flex items-center px-3 py-1.5 bg-gradient-to-r from-pink-500/30 to-purple-500/30 text-white font-bold text-sm rounded-full border border-white/40 backdrop-blur-sm shadow-lg"
+                    role="status"
+                    aria-label="Best seller product"
+                  >
+                    <span className="mr-1" aria-hidden="true">
+                      ★
+                    </span>
+                    Best Seller
+                  </motion.div>
+                )}
 
                 <Image
                   src={imageUrl || '/logo.svg'}
@@ -208,63 +260,6 @@ export const ProductPage = ({ product }: ProductPageProps) => {
                   aria-hidden="true"
                 ></div>
               </div>
-            </motion.div>
-
-            {/* Product Details Section with enhanced accessibility */}
-            <motion.div variants={itemVariants} className="space-y-6 lg:col-span-2">
-              {/* Title and Badges */}
-              <div className="space-y-4">
-                <motion.h1
-                  variants={itemVariants}
-                  className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1C3A6A] font-['Montserrat'] leading-tight"
-                >
-                  {product.title}
-                </motion.h1>
-
-                {/* Badges */}
-                <motion.div variants={itemVariants} className="flex flex-wrap gap-3">
-                  {product.is_best_seller && (
-                    <motion.div
-                      variants={badgeVariants}
-                      className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-pink-500/30 to-purple-500/30 text-white font-bold rounded-full border border-white/40 backdrop-blur-sm"
-                      role="status"
-                      aria-label="Best seller product"
-                    >
-                      <span className="mr-2" aria-hidden="true">
-                        ★
-                      </span>
-                      Best Seller
-                    </motion.div>
-                  )}
-                </motion.div>
-              </div>
-
-              {/* Enhanced Buy Now Button with better accessibility */}
-              <motion.div variants={itemVariants}>
-                <motion.button
-                  onClick={handleBuyNow}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-full bg-gradient-to-br from-[#faf0e8] via-[#f8e8d8] to-[#f5e0c8] text-[#1C3A6A] font-bold py-2 md:py-4 px-4 md:px-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-white/60 backdrop-blur-sm hover:bg-gradient-to-br hover:from-[#f5e0c8] hover:via-[#f8e8d8] hover:to-[#faf0e8]"
-                  aria-label={`Purchase ${product.title} via WhatsApp`}
-                >
-                  <span className="mr-2" aria-hidden="true">
-                    🛒
-                  </span>
-                  Buy Now
-                </motion.button>
-              </motion.div>
-
-              {/* Description with enhanced accessibility */}
-              <motion.section variants={itemVariants} className="space-y-4">
-                <h2 className="text-lg md:text-xl font-semibold text-[#1C3A6A] font-['Montserrat']">
-                  Product Description
-                </h2>
-                <p className="text-[#1C3A6A] font-['Montserrat'] leading-relaxed text-sm md:text-lg">
-                  {product.description ||
-                    'Discover this amazing product that combines quality, style, and functionality. Perfect for your needs and designed to exceed expectations.'}
-                </p>
-              </motion.section>
             </motion.div>
           </div>
         </div>

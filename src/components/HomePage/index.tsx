@@ -120,7 +120,7 @@ export default function HomePage({
       availableLanguage: 'English',
       areaServed: 'IN',
     },
-    email: 'info@whitetradingcompany.com',
+    email: 'info@whitetrading.in',
     sameAs: [
       'https://www.facebook.com/whitetradingcompany',
       'https://www.linkedin.com/company/white-trading-company',

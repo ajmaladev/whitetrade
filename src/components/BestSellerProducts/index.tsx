@@ -25,8 +25,8 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       className={`
         relative flex flex-col justify-between overflow-hidden 
         rounded-[2.5rem]
-        bg-gradient-to-br from-[#faf0e8] via-[#f8e8d8] to-[#f5e0c8]
-        h-[250px] sm:h-[300px]
+        bg-white
+        h-[200px] sm:h-[250px]
         w-[200px] sm:w-[250px] lg:w-[300px]
         p-4 sm:p-5
         transition-all duration-500 ease-out
@@ -36,7 +36,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         backdrop-blur-sm
         cursor-pointer
         flex-shrink-0
-        shadow-lg hover:shadow-2xl
+        shadow-lg
       `}
     >
       {/* Enhanced decorative elements */}
@@ -46,14 +46,8 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 
       <Link href={`/products/${product.slug || product.id}`} className="h-full flex flex-col">
         <div className="flex-1">
-          <div className="flex items-center justify-between mb-3">
-            <div className="text-xs font-bold text-white/95 bg-gradient-to-r from-pink-500/30 to-purple-500/30 px-3 py-1.5 rounded-full border border-white/40 backdrop-blur-sm">
-              Best Seller
-            </div>
-          </div>
-
           <h2
-            className={`font-bold text-[#1C3A6A] text-sm sm:text-lg font-['Montserrat'] mb-3 !leading-tight
+            className={`font-bold text-center text-[#1C3A6A] text-sm sm:text-lg font-['Montserrat'] mb-3 !leading-tight
             transition-colors duration-300 group-hover:text-gray-900
             line-clamp-2 group-hover:line-clamp-none`}
           >
@@ -74,11 +68,6 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
               className="object-contain drop-shadow-2xl transition-all duration-700 group-hover:drop-shadow-3xl group-hover:brightness-110"
               sizes="(max-width: 640px) 160px, (max-width: 1024px) 200px, 220px"
             />
-          </div>
-
-          {/* Floating price tag effect */}
-          <div className="absolute -bottom-1 -right-1 w-8 h-8 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110">
-            <span className="text-xs font-bold text-white">$</span>
           </div>
         </div>
 
@@ -184,7 +173,7 @@ export const BestSellerProducts = ({ products }: { products: Product[] }) => {
           >
             <div className="relative inline-block">
               <h3 className="text-2xl sm:text-4xl lg:text-6xl font-bold text-[#1C3A6A] mb-4 font-['Montserrat'] relative z-10">
-                Best Sellers
+                Recent Shipments
               </h3>
               <div className="absolute inset-0 bg-gradient-to-r from-pink-100/60 via-purple-100/60 to-blue-100/60 rounded-3xl blur-xl -z-10"></div>
             </div>
@@ -203,7 +192,7 @@ export const BestSellerProducts = ({ products }: { products: Product[] }) => {
               animate={firstRowInView ? 'visible' : 'hidden'}
               variants={staggerContainer}
             >
-              <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-6 scrollbar-hide">
+              <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-6 scrollbar-hide pl-1">
                 {firstRowProducts.map((product, index) => (
                   <motion.div key={product.id} variants={staggerItem}>
                     <ProductCard product={product} index={index} />
@@ -219,7 +208,7 @@ export const BestSellerProducts = ({ products }: { products: Product[] }) => {
               animate={secondRowInView ? 'visible' : 'hidden'}
               variants={staggerContainer}
             >
-              <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide">
+              <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide pl-1">
                 {secondRowProducts.map((product, index) => (
                   <motion.div key={product.id} variants={staggerItem}>
                     <ProductCard product={product} index={index + firstRowProducts.length} />

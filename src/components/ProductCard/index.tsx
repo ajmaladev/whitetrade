@@ -20,12 +20,12 @@ export const ProductCard = ({ product, index }: ProductCardProps) => {
       className={`
         relative flex flex-col justify-between overflow-hidden 
         rounded-[2.5rem]
-        bg-gradient-to-br from-[#faf0e8] via-[#f8e8d8] to-[#f5e0c8]
+        bg-white
         h-[200px] sm:h-[300px]
         w-full
         p-4 sm:p-5
         transition-all duration-500 ease-out
-        hover:scale-110
+        hover:scale-105
         group
         border-2 border-white/60
         backdrop-blur-sm
@@ -42,7 +42,7 @@ export const ProductCard = ({ product, index }: ProductCardProps) => {
         <div className="flex-1">
           {product.is_best_seller ? (
             <div className="flex items-center justify-between mb-3">
-              <div className="text-xs font-bold text-white/95 bg-gradient-to-r from-blue-500/30 to-purple-500/30 px-3 py-1.5 rounded-full border border-white/40 backdrop-blur-sm">
+              <div className="text-xs font-bold text-white bg-gradient-to-r from-blue-500/30 to-purple-500/30 px-3 py-1.5 rounded-full border border-white/40 backdrop-blur-sm">
                 Best Seller
               </div>
             </div>

@@ -55,7 +55,7 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
         contactType: 'customer service',
         availableLanguage: 'English',
       },
-      email: 'info@whitetradingcompany.com',
+      email: 'info@whitetrading.in',
       areaServed: 'Coimbatore and beyond',
       serviceType: 'Safety Products, Fruits & Vegetables, Grains & Rice, Food Products, Textile',
     }

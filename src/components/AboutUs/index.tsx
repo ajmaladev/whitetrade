@@ -69,7 +69,7 @@ export const AboutUs = () => {
     logo: 'https://whitetradingcompany.com/logo.svg',
     address: {
       '@type': 'PostalAddress',
-      streetAddress: '45/2A - 1, Sungam Byepass Road 641045, Ramanathapuram',
+      streetAddress: 'Sungam Byepass Road 641045, Ramanathapuram',
       addressLocality: 'Coimbatore',
       addressRegion: 'Tamil Nadu',
       postalCode: '641045',
@@ -90,7 +90,7 @@ export const AboutUs = () => {
       },
       {
         '@type': 'ContactPoint',
-        email: 'info@whitetradingcompany.com',
+        email: 'info@whitetrading.in',
         contactType: 'customer service',
         availableLanguage: 'English',
       },
@@ -131,7 +131,7 @@ export const AboutUs = () => {
           >
             <h4
               id="about-heading"
-              className="text-4xl sm:text-6xl lg:text-8xl xl:text-9xl font-bold font-['Poppins'] text-white"
+              className="text-4xl sm:text-6xl lg:text-8xl font-bold font-['Poppins'] text-white"
             >
               About Us
             </h4>
@@ -271,20 +271,11 @@ export const AboutUs = () => {
                 </h5>
                 <div className="space-y-2">
                   <a
-                    href="tel:+914222321811"
+                    href="tel:+919843044489"
                     className="block text-white/90 text-base lg:text-lg font-medium font-['Poppins'] hover:text-orange-400 transition-colors duration-200"
                   >
-                    0422 2321811
+                    98430 44489
                   </a>
-                  <a
-                    href="tel:+919843044443"
-                    className="block text-white/90 text-base lg:text-lg font-medium font-['Poppins'] hover:text-orange-400 transition-colors duration-200"
-                  >
-                    98430 44443
-                  </a>
-                  <p className="text-white/70 text-sm lg:text-base font-medium font-['Poppins'] mt-2">
-                    Noufal Riyas (Manager)
-                  </p>
                 </div>
               </div>
             </motion.div>
@@ -302,10 +293,10 @@ export const AboutUs = () => {
                   Email
                 </h5>
                 <a
-                  href="mailto:info@whitetradingcompany.com"
+                  href="mailto:info@whitetrading.in"
                   className="text-white/90 text-base lg:text-lg font-medium font-['Poppins'] hover:text-orange-400 transition-colors duration-200 break-all"
                 >
-                  info@whitetradingcompany.com
+                  info@whitetrading.in
                 </a>
               </div>
             </motion.div>
@@ -323,7 +314,7 @@ export const AboutUs = () => {
                   Location
                 </h5>
                 <address className="text-white/90 text-base lg:text-lg font-medium font-['Poppins'] leading-relaxed not-italic">
-                  45/2A - 1, Sungam Byepass Road
+                  Sungam Byepass Road
                   <br />
                   Ramanathapuram, Coimbatore
                   <br />

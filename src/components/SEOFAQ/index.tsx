@@ -156,7 +156,7 @@ export const whiteTradingCompanyFAQItems: FAQItem[] = [
     id: 'contact',
     question: 'How can I contact White Trading Company?',
     answer:
-      'You can contact us at +91-422-2321811 or +91-98430-44443, or email us at info@whitetradingcompany.com. Our team is available to discuss your product requirements and provide personalized solutions.',
+      'You can contact us at +91-422-2321811 or +91-98430-44443, or email us at info@whitetrading.in. Our team is available to discuss your product requirements and provide personalized solutions.',
   },
 ]
 

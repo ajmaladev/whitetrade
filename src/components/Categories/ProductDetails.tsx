@@ -81,6 +81,22 @@ Looking forward to hearing from you!
       </div>
 
       {/* Dropdown Trigger */}
+      <div className="w-full flex items-center gap-3 mb-4 md:mb-6">
+        <button
+          onClick={handleBuyNow}
+          className="w-1/2 py-3 bg-[#669075] bg-gradient-to-r from-[#669075] to-[#5a8268] rounded-xl inline-flex justify-center items-center gap-2 text-white text-sm font-semibold font-['Manrope'] leading-normal hover:from-[#5a8268] hover:to-[#4d735b] transition-all duration-200"
+          aria-label={`Purchase ${selectedProduct?.title} via WhatsApp`}
+        >
+          Buy Now
+        </button>
+        <Link
+          href={`/products/${selectedProduct?.slug || selectedProduct?.id}`}
+          className="w-1/2 py-3 bg-[#597cc9] bg-gradient-to-r from-[#597cc9] to-[#4a6bb8] rounded-xl inline-flex justify-center items-center gap-2 text-white text-sm font-semibold font-['Manrope'] leading-normal hover:from-[#4a6bb8] hover:to-[#3d5aa7] transition-all duration-200"
+          aria-label={`View ${selectedProduct?.title}`}
+        >
+          More Details...
+        </Link>
+      </div>
       <div
         ref={dropdownRef}
         className={`h-14 relative flex justify-between items-center pl-4 md:pl-10 pr-10 md:pr-16 bg-gradient-to-r from-cyan-900 to-blue-600  ${!dropdownOpen ? 'rounded-[49.41px]' : 'rounded-t-[29.41px]'} shadow-[0px_3.95px_3.95px_0px_rgba(0,0,0,0.25)]  cursor-pointer`}
@@ -101,7 +117,7 @@ Looking forward to hearing from you!
         {/* Dropdown List */}
         {dropdownOpen && (
           <div
-            className="absolute left-0 top-full w-full rounded-b-md shadow-[0px_8px_24px_0px_rgba(0,0,0,0.10)] border-t border-blue-100 z-20 animate-fadeIn bg-white max-h-60 overflow-y-auto scrollbar-hide"
+            className="absolute left-0 top-full w-full rounded-b-md shadow-[0px_8px_24px_0px_rgba(0,0,0,0.10)] border-t border-blue-100 z-20 animate-fadeIn bg-white"
             style={{
               borderTopLeftRadius: 0,
               borderTopRightRadius: 0,
@@ -155,22 +171,7 @@ Looking forward to hearing from you!
           </div>
         )}
       </div>
-      <div className="w-full flex items-center gap-3 mt-4 md:mt-6">
-        <Link
-          href={`/products/${selectedProduct?.slug || selectedProduct?.id}`}
-          className="w-1/2 py-3 bg-blue-600 rounded-xl inline-flex justify-center items-center gap-2 text-white text-sm font-semibold font-['Manrope'] leading-normal hover:bg-blue-700 transition-colors duration-200"
-          aria-label={`View ${selectedProduct?.title}`}
-        >
-          View Product
-        </Link>
-        <button
-          onClick={handleBuyNow}
-          className="w-1/2 py-3 bg-green-600 rounded-xl inline-flex justify-center items-center gap-2 text-white text-sm font-semibold font-['Manrope'] leading-normal hover:bg-green-700 transition-colors duration-200"
-          aria-label={`Purchase ${selectedProduct?.title} via WhatsApp`}
-        >
-          Buy Now
-        </button>
-      </div>
+
       <p className="mt-6 mb-4 justify-start text-cyan-900 text-sm font-medium font-['Poppins']">
         {selectedProduct?.description}
       </p>

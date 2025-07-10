@@ -25,13 +25,12 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       className={`
         relative flex flex-col justify-between overflow-hidden 
         rounded-[2.5rem]
-        bg-gradient-to-br from-[#faf0e8] via-[#f8e8d8] to-[#f5e0c8]
+        bg-white
         h-[200px] sm:h-[300px]
         w-full
         p-4 sm:p-5
         transition-all duration-500 ease-out
         hover:scale-110
-        hover:rotate-2
         group
         border-2 border-white/60
         backdrop-blur-sm
@@ -62,7 +61,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         </div>
 
         <div className="flex-1 flex items-end justify-center relative">
-          <div className="relative w-24 h-20 sm:w-32 sm:h-28 transition-all duration-700 group-hover:scale-125 group-hover:rotate-6">
+          <div className="relative w-24 h-20 sm:w-32 sm:h-28 transition-all duration-700 group-hover:scale-125">
             {/* Enhanced glow effect */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent rounded-3xl blur-lg group-hover:blur-xl transition-all duration-500"></div>
             <div className="absolute inset-0 bg-white/30 rounded-3xl blur-md"></div>
