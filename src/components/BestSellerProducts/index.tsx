@@ -2,83 +2,9 @@
 
 import { Product } from '@/payload-types'
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useInView } from 'react-intersection-observer'
-
-function ProductCard({ product, index }: { product: Product; index: number }) {
-  let imageUrl = product?.product_image
-  if (imageUrl) {
-    imageUrl = process.env.NEXT_PUBLIC_BUNNY_CDN + imageUrl
-  }
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: 100 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{
-        duration: 0.8,
-        delay: index * 0.15,
-        ease: 'easeOut',
-      }}
-      viewport={{ once: true, margin: '-20px' }}
-      className={`
-        relative flex flex-col justify-between overflow-hidden 
-        rounded-[2.5rem]
-        bg-white
-        h-[200px] sm:h-[250px]
-        w-[200px] sm:w-[250px] lg:w-[300px]
-        p-4 sm:p-5
-        transition-all duration-500 ease-out
-        hover:scale-110
-        group
-        border-2 border-white/60
-        backdrop-blur-sm
-        cursor-pointer
-        flex-shrink-0
-        shadow-lg
-      `}
-    >
-      {/* Enhanced decorative elements */}
-      <div className="absolute top-3 right-3 w-4 h-4 bg-white/80 rounded-full opacity-90 animate-pulse"></div>
-      <div className="absolute bottom-4 left-4 w-3 h-3 bg-white/60 rounded-full opacity-70"></div>
-      <div className="absolute top-1/2 left-2 w-2 h-2 bg-white/40 rounded-full opacity-50"></div>
-
-      <Link href={`/products/${product.slug || product.id}`} className="h-full flex flex-col">
-        <div className="flex-1">
-          <h2
-            className={`font-bold text-center text-[#1C3A6A] text-sm sm:text-lg font-['Montserrat'] mb-3 !leading-tight
-            transition-colors duration-300 group-hover:text-gray-900
-            line-clamp-2 group-hover:line-clamp-none`}
-          >
-            {product.title}
-          </h2>
-        </div>
-
-        <div className="flex-1 flex items-end justify-center relative">
-          <div className="relative w-24 h-20 sm:w-32 sm:h-28 transition-all duration-700 group-hover:scale-125">
-            {/* Enhanced glow effect */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent rounded-3xl blur-lg group-hover:blur-xl transition-all duration-500"></div>
-            <div className="absolute inset-0 bg-white/30 rounded-3xl blur-md"></div>
-
-            <Image
-              src={imageUrl || '/logo.svg'}
-              alt={product.title || product.description || 'Product Image'}
-              fill
-              className="object-contain drop-shadow-2xl transition-all duration-700 group-hover:drop-shadow-3xl group-hover:brightness-110"
-              sizes="(max-width: 640px) 160px, (max-width: 1024px) 200px, 220px"
-            />
-          </div>
-        </div>
-
-        {/* Enhanced bottom decoration */}
-        <div className="flex justify-center mt-3">
-          <div className="w-16 h-1.5 bg-gradient-to-r from-white/60 via-white/90 to-white/60 rounded-full"></div>
-        </div>
-      </Link>
-    </motion.div>
-  )
-}
+import { ProductCard } from '../ProductCard'
 
 export const BestSellerProducts = ({ products }: { products: Product[] }) => {
   // Split products into two arrays for two rows
@@ -155,7 +81,7 @@ export const BestSellerProducts = ({ products }: { products: Product[] }) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <section className="pb-2 px-4 sm:px-6 lg:px-12 md:my-14 md:mb-20 relative" id="best-sellers">
+      <section className="pb-2 px-4 sm:px-6 lg:px-10 md:my-14 md:mb-20 relative" id="best-sellers">
         {/* Background decorative elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-br from-pink-200/20 to-purple-200/20 rounded-full blur-3xl animate-pulse"></div>
@@ -184,7 +110,7 @@ export const BestSellerProducts = ({ products }: { products: Product[] }) => {
           </motion.div>
 
           {/* Two Rows with Horizontal Scrolling - Works on all screen sizes */}
-          <div className="space-y-4">
+          <div className="space-y-2">
             {/* First Row */}
             <motion.div
               ref={firstRowRef}
@@ -192,10 +118,14 @@ export const BestSellerProducts = ({ products }: { products: Product[] }) => {
               animate={firstRowInView ? 'visible' : 'hidden'}
               variants={staggerContainer}
             >
-              <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-6 scrollbar-hide pl-1">
+              <div className="flex gap-4 sm:gap-6 overflow-x-auto py-8 scrollbar-hide sm:px-4 px-2">
                 {firstRowProducts.map((product, index) => (
                   <motion.div key={product.id} variants={staggerItem}>
-                    <ProductCard product={product} index={index} />
+                    <ProductCard
+                      product={product}
+                      index={index}
+                      className="h-[180px] sm:h-[250px] w-[200px] sm:w-[300px]"
+                    />
                   </motion.div>
                 ))}
               </div>
@@ -208,10 +138,14 @@ export const BestSellerProducts = ({ products }: { products: Product[] }) => {
               animate={secondRowInView ? 'visible' : 'hidden'}
               variants={staggerContainer}
             >
-              <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide pl-1">
+              <div className="flex gap-6 overflow-x-auto pb-8 scrollbar-hide sm:px-4 px-2">
                 {secondRowProducts.map((product, index) => (
                   <motion.div key={product.id} variants={staggerItem}>
-                    <ProductCard product={product} index={index + firstRowProducts.length} />
+                    <ProductCard
+                      product={product}
+                      index={index + firstRowProducts.length}
+                      className="h-[200px] sm:h-[250px] w-[200px] md:w-[300px]"
+                    />
                   </motion.div>
                 ))}
               </div>

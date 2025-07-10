@@ -5,12 +5,12 @@ import Link from 'next/link'
 import { useMemo, useRef, useState } from 'react'
 
 export default function ProductDetails({ products }: { products: Product[] }) {
-  const [selectedIndex, setSelectedIndex] = useState(0)
-  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [selectedIndex, setSelectedIndex] = useState(-1)
+  const [dropdownOpen, setDropdownOpen] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
   const dropdownRef = useRef<HTMLDivElement>(null)
 
-  const selectedProduct = products[selectedIndex]
+  const selectedProduct = selectedIndex >= 0 ? products[selectedIndex] : null
 
   // Filter products based on search query
   const filteredProducts = useMemo(() => {
@@ -24,6 +24,8 @@ export default function ProductDetails({ products }: { products: Product[] }) {
   const showSearch = products.length > 5
 
   const handleBuyNow = () => {
+    if (!selectedProduct) return
+
     // Get category title from the product
     const categoryTitle = (selectedProduct?.category?.[0]?.value as Category)?.title || 'Product'
 
@@ -84,15 +86,28 @@ Looking forward to hearing from you!
       <div className="w-full flex items-center gap-3 mb-4 md:mb-6">
         <button
           onClick={handleBuyNow}
-          className="w-1/2 py-3 bg-[#669075] bg-gradient-to-r from-[#669075] to-[#5a8268] rounded-xl inline-flex justify-center items-center gap-2 text-white text-sm font-semibold font-['Manrope'] leading-normal hover:from-[#5a8268] hover:to-[#4d735b] transition-all duration-200"
-          aria-label={`Purchase ${selectedProduct?.title} via WhatsApp`}
+          disabled={!selectedProduct}
+          className={`w-1/2 py-3 rounded-xl inline-flex justify-center items-center gap-2 text-white text-sm font-semibold font-['Manrope'] leading-normal transition-all duration-200 ${
+            selectedProduct
+              ? 'bg-[#669075] bg-gradient-to-r from-[#669075] to-[#5a8268] hover:from-[#5a8268] hover:to-[#4d735b]'
+              : 'bg-gray-400 cursor-not-allowed'
+          }`}
+          aria-label={
+            selectedProduct
+              ? `Purchase ${selectedProduct?.title} via WhatsApp`
+              : 'No product selected'
+          }
         >
           Buy Now
         </button>
         <Link
-          href={`/products/${selectedProduct?.slug || selectedProduct?.id}`}
-          className="w-1/2 py-3 bg-[#597cc9] bg-gradient-to-r from-[#597cc9] to-[#4a6bb8] rounded-xl inline-flex justify-center items-center gap-2 text-white text-sm font-semibold font-['Manrope'] leading-normal hover:from-[#4a6bb8] hover:to-[#3d5aa7] transition-all duration-200"
-          aria-label={`View ${selectedProduct?.title}`}
+          href={selectedProduct ? `/products/${selectedProduct?.slug || selectedProduct?.id}` : '#'}
+          className={`w-1/2 py-3 rounded-xl inline-flex justify-center items-center gap-2 text-white text-sm font-semibold font-['Manrope'] leading-normal transition-all duration-200 ${
+            selectedProduct
+              ? 'bg-[#597cc9] bg-gradient-to-r from-[#597cc9] to-[#4a6bb8] hover:from-[#4a6bb8] hover:to-[#3d5aa7]'
+              : 'bg-gray-400 cursor-not-allowed'
+          }`}
+          aria-label={selectedProduct ? `View ${selectedProduct?.title}` : 'No product selected'}
         >
           More Details...
         </Link>
@@ -104,7 +119,7 @@ Looking forward to hearing from you!
         tabIndex={0}
       >
         <div className="justify-start text-white text-md md:text-2xl font-semibold font-['Montserrat']">
-          {selectedProduct?.title}
+          {selectedProduct?.title || 'Select a product'}
         </div>
         <div className="justify-start text-white/30 text-sm md:text-base font-normal font-['Poppins']">
           Select your choice
@@ -126,7 +141,7 @@ Looking forward to hearing from you!
           >
             {/* Search Input - Only show if more than 5 products */}
             {showSearch && (
-              <div className="sticky top-0 bg-white p-2 border-b border-blue-100">
+              <div className="bg-white p-2 border-b border-blue-100">
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-blue-400" />
                   <input
@@ -142,41 +157,43 @@ Looking forward to hearing from you!
               </div>
             )}
 
-            {/* Filtered Products List */}
-            {filteredProducts.length > 0 ? (
-              filteredProducts.map((product, idx) => {
-                const originalIndex = products.findIndex((p) => p.id === product.id)
-                return (
-                  <div
-                    key={product.id}
-                    className={`px-6 py-3 cursor-pointer hover:bg-blue-50 text-cyan-900 font-medium font-['Poppins'] transition-colors ${
-                      originalIndex === selectedIndex ? 'bg-blue-100' : ''
-                    }`}
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      setSelectedIndex(originalIndex)
-                      setDropdownOpen(false)
-                      setSearchQuery('') // Clear search when item is selected
-                    }}
-                  >
-                    {product.title}
-                  </div>
-                )
-              })
-            ) : (
-              <div className="px-6 py-4 text-center text-gray-500 font-['Poppins']">
-                No products found
-              </div>
-            )}
+            {/* Filtered Products List - Scrollable on md+ screens */}
+            <div className="lg:max-h-[400px] lg:overflow-y-auto">
+              {filteredProducts.length > 0 ? (
+                filteredProducts.map((product, idx) => {
+                  const originalIndex = products.findIndex((p) => p.id === product.id)
+                  return (
+                    <div
+                      key={product.id}
+                      className={`px-6 py-3 cursor-pointer hover:bg-blue-50 text-cyan-900 font-medium font-['Poppins'] transition-colors ${
+                        originalIndex === selectedIndex ? 'bg-blue-100' : ''
+                      }`}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setSelectedIndex(originalIndex)
+                        setDropdownOpen(false) // Close dropdown when product is selected
+                        setSearchQuery('') // Clear search when item is selected
+                      }}
+                    >
+                      {product.title}
+                    </div>
+                  )
+                })
+              ) : (
+                <div className="px-6 py-4 text-center text-gray-500 font-['Poppins']">
+                  No products found
+                </div>
+              )}
+            </div>
           </div>
         )}
       </div>
 
-      <p className="mt-6 mb-4 justify-start text-cyan-900 text-sm font-medium font-['Poppins']">
-        {selectedProduct?.description}
-      </p>
-
-      {/* Buy Now Button */}
+      {selectedProduct && (
+        <p className="mt-6 mb-4 justify-start text-cyan-900 text-sm font-medium font-['Poppins']">
+          {selectedProduct?.description}
+        </p>
+      )}
     </div>
   )
 }

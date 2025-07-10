@@ -217,32 +217,7 @@ export const ProductPage = ({ product }: ProductPageProps) => {
 
             {/* Product Image Section with enhanced accessibility */}
             <motion.div variants={imageVariants} className="lg:w-1/2 relative">
-              <div className="relative aspect-square rounded-[2rem] overflow-hidden bg-gradient-to-br from-white/60 to-white/40 backdrop-blur-sm border-2 border-white/60 shadow-2xl max-w-md mx-auto">
-                {/* Enhanced glow effect */}
-                <div
-                  className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent rounded-[2rem] blur-lg"
-                  aria-hidden="true"
-                ></div>
-                <div
-                  className="absolute inset-0 bg-white/30 rounded-[2rem] blur-md"
-                  aria-hidden="true"
-                ></div>
-
-                {/* Best Seller Badge - Top Left Corner */}
-                {product.is_best_seller && (
-                  <motion.div
-                    variants={badgeVariants}
-                    className="absolute top-4 left-4 z-10 inline-flex items-center px-3 py-1.5 bg-gradient-to-r from-pink-500/30 to-purple-500/30 text-white font-bold text-sm rounded-full border border-white/40 backdrop-blur-sm shadow-lg"
-                    role="status"
-                    aria-label="Best seller product"
-                  >
-                    <span className="mr-1" aria-hidden="true">
-                      ★
-                    </span>
-                    Best Seller
-                  </motion.div>
-                )}
-
+              <div className="relative aspect-square rounded-[2rem] overflow-hidden bg-white shadow-2xl max-w-md mx-auto">
                 <Image
                   src={imageUrl || '/logo.svg'}
                   alt={`${product.title} - Product image`}
