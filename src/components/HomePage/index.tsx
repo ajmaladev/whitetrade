@@ -141,7 +141,7 @@ export default function HomePage({
       <main
         className="w-full"
         role="main"
-        aria-label="White Trading Company Homepage - Leading supplier of safety products, food supplies, and textile materials in Coimbatore"
+        aria-label="White Trading Company Homepage - Always On, Always Ahead"
       >
         <HeroSection carousal={carousal} />
         <div className="!mt-[-18px] sm:mt-14">

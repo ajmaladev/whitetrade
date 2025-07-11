@@ -73,7 +73,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 export const metadata: Metadata = {
   metadataBase: new URL(getServerSideURL()),
   title: {
-    default: 'White Trading Company - Safety Products & Food Supplies',
+    default: 'White Trading Company - Always On, Always Ahead',
     template: '%s | White Trading Company',
   },
   description:
@@ -126,7 +126,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     ...mergeOpenGraph(),
-    title: 'White Trading Company - Safety Products & Food Supplies',
+    title: 'White Trading Company - Always On, Always Ahead',
     description:
       'Leading supplier of safety products, fruits & vegetables, grains & rice, food products, and textile materials in Coimbatore since 2011.',
     siteName: 'White Trading Company',
@@ -135,7 +135,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'White Trading Company - Safety Products & Food Supplies',
+    title: 'White Trading Company - Always On, Always Ahead',
     description:
       'Leading supplier of safety products, fruits & vegetables, grains & rice, food products, and textile materials in Coimbatore since 2011.',
     creator: '@whitetradingcompany',

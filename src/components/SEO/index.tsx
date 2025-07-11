@@ -61,7 +61,7 @@ export const generateDynamicSEO = (props: DynamicSEOProps): Metadata => {
   // Generate SEO data based on content type
   switch (type) {
     case 'home':
-      title = 'White Trading Company - Safety Products & Food Supplies'
+      title = 'White Trading Company - Always On, Always Ahead'
       // Optimized description: 155 characters
       description =
         'Leading supplier of safety products, fruits & vegetables, grains & rice, food products, and textile materials in Coimbatore since 2011.'
@@ -99,7 +99,7 @@ export const generateDynamicSEO = (props: DynamicSEOProps): Metadata => {
       title = pageData?.meta?.title || pageData?.title || 'White Trading Company'
       description =
         pageData?.meta?.description ||
-        `Explore ${pageData?.title} on White Trading Company - Your trusted partner for safety products, food supplies, and textile materials in Coimbatore since 2011.`
+        `Explore ${pageData?.title} on White Trading Company - Always On, Always Ahead. Your trusted partner for safety products, food supplies, and textile materials in Coimbatore since 2011.`
       image = '/white-trading-company-brochure.webp'
       url = pageData?.slug ? `${serverUrl}/${pageData.slug}` : serverUrl
       publishedAt = pageData?.publishedAt || undefined
@@ -182,7 +182,7 @@ export const generateDynamicSEO = (props: DynamicSEOProps): Metadata => {
   })
 
   return {
-    title: title ? `${title}` : 'White Trading Company - Safety Products & Food Supplies',
+    title: title ? `${title}` : 'White Trading Company - Always On, Always Ahead',
     description,
     keywords: keywords.join(', '),
     authors: author ? [{ name: author }] : undefined,
@@ -266,7 +266,7 @@ const generateOpenGraph = (props: {
   }
 
   return {
-    title: title || 'White Trading Company - Safety Products & Food Supplies',
+    title: title || 'White Trading Company - Always On, Always Ahead',
     description:
       description ||
       'Leading supplier of safety products, fruits & vegetables, grains & rice, food products, and textile materials in Coimbatore since 2011.',
@@ -302,7 +302,7 @@ const generateTwitterCard = (props: {
 
   return {
     card: 'summary_large_image',
-    title: title || 'White Trading Company - Safety Products & Food Supplies',
+    title: title || 'White Trading Company - Always On, Always Ahead',
     description:
       description ||
       'Leading supplier of safety products, fruits & vegetables, grains & rice, food products, and textile materials in Coimbatore since 2011.',

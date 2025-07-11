@@ -262,7 +262,10 @@ export const AboutUs = () => {
               variants={slideInFromRight}
               className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 lg:p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105"
             >
-              <div className="flex flex-col items-center text-center">
+              <Link
+                href="tel:+919843044489"
+                className="flex flex-col items-center text-center cursor-pointer"
+              >
                 <div className="w-16 h-16 bg-[#5a6694] rounded-full flex items-center justify-center mb-4 lg:mb-6">
                   <PhoneIcon className="w-8 h-8 text-white" aria-hidden="true" />
                 </div>
@@ -270,14 +273,11 @@ export const AboutUs = () => {
                   Phone
                 </h5>
                 <div className="space-y-2">
-                  <a
-                    href="tel:+919843044489"
-                    className="block text-white/90 text-base lg:text-lg font-medium font-['Poppins'] hover:text-orange-400 transition-colors duration-200"
-                  >
+                  <div className="block text-white/90 text-base lg:text-lg font-medium font-['Poppins'] hover:text-orange-400 transition-colors duration-200">
                     98430 44489
-                  </a>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </motion.div>
 
             {/* Email Card */}
@@ -285,20 +285,20 @@ export const AboutUs = () => {
               variants={slideInFromRight}
               className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105"
             >
-              <div className="flex flex-col items-center text-center">
+              <Link
+                href="mailto:info@whitetrading.in"
+                className="flex flex-col items-center text-center cursor-pointer"
+              >
                 <div className="w-16 h-16 bg-[#5a6694] rounded-full flex items-center justify-center mb-4 lg:mb-6">
                   <MailIcon className="w-8 h-8 text-white" aria-hidden="true" />
                 </div>
                 <h5 className="text-white text-xl lg:text-2xl font-semibold font-['Poppins'] mb-3">
                   Email
                 </h5>
-                <a
-                  href="mailto:info@whitetrading.in"
-                  className="text-white/90 text-base lg:text-lg font-medium font-['Poppins'] hover:text-orange-400 transition-colors duration-200 break-all"
-                >
+                <div className="text-white/90 text-base lg:text-lg font-medium font-['Poppins'] hover:text-orange-400 transition-colors duration-200 break-all">
                   info@whitetrading.in
-                </a>
-              </div>
+                </div>
+              </Link>
             </motion.div>
 
             {/* Location Card */}
@@ -306,7 +306,12 @@ export const AboutUs = () => {
               variants={slideInFromRight}
               className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 lg:p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105"
             >
-              <div className="flex flex-col items-center text-center">
+              <Link
+                href="https://www.google.com/maps?q=10.99188232421875,76.97906494140625&z=17&hl=en"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center text-center cursor-pointer"
+              >
                 <div className="w-16 h-16 bg-[#5a6694] rounded-full flex items-center justify-center mb-4 lg:mb-6">
                   <MapPinIcon className="w-8 h-8 text-white" aria-hidden="true" />
                 </div>
@@ -320,7 +325,7 @@ export const AboutUs = () => {
                   <br />
                   Tamil Nadu, India - 641045
                 </address>
-              </div>
+              </Link>
             </motion.div>
           </motion.div>
         </motion.div>
