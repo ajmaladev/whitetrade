@@ -157,7 +157,7 @@ export default function HeroSection({ carousal = [] }: HeroSectionProps) {
 
         {/* Small screen design */}
         <div className="sm:hidden m-4 relative">
-          <div className="relative w-full h-[44vh] md:h-[50vh] overflow-hidden rounded-2xl">
+          <div className="relative w-full h-[38vh] md:h-[50vh] overflow-hidden rounded-2xl">
             {/* Carousel with small_image */}
             {carousal?.map((img, idx) => {
               let src = ''

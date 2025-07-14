@@ -144,7 +144,7 @@ export default function HomePage({
         aria-label="White Trading Company Homepage - Always On, Always Ahead"
       >
         <HeroSection carousal={carousal} />
-        <div className="!mt-[-18px] sm:mt-14">
+        <div className="!mt-[-18px] xs:!mt-0 md:!mt-14">
           <Categories categories={categories} />
         </div>
         <BuyNow />

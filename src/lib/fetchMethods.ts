@@ -48,6 +48,7 @@ export const getBestSellerProducts = async () => {
     where: {
       is_best_seller: { equals: true },
     },
+    sort: 'updatedAt',
   })
   return products as PaginatedDocs<Product>
 }

@@ -146,7 +146,7 @@ export const AboutUs = () => {
             transition={{ delay: 0.3 }}
           >
             <Link
-              href="https://g.co/kgs/NU7JFgw"
+              href="https://www.google.com/maps?q=10.99188232421875,76.97906494140625&z=17&hl=en"
               className="flex justify-center mb-8 sm:mb-12 lg:mb-16"
               target="_blank"
             >
